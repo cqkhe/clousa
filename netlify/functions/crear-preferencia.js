@@ -7,6 +7,9 @@ exports.handler = async (event) => {
     const { items } = JSON.parse(event.body);
     const ACCESS_TOKEN = process.env.MP_ACCESS_TOKEN;
 
+    console.log('Token:', ACCESS_TOKEN ? 'OK' : 'MISSING');
+    console.log('Items:', JSON.stringify(items));
+
     const response = await fetch('https://api.mercadopago.com/checkout/preferences', {
       method: 'POST',
       headers: {
@@ -16,8 +19,8 @@ exports.handler = async (event) => {
       body: JSON.stringify({
         items: items.map(i => ({
           title: i.name,
-          unit_price: i.price,
-          quantity: i.qty,
+          unit_price: parseFloat(i.price),
+          quantity: parseInt(i.qty),
           currency_id: 'ARS'
         })),
         back_urls: {
@@ -31,6 +34,7 @@ exports.handler = async (event) => {
     });
 
     const data = await response.json();
+    console.log('MP response:', JSON.stringify(data));
 
     if (data.init_point) {
       return {
@@ -41,12 +45,15 @@ exports.handler = async (event) => {
     } else {
       return {
         statusCode: 400,
+        headers: { 'Access-Control-Allow-Origin': '*' },
         body: JSON.stringify({ error: 'No se pudo crear la preferencia', detail: data })
       };
     }
   } catch (err) {
+    console.log('Error:', err.message);
     return {
       statusCode: 500,
+      headers: { 'Access-Control-Allow-Origin': '*' },
       body: JSON.stringify({ error: err.message })
     };
   }
