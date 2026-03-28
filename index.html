@@ -1,0 +1,1648 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Clousa — Indumentaria Masculina</title>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+  :root {
+    --milk:#FBF7F4; --oat:#E5DED2; --coffee:#5A493B;
+    --coffee2:#3E3229; --dorado:#C4A882; --texto:#2E2418; --muted:#9A8E82;
+  }
+  html { scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
+  body { font-family:'Lato',sans-serif; background:var(--milk); color:var(--texto); overflow-x:hidden; width:100%; }
+
+  /* NAVBAR */
+  nav { position:fixed; top:0; left:0; right:0; z-index:1000; background:var(--coffee2); height:60px; display:flex; align-items:center; justify-content:space-between; padding:0 20px; }
+  .logo { font-family:'Raleway',sans-serif; font-size:20px; font-weight:400; letter-spacing:5px; text-transform:uppercase; color:var(--milk); text-decoration:none; }
+  .nav-links { display:none; gap:28px; list-style:none; }
+  .nav-links a { font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--milk); opacity:0.6; text-decoration:none; transition:opacity 0.2s; }
+  .nav-links a:hover { opacity:1; }
+  .nav-right { display:flex; align-items:center; gap:12px; }
+  .nav-cart { background:none; border:none; color:var(--milk); font-size:20px; cursor:pointer; position:relative; padding:8px; -webkit-tap-highlight-color:transparent; }
+  .nav-cart-count { position:absolute; top:2px; right:2px; width:16px; height:16px; border-radius:50%; background:var(--dorado); color:var(--coffee2); font-size:10px; font-weight:500; display:flex; align-items:center; justify-content:center; opacity:0; transform:scale(0); transition:opacity 0.2s,transform 0.2s; }
+  .nav-cart-count.visible { opacity:1; transform:scale(1); }
+  .hamburger { display:flex; flex-direction:column; gap:5px; cursor:pointer; padding:8px; background:none; border:none; -webkit-tap-highlight-color:transparent; }
+  .hamburger span { width:22px; height:1.5px; background:var(--milk); opacity:0.8; display:block; transition:all 0.3s; }
+  .hamburger.active span:nth-child(1) { transform:rotate(45deg) translate(4px,4px); }
+  .hamburger.active span:nth-child(2) { opacity:0; }
+  .hamburger.active span:nth-child(3) { transform:rotate(-45deg) translate(4px,-4px); }
+  .mobile-menu { display:none; position:fixed; top:60px; left:0; right:0; background:var(--coffee2); z-index:999; padding:20px 24px 28px; flex-direction:column; gap:18px; border-bottom:1px solid rgba(196,168,130,0.2); box-shadow:0 8px 32px rgba(0,0,0,0.3); }
+  .mobile-menu.open { display:flex; }
+  .mobile-menu a { font-size:13px; letter-spacing:2.5px; text-transform:uppercase; color:var(--milk); opacity:0.75; text-decoration:none; padding:4px 0; border-bottom:1px solid rgba(255,255,255,0.05); }
+
+  /* HERO */
+  .hero { min-height:100vh; background:var(--coffee2); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:118px 24px 80px; position:relative; overflow:hidden; }
+  .hero-bg { position:absolute; inset:0; z-index:0; }
+  .hero-bg img { width:100%; height:100%; object-fit:cover; object-position:center top; display:block; }
+  .hero-bg::after { content:''; position:absolute; inset:0; background:linear-gradient(to bottom, rgba(30,20,10,0.55) 0%, rgba(30,20,10,0.7) 100%); }
+  .hero::before { content:''; position:absolute; inset:0; background:rgba(30,20,10,0.1); pointer-events:none; z-index:1; }
+  .hero > *:not(.hero-bg) { position:relative; z-index:2; }
+  .hero-line { width:1px; height:48px; background:var(--dorado); margin:0 auto 28px; opacity:0; animation:fadeIn 0.6s ease 0.1s forwards; }
+  .hero-eyebrow { font-size:10px; letter-spacing:4px; text-transform:uppercase; color:var(--dorado); margin-bottom:20px; opacity:0; animation:fadeUp 0.8s ease 0.3s forwards; }
+  .hero-title { font-family:'Raleway',sans-serif; font-size:clamp(38px,11vw,76px); font-weight:300; line-height:1.06; color:var(--milk); margin-bottom:20px; opacity:0; animation:fadeUp 0.8s ease 0.5s forwards; }
+  .hero-title em { font-style:italic; color:var(--dorado); }
+  .hero-sub { font-size:11px; letter-spacing:2px; text-transform:uppercase; color:rgba(251,247,244,0.4); margin-bottom:40px; line-height:2.2; opacity:0; animation:fadeUp 0.8s ease 0.7s forwards; }
+  .hero-sub span { color:var(--dorado); }
+  .hero-btns { display:flex; flex-direction:column; gap:12px; width:100%; max-width:280px; opacity:0; animation:fadeUp 0.8s ease 0.9s forwards; }
+
+  /* BOTONES GENERALES */
+  .btn-primary { background:var(--dorado); color:var(--coffee2); padding:16px 32px; font-family:'Lato',sans-serif; font-size:11px; font-weight:500; letter-spacing:3px; text-transform:uppercase; border:none; cursor:pointer; width:100%; -webkit-tap-highlight-color:transparent; transition:background 0.2s; }
+  .btn-primary:hover { background:#d4b892; }
+  .btn-outline { background:transparent; color:var(--milk); padding:15px 32px; font-family:'Lato',sans-serif; font-size:11px; letter-spacing:3px; text-transform:uppercase; border:1px solid rgba(251,247,244,0.3); cursor:pointer; width:100%; -webkit-tap-highlight-color:transparent; }
+  .btn-outline:hover { border-color:var(--dorado); color:var(--dorado); }
+
+  /* PROPUESTA */
+  .propuesta { background:var(--oat); padding:48px 20px; display:flex; flex-direction:column; border-top:1px solid rgba(90,73,59,0.1); }
+  .prop-item { padding:28px 16px; border-bottom:1px solid rgba(90,73,59,0.1); text-align:center; }
+  .prop-item:last-child { border-bottom:none; }
+  .prop-num { font-family:'Raleway',sans-serif; font-size:48px; font-weight:300; color:var(--dorado); line-height:1; margin-bottom:8px; }
+  .prop-label { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--coffee); margin-bottom:6px; font-weight:500; }
+  .prop-desc { font-size:13px; color:var(--muted); line-height:1.6; }
+
+  /* SECCIONES */
+  section { padding:56px 20px; width:100%; }
+  .section-eyebrow { font-size:10px; letter-spacing:4px; text-transform:uppercase; color:var(--muted); margin-bottom:8px; }
+  .section-title { font-family:'Raleway',sans-serif; font-size:clamp(26px,7vw,38px); font-weight:400; margin-bottom:32px; color:var(--texto); }
+
+  /* CARRUSEL */
+  .novedades { background:var(--coffee2); padding:56px 20px 64px; }
+  .novedades-header { margin-bottom:28px; }
+  .novedades-header .section-eyebrow { color:var(--dorado); }
+  .novedades-header .section-title { color:var(--milk); margin-bottom:0; }
+  .carrusel-controls { display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; }
+  .carrusel-controls button { width:40px; height:40px; border:1px solid rgba(196,168,130,0.3); background:transparent; color:var(--milk); font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; -webkit-tap-highlight-color:transparent; transition:border-color 0.2s; }
+  .carrusel-controls button:hover { border-color:var(--dorado); color:var(--dorado); }
+  .carrusel-counter { font-size:11px; letter-spacing:2px; color:rgba(196,168,130,0.55); }
+  .carrusel-viewport { overflow:hidden; width:100%; }
+  .carrusel-track { display:flex; transition:transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94); will-change:transform; }
+  .carrusel-slide { display:grid; grid-template-columns:1fr 1fr; gap:12px; min-width:100%; flex-shrink:0; }
+  .carrusel-card { border:1px solid rgba(196,168,130,0.15); overflow:hidden; background:rgba(255,255,255,0.04); }
+  .carrusel-img { width:100%; height:240px; overflow:hidden; background:var(--oat); }
+  .carrusel-img img { width:100%; height:100%; object-fit:cover; object-position:top center; display:block; }
+  .carrusel-info { padding:14px; }
+  .carrusel-brand { font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--dorado); margin-bottom:5px; }
+  .carrusel-name { font-size:12px; color:var(--milk); margin-bottom:10px; line-height:1.4; }
+  .carrusel-footer { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:4px; }
+  .carrusel-price { font-family:'Raleway',sans-serif; font-size:18px; color:var(--milk); }
+  .badge-nov { font-size:8px; letter-spacing:2px; text-transform:uppercase; padding:4px 8px; background:var(--dorado); color:var(--coffee2); }
+  .carrusel-dots { display:flex; justify-content:center; gap:8px; margin-top:18px; }
+  .carrusel-dots button { width:6px; height:6px; border-radius:50%; border:none; background:rgba(196,168,130,0.25); cursor:pointer; padding:0; transition:background 0.3s,transform 0.3s; }
+  .carrusel-dots button.active { background:var(--dorado); transform:scale(1.5); }
+
+  /* CATEGORÍAS */
+  .cats { background:var(--milk); }
+  .cats-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .cat-card { background:white; border:1px solid rgba(90,73,59,0.08); padding:28px 16px; text-align:center; transition:border-color 0.2s; }
+  .cat-card:hover { border-color:var(--dorado); }
+  .cat-icon { font-size:26px; margin-bottom:12px; }
+  .cat-name { font-size:11px; letter-spacing:2px; text-transform:uppercase; font-weight:500; margin-bottom:6px; color:var(--coffee); }
+  .cat-desc { font-size:11px; color:var(--muted); line-height:1.5; }
+
+  /* PRODUCTOS */
+  .productos { background:var(--oat); }
+  .productos-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:28px; }
+  .productos-header .section-title { margin-bottom:0; }
+  .ver-todos { font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:var(--coffee); text-decoration:none; border-bottom:1px solid var(--coffee); padding-bottom:2px; flex-shrink:0; }
+  .productos-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .product-card { border:1px solid rgba(90,73,59,0.08); overflow:hidden; background:var(--milk); transition:transform 0.2s; }
+  .product-card:hover { transform:translateY(-3px); }
+  .product-img { height:180px; overflow:hidden; background:var(--oat); }
+  .product-img img { width:100%; height:100%; object-fit:cover; object-position:top center; display:block; }
+  .product-info { padding:14px; }
+  .product-brand { font-size:9px; letter-spacing:2.5px; text-transform:uppercase; color:var(--muted); margin-bottom:4px; }
+  .product-name { font-size:12px; font-weight:400; margin-bottom:8px; color:var(--texto); line-height:1.4; }
+  .product-footer { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:4px; margin-bottom:10px; }
+  .product-price { font-family:'Raleway',sans-serif; font-size:20px; color:var(--coffee); }
+  .badge { font-size:8px; letter-spacing:1.5px; text-transform:uppercase; padding:4px 8px; }
+  .badge-new { background:var(--coffee2); color:var(--milk); }
+  .badge-sale { background:var(--dorado); color:var(--coffee2); }
+  .btn-add {
+    width:100%; padding:10px; background:transparent;
+    color:var(--coffee); border:1px solid rgba(90,73,59,0.2);
+    font-family:'Lato',sans-serif; font-size:10px; letter-spacing:2px;
+    text-transform:uppercase; cursor:pointer;
+    transition:background 0.2s,color 0.2s,border-color 0.2s;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .btn-add:hover { background:var(--coffee2); color:var(--milk); border-color:var(--coffee2); }
+  .btn-add.added { background:var(--dorado); color:var(--coffee2); border-color:var(--dorado); }
+
+  /* MARCAS */
+  .marcas { background:var(--milk); }
+  .marcas-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .marca-card { background:white; border:1px solid rgba(90,73,59,0.08); padding:16px 14px; display:flex; align-items:center; gap:12px; transition:border-color 0.2s; }
+  .marca-card:hover { border-color:var(--dorado); }
+  .marca-inicial { width:38px; height:38px; border-radius:50%; background:var(--coffee2); color:var(--milk); display:flex; align-items:center; justify-content:center; font-family:'Raleway',sans-serif; font-size:18px; flex-shrink:0; }
+  .marca-nombre { font-size:10px; letter-spacing:1.5px; text-transform:uppercase; font-weight:500; margin-bottom:3px; color:var(--coffee); }
+  .marca-desc { font-size:11px; color:var(--muted); }
+
+  /* MÉTODOS DE PAGO */
+  .pagos { background:var(--oat); padding:40px 20px; text-align:center; border-top:1px solid rgba(90,73,59,0.1); }
+  .pagos-title { font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--muted); margin-bottom:16px; }
+  .pagos-pills { display:flex; justify-content:center; flex-wrap:wrap; gap:10px; }
+  .pago-pill { display:flex; align-items:center; gap:6px; padding:8px 16px; border:1px solid rgba(90,73,59,0.12); background:white; font-size:11px; letter-spacing:1px; color:var(--coffee); border-radius:2px; }
+  .pago-pill .pico { font-size:18px; }
+
+  /* DIRECCIÓN */
+  .direccion { background:var(--coffee2); color:var(--milk); padding:56px 20px; display:flex; flex-direction:column; gap:40px; }
+  .dir-eyebrow { font-size:10px; letter-spacing:4px; text-transform:uppercase; color:var(--dorado); margin-bottom:12px; }
+  .dir-title { font-family:'Raleway',sans-serif; font-size:clamp(26px,7vw,36px); font-weight:300; margin-bottom:28px; line-height:1.2; }
+  .dir-info { display:flex; flex-direction:column; gap:18px; }
+  .dir-row { display:flex; align-items:flex-start; gap:14px; }
+  .dir-icon { font-size:15px; opacity:0.5; margin-top:2px; flex-shrink:0; }
+  .dir-text-label { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--dorado); margin-bottom:4px; }
+  .dir-text-val { font-size:14px; opacity:0.7; line-height:1.6; }
+  .dir-right { display:flex; flex-direction:column; gap:14px; }
+  .dir-cta-title { font-family:'Raleway',sans-serif; font-size:clamp(26px,7vw,32px); font-weight:300; margin-bottom:6px; line-height:1.2; }
+  .dir-cta-title em { color:var(--dorado); font-style:italic; }
+  .dir-cta-sub { font-size:11px; letter-spacing:1.5px; opacity:0.4; text-transform:uppercase; margin-bottom:22px; }
+  .btn-wa { background:#25D366; color:white; padding:16px 32px; font-family:'Lato',sans-serif; font-size:11px; font-weight:500; letter-spacing:2.5px; text-transform:uppercase; border:none; cursor:pointer; text-decoration:none; display:block; text-align:center; }
+  .btn-maps { background:transparent; color:var(--milk); padding:15px 32px; font-family:'Lato',sans-serif; font-size:11px; letter-spacing:2.5px; text-transform:uppercase; border:1px solid rgba(251,247,244,0.2); cursor:pointer; text-decoration:none; display:block; text-align:center; transition:border-color 0.2s; }
+  .btn-maps:hover { border-color:var(--dorado); color:var(--dorado); }
+
+  /* COOKIES */
+  .cookies-bar { position:fixed; bottom:0; left:0; right:0; z-index:1400; background:white; border-top:1px solid rgba(90,73,59,0.12); padding:16px 20px; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; box-shadow:0 -4px 20px rgba(0,0,0,0.08); transform:translateY(100%); transition:transform 0.4s ease; }
+  .cookies-bar.show { transform:translateY(0); }
+  .cookies-text { font-size:13px; color:var(--muted); line-height:1.6; flex:1; min-width:200px; }
+  .cookies-text strong { color:var(--texto); font-weight:500; }
+  .cookies-btns { display:flex; gap:10px; flex-shrink:0; }
+  .btn-cookies-ok { background:var(--coffee2); color:var(--milk); padding:10px 24px; font-family:"Lato",sans-serif; font-size:11px; font-weight:500; letter-spacing:2px; text-transform:uppercase; border:none; cursor:pointer; transition:background 0.2s; -webkit-tap-highlight-color:transparent; }
+  .btn-cookies-ok:hover { background:var(--coffee); }
+  .btn-cookies-no { background:transparent; color:var(--muted); padding:10px 16px; font-family:"Lato",sans-serif; font-size:11px; letter-spacing:1px; text-transform:uppercase; border:1px solid rgba(90,73,59,0.15); cursor:pointer; transition:border-color 0.2s; -webkit-tap-highlight-color:transparent; }
+  .btn-cookies-no:hover { border-color:var(--coffee); color:var(--coffee); }
+  @media (min-width:768px) { .cookies-bar { padding:16px 56px; } }
+  /* BANNER FLOTANTE */
+  .banner-flotante { position:fixed; bottom:0; left:0; right:0; z-index:1500; background:var(--coffee2); color:var(--milk); padding:12px 20px; display:flex; align-items:center; justify-content:space-between; gap:12px; transform:translateY(100%); transition:transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94); box-shadow:0 -4px 24px rgba(0,0,0,0.2); border-top:1px solid rgba(196,168,130,0.2); }
+  .banner-flotante.show { transform:translateY(0); }
+  .banner-left { display:flex; align-items:center; gap:12px; }
+  .banner-icon { font-size:20px; flex-shrink:0; }
+  .banner-text { display:flex; flex-direction:column; gap:2px; }
+  .banner-title { font-size:13px; font-weight:500; letter-spacing:0.5px; color:var(--milk); }
+  .banner-sub { font-size:11px; color:var(--dorado); letter-spacing:1px; }
+  .banner-btn { background:var(--dorado); color:var(--coffee2); padding:9px 20px; font-family:"Lato",sans-serif; font-size:11px; font-weight:500; letter-spacing:2px; text-transform:uppercase; border:none; cursor:pointer; white-space:nowrap; flex-shrink:0; transition:background 0.2s; -webkit-tap-highlight-color:transparent; }
+  .banner-btn:hover { background:#d4b892; }
+  .banner-close { background:none; border:none; color:var(--milk); opacity:0.5; font-size:18px; cursor:pointer; padding:4px; flex-shrink:0; line-height:1; -webkit-tap-highlight-color:transparent; }
+  .banner-close:hover { opacity:1; }
+  @media (min-width:768px) { .banner-flotante { padding:14px 56px; } .banner-title { font-size:14px; } }
+  /* BARRA SUPERIOR */
+  .top-bar { background:var(--coffee2); color:var(--milk); text-align:center; padding:10px 20px; font-size:11px; letter-spacing:2px; text-transform:uppercase; position:fixed; top:0; left:0; right:0; z-index:1001; }
+  .top-bar span { color:var(--dorado); font-weight:500; }
+  .top-bar-sep { margin:0 12px; opacity:0.3; }
+  nav { top:38px; }
+  .mobile-menu { top:98px; }
+  .search-bar { top:98px; }
+  @media (min-width:768px) { nav { top:38px; } .search-bar { top:110px; } }
+  /* FOOTER */
+  footer { background:#1E1611; color:var(--milk); padding:24px 20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; }
+  .footer-logo { font-family:'Raleway',sans-serif; font-size:18px; letter-spacing:6px; opacity:0.3; }
+  .footer-info { font-size:10px; letter-spacing:1px; opacity:0.2; text-transform:uppercase; text-align:right; line-height:1.8; }
+
+  /* SUSCRIPCIÓN */
+  .suscripcion { background:var(--coffee2); padding:64px 20px; text-align:center; }
+  .suscripcion-inner { max-width:500px; margin:0 auto; }
+  .suscripcion-title { font-family:"Raleway",sans-serif; font-size:clamp(28px,7vw,40px); font-weight:300; color:var(--milk); margin-bottom:14px; line-height:1.15; }
+  .suscripcion-title em { font-style:italic; color:var(--dorado); }
+  .suscripcion-sub { font-size:13px; color:rgba(251,247,244,0.5); line-height:1.7; margin-bottom:32px; }
+  .suscripcion-form { display:flex; gap:0; max-width:440px; margin:0 auto 14px; }
+  .suscripcion-form input { flex:1; padding:14px 18px; background:rgba(255,255,255,0.07); border:1px solid rgba(196,168,130,0.3); border-right:none; color:var(--milk); font-family:"Lato",sans-serif; font-size:13px; outline:none; }
+  .suscripcion-form input::placeholder { color:rgba(251,247,244,0.35); }
+  .suscripcion-form input:focus { border-color:var(--dorado); background:rgba(255,255,255,0.1); }
+  .suscripcion-form button { padding:14px 24px; background:var(--dorado); color:var(--coffee2); border:none; font-family:"Lato",sans-serif; font-size:11px; font-weight:500; letter-spacing:2px; text-transform:uppercase; cursor:pointer; flex-shrink:0; transition:background 0.2s; white-space:nowrap; }
+  .suscripcion-form button:hover { background:#d4b892; }
+  .suscripcion-nota { font-size:10px; letter-spacing:1px; color:rgba(251,247,244,0.25); text-transform:uppercase; margin-bottom:0; }
+  .suscripcion-ok { display:none; margin-top:16px; font-size:13px; color:var(--dorado); letter-spacing:1px; }
+  @media (max-width:480px) { .suscripcion-form { flex-direction:column; } .suscripcion-form input { border-right:1px solid rgba(196,168,130,0.3); border-bottom:none; } .suscripcion-form button { width:100%; } }
+
+  /* ── CARRITO ── */
+  .cart-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:2001; opacity:0; pointer-events:none; transition:opacity 0.3s; }
+  .cart-overlay.open { opacity:1; pointer-events:all; }
+  .cart-panel { position:fixed; top:0; right:0; bottom:0; width:min(100vw,400px); background:var(--milk); z-index:2002; display:flex; flex-direction:column; transform:translateX(100%); transition:transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94); box-shadow:-8px 0 40px rgba(0,0,0,0.15); }
+  .cart-panel.open { transform:translateX(0); }
+  .cart-header { display:flex; align-items:center; justify-content:space-between; padding:20px 24px; border-bottom:1px solid rgba(90,73,59,0.1); background:var(--coffee2); color:var(--milk); }
+  .cart-header-title { font-family:'Raleway',sans-serif; font-size:22px; font-weight:300; letter-spacing:2px; }
+  .cart-close { background:none; border:none; color:var(--milk); font-size:22px; cursor:pointer; padding:4px; opacity:0.7; line-height:1; }
+  .cart-close:hover { opacity:1; }
+  .cart-items { flex:1; overflow-y:auto; padding:16px; display:flex; flex-direction:column; gap:10px; }
+  .cart-empty { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; color:var(--muted); text-align:center; padding:40px; }
+  .cart-empty-icon { font-size:48px; opacity:0.3; }
+  .cart-empty p { font-size:12px; letter-spacing:1px; text-transform:uppercase; }
+  .cart-item { display:flex; gap:12px; align-items:center; background:white; border:1px solid rgba(90,73,59,0.08); padding:12px; }
+  .cart-item-img { width:56px; height:68px; object-fit:cover; object-position:top; flex-shrink:0; }
+  .cart-item-info { flex:1; min-width:0; }
+  .cart-item-brand { font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:2px; }
+  .cart-item-name { font-size:12px; color:var(--texto); margin-bottom:8px; line-height:1.3; }
+  .cart-item-row { display:flex; align-items:center; justify-content:space-between; }
+  .cart-item-price { font-family:'Raleway',sans-serif; font-size:18px; color:var(--coffee); }
+  .cart-qty { display:flex; align-items:center; gap:8px; }
+  .cart-qty button { width:26px; height:26px; border:1px solid rgba(90,73,59,0.2); background:white; cursor:pointer; font-size:14px; color:var(--coffee); display:flex; align-items:center; justify-content:center; -webkit-tap-highlight-color:transparent; }
+  .cart-qty span { font-size:13px; min-width:18px; text-align:center; }
+  .cart-item-remove { background:none; border:none; color:var(--muted); cursor:pointer; font-size:16px; padding:4px; flex-shrink:0; opacity:0.6; }
+  .cart-item-remove:hover { opacity:1; color:var(--coffee); }
+  .cart-footer { padding:20px 24px; border-top:1px solid rgba(90,73,59,0.1); background:white; display:flex; flex-direction:column; gap:12px; }
+  .cart-total { display:flex; justify-content:space-between; align-items:center; padding-bottom:12px; border-bottom:1px solid rgba(90,73,59,0.08); }
+  .cart-total-label { font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); }
+  .cart-total-price { font-family:'Raleway',sans-serif; font-size:28px; color:var(--coffee); }
+  .cart-metodos { display:flex; gap:6px; flex-wrap:wrap; }
+  .metodo-tag { font-size:9px; letter-spacing:1px; text-transform:uppercase; padding:4px 8px; border:1px solid rgba(90,73,59,0.12); color:var(--muted); display:flex; align-items:center; gap:4px; }
+  .btn-cart-wa { background:#25D366; color:white; padding:15px; font-family:'Lato',sans-serif; font-size:11px; font-weight:500; letter-spacing:2px; text-transform:uppercase; border:none; cursor:pointer; width:100%; -webkit-tap-highlight-color:transparent; }
+  .btn-cart-wa:hover { background:#1ebe5d; }
+  .btn-cart-mp { background:var(--coffee2); color:var(--milk); padding:15px; font-family:'Lato',sans-serif; font-size:11px; font-weight:500; letter-spacing:2px; text-transform:uppercase; border:none; cursor:pointer; width:100%; -webkit-tap-highlight-color:transparent; .btn-cart-mp:hover { background:var(--coffee); } }
+  .mp-note { font-size:10px; color:var(--muted); text-align:center; letter-spacing:0.5px; }
+
+
+  /* POPUP SUSCRIPCIÓN */
+  .popup-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.65); z-index:3000; display:flex; align-items:center; justify-content:center; padding:20px; opacity:0; pointer-events:none; transition:opacity 0.4s ease; }
+  .popup-overlay.show { opacity:1; pointer-events:all; }
+  .popup-box { background:var(--coffee2); width:100%; max-width:480px; position:relative; animation:popupIn 0.4s ease; overflow:hidden; }
+  @keyframes popupIn { from{opacity:0;transform:translateY(30px) scale(0.97)} to{opacity:1;transform:translateY(0) scale(1)} }
+  .popup-close { position:absolute; top:14px; right:16px; background:none; border:none; color:var(--milk); font-size:22px; cursor:pointer; opacity:0.6; line-height:1; z-index:1; padding:4px; -webkit-tap-highlight-color:transparent; }
+  .popup-close:hover { opacity:1; }
+  .popup-img { width:100%; height:160px; object-fit:cover; object-position:center; display:block; filter:brightness(0.5); }
+  .popup-img-placeholder { width:100%; height:140px; background:linear-gradient(135deg,var(--coffee) 0%,var(--coffee2) 100%); display:flex; align-items:center; justify-content:center; }
+  .popup-img-placeholder span { font-family:"Raleway",sans-serif; font-size:32px; letter-spacing:8px; color:rgba(251,247,244,0.2); text-transform:uppercase; }
+  .popup-body { padding:28px 28px 32px; }
+  .popup-eyebrow { font-size:9px; letter-spacing:4px; text-transform:uppercase; color:var(--dorado); margin-bottom:10px; }
+  .popup-title { font-family:"Raleway",sans-serif; font-size:clamp(24px,5vw,32px); font-weight:300; color:var(--milk); line-height:1.15; margin-bottom:10px; }
+  .popup-title em { font-style:italic; color:var(--dorado); }
+  .popup-sub { font-size:12px; color:rgba(251,247,244,0.5); line-height:1.7; margin-bottom:24px; }
+  .popup-form { display:flex; flex-direction:column; gap:10px; }
+  .popup-form input { padding:13px 16px; background:rgba(255,255,255,0.07); border:1px solid rgba(196,168,130,0.25); color:var(--milk); font-family:"Lato",sans-serif; font-size:13px; outline:none; width:100%; }
+  .popup-form input::placeholder { color:rgba(251,247,244,0.3); }
+  .popup-form input:focus { border-color:var(--dorado); background:rgba(255,255,255,0.1); }
+  .popup-form button { padding:14px; background:var(--dorado); color:var(--coffee2); border:none; font-family:"Lato",sans-serif; font-size:11px; font-weight:500; letter-spacing:3px; text-transform:uppercase; cursor:pointer; transition:background 0.2s; }
+  .popup-form button:hover { background:#d4b892; }
+  .popup-skip { text-align:center; margin-top:14px; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:rgba(251,247,244,0.3); cursor:pointer; -webkit-tap-highlight-color:transparent; }
+  .popup-skip:hover { color:rgba(251,247,244,0.6); }
+  .popup-ok { display:none; text-align:center; padding:16px 0 4px; font-size:13px; color:var(--dorado); letter-spacing:1px; }
+
+  /* MODAL PRODUCTO */
+  .modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.7); z-index:4000; display:flex; align-items:center; justify-content:center; padding:16px; opacity:0; pointer-events:none; transition:opacity 0.3s; }
+  .modal-overlay.show { opacity:1; pointer-events:all; }
+  .modal-box { background:var(--milk); width:100%; max-width:860px; max-height:90vh; overflow-y:auto; position:relative; display:grid; grid-template-columns:1fr; animation:popupIn 0.35s ease; }
+  .modal-close { position:absolute; top:14px; right:16px; background:none; border:none; font-size:22px; cursor:pointer; color:var(--coffee2); opacity:0.6; z-index:1; padding:4px; line-height:1; }
+  .modal-close:hover { opacity:1; }
+  .modal-img-wrap { position:relative; background:var(--oat); }
+  .modal-img-main { width:100%; height:320px; object-fit:cover; object-position:top center; display:block; }
+  .modal-thumbs { display:flex; gap:8px; padding:10px 16px; background:white; border-bottom:1px solid rgba(90,73,59,0.08); overflow-x:auto; }
+  .modal-thumb { width:60px; height:72px; object-fit:cover; object-position:top; cursor:pointer; border:2px solid transparent; flex-shrink:0; transition:border-color 0.2s; }
+  .modal-thumb.active { border-color:var(--dorado); }
+  .modal-info { padding:24px 20px 32px; }
+  .modal-brand { font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--muted); margin-bottom:6px; }
+  .modal-name { font-family:"Raleway",sans-serif; font-size:clamp(22px,5vw,30px); font-weight:400; color:var(--texto); margin-bottom:6px; line-height:1.2; }
+  .modal-price { font-family:"Raleway",sans-serif; font-size:32px; color:var(--coffee); margin-bottom:20px; }
+  .modal-label { font-size:10px; letter-spacing:2.5px; text-transform:uppercase; color:var(--muted); margin-bottom:10px; }
+  .modal-talles { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px; }
+  .talle-btn { width:44px; height:44px; border:1px solid rgba(90,73,59,0.2); background:white; font-family:"Lato",sans-serif; font-size:12px; cursor:pointer; color:var(--coffee); transition:all 0.2s; -webkit-tap-highlight-color:transparent; }
+  .talle-btn:hover { border-color:var(--coffee); }
+  .talle-btn.selected { background:var(--coffee2); color:var(--milk); border-color:var(--coffee2); }
+  .talle-btn.agotado { opacity:0.35; cursor:not-allowed; text-decoration:line-through; }
+  .modal-desc { font-size:13px; color:var(--muted); line-height:1.8; margin-bottom:24px; border-top:1px solid rgba(90,73,59,0.08); padding-top:20px; }
+  .modal-actions { display:flex; flex-direction:column; gap:10px; }
+  .btn-modal-add { background:var(--coffee2); color:var(--milk); padding:16px; font-family:"Lato",sans-serif; font-size:11px; font-weight:500; letter-spacing:3px; text-transform:uppercase; border:none; cursor:pointer; width:100%; transition:background 0.2s; -webkit-tap-highlight-color:transparent; }
+  .btn-modal-add:hover { background:var(--coffee); }
+  .btn-modal-wa { background:#25D366; color:white; padding:15px; font-family:"Lato",sans-serif; font-size:11px; font-weight:500; letter-spacing:2px; text-transform:uppercase; border:none; cursor:pointer; width:100%; -webkit-tap-highlight-color:transparent; }
+  .modal-talle-error { font-size:11px; color:#c0392b; display:none; margin-top:-14px; margin-bottom:8px; letter-spacing:0.5px; }
+  @media (min-width:640px) { .modal-box { grid-template-columns:1fr 1fr; } .modal-img-main { height:100%; min-height:420px; } .modal-thumbs { flex-direction:column; position:absolute; left:10px; bottom:10px; gap:6px; padding:0; background:none; border:none; overflow:visible; } .modal-thumb { width:48px; height:56px; } .modal-info { padding:32px 28px 36px; } }
+  /* TALLES EN GRILLA */
+  .card-talles { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:10px; }
+  .card-talle { width:34px; height:34px; border:1px solid rgba(90,73,59,0.18); background:white; font-family:"Lato",sans-serif; font-size:10px; cursor:pointer; color:var(--coffee); transition:all 0.15s; display:flex; align-items:center; justify-content:center; -webkit-tap-highlight-color:transparent; }
+  .card-talle:hover { border-color:var(--coffee); }
+  .card-talle.sel { background:var(--coffee2); color:var(--milk); border-color:var(--coffee2); }
+  .card-talle-error { font-size:10px; color:#c0392b; display:none; margin-bottom:6px; }
+  /* FILTROS */
+  .filtros-wrap { margin-bottom:24px; display:flex; flex-direction:column; gap:12px; }
+  .filtros-row { display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+  .filtros-label { font-size:10px; letter-spacing:2.5px; text-transform:uppercase; color:var(--muted); flex-shrink:0; }
+  .filtro-btn { padding:7px 14px; border:1px solid rgba(90,73,59,0.15); background:white; font-family:"Lato",sans-serif; font-size:11px; letter-spacing:1px; color:var(--coffee); cursor:pointer; transition:all 0.2s; -webkit-tap-highlight-color:transparent; border-radius:2px; }
+  .filtro-btn:hover { border-color:var(--coffee); }
+  .filtro-btn.active { background:var(--coffee2); color:var(--milk); border-color:var(--coffee2); }
+  .filtros-divider { height:1px; background:rgba(90,73,59,0.08); margin:4px 0; }
+  .no-results { text-align:center; padding:40px 20px; color:var(--muted); font-size:13px; letter-spacing:1px; display:none; grid-column:1/-1; }
+  /* BUSCADOR */
+  .search-btn { background:none; border:none; color:var(--milk); font-size:18px; cursor:pointer; padding:8px; opacity:0.7; transition:opacity 0.2s; -webkit-tap-highlight-color:transparent; }
+  .search-btn:hover { opacity:1; }
+  .search-bar { position:fixed; top:98px; left:0; right:0; z-index:998; background:var(--coffee2); padding:12px 20px; border-bottom:1px solid rgba(196,168,130,0.2); display:flex; gap:10px; align-items:center; transform:translateY(-100%); transition:transform 0.3s ease; box-shadow:0 4px 20px rgba(0,0,0,0.2); }
+  .search-bar.show { transform:translateY(0); }
+  .search-input { flex:1; padding:11px 16px; background:rgba(255,255,255,0.08); border:1px solid rgba(196,168,130,0.25); color:var(--milk); font-family:"Lato",sans-serif; font-size:14px; outline:none; }
+  .search-input::placeholder { color:rgba(251,247,244,0.35); }
+  .search-input:focus { border-color:var(--dorado); background:rgba(255,255,255,0.12); }
+  .search-clear { background:none; border:none; color:var(--milk); font-size:18px; cursor:pointer; opacity:0.6; padding:4px; -webkit-tap-highlight-color:transparent; }
+  .search-clear:hover { opacity:1; }
+  .search-results-count { font-size:11px; letter-spacing:1.5px; color:rgba(196,168,130,0.6); white-space:nowrap; }
+  .product-card.hidden-search { display:none !important; }
+  .search-highlight { background:rgba(196,168,130,0.3); border-radius:2px; padding:0 2px; }
+  /* OFERTAS */
+  .ofertas { background:var(--oat); padding:64px 20px; }
+  
+  
+  .ofertas-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .oferta-card { background:var(--milk); border:1px solid rgba(90,73,59,0.08); overflow:hidden; cursor:pointer; transition:transform 0.25s,border-color 0.25s; position:relative; }
+  .oferta-card:hover { transform:translateY(-4px); border-color:var(--dorado); }
+  .oferta-badge { position:absolute; top:10px; left:10px; background:var(--coffee2); color:var(--milk); font-size:10px; font-weight:500; letter-spacing:1.5px; padding:5px 10px; text-transform:uppercase; z-index:1; }
+  .oferta-img { height:200px; overflow:hidden; background:var(--oat); }
+  .oferta-img img { width:100%; height:100%; object-fit:cover; object-position:top center; display:block; transition:transform 0.4s; }
+  .oferta-card:hover .oferta-img img { transform:scale(1.04); }
+  .oferta-info { padding:14px 16px 18px; }
+  .oferta-brand { font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--muted); margin-bottom:4px; }
+  .oferta-name { font-size:13px; color:var(--texto); margin-bottom:10px; line-height:1.4; }
+  .oferta-precios { display:flex; align-items:baseline; gap:10px; margin-bottom:12px; }
+  .oferta-precio-nuevo { font-family:"Raleway",sans-serif; font-size:22px; color:var(--coffee); }
+  .oferta-precio-viejo { font-family:"Raleway",sans-serif; font-size:16px; color:var(--muted); text-decoration:line-through; }
+  .oferta-ahorro { font-size:10px; letter-spacing:1px; color:var(--muted); text-transform:uppercase; }
+  .oferta-talles { display:flex; gap:5px; margin-bottom:12px; }
+  .oferta-talle { width:32px; height:32px; border:1px solid rgba(90,73,59,0.18); background:white; font-family:"Lato",sans-serif; font-size:10px; cursor:pointer; color:var(--coffee); display:flex; align-items:center; justify-content:center; transition:all 0.15s; -webkit-tap-highlight-color:transparent; }
+  .oferta-talle:hover { border-color:var(--dorado); color:var(--dorado); }
+  .oferta-talle.sel { background:var(--dorado); color:var(--coffee2); border-color:var(--dorado); }
+  .oferta-talle-error { font-size:10px; color:#e74c3c; display:none; margin-bottom:6px; }
+  .btn-oferta { width:100%; padding:11px; background:var(--dorado); color:var(--coffee2); border:none; font-family:"Lato",sans-serif; font-size:10px; font-weight:500; letter-spacing:2px; text-transform:uppercase; cursor:pointer; transition:background 0.2s; -webkit-tap-highlight-color:transparent; }
+  .btn-oferta:hover { background:#d4b892; }
+  .btn-oferta.added { background:#2ecc71; color:white; }
+  @media (min-width:768px) { .ofertas { padding:72px 56px; } .ofertas-grid { grid-template-columns:repeat(4,1fr); gap:16px; } .oferta-img { height:260px; } }
+  /* CATEGORÍAS INTERACTIVAS */
+  .cat-card { cursor:pointer; position:relative; }
+  .cat-card.active { border-color:var(--dorado); background:var(--oat); }
+  .cat-card.active .cat-name { color:var(--coffee2); }
+  .cat-card::after { content:""; position:absolute; bottom:-12px; left:50%; transform:translateX(-50%) rotate(45deg); width:12px; height:12px; background:var(--oat); border-left:1px solid rgba(90,73,59,0.15); border-top:1px solid rgba(90,73,59,0.15); opacity:0; transition:opacity 0.2s; z-index:1; }
+  .cat-card.active::after { opacity:1; }
+  .cat-submenu { overflow:hidden; max-height:0; transition:max-height 0.4s ease, opacity 0.3s ease; opacity:0; margin-top:16px; }
+  .cat-submenu.open { max-height:600px; opacity:1; }
+  .cat-submenu-inner { background:var(--oat); border:1px solid rgba(90,73,59,0.1); padding:24px 20px; }
+  .cat-submenu-title { font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--muted); margin-bottom:16px; }
+  .cat-submenu-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .cat-sub-card { background:var(--milk); border:1px solid rgba(90,73,59,0.08); display:flex; gap:10px; align-items:center; cursor:pointer; transition:border-color 0.2s,transform 0.2s; padding:10px; -webkit-tap-highlight-color:transparent; }
+  .cat-sub-card:hover { border-color:var(--dorado); transform:translateY(-2px); }
+  .cat-sub-img { width:52px; height:64px; object-fit:cover; object-position:top; flex-shrink:0; }
+  .cat-sub-info { flex:1; min-width:0; }
+  .cat-sub-brand { font-size:8px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:2px; }
+  .cat-sub-name { font-size:12px; color:var(--texto); margin-bottom:4px; line-height:1.3; }
+  .cat-sub-price { font-family:"Raleway",sans-serif; font-size:16px; color:var(--coffee); }
+  .cat-submenu-empty { font-size:13px; color:var(--muted); text-align:center; padding:20px; }
+  @media (min-width:768px) { .cat-submenu-grid { grid-template-columns:repeat(4,1fr); } .cat-submenu-inner { padding:28px 56px; } }
+  /* VER MÁS */
+  .ver-mas-wrap { text-align:center; margin-top:32px; }
+  .btn-ver-mas { background:transparent; color:var(--coffee); border:1px solid rgba(90,73,59,0.3); padding:13px 48px; font-family:"Raleway",sans-serif; font-size:11px; letter-spacing:3px; text-transform:uppercase; cursor:pointer; transition:all 0.2s; -webkit-tap-highlight-color:transparent; }
+  .btn-ver-mas:hover { background:var(--coffee2); color:var(--milk); border-color:var(--coffee2); }
+  .product-card.oculto { display:none; }
+  /* MEGAMENÚ */
+  .nav-links { position:relative; }
+  .nav-item { position:relative; }
+  .nav-item > a { padding:8px 0; display:block; }
+  .megamenu { position:fixed; top:110px; left:0; right:0; background:var(--milk); z-index:900; border-top:1px solid rgba(90,73,59,0.1); border-bottom:1px solid rgba(90,73,59,0.1); box-shadow:0 8px 32px rgba(0,0,0,0.08); opacity:0; pointer-events:none; transform:translateY(-8px); transition:opacity 0.25s ease, transform 0.25s ease; display:flex; gap:0; }
+  .megamenu.show { opacity:1; pointer-events:all; transform:translateY(0); }
+  .mega-col-cats { padding:36px 40px; min-width:200px; border-right:1px solid rgba(90,73,59,0.08); }
+  .mega-col-title { font-size:9px; letter-spacing:4px; text-transform:uppercase; color:var(--muted); margin-bottom:20px; }
+  .mega-cat-link { display:block; font-size:13px; letter-spacing:1.5px; text-transform:uppercase; color:var(--texto); padding:8px 0; border-bottom:1px solid rgba(90,73,59,0.06); cursor:pointer; transition:color 0.2s, padding-left 0.2s; text-decoration:none; }
+  .mega-cat-link:hover { color:var(--coffee); padding-left:8px; }
+  .mega-col-imgs { flex:1; display:grid; grid-template-columns:repeat(4,1fr); gap:0; }
+  .mega-img-item { position:relative; overflow:hidden; cursor:pointer; }
+  .mega-img-item img { width:100%; height:220px; object-fit:cover; object-position:top center; display:block; transition:transform 0.4s ease; }
+  .mega-img-item:hover img { transform:scale(1.04); }
+  .mega-img-label { position:absolute; bottom:12px; left:12px; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:white; text-shadow:0 1px 4px rgba(0,0,0,0.4); }
+  @media (max-width:767px) { .megamenu { display:none !important; } }
+  /* NUEVA COLECCIÓN EDITORIAL */
+  .nueva-coleccion { background:var(--milk); padding:0; }
+  .nueva-col-header { display:flex; align-items:flex-end; justify-content:space-between; padding:56px 20px 36px; flex-wrap:wrap; gap:12px; }
+  .nueva-col-header .section-title { margin-bottom:0; }
+  .nce-card { position:relative; cursor:pointer; overflow:hidden; background:var(--oat); display:block; }
+  .nce-card img { width:100%; height:100%; object-fit:cover; object-position:top center; display:block; transition:transform 0.6s ease; }
+  .nce-card:hover img { transform:scale(1.04); }
+  .nce-info { position:absolute; bottom:0; left:0; right:0; padding:24px 20px; background:linear-gradient(to top, rgba(20,12,4,0.8) 0%, transparent 100%); color:white; }
+  .nce-brand { font-size:9px; letter-spacing:3px; text-transform:uppercase; opacity:0.6; margin-bottom:4px; }
+  .nce-name { font-size:15px; font-weight:500; margin-bottom:4px; letter-spacing:0.5px; }
+  .nce-price { font-size:14px; color:var(--dorado); }
+  /* Fila 1: foto full ancho */
+  .nce-row-full { width:100%; }
+  .nce-row-full .nce-card { height:60vw; max-height:600px; }
+  /* Fila 2: dos fotos iguales */
+  .nce-row-2 { display:grid; grid-template-columns:1fr 1fr; gap:2px; }
+  .nce-row-2 .nce-card { height:56vw; max-height:480px; }
+  /* Fila 3: grande izq + dos apiladas der */
+  .nce-row-3 { display:grid; grid-template-columns:1fr 1fr; gap:2px; }
+  .nce-row-3-left .nce-card { height:calc(112vw + 2px); max-height:962px; }
+  .nce-row-3-right { display:flex; flex-direction:column; gap:2px; }
+  .nce-row-3-right .nce-card { height:56vw; max-height:480px; flex:1; }
+  /* Fila 4: tres fotos */
+  .nce-row-4 { display:grid; grid-template-columns:1fr 1fr; gap:2px; }
+  .nce-row-4 .nce-card { height:56vw; max-height:400px; }
+  @media (min-width:768px) {
+    .nueva-col-header { padding:72px 56px 40px; }
+    .nce-row-full .nce-card { height:70vh; max-height:700px; }
+    .nce-row-2 .nce-card { height:55vw; max-height:520px; }
+    .nce-row-3 { grid-template-columns:1fr 1fr; }
+    .nce-row-3-left .nce-card { height:calc(110vw + 2px); max-height:1042px; }
+    .nce-row-3-right .nce-card { height:55vw; max-height:520px; }
+    .nce-row-4 { grid-template-columns:1fr 1fr 1fr; }
+    .nce-row-4 .nce-card { height:40vw; max-height:420px; }
+    .nce-info { padding:28px 24px; }
+    .nce-name { font-size:17px; }
+  }
+  /* ANIMACIONES */
+  
+
+  /* SCROLL REVEAL MEJORADO */
+  .reveal-left { opacity:0; transform:translateX(-32px); transition:opacity 0.8s ease, transform 0.8s ease; }
+  .reveal-right { opacity:0; transform:translateX(32px); transition:opacity 0.8s ease, transform 0.8s ease; }
+  .reveal-scale { opacity:0; transform:scale(0.94); transition:opacity 0.7s ease, transform 0.7s ease; }
+  .reveal-left.visible, .reveal-right.visible, .reveal-scale.visible { opacity:1; transform:none; }
+  .delay-1 { transition-delay:0.1s; }
+  .delay-2 { transition-delay:0.2s; }
+  .delay-3 { transition-delay:0.3s; }
+  .delay-4 { transition-delay:0.4s; }
+
+  /* HOVER EFFECTS PRODUCTOS */
+  .product-card { transition:transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.35s ease; }
+  .product-card:hover { transform:translateY(-6px); box-shadow:0 24px 60px rgba(90,73,59,0.13); }
+  .product-card:hover .product-img img { transform:scale(1.06); }
+  .product-img img { transition:transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94); }
+  .product-card:hover .product-name { color:var(--coffee); }
+
+  /* HOVER EFFECTS OFERTAS */
+  .oferta-card { transition:transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.35s ease; }
+  .oferta-card:hover { transform:translateY(-6px); box-shadow:0 24px 60px rgba(90,73,59,0.13); }
+
+  /* HOVER MARCAS */
+  .marca-card { transition:transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; }
+  .marca-card:hover { transform:translateX(6px); box-shadow:4px 0 20px rgba(90,73,59,0.08); }
+
+  /* HERO PARALLAX SUAVE */
+  .hero-title { will-change:transform; }
+
+  /* SMOOTH SCROLL INDICATOR */
+  .scroll-indicator { position:absolute; bottom:32px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:6px; opacity:0; animation:fadeIn 1s ease 1.5s forwards; }
+  .scroll-indicator span { font-size:9px; letter-spacing:3px; text-transform:uppercase; color:rgba(251,247,244,0.4); }
+  .scroll-line { width:1px; height:40px; background:linear-gradient(to bottom, rgba(196,168,130,0.6), transparent); animation:scrollPulse 2s ease-in-out infinite; }
+  @keyframes scrollPulse { 0%,100%{opacity:0.3;transform:scaleY(0.8)} 50%{opacity:1;transform:scaleY(1)} }
+
+  /* NAVBAR SCROLL EFFECT */
+  nav { transition:background 0.3s ease, box-shadow 0.3s ease, height 0.3s ease; }
+  nav.scrolled { box-shadow:0 2px 24px rgba(0,0,0,0.15); }
+
+  /* LOGO HOVER */
+  .logo { transition:letter-spacing 0.3s ease, opacity 0.2s; }
+  .logo:hover { letter-spacing:8px; opacity:0.8; }
+
+  /* BOTONES PREMIUM */
+  .btn-primary { position:relative; overflow:hidden; }
+  .btn-primary::after { content:""; position:absolute; inset:0; background:rgba(255,255,255,0.15); transform:translateX(-100%); transition:transform 0.4s ease; }
+  .btn-primary:hover::after { transform:translateX(100%); }
+  .btn-add { transition:all 0.25s ease; position:relative; overflow:hidden; }
+  .btn-add::after { content:""; position:absolute; inset:0; background:rgba(255,255,255,0.1); transform:translateX(-100%); transition:transform 0.35s ease; }
+  .btn-add:hover::after { transform:translateX(100%); }
+
+  /* IMAGEN ZOOM SUAVE EN CARRUSEL */
+  .carrusel-img img { transition:transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94); }
+  .carrusel-card:hover .carrusel-img img { transform:scale(1.04); }
+
+  /* LINK HOVER UNDERLINE ANIMADO */
+  .nav-links a { position:relative; }
+  .nav-links a::after { content:""; position:absolute; bottom:-2px; left:0; width:0; height:1px; background:var(--dorado); transition:width 0.3s ease; }
+  .nav-links a:hover::after { width:100%; }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes fadeIn { from{opacity:0} to{opacity:0.4} }
+  .reveal { opacity:0; transform:translateY(24px); transition:opacity 0.75s ease,transform 0.75s ease; }
+  .reveal.visible { opacity:1; transform:translateY(0); }
+
+  /* DESKTOP */
+  @media (min-width:768px) {
+    .search-bar { top:110px; padding:14px 56px; }
+    nav { height:72px; padding:0 56px; }
+    .logo { font-size:26px; }
+    .nav-links { display:flex; }
+    .hamburger { display:none; }
+    .hero { padding:120px 40px 100px; }
+    .hero-btns { flex-direction:row; max-width:none; width:auto; }
+    .btn-primary, .btn-outline { width:auto; }
+    .propuesta { flex-direction:row; padding:72px 56px; }
+    .prop-item { border-bottom:none; border-right:1px solid rgba(90,73,59,0.1); padding:40px 48px; flex:1; }
+    .prop-item:last-child { border-right:none; }
+    section { padding:96px 56px; }
+    .novedades { padding:72px 56px 80px; }
+    .carrusel-slide { gap:20px; }
+    .carrusel-img { height:340px; }
+    .cats-grid { grid-template-columns:repeat(4,1fr); gap:14px; }
+    .productos-grid { grid-template-columns:repeat(3,1fr); gap:20px; }
+    .product-img { height:260px; }
+    .product-info { padding:20px 22px; }
+    .product-price { font-size:24px; }
+    .marcas-grid { grid-template-columns:repeat(3,1fr); gap:14px; }
+    .pagos { padding:40px 56px; }
+    .direccion { flex-direction:row; gap:80px; padding:80px 56px; align-items:center; }
+    .btn-wa, .btn-maps { display:inline-block; }
+    footer { padding:28px 56px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MODAL PRODUCTO -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal-box" id="modalBox">
+    <button class="modal-close" onclick="closeModalDirect()">✕</button>
+    <div class="modal-img-wrap">
+      <img class="modal-img-main" id="modalImgMain" src="" alt="">
+      <div class="modal-thumbs" id="modalThumbs"></div>
+    </div>
+    <div class="modal-info">
+      <div class="modal-brand" id="modalBrand"></div>
+      <div class="modal-name" id="modalName"></div>
+      <div class="modal-price" id="modalPrice"></div>
+      <div class="modal-label">Seleccioná tu talle</div>
+      <div class="modal-talles" id="modalTalles"></div>
+      <div class="modal-talle-error" id="talleError">Por favor seleccioná un talle</div>
+      <div class="modal-desc" id="modalDesc"></div>
+      <div class="modal-actions">
+        <button class="btn-modal-add" onclick="addFromModal()">+ Agregar al carrito</button>
+        <button class="btn-modal-wa" onclick="consultarWA()">Consultar por WhatsApp</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- COOKIES -->
+<div class="cookies-bar" id="cookiesBar">
+  <p class="cookies-text">Al navegar por este sitio <strong>aceptás el uso de cookies</strong> para mejorar tu experiencia de compra.</p>
+  <div class="cookies-btns">
+    <button class="btn-cookies-ok" onclick="aceptarCookies()">Entendido</button>
+    <button class="btn-cookies-no" onclick="rechazarCookies()">No gracias</button>
+  </div>
+</div>
+<!-- BANNER FLOTANTE -->
+<div class="banner-flotante" id="bannerFlotante">
+  <div class="banner-left">
+    <div class="banner-icon">🔥</div>
+    <div class="banner-text">
+      <div class="banner-title">Ofertas destacadas — ¡Tiempo limitado!</div>
+      <div class="banner-sub">Hasta 25% de descuento en camperas y sweaters seleccionados</div>
+    </div>
+  </div>
+  <button class="banner-btn" onclick="irAOfertas()">Ver ofertas</button>
+  <button class="banner-close" onclick="cerrarBanner()" aria-label="Cerrar">✕</button>
+</div>
+<!-- MEGAMENÚ -->
+<div class="megamenu" id="megamenu" onmouseenter="keepMega()" onmouseleave="hideMega()">
+
+  <!-- COLECCIÓN -->
+  <div id="mega-coleccion" style="display:flex;width:100%">
+    <div class="mega-col-cats">
+      <div class="mega-col-title">Colección Invierno 2025</div>
+      <a class="mega-cat-link" onclick="filtrarYIr('todas','todas')">Ver todo</a>
+      <a class="mega-cat-link" onclick="filtrarYIr('cat','abrigos')">Abrigos</a>
+      <a class="mega-cat-link" onclick="filtrarYIr('cat','formal')">Formal</a>
+      <a class="mega-cat-link" onclick="filtrarYIr('cat','casual')">Casual</a>
+      <a class="mega-cat-link" onclick="filtrarYIr('cat','especial')">Especial</a>
+    </div>
+    <div class="mega-col-imgs">
+      <div class="mega-img-item" onclick="filtrarYIr('cat','abrigos')">
+        <img src="https://www.brooksfieldstore.com/71441-large_default/campera-vicent.jpg" alt="Abrigos">
+        <span class="mega-img-label">Abrigos</span>
+      </div>
+      <div class="mega-img-item" onclick="filtrarYIr('cat','casual')">
+        <img src="https://acdn-us.mitiendanube.com/stores/001/568/736/products/dsc04683-43afb91dbbf71ee5c917734057160679-1024-1024.webp" alt="Casual">
+        <span class="mega-img-label">Casual</span>
+      </div>
+      <div class="mega-img-item" onclick="filtrarYIr('cat','formal')">
+        <img src="https://www.brooksfieldstore.com/70503-large_default/polo-jersey-hart.jpg" alt="Formal">
+        <span class="mega-img-label">Formal</span>
+      </div>
+      <div class="mega-img-item" onclick="filtrarYIr('cat','abrigos')">
+        <img src="https://acdn-us.mitiendanube.com/stores/001/369/862/products/40060m012-5-65965a63895ea892bb17728402335732-1024-1024.webp" alt="Sweaters">
+        <span class="mega-img-label">Sweaters</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CATEGORÍAS -->
+  <div id="mega-categorias" style="display:none;width:100%">
+    <div class="mega-col-cats">
+      <div class="mega-col-title">Categorías</div>
+      <a class="mega-cat-link" onclick="filtrarYIr('cat','formal')">Formal</a>
+      <a class="mega-cat-link" onclick="filtrarYIr('cat','casual')">Casual</a>
+      <a class="mega-cat-link" onclick="filtrarYIr('cat','abrigos')">Abrigos</a>
+      <a class="mega-cat-link" onclick="filtrarYIr('cat','especial')">Especial</a>
+    </div>
+    <div class="mega-col-cats" style="border-right:none">
+      <div class="mega-col-title">Marcas</div>
+      <a class="mega-cat-link" onclick="filtrarYIr('marca','Brooksfiled')">Brooksfiled</a>
+      <a class="mega-cat-link" onclick="filtrarYIr('marca','Mistral')">Mistral</a>
+      <a class="mega-cat-link" onclick="filtrarYIr('marca','Wrangler')">Wrangler</a>
+      <a class="mega-cat-link" onclick="filtrarYIr('marca','US Polo')">US Polo</a>
+      <a class="mega-cat-link" onclick="filtrarYIr('marca','Superflag')">Superflag</a>
+      <a class="mega-cat-link" onclick="filtrarYIr('marca','Old Bridge')">Old Bridge</a>
+    </div>
+  </div>
+
+</div>
+<!-- BUSCADOR -->
+<div class="search-bar" id="searchBar">
+  <input type="search" class="search-input" id="searchInput" placeholder="Buscar productos, marcas..." oninput="buscar(this.value)" autocomplete="off">
+  <span class="search-results-count" id="searchCount"></span>
+  <button class="search-clear" onclick="clearSearch()" aria-label="Cerrar">✕</button>
+</div>
+<!-- POPUP SUSCRIPCIÓN -->
+<div class="popup-overlay" id="popupOverlay">
+  <div class="popup-box">
+    <button class="popup-close" onclick="closePopup()" aria-label="Cerrar">✕</button>
+    <div class="popup-img-placeholder"><span>Clousa</span></div>
+    <div class="popup-body">
+      <p class="popup-eyebrow">Oferta exclusiva para suscriptores</p>
+      <h2 class="popup-title">Enterate primero<br><em>de todo lo nuevo</em></h2>
+      <p class="popup-sub">Suscribite y recibí novedades, promociones exclusivas y los últimos ingresos de Clousa antes que nadie.</p>
+      <form class="popup-form" onsubmit="suscribirsePopup(event)">
+        <input type="email" id="popupEmail" placeholder="Tu correo electrónico" required>
+        <button type="submit">Quiero recibirlos</button>
+      </form>
+      <div class="popup-ok" id="popupOk">✓ ¡Gracias! Pronto tendrás novedades en tu mail.</div>
+      <p class="popup-skip" onclick="closePopup()">No gracias, seguir navegando</p>
+    </div>
+  </div>
+</div>
+<!-- OVERLAY CARRITO -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+
+<!-- PANEL CARRITO -->
+<div class="cart-panel" id="cartPanel">
+  <div class="cart-header">
+    <span class="cart-header-title">Tu carrito</span>
+    <button class="cart-close" onclick="closeCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty">
+      <div class="cart-empty-icon">🛍️</div>
+      <p>Tu carrito está vacío</p>
+    </div>
+  </div>
+  <div class="cart-footer" id="cartFooter" style="display:none">
+    <div class="cart-total">
+      <span class="cart-total-label">Total</span>
+      <span class="cart-total-price" id="cartTotal">$0</span>
+    </div>
+    <div class="cart-metodos">
+      <span class="metodo-tag">💳 Tarjeta</span>
+      <span class="metodo-tag">🏦 Transferencia</span>
+      <span class="metodo-tag">💙 Mercado Pago</span>
+    </div>
+    <button class="btn-cart-wa" onclick="pedirPorWA()">Pedir por WhatsApp</button>
+    <button class="btn-cart-mp" onclick="pagarConMP()" id="btnMP">💙 Pagar con Mercado Pago</button>
+    <p class="mp-note">Tarjeta de crédito · Débito · Mercado Pago</p>
+  </div>
+</div>
+
+<!-- BARRA SUPERIOR -->
+<div class="top-bar">
+  <span>3 cuotas sin interés</span>
+  <span class="top-bar-sep">·</span>
+  <span>10% OFF</span> con transferencia bancaria
+</div>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="#" class="logo">Clousa</a>
+  <ul class="nav-links">
+    <li class="nav-item"><a href="#novedades">Novedades</a></li>
+    <li class="nav-item"><a href="#ofertas" style="color:var(--dorado);opacity:1">Ofertas 🔥</a></li>
+    <li class="nav-item" onmouseenter="showMega('coleccion')" onmouseleave="hideMega()"><a href="#productos">Colección</a></li>
+    <li class="nav-item" onmouseenter="showMega('categorias')" onmouseleave="hideMega()"><a href="#categorias">Categorías</a></li>
+    <li class="nav-item"><a href="#marcas">Marcas</a></li>
+    <li class="nav-item"><a href="#direccion">Contacto</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="search-btn" onclick="toggleSearch()" aria-label="Buscar">🔍</button>
+    <button class="nav-cart" onclick="toggleCart()" aria-label="Carrito">
+      🛒
+      <span class="nav-cart-count" id="navCartCount">0</span>
+    </button>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#novedades" onclick="toggleMenu()">Novedades</a>
+  <a href="#ofertas" onclick="toggleMenu()" style="color:var(--dorado)">Ofertas 🔥</a>
+  <a href="#categorias" onclick="toggleMenu()">Categorías</a>
+  <a href="#marcas" onclick="toggleMenu()">Marcas</a>
+  <a href="#direccion" onclick="toggleMenu()">Contacto</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <img src="https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Clousa Invierno 2025">
+  </div>
+  <div class="hero-line"></div>
+  <p class="hero-eyebrow">Clousa · San Miguel · Zona Norte</p>
+  <h1 class="hero-title">Vestirse bien<br><em>es un arte</em></h1>
+  <p class="hero-sub">Indumentaria masculina de calidad<br><span>Brooksfiled · Mistral · Wrangler · US Polo · Superflag · Old Bridge</span></p>
+  <div class="hero-btns">
+    <button class="btn-primary" onclick="document.getElementById('coleccion').scrollIntoView({behavior:'smooth'})">Ver novedades</button>
+    <button class="btn-outline" onclick="document.getElementById('coleccion').scrollIntoView({behavior:'smooth'})">Ver catálogo</button>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- NUEVA COLECCIÓN -->
+<section class="nueva-coleccion reveal" id="coleccion">
+  <div class="nueva-col-header">
+    <div>
+      <p class="section-eyebrow">Invierno 2025</p>
+      <h2 class="section-title">Nueva Colección</h2>
+    </div>
+    <a href="#productos" class="ver-todos" onclick="filtrarYIr('todas','todas')">Ver todo →</a>
+  </div>
+
+  <!-- FILA 1: Full ancho -->
+  <div class="nce-row-full">
+    <div class="nce-card" onclick="openModal(4)">
+      <img src="https://www.brooksfieldstore.com/71441-large_default/campera-vicent.jpg" alt="Campera Vicent" loading="lazy">
+      <div class="nce-info">
+        <div class="nce-brand">Brooksfiled</div>
+        <div class="nce-name">Campera Vicent</div>
+        <div class="nce-price">$89.990</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FILA 2: Dos iguales -->
+  <div class="nce-row-2" style="margin-top:2px">
+    <div class="nce-card" onclick="openModal(5)">
+      <img src="https://www.brooksfieldstore.com/70857-large_default/campera-moritz.jpg" alt="Campera Moritz" loading="lazy">
+      <div class="nce-info">
+        <div class="nce-brand">Brooksfiled</div>
+        <div class="nce-name">Campera Moritz</div>
+        <div class="nce-price">$94.500</div>
+      </div>
+    </div>
+    <div class="nce-card" onclick="openModal(6)">
+      <img src="https://www.brooksfieldstore.com/55727-large_default/campera-vicent-hoodie.jpg" alt="Campera Vicent Hoodie" loading="lazy">
+      <div class="nce-info">
+        <div class="nce-brand">Brooksfiled</div>
+        <div class="nce-name">Campera Vicent Hoodie</div>
+        <div class="nce-price">$86.000</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FILA 3: Grande izq + dos apiladas der -->
+  <div class="nce-row-3" style="margin-top:2px">
+    <div class="nce-row-3-left">
+      <div class="nce-card" onclick="openModal(7)">
+        <img src="https://acdn-us.mitiendanube.com/stores/001/568/736/products/dsc04683-43afb91dbbf71ee5c917734057160679-1024-1024.webp" alt="Mercedario Jeans" loading="lazy">
+        <div class="nce-info">
+          <div class="nce-brand">Superflag / Old Bridge</div>
+          <div class="nce-name">Mercedario Jeans</div>
+          <div class="nce-price">$75.000</div>
+        </div>
+      </div>
+    </div>
+    <div class="nce-row-3-right">
+      <div class="nce-card" onclick="openModal(1)">
+        <img src="https://acdn-us.mitiendanube.com/stores/001/369/862/products/40060m012-5-65965a63895ea892bb17728402335732-1024-1024.webp" alt="Sweater Mistral" loading="lazy">
+        <div class="nce-info">
+          <div class="nce-brand">Mistral</div>
+          <div class="nce-name">Sweater Half Zipper Waffle</div>
+          <div class="nce-price">$56.000</div>
+        </div>
+      </div>
+      <div class="nce-card" onclick="openModal(2)">
+        <img src="https://www.brooksfieldstore.com/70503-large_default/polo-jersey-hart.jpg" alt="Polo Jersey Hart" loading="lazy">
+        <div class="nce-info">
+          <div class="nce-brand">Brooksfiled</div>
+          <div class="nce-name">Polo Jersey Hart</div>
+          <div class="nce-price">$48.000</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FILA 4: Tres fotos -->
+  <div class="nce-row-4" style="margin-top:2px">
+    <div class="nce-card" onclick="openModal(3)">
+      <img src="https://www.brooksfieldstore.com/68254-large_default/polo-filippo-pima-pique.jpg" alt="Polo Filippo" loading="lazy">
+      <div class="nce-info">
+        <div class="nce-brand">Brooksfiled</div>
+        <div class="nce-name">Polo Filippo Pima Piqué</div>
+        <div class="nce-price">$52.000</div>
+      </div>
+    </div>
+    <div class="nce-card" onclick="openModal(7)">
+      <img src="https://acdn-us.mitiendanube.com/stores/001/568/736/products/dsc04690-9668c7b7c329be6b5b17734057172226-1024-1024.webp" alt="Jeans" loading="lazy">
+      <div class="nce-info">
+        <div class="nce-brand">Superflag / Old Bridge</div>
+        <div class="nce-name">Mercedario Jeans</div>
+        <div class="nce-price">$75.000</div>
+      </div>
+    </div>
+    <div class="nce-card" onclick="openModal(6)">
+      <img src="https://www.brooksfieldstore.com/55727-large_default/campera-vicent-hoodie.jpg" alt="Campera Vicent Hoodie" loading="lazy">
+      <div class="nce-info">
+        <div class="nce-brand">Brooksfiled</div>
+        <div class="nce-name">Campera Vicent Hoodie</div>
+        <div class="nce-price">$86.000</div>
+      </div>
+    </div>
+  </div>
+
+</section>
+<!-- PROPUESTA -->
+<div class="propuesta reveal">
+  <div class="prop-item reveal-left delay-1"><div class="prop-num">6</div><div class="prop-label">Marcas premium</div><div class="prop-desc">Las mejores marcas de indumentaria masculina en un solo local</div></div>
+  <div class="prop-item reveal-left delay-2"><div class="prop-num">+20</div><div class="prop-label">Años de experiencia</div><div class="prop-desc">Trayectoria en moda masculina en San Miguel y zona norte</div></div>
+  <div class="prop-item reveal-left delay-3"><div class="prop-num">100%</div><div class="prop-label">Asesoramiento</div><div class="prop-desc">Te ayudamos a encontrar el look ideal para cada ocasión</div></div>
+</div>
+
+<!-- NOVEDADES -->
+<div class="novedades reveal" id="novedades">
+  <div class="novedades-header">
+    <p class="section-eyebrow">Lo que llegó esta semana</p>
+    <h2 class="section-title">Novedades</h2>
+  </div>
+  <div class="carrusel-wrap">
+    <div class="carrusel-controls">
+      <button onclick="mover(-1)">&#8592;</button>
+      <span class="carrusel-counter" id="counter">1 / 3</span>
+      <button onclick="mover(1)">&#8594;</button>
+    </div>
+    <div class="carrusel-viewport">
+      <div class="carrusel-track" id="track">
+        <div class="carrusel-slide">
+          <div class="carrusel-card"><div class="carrusel-img"><img src="https://acdn-us.mitiendanube.com/stores/001/369/862/products/40060m012-5-65965a63895ea892bb17728402335732-1024-1024.webp" alt="Sweater" loading="lazy"></div><div class="carrusel-info"><div class="carrusel-brand">Mistral</div><div class="carrusel-name">Sweater Half Zipper Waffle</div><div class="carrusel-footer"><span class="carrusel-price">$56.000</span><span class="badge-nov">Nuevo</span></div></div></div>
+          <div class="carrusel-card"><div class="carrusel-img"><img src="https://www.brooksfieldstore.com/71441-large_default/campera-vicent.jpg" alt="Campera Vicent" loading="lazy"></div><div class="carrusel-info"><div class="carrusel-brand">Brooksfiled</div><div class="carrusel-name">Campera Vicent</div><div class="carrusel-footer"><span class="carrusel-price">$89.990</span><span class="badge-nov">Nuevo</span></div></div></div>
+        </div>
+        <div class="carrusel-slide">
+          <div class="carrusel-card"><div class="carrusel-img"><img src="https://www.brooksfieldstore.com/70857-large_default/campera-moritz.jpg" alt="Campera Moritz" loading="lazy"></div><div class="carrusel-info"><div class="carrusel-brand">Brooksfiled</div><div class="carrusel-name">Campera Moritz</div><div class="carrusel-footer"><span class="carrusel-price">$94.500</span><span class="badge-nov">Nuevo</span></div></div></div>
+          <div class="carrusel-card"><div class="carrusel-img"><img src="https://www.brooksfieldstore.com/70503-large_default/polo-jersey-hart.jpg" alt="Polo Hart" loading="lazy"></div><div class="carrusel-info"><div class="carrusel-brand">Brooksfiled</div><div class="carrusel-name">Polo Jersey Hart</div><div class="carrusel-footer"><span class="carrusel-price">$48.000</span><span class="badge-nov">Nuevo</span></div></div></div>
+        </div>
+        <div class="carrusel-slide">
+          <div class="carrusel-card"><div class="carrusel-img"><img src="https://www.brooksfieldstore.com/68254-large_default/polo-filippo-pima-pique.jpg" alt="Polo Filippo" loading="lazy"></div><div class="carrusel-info"><div class="carrusel-brand">Brooksfiled</div><div class="carrusel-name">Polo Filippo Pima Piqué</div><div class="carrusel-footer"><span class="carrusel-price">$52.000</span><span class="badge-nov">Nuevo</span></div></div></div>
+          <div class="carrusel-card"><div class="carrusel-img"><img src="https://www.brooksfieldstore.com/55727-large_default/campera-vicent-hoodie.jpg" alt="Campera Hoodie" loading="lazy"></div><div class="carrusel-info"><div class="carrusel-brand">Brooksfiled</div><div class="carrusel-name">Campera Vicent Hoodie</div><div class="carrusel-footer"><span class="carrusel-price">$86.000</span><span class="badge-nov">Nuevo</span></div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="carrusel-dots" id="dots"></div>
+  </div>
+</div>
+
+<!-- OFERTAS -->
+<section class="ofertas reveal" id="ofertas">
+  <p class="section-eyebrow">Tiempo limitado</p>
+  <h2 class="section-title">Ofertas destacadas 🔥</h2>
+  <div class="ofertas-grid">
+
+    <div class="oferta-card" onclick="openModal(4)">
+      <div class="oferta-badge">-25%</div>
+      <div class="oferta-img"><img src="https://www.brooksfieldstore.com/71441-large_default/campera-vicent.jpg" alt="Campera Vicent" loading="lazy"></div>
+      <div class="oferta-info">
+        <div class="oferta-brand">Brooksfiled</div>
+        <div class="oferta-name">Campera Vicent</div>
+        <div class="oferta-precios">
+          <span class="oferta-precio-nuevo">$67.490</span>
+          <span class="oferta-precio-viejo">$89.990</span>
+        </div>
+        <div class="oferta-ahorro">Ahorrás $22.500</div>
+        <div class="oferta-talles" onclick="event.stopPropagation()">
+          <button class="oferta-talle" onclick="selOfertaTalle(this)">S</button>
+          <button class="oferta-talle" onclick="selOfertaTalle(this)">M</button>
+          <button class="oferta-talle" onclick="selOfertaTalle(this)">L</button>
+          <button class="oferta-talle" onclick="selOfertaTalle(this)">XL</button>
+        </div>
+        <p class="oferta-talle-error" id="oerr1">Elegí un talle</p>
+        <button class="btn-oferta" onclick="event.stopPropagation(); addOferta(this,'oerr1','Campera Vicent','Brooksfiled',67490,'https://www.brooksfieldstore.com/71441-large_default/campera-vicent.jpg')">Agregar al carrito</button>
+      </div>
+    </div>
+
+    <div class="oferta-card" onclick="openModal(5)">
+      <div class="oferta-badge">-20%</div>
+      <div class="oferta-img"><img src="https://www.brooksfieldstore.com/70857-large_default/campera-moritz.jpg" alt="Campera Moritz" loading="lazy"></div>
+      <div class="oferta-info">
+        <div class="oferta-brand">Brooksfiled</div>
+        <div class="oferta-name">Campera Moritz</div>
+        <div class="oferta-precios">
+          <span class="oferta-precio-nuevo">$75.600</span>
+          <span class="oferta-precio-viejo">$94.500</span>
+        </div>
+        <div class="oferta-ahorro">Ahorrás $18.900</div>
+        <div class="oferta-talles" onclick="event.stopPropagation()">
+          <button class="oferta-talle" onclick="selOfertaTalle(this)">M</button>
+          <button class="oferta-talle" onclick="selOfertaTalle(this)">L</button>
+          <button class="oferta-talle" onclick="selOfertaTalle(this)">XL</button>
+        </div>
+        <p class="oferta-talle-error" id="oerr2">Elegí un talle</p>
+        <button class="btn-oferta" onclick="event.stopPropagation(); addOferta(this,'oerr2','Campera Moritz','Brooksfiled',75600,'https://www.brooksfieldstore.com/70857-large_default/campera-moritz.jpg')">Agregar al carrito</button>
+      </div>
+    </div>
+
+    <div class="oferta-card" onclick="openModal(6)">
+      <div class="oferta-badge">-15%</div>
+      <div class="oferta-img"><img src="https://www.brooksfieldstore.com/55727-large_default/campera-vicent-hoodie.jpg" alt="Campera Hoodie" loading="lazy"></div>
+      <div class="oferta-info">
+        <div class="oferta-brand">Brooksfiled</div>
+        <div class="oferta-name">Campera Vicent Hoodie</div>
+        <div class="oferta-precios">
+          <span class="oferta-precio-nuevo">$73.100</span>
+          <span class="oferta-precio-viejo">$86.000</span>
+        </div>
+        <div class="oferta-ahorro">Ahorrás $12.900</div>
+        <div class="oferta-talles" onclick="event.stopPropagation()">
+          <button class="oferta-talle" onclick="selOfertaTalle(this)">S</button>
+          <button class="oferta-talle" onclick="selOfertaTalle(this)">M</button>
+          <button class="oferta-talle" onclick="selOfertaTalle(this)">L</button>
+          <button class="oferta-talle" onclick="selOfertaTalle(this)">XL</button>
+          <button class="oferta-talle" onclick="selOfertaTalle(this)">XXL</button>
+        </div>
+        <p class="oferta-talle-error" id="oerr3">Elegí un talle</p>
+        <button class="btn-oferta" onclick="event.stopPropagation(); addOferta(this,'oerr3','Campera Vicent Hoodie','Brooksfiled',73100,'https://www.brooksfieldstore.com/55727-large_default/campera-vicent-hoodie.jpg')">Agregar al carrito</button>
+      </div>
+    </div>
+
+    <div class="oferta-card" onclick="openModal(1)">
+      <div class="oferta-badge">-10%</div>
+      <div class="oferta-img"><img src="https://acdn-us.mitiendanube.com/stores/001/369/862/products/40060m012-5-65965a63895ea892bb17728402335732-1024-1024.webp" alt="Sweater Mistral" loading="lazy"></div>
+      <div class="oferta-info">
+        <div class="oferta-brand">Mistral</div>
+        <div class="oferta-name">Sweater Half Zipper Waffle</div>
+        <div class="oferta-precios">
+          <span class="oferta-precio-nuevo">$50.400</span>
+          <span class="oferta-precio-viejo">$56.000</span>
+        </div>
+        <div class="oferta-ahorro">Ahorrás $5.600</div>
+        <div class="oferta-talles" onclick="event.stopPropagation()">
+          <button class="oferta-talle" onclick="selOfertaTalle(this)">S</button>
+          <button class="oferta-talle" onclick="selOfertaTalle(this)">M</button>
+          <button class="oferta-talle" onclick="selOfertaTalle(this)">L</button>
+          <button class="oferta-talle" onclick="selOfertaTalle(this)">XL</button>
+        </div>
+        <p class="oferta-talle-error" id="oerr4">Elegí un talle</p>
+        <button class="btn-oferta" onclick="event.stopPropagation(); addOferta(this,'oerr4','Sweater Half Zipper Waffle','Mistral',50400,'https://acdn-us.mitiendanube.com/stores/001/369/862/products/40060m012-5-65965a63895ea892bb17728402335732-1024-1024.webp')">Agregar al carrito</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- CATEGORÍAS -->
+<section class="cats reveal" id="categorias">
+  <p class="section-eyebrow">Explorá por categoría</p>
+  <h2 class="section-title">¿Qué estás buscando?</h2>
+  <div class="cats-grid">
+    <div class="cat-card" onclick="toggleCat(this,'formal')" style="transition-delay:0s"><div class="cat-icon">👔</div><div class="cat-name">Formal</div><div class="cat-desc">Sacos, blazers y camisas de vestir</div></div>
+    <div class="cat-card" onclick="toggleCat(this,'casual')" style="transition-delay:0.1s"><div class="cat-icon">👖</div><div class="cat-name">Casual</div><div class="cat-desc">Pantalones, jeans y polos</div></div>
+    <div class="cat-card" onclick="toggleCat(this,'campera')" style="transition-delay:0.2s"><div class="cat-icon">🧥</div><div class="cat-name">Abrigos</div><div class="cat-desc">Camperas y sweaters</div></div>
+    <div class="cat-card" onclick="toggleCat(this,'especial')" style="transition-delay:0.3s"><div class="cat-icon">✨</div><div class="cat-name">Especial</div><div class="cat-desc">Casamientos y eventos</div></div>
+  </div>
+  <div class="cat-submenu" id="catSubmenu">
+    <div class="cat-submenu-inner">
+      <div class="cat-submenu-title" id="catSubmenuTitle"></div>
+      <div class="cat-submenu-grid" id="catSubmenuGrid"></div>
+    </div>
+  </div>
+</section>
+
+<!-- MARCAS -->
+<section class="marcas reveal" id="marcas">
+  <p class="section-eyebrow">Nuestras marcas</p>
+  <h2 class="section-title">Lo mejor en indumentaria masculina</h2>
+  <div class="marcas-grid">
+    <div class="marca-card reveal-scale delay-1"><div class="marca-inicial">B</div><div><div class="marca-nombre">Brooksfiled</div><div class="marca-desc">Formal masculino premium</div></div></div>
+    <div class="marca-card reveal-scale delay-2"><div class="marca-inicial">M</div><div><div class="marca-nombre">Mistral</div><div class="marca-desc">Camisas y ropa de vestir</div></div></div>
+    <div class="marca-card reveal-scale delay-1"><div class="marca-inicial">W</div><div><div class="marca-nombre">Wrangler</div><div class="marca-desc">Denim y casual americana</div></div></div>
+    <div class="marca-card reveal-scale delay-2"><div class="marca-inicial">U</div><div><div class="marca-nombre">US Polo</div><div class="marca-desc">Estilo preppy y sport</div></div></div>
+    <div class="marca-card reveal-scale delay-3"><div class="marca-inicial">S</div><div><div class="marca-nombre">Superflag</div><div class="marca-desc">Casual urbano masculino</div></div></div>
+    <div class="marca-card reveal-scale delay-4"><div class="marca-inicial">O</div><div><div class="marca-nombre">Old Bridge</div><div class="marca-desc">Clásico atemporal</div></div></div>
+  </div>
+</section>
+
+<!-- MÉTODOS DE PAGO -->
+<div class="pagos reveal">
+  <div class="pagos-title">Medios de pago aceptados</div>
+  <div class="pagos-pills">
+    <div class="pago-pill"><span class="pico">💙</span> Mercado Pago</div>
+    <div class="pago-pill"><span class="pico">🏦</span> Transferencia bancaria</div>
+    <div class="pago-pill"><span class="pico">💳</span> Tarjeta crédito / débito</div>
+    <div class="pago-pill"><span class="pico">💵</span> Efectivo en local</div>
+  </div>
+</div>
+
+<!-- DIRECCIÓN -->
+<div class="direccion reveal" id="direccion">
+  <div>
+    <div class="dir-eyebrow">Encontranos</div>
+
+<!-- SUSCRIPCIÓN -->
+<div class="suscripcion reveal">
+  <div class="suscripcion-inner">
+    <p class="section-eyebrow" style="color:var(--dorado);margin-bottom:10px">Quedate informado</p>
+    <h2 class="suscripcion-title">Novedades y ofertas<br><em>directo a tu mail</em></h2>
+    <p class="suscripcion-sub">Suscribite y recibí primero las novedades, promociones exclusivas y los últimos ingresos de Clousa.</p>
+    <form class="suscripcion-form" onsubmit="suscribirse(event)">
+      <input type="email" id="emailInput" placeholder="Tu correo electrónico" required>
+      <button type="submit">Suscribirme</button>
+    </form>
+    <p class="suscripcion-nota">Sin spam · Podés darte de baja cuando quieras</p>
+    <div class="suscripcion-ok" id="suscripcionOk">✓ ¡Gracias! Te avisamos cuando haya novedades.</div>
+  </div>
+</div>
+    <div class="dir-title">Visitanos en<br>San Miguel Centro</div>
+    <div class="dir-info">
+      <div class="dir-row"><div class="dir-icon">📍</div><div><div class="dir-text-label">Dirección</div><div class="dir-text-val">Cnel. Charlone 1095<br>B1663 San Miguel<br>Provincia de Buenos Aires</div></div></div>
+      <div class="dir-row"><div class="dir-icon">🕐</div><div><div class="dir-text-label">Horario</div><div class="dir-text-val">Lunes a sábado · 9:00 a 20:00</div></div></div>
+      <div class="dir-row"><div class="dir-icon">📱</div><div><div class="dir-text-label">WhatsApp</div><div class="dir-text-val">11 6602-5737</div></div></div>
+    </div>
+  </div>
+  <div class="dir-right">
+    <div class="dir-cta-title">Escribinos y te<br><em>asesoramos</em></div>
+    <div class="dir-cta-sub">Respondemos en el día</div>
+    <a class="btn-wa" href="https://wa.me/5491166025737?text=Hola%20Clousa!%20Quisiera%20consultar%20sobre%20indumentaria." target="_blank">Escribir por WhatsApp</a>
+    <a class="btn-maps" href="https://maps.google.com/?q=Cnel.+Charlone+1095,+San+Miguel,+Buenos+Aires" target="_blank">Ver en Google Maps</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">CLOUSA</div>
+  <div class="footer-info">Cnel. Charlone 1095 · San Miguel<br>Indumentaria masculina multimarcas</div>
+</footer>
+
+<script>
+  // ── MENÚ ──
+  function toggleMenu() {
+    document.getElementById("mobileMenu").classList.toggle("open");
+    document.getElementById("hamburger").classList.toggle("active");
+  }
+  // ── POPUP ──
+  function closePopup() {
+    document.getElementById("popupOverlay").classList.remove("show");
+    mostrarCookies();
+  }
+  function suscribirsePopup(e) {
+    e.preventDefault();
+    document.getElementById("popupEmail").value = "";
+    document.getElementById("popupOk").style.display = "block";
+    setTimeout(() => closePopup(), 2500);
+  }
+  // Mostrar popup a los 3 segundos
+  setTimeout(() => {
+    document.getElementById("popupOverlay").classList.add("show");
+  }, 3000);
+  // Cerrar con click fuera
+  document.getElementById("popupOverlay").addEventListener("click", function(e) {
+    if(e.target === this) closePopup();
+  });
+
+  // ── VER MÁS ──
+  const PRODUCTOS_VISIBLES = 6;
+  function initVerMas() {
+    const cards = Array.from(document.querySelectorAll("#productosGrid .product-card"));
+    cards.forEach((card, i) => {
+      if(i >= PRODUCTOS_VISIBLES) card.classList.add("oculto");
+    });
+    const wrap = document.getElementById("verMasWrap");
+    if(cards.length <= PRODUCTOS_VISIBLES) wrap.style.display = "none";
+  }
+
+  function verMas() {
+    const ocultos = document.querySelectorAll("#productosGrid .product-card.oculto");
+    let mostrados = 0;
+    ocultos.forEach(card => {
+      if(mostrados < PRODUCTOS_VISIBLES) {
+        card.classList.remove("oculto");
+        mostrados++;
+      }
+    });
+    const restantes = document.querySelectorAll("#productosGrid .product-card.oculto");
+    if(restantes.length === 0) {
+      document.getElementById("verMasWrap").style.display = "none";
+    }
+  }
+  // ── MEGAMENÚ ──
+  let megaTimer = null;
+  let megaActive = false;
+
+  function showMega(tipo) {
+    clearTimeout(megaTimer);
+    const menu = document.getElementById("megamenu");
+    document.getElementById("mega-coleccion").style.display = tipo === "coleccion" ? "flex" : "none";
+    document.getElementById("mega-categorias").style.display = tipo === "categorias" ? "flex" : "none";
+    menu.classList.add("show");
+    megaActive = true;
+  }
+
+  function keepMega() {
+    clearTimeout(megaTimer);
+    megaActive = true;
+  }
+
+  function hideMega() {
+    megaTimer = setTimeout(() => {
+      document.getElementById("megamenu").classList.remove("show");
+      megaActive = false;
+    }, 200);
+  }
+
+  function filtrarYIr(tipo, valor) {
+    document.getElementById("megamenu").classList.remove("show");
+    if(tipo === "cat") {
+      filtroCat = valor;
+      filtroMarca = "todas";
+      document.querySelectorAll(".filtros-row:first-child .filtro-btn").forEach(b => b.classList.toggle("active", b.textContent === "Todas"));
+      document.querySelectorAll(".filtros-row:last-child .filtro-btn").forEach(b => b.classList.toggle("active", b.textContent.toLowerCase() === valor.toLowerCase()));
+    } else if(tipo === "marca") {
+      filtroMarca = valor;
+      filtroCat = "todas";
+      document.querySelectorAll(".filtros-row:first-child .filtro-btn").forEach(b => b.classList.toggle("active", b.textContent === valor));
+      document.querySelectorAll(".filtros-row:last-child .filtro-btn").forEach(b => b.classList.toggle("active", b.textContent === "Todas"));
+    } else {
+      filtroMarca = "todas";
+      filtroCat = "todas";
+      document.querySelectorAll(".filtro-btn").forEach(b => b.classList.toggle("active", b.textContent === "Todas"));
+    }
+    aplicarFiltros();
+    setTimeout(() => document.getElementById("coleccion").scrollIntoView({ behavior:"smooth" }), 100);
+  }
+  // ── REVEAL ──
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold:0.06 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // ── CARRUSEL ──
+  const track = document.getElementById('track');
+  const slides = track.querySelectorAll('.carrusel-slide');
+  const dotsEl = document.getElementById('dots');
+  const counterEl = document.getElementById('counter');
+  const total = slides.length;
+  let current = 0;
+  let timer = null;
+  const DELAY = 7000;
+
+  slides.forEach((_, i) => {
+    const b = document.createElement('button');
+    if(i === 0) b.classList.add('active');
+    b.onclick = () => { goTo(i); resetTimer(); };
+    dotsEl.appendChild(b);
+  });
+
+  function goTo(index) {
+    current = ((index % total) + total) % total;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    counterEl.textContent = (current + 1) + ' / ' + total;
+    dotsEl.querySelectorAll('button').forEach((b, i) => b.classList.toggle('active', i === current));
+  }
+
+  function mover(dir) { goTo(current + dir); resetTimer(); }
+  function startTimer() { timer = setInterval(() => goTo(current + 1), DELAY); }
+  function resetTimer() { clearInterval(timer); startTimer(); }
+  startTimer();
+
+  const wrap = document.querySelector('.carrusel-wrap');
+  wrap.addEventListener('mouseenter', () => clearInterval(timer));
+  wrap.addEventListener('mouseleave', () => startTimer());
+  let tx = 0;
+  wrap.addEventListener('touchstart', e => { tx = e.touches[0].clientX; clearInterval(timer); }, { passive:true });
+  wrap.addEventListener('touchend', e => {
+    const diff = tx - e.changedTouches[0].clientX;
+    if(Math.abs(diff) > 40) goTo(current + (diff > 0 ? 1 : -1));
+    setTimeout(startTimer, 1500);
+  }, { passive:true });
+
+  // ── CARRITO ──
+  let cart = [];
+
+  function toggleCart() {
+    document.getElementById('cartPanel').classList.toggle('open');
+    document.getElementById('cartOverlay').classList.toggle('open');
+  }
+
+  function closeCart() {
+    document.getElementById('cartPanel').classList.remove('open');
+    document.getElementById('cartOverlay').classList.remove('open');
+  }
+
+  // ── CATEGORÍAS INTERACTIVAS ──
+  const catProductos = {
+    formal: [
+      { id:2, name:"Polo Jersey Hart", brand:"Brooksfiled", price:48000, img:"https://www.brooksfieldstore.com/70503-large_default/polo-jersey-hart.jpg" },
+      { id:3, name:"Polo Filippo Pima Piqué", brand:"Brooksfiled", price:52000, img:"https://www.brooksfieldstore.com/68254-large_default/polo-filippo-pima-pique.jpg" },
+      { id:1, name:"Sweater Half Zipper Waffle", brand:"Mistral", price:56000, img:"https://acdn-us.mitiendanube.com/stores/001/369/862/products/40060m012-5-65965a63895ea892bb17728402335732-1024-1024.webp" }
+    ],
+    casual: [
+      { id:2, name:"Polo Jersey Hart", brand:"Brooksfiled", price:48000, img:"https://www.brooksfieldstore.com/70503-large_default/polo-jersey-hart.jpg" },
+      { id:3, name:"Polo Filippo Pima Piqué", brand:"Brooksfiled", price:52000, img:"https://www.brooksfieldstore.com/68254-large_default/polo-filippo-pima-pique.jpg" },
+      { id:7, name:"Mercedario Jeans", brand:"Superflag / Old Bridge", price:75000, img:"https://acdn-us.mitiendanube.com/stores/001/568/736/products/dsc04683-43afb91dbbf71ee5c917734057160679-1024-1024.webp" },
+      { id:8, name:"Jean Superflag", brand:"Superflag", price:75000, img:"https://acdn-us.mitiendanube.com/stores/001/568/736/products/dsc04677-a4c8010fcea384a3c017734051935477-1024-1024.webp" }
+    ],
+    campera: [
+      { id:4, name:"Campera Vicent", brand:"Brooksfiled", price:89990, img:"https://www.brooksfieldstore.com/71441-large_default/campera-vicent.jpg" },
+      { id:5, name:"Campera Moritz", brand:"Brooksfiled", price:94500, img:"https://www.brooksfieldstore.com/70857-large_default/campera-moritz.jpg" },
+      { id:6, name:"Campera Vicent Hoodie", brand:"Brooksfiled", price:86000, img:"https://www.brooksfieldstore.com/55727-large_default/campera-vicent-hoodie.jpg" },
+      { id:1, name:"Sweater Half Zipper Waffle", brand:"Mistral", price:56000, img:"https://acdn-us.mitiendanube.com/stores/001/369/862/products/40060m012-5-65965a63895ea892bb17728402335732-1024-1024.webp" }
+    ],
+    especial: []
+  };
+
+  const catLabels = { formal:"Ropa formal", casual:"Casual y diario", campera:"Abrigos y sweaters", especial:"Ocasiones especiales" };
+  let catActiva = null;
+
+  function toggleCat(btn, cat) {
+    // Activar visualmente la card
+    document.querySelectorAll(".cat-card").forEach(c => c.classList.remove("active"));
+    btn.classList.add("active");
+
+    // Activar el filtro de categoría correspondiente
+    const filtroBtns = document.querySelectorAll(".filtros-row:last-child .filtro-btn");
+    filtroBtns.forEach(b => b.classList.remove("active"));
+
+    // Mapear categoria a valor de filtro
+    const catMap = { formal:"formal", casual:"casual", campera:"abrigos", especial:"especial" };
+    const catValor = catMap[cat] || "todas";
+
+    filtroCat = catValor;
+    filtroBtns.forEach(b => {
+      if(b.textContent.toLowerCase() === catValor.toLowerCase() || (catValor === "todas" && b.textContent === "Todas")) {
+        b.classList.add("active");
+      }
+    });
+
+    aplicarFiltros();
+
+    // Scroll suave a productos
+    setTimeout(() => {
+      document.getElementById("coleccion").scrollIntoView({ behavior:"smooth", block:"start" });
+    }, 150);
+  }
+  // ── OFERTAS ──
+  function selOfertaTalle(btn) {
+    const container = btn.closest(".oferta-talles");
+    container.querySelectorAll(".oferta-talle").forEach(b => b.classList.remove("sel"));
+    btn.classList.add("sel");
+  }
+
+  function addOferta(btn, errId, name, brand, price, img) {
+    const card = btn.closest(".oferta-card");
+    const sel = card.querySelector(".oferta-talle.sel");
+    if(!sel) {
+      document.getElementById(errId).style.display = "block";
+      return;
+    }
+    document.getElementById(errId).style.display = "none";
+    const nameConTalle = name + " (Talle " + sel.textContent + ")";
+    const existing = cart.find(i => i.name === nameConTalle);
+    if(existing) { existing.qty++; } else { cart.push({ name:nameConTalle, brand, price, img, qty:1 }); }
+    btn.textContent = "✓ Agregado";
+    btn.classList.add("added");
+    setTimeout(() => { btn.textContent = "Agregar al carrito"; btn.classList.remove("added"); }, 1500);
+    updateCart();
+    setTimeout(() => { document.getElementById("cartPanel").classList.add("open"); document.getElementById("cartOverlay").classList.add("open"); }, 200);
+  }
+  // ── BUSCADOR ──
+  let searchActive = false;
+
+  function toggleSearch() {
+    searchActive = !searchActive;
+    const bar = document.getElementById("searchBar");
+    bar.classList.toggle("show", searchActive);
+    if(searchActive) {
+      setTimeout(() => document.getElementById("searchInput").focus(), 300);
+    } else {
+      clearSearch();
+    }
+  }
+
+  function buscar(query) {
+    const q = query.toLowerCase().trim();
+    const cards = document.querySelectorAll("#productosGrid .product-card");
+    let count = 0;
+    cards.forEach(card => {
+      if(card.id === "noResults") return;
+      const nombre = (card.querySelector(".product-name") || {}).textContent || "";
+      const marca = (card.querySelector(".product-brand") || {}).textContent || "";
+      const match = !q || nombre.toLowerCase().includes(q) || marca.toLowerCase().includes(q);
+      card.classList.toggle("hidden-search", !match);
+      if(match) count++;
+    });
+    const countEl = document.getElementById("searchCount");
+    if(q) {
+      countEl.textContent = count + (count === 1 ? " resultado" : " resultados");
+      if(count > 0) document.getElementById("coleccion").scrollIntoView({ behavior:"smooth", block:"start" });
+    } else {
+      countEl.textContent = "";
+    }
+    const noRes = document.getElementById("noResults");
+    if(noRes) noRes.style.display = (count === 0 && q) ? "block" : "none";
+  }
+
+  function clearSearch() {
+    document.getElementById("searchInput").value = "";
+    document.getElementById("searchCount").textContent = "";
+    document.querySelectorAll("#productosGrid .product-card").forEach(c => c.classList.remove("hidden-search"));
+    const noRes = document.getElementById("noResults");
+    if(noRes) noRes.style.display = "none";
+    searchActive = false;
+    document.getElementById("searchBar").classList.remove("show");
+  }
+
+  document.addEventListener("keydown", e => { if(e.key === "Escape") clearSearch(); });
+  // ── COOKIES ──
+  function mostrarCookies() {
+    setTimeout(() => {
+      document.getElementById("cookiesBar").classList.add("show");
+    }, 800);
+  }
+
+  function aceptarCookies() {
+    document.getElementById("cookiesBar").classList.remove("show");
+  }
+
+  function rechazarCookies() {
+    document.getElementById("cookiesBar").classList.remove("show");
+  }
+
+  // ── BANNER FLOTANTE ──
+  let bannerCerrado = false;
+  setTimeout(() => {
+    if(!bannerCerrado) document.getElementById("bannerFlotante").classList.add("show");
+  }, 5000);
+
+  function cerrarBanner() {
+    bannerCerrado = true;
+    document.getElementById("bannerFlotante").classList.remove("show");
+  }
+
+  function irAOfertas() {
+    cerrarBanner();
+    setTimeout(() => {
+      document.getElementById("ofertas").scrollIntoView({ behavior:"smooth" });
+    }, 300);
+  }
+
+  // ── NAVBAR SCROLL EFFECT ──
+  window.addEventListener("scroll", () => {
+    document.querySelector("nav").classList.toggle("scrolled", window.scrollY > 40);
+  }, { passive:true });
+
+  // ── PARALLAX SUAVE EN HERO ──
+  window.addEventListener("scroll", () => {
+    const hero = document.querySelector(".hero-title");
+    if(hero) hero.style.transform = "translateY(" + window.scrollY * 0.15 + "px)";
+  }, { passive:true });
+
+  // ── REVEAL DIRECCIONAL ──
+  const obsDir = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add("visible"); });
+  }, { threshold:0.08 });
+  document.querySelectorAll(".reveal-left, .reveal-right, .reveal-scale").forEach(el => obsDir.observe(el));
+  // ── FILTROS ──
+  let filtroMarca = "todas";
+  let filtroCat = "todas";
+
+  function setFiltro(btn, tipo, valor) {
+    if(tipo === "marca") {
+      filtroMarca = valor;
+      document.querySelectorAll(".filtros-row:first-child .filtro-btn").forEach(b => b.classList.remove("active"));
+    } else {
+      filtroCat = valor;
+      document.querySelectorAll(".filtros-row:last-child .filtro-btn").forEach(b => b.classList.remove("active"));
+    }
+    btn.classList.add("active");
+    aplicarFiltros();
+  }
+
+  function aplicarFiltros() {
+    const cards = document.querySelectorAll("#productosGrid .product-card");
+    let visible = 0;
+    cards.forEach(card => {
+      const marca = card.dataset.marca || "";
+      const cat = card.dataset.cat || "";
+      const matchMarca = filtroMarca === "todas" || marca === filtroMarca;
+      const matchCat = filtroCat === "todas" || cat === filtroCat;
+      if(matchMarca && matchCat) {
+        card.style.display = "";
+        visible++;
+      } else {
+        card.style.display = "none";
+      }
+    });
+    const noRes = document.getElementById("noResults");
+    if(noRes) noRes.style.display = visible === 0 ? "block" : "none";
+  }
+  function selTalle(btn) {
+    const container = btn.closest(".card-talles");
+    container.querySelectorAll(".card-talle").forEach(b => b.classList.remove("sel"));
+    btn.classList.add("sel");
+  }
+
+  function addWithTalle(btn, errId, name, brand, price, img) {
+    const card = btn.closest(".product-card");
+    const sel = card.querySelector(".card-talle.sel");
+    if(!sel) {
+      document.getElementById(errId).style.display = "block";
+      return;
+    }
+    document.getElementById(errId).style.display = "none";
+    const nameConTalle = name + " (Talle " + sel.textContent + ")";
+    const existing = cart.find(i => i.name === nameConTalle);
+    if(existing) { existing.qty++; } else { cart.push({ name:nameConTalle, brand, price, img, qty:1 }); }
+    btn.textContent = "✓ Agregado";
+    btn.classList.add("added");
+    setTimeout(() => { btn.textContent = "+ Agregar al carrito"; btn.classList.remove("added"); }, 1500);
+    updateCart();
+    setTimeout(() => { document.getElementById("cartPanel").classList.add("open"); document.getElementById("cartOverlay").classList.add("open"); }, 200);
+  }
+  function addToCart(btn, name, brand, price, img) {
+    const existing = cart.find(i => i.name === name);
+    if(existing) {
+      existing.qty++;
+    } else {
+      cart.push({ name, brand, price, img, qty:1 });
+    }
+    btn.textContent = '✓ Agregado';
+    btn.classList.add('added');
+    setTimeout(() => {
+      btn.textContent = '+ Agregar al carrito';
+      btn.classList.remove('added');
+    }, 1500);
+    updateCart();
+    toggleCart();
+  }
+
+  function removeFromCart(index) {
+    cart.splice(index, 1);
+    updateCart();
+  }
+
+  function changeQty(index, delta) {
+    cart[index].qty += delta;
+    if(cart[index].qty <= 0) cart.splice(index, 1);
+    updateCart();
+  }
+
+  function updateCart() {
+    const itemsEl = document.getElementById('cartItems');
+    const footerEl = document.getElementById('cartFooter');
+    const countEl = document.getElementById('navCartCount');
+    const totalEl = document.getElementById('cartTotal');
+
+    const totalQty = cart.reduce((s, i) => s + i.qty, 0);
+    const totalPrice = cart.reduce((s, i) => s + i.price * i.qty, 0);
+
+    countEl.textContent = totalQty;
+    countEl.classList.toggle('visible', totalQty > 0);
+
+    if(cart.length === 0) {
+      itemsEl.innerHTML = '<div class="cart-empty"><div class="cart-empty-icon">🛍️</div><p>Tu carrito está vacío</p></div>';
+      footerEl.style.display = 'none';
+      return;
+    }
+
+    footerEl.style.display = 'flex';
+    totalEl.textContent = '$' + totalPrice.toLocaleString('es-AR');
+
+    itemsEl.innerHTML = cart.map((item, i) => `
+      <div class="cart-item">
+        <img class="cart-item-img" src="${item.img}" alt="${item.name}">
+        <div class="cart-item-info">
+          <div class="cart-item-brand">${item.brand}</div>
+          <div class="cart-item-name">${item.name}</div>
+          <div class="cart-item-row">
+            <span class="cart-item-price">$${(item.price * item.qty).toLocaleString('es-AR')}</span>
+            <div class="cart-qty">
+              <button onclick="changeQty(${i},-1)">−</button>
+              <span>${item.qty}</span>
+              <button onclick="changeQty(${i},1)">+</button>
+            </div>
+          </div>
+        </div>
+        <button class="cart-item-remove" onclick="removeFromCart(${i})">✕</button>
+      </div>
+    `).join('');
+  }
+
+  function pedirPorWA() {
+    if(cart.length === 0) return;
+    const lineas = cart.map(i => `• ${i.qty}x ${i.name} (${i.brand}) - $${(i.price * i.qty).toLocaleString('es-AR')}`).join('\n');
+    const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+    const msg = `Hola Clousa! Quisiera hacer el siguiente pedido:\n\n${lineas}\n\n*Total: $${total.toLocaleString('es-AR')}*\n\n¿Cómo coordino el pago y la entrega?`;
+    window.open('https://wa.me/5491166025737?text=' + encodeURIComponent(msg), '_blank');
+  }
+  function suscribirse(e) {
+    e.preventDefault();
+    document.getElementById("emailInput").value = "";
+    document.getElementById("suscripcionOk").style.display = "block";
+    setTimeout(() => document.getElementById("suscripcionOk").style.display = "none", 4000);
+  }
+
+  // ── MERCADO PAGO ──
+
+  // ── MODAL PRODUCTO ──
+  const productos = [
+    { id:1, name:"Sweater Half Zipper Waffle", brand:"Mistral", price:56000, img:"https://acdn-us.mitiendanube.com/stores/001/369/862/products/40060m012-5-65965a63895ea892bb17728402335732-1024-1024.webp", imgs:["https://acdn-us.mitiendanube.com/stores/001/369/862/products/40060m012-5-65965a63895ea892bb17728402335732-1024-1024.webp"], talles:["S","M","L","XL"], desc:"Sweater de tejido waffle con cierre half zipper. Confección premium en algodón y poliéster. Ideal para combinar con jeans o pantalón de vestir." },
+    { id:2, name:"Polo Jersey Hart", brand:"Brooksfiled", price:48000, img:"https://www.brooksfieldstore.com/70503-large_default/polo-jersey-hart.jpg", imgs:["https://www.brooksfieldstore.com/70503-large_default/polo-jersey-hart.jpg"], talles:["S","M","L","XL","XXL"], desc:"Polo de jersey de algodón con corte slim. Cuello camisero con botones. Clásico del guardarropa masculino de Brooksfiled." },
+    { id:3, name:"Polo Filippo Pima Piqué", brand:"Brooksfiled", price:52000, img:"https://www.brooksfieldstore.com/68254-large_default/polo-filippo-pima-pique.jpg", imgs:["https://www.brooksfieldstore.com/68254-large_default/polo-filippo-pima-pique.jpg"], talles:["S","M","L","XL"], desc:"Polo de algodón pima piqué de alta calidad. Suave al tacto, transpirable y con excelente caída. Ideal para ocasiones formales y casuales." },
+    { id:4, name:"Campera Vicent", brand:"Brooksfiled", price:89990, img:"https://www.brooksfieldstore.com/71441-large_default/campera-vicent.jpg", imgs:["https://www.brooksfieldstore.com/71441-large_default/campera-vicent.jpg"], talles:["S","M","L","XL"], desc:"Campera Vicent de Brooksfiled. Exterior resistente al viento con interior abrigado. Cierre central con tapa. Perfecta para el otoño-invierno." },
+    { id:5, name:"Campera Moritz", brand:"Brooksfiled", price:94500, img:"https://www.brooksfieldstore.com/70857-large_default/campera-moritz.jpg", imgs:["https://www.brooksfieldstore.com/70857-large_default/campera-moritz.jpg"], talles:["M","L","XL"], desc:"Campera Moritz, diseño urbano con detalles premium. Tela técnica con excelente aislación térmica. Bolsillos frontales con cierre." },
+    { id:6, name:"Campera Vicent Hoodie", brand:"Brooksfiled", price:86000, img:"https://www.brooksfieldstore.com/55727-large_default/campera-vicent-hoodie.jpg", imgs:["https://www.brooksfieldstore.com/55727-large_default/campera-vicent-hoodie.jpg"], talles:["S","M","L","XL","XXL"], desc:"Versión hoodie de la icónica Campera Vicent. Capucha regulable, bolsillo canguro y puños acanalados. Estilo streetwear con calidad Brooksfiled." },    { id:7, name:"Mercedario Jeans", brand:"Superflag / Old Bridge", price:75000, img:"https://acdn-us.mitiendanube.com/stores/001/568/736/products/dsc04683-43afb91dbbf71ee5c917734057160679-1024-1024.webp", imgs:["https://acdn-us.mitiendanube.com/stores/001/568/736/products/dsc04683-43afb91dbbf71ee5c917734057160679-1024-1024.webp","https://acdn-us.mitiendanube.com/stores/001/568/736/products/dsc04690-9668c7b7c329be6b5b17734057172226-1024-1024.webp","https://acdn-us.mitiendanube.com/stores/001/568/736/products/dsc04687-be0f884e3f65e2f46317734057166214-1024-1024.webp"], talles:["40","44","46","48","50","52"], desc:"Jean Mercedario de Old Bridge. Corte recto clásico con excelente caída. Color único. Talles disponibles: 40 (2u), 44 (3u), 46 (3u), 48 (3u), 50 (2u), 52 (1u)." },
+    { id:8, name:"Jean Superflag", brand:"Superflag", price:75000, img:"https://acdn-us.mitiendanube.com/stores/001/568/736/products/dsc04677-a4c8010fcea384a3c017734051935477-1024-1024.webp", imgs:["https://acdn-us.mitiendanube.com/stores/001/568/736/products/dsc04677-a4c8010fcea384a3c017734051935477-1024-1024.webp","https://acdn-us.mitiendanube.com/stores/001/568/736/products/dsc04680-cfa499e015e07ae72d17734051948174-1024-1024.webp","https://acdn-us.mitiendanube.com/stores/001/568/736/products/dsc04682-98e5a6fd198cb1d53917734051944021-1024-1024.webp"], talles:["40","42","44","46"], desc:"Jean de Superflag. Corte urbano con excelente terminación. Color único. Talles disponibles: 40 (1u), 42 (2u), 44 (1u), 46 (1u)." }
+  ];
+
+  let modalProduct = null;
+  let talleSeleccionado = null;
+
+  function openModal(id) {
+    const p = productos.find(x => x.id === id);
+    if(!p) return;
+    modalProduct = p;
+    talleSeleccionado = null;
+    document.getElementById("modalBrand").textContent = p.brand;
+    document.getElementById("modalName").textContent = p.name;
+    document.getElementById("modalPrice").textContent = "$" + p.price.toLocaleString("es-AR");
+    document.getElementById("modalDesc").textContent = p.desc;
+    document.getElementById("talleError").style.display = "none";
+    const mainImg = document.getElementById("modalImgMain");
+    mainImg.src = p.img;
+    mainImg.alt = p.name;
+    const thumbsEl = document.getElementById("modalThumbs");
+    thumbsEl.innerHTML = p.imgs.length > 1 ? p.imgs.map((src,i) =>
+      `<img class="modal-thumb ${i===0?"active":""}" src="${src}" onclick="switchImg(this,'${src}')" alt="foto ${i+1}">`
+    ).join("") : "";
+    const tallesEl = document.getElementById("modalTalles");
+    tallesEl.innerHTML = p.talles.map(t =>
+      `<button class="talle-btn" onclick="selectTalle(this,'${t}')">${t}</button>`
+    ).join("");
+    document.getElementById("modalOverlay").classList.add("show");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeModalDirect() {
+    document.getElementById("modalOverlay").classList.remove("show");
+    document.body.style.overflow = "";
+  }
+
+  function closeModal(e) {
+    if(e.target === document.getElementById("modalOverlay")) closeModalDirect();
+  }
+
+  function switchImg(thumb, src) {
+    document.getElementById("modalImgMain").src = src;
+    document.querySelectorAll(".modal-thumb").forEach(t => t.classList.remove("active"));
+    thumb.classList.add("active");
+  }
+
+  function selectTalle(btn, talle) {
+    document.querySelectorAll(".talle-btn").forEach(b => b.classList.remove("selected"));
+    btn.classList.add("selected");
+    talleSeleccionado = talle;
+    document.getElementById("talleError").style.display = "none";
+  }
+
+  function addFromModal() {
+    if(!talleSeleccionado) {
+      document.getElementById("talleError").style.display = "block";
+      return;
+    }
+    const p = modalProduct;
+    const nameConTalle = p.name + " (Talle " + talleSeleccionado + ")";
+    const existing = cart.find(i => i.name === nameConTalle);
+    if(existing) { existing.qty++; } else { cart.push({ name:nameConTalle, brand:p.brand, price:p.price, img:p.img, qty:1 }); }
+    updateCart();
+    closeModalDirect();
+    setTimeout(() => { document.getElementById("cartPanel").classList.add("open"); document.getElementById("cartOverlay").classList.add("open"); }, 200);
+  }
+
+  function consultarWA() {
+    const p = modalProduct;
+    const talle = talleSeleccionado ? " - Talle " + talleSeleccionado : "";
+    const msg = "Hola Clousa! Quisiera consultar sobre: " + p.name + talle + " ($" + p.price.toLocaleString("es-AR") + ")";
+    window.open("https://wa.me/5491166025737?text=" + encodeURIComponent(msg), "_blank");
+  }
+  async function pagarConMP() {
+    if(cart.length === 0) return;
+    const btn = document.getElementById("btnMP");
+    btn.textContent = "Procesando...";
+    btn.disabled = true;
+    try {
+      const res = await fetch("/.netlify/functions/crear-preferencia", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ items: cart.map(i => ({ name: i.name, price: i.price, qty: i.qty })) })
+      });
+      const data = await res.json();
+      if(data.init_point) {
+        window.open(data.init_point, "_blank");
+      } else {
+        alert("Error al procesar el pago. Intentá por WhatsApp.");
+      }
+    } catch(err) {
+      alert("Error de conexión. Intentá por WhatsApp.");
+    } finally {
+      btn.textContent = "💙 Pagar con Mercado Pago";
+      btn.disabled = false;
+    }
+  }
+</script>
+
+</body>
+</html>
