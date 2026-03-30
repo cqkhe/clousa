@@ -33,12 +33,12 @@
   #progressBar { position:fixed; top:0; left:0; height:2px; width:0%; background:linear-gradient(to right, var(--navy), #2A4A7F); z-index:9999; pointer-events:none; }
 
   /* TOP BAR */
-  .top-bar { position:fixed; top:0; left:0; right:0; z-index:1001; background:transparent; color:var(--milk); text-align:center; padding:9px 20px; font-size:10px; letter-spacing:2.5px; text-transform:uppercase; }
+  .top-bar { position:fixed; top:0; left:0; right:0; z-index:1001; background:transparent; color:var(--milk); text-align:center; padding:9px 20px; font-size:10px; letter-spacing:2.5px; text-transform:uppercase; transition:transform 0.4s; }
   .top-bar span { color:var(--dorado); font-weight:600; }
 
   /* NAV */
-  nav { position:fixed; top:38px; left:0; right:0; z-index:1000; height:64px; display:flex; align-items:center; justify-content:space-between; padding:0 32px; transition:background 0.4s, backdrop-filter 0.4s, box-shadow 0.4s; }
-  nav.scrolled { background:rgba(15,14,13,0.88); backdrop-filter:blur(16px); box-shadow:0 2px 32px rgba(0,0,0,0.3); }
+  nav { position:fixed; top:38px; left:0; right:0; z-index:1000; height:64px; display:flex; align-items:center; justify-content:space-between; padding:0 32px; transition:background 0.4s, backdrop-filter 0.4s, box-shadow 0.4s, transform 0.4s; }
+  nav.scrolled { background:transparent; backdrop-filter:none; box-shadow:none; }
   .logo { font-family:'Raleway',sans-serif; font-size:20px; font-weight:700; letter-spacing:6px; color:var(--milk); text-decoration:none; text-transform:uppercase; transition:letter-spacing 0.3s; }
   .logo:hover { letter-spacing:10px; }
   .nav-links { display:none; gap:32px; list-style:none; }
@@ -80,8 +80,70 @@
   .search-count { font-size:11px; color:var(--dorado); letter-spacing:1px; white-space:nowrap; }
   .search-close { background:none; border:none; color:var(--milk); font-size:20px; cursor:pointer; opacity:0.6; }
 
-  /* ═══════ HERO ═══════ */
-  .hero { position:relative; height:100vh; display:flex; align-items:center; justify-content:center; background:transparent; }
+  /* VIDEO FALLBACK para móvil */
+  .hero-video-fallback {
+    position:absolute; inset:0; z-index:0;
+    background: linear-gradient(135deg, #1a1008 0%, #2c1f12 40%, #1a1810 100%);
+    background-image: url('https://res.cloudinary.com/dtw62rva1/video/upload/so_0/v1774767260/fffffff_zaoxv6.jpg');
+    background-size: cover;
+    background-position: center 70%;
+  }
+  #heroBgImg { position:relative; z-index:1; }
+
+  /* En móvil: mostrar imagen, ocultar video */
+  @media(max-width:767px) {
+    #heroBgImg { display:none !important; }
+    .hero-video-fallback { display:block !important; }
+  }
+  /* ═══════ MOBILE FIXES ═══════ */
+  @media(max-width:767px) {
+    /* Top bar wrapping */
+    .top-bar { font-size:9px; letter-spacing:1.5px; padding:8px 12px; line-height:1.5; }
+
+    /* Nav compacto */
+    nav { padding:0 16px; top:44px; }
+
+    /* Hero centrado y proporcional */
+    .hero { height:100svh; min-height:600px; }
+    .hero-content { padding:0 20px; }
+    .hero-title { font-size:clamp(36px,11vw,56px); margin-bottom:16px; }
+    .hero-eyebrow { font-size:9px; letter-spacing:3px; margin-bottom:16px; }
+    .hero-sub { font-size:9px; letter-spacing:2px; margin-bottom:32px; line-height:2; }
+    .hero-btns { flex-direction:column; align-items:center; gap:12px; }
+    .btn-primary, .btn-outline { width:280px; padding:14px 20px; }
+
+    /* Nueva colección slides más cortos en móvil */
+    .col-slide { height:85vh; }
+    .col-slide-info { padding:24px 20px; flex-direction:column; align-items:flex-start; gap:16px; }
+    .col-slide-cta { width:100%; text-align:center; }
+
+    /* Ofertas apiladas */
+    .oferta-card { flex-direction:column !important; height:auto; }
+    .oferta-img { height:260px; width:100% !important; }
+    .oferta-info { padding:20px 16px; }
+
+    /* Marcas grid */
+    .marcas-grid { grid-template-columns:1fr; }
+    .marca-card { padding:20px 16px; }
+
+    /* Suscripción form apilado */
+    .suscripcion-form { flex-direction:column; }
+    .suscripcion-form input, .suscripcion-form button { width:100%; border-right:1px solid rgba(196,168,130,0.2); }
+
+    /* Secciones padding reducido */
+    .ofertas-section, .marcas-section, .novedades-section, .suscripcion-section, .direccion-section { padding:60px 16px; }
+    .nueva-col-header { padding:60px 16px 24px; }
+
+    /* CLOUSA big text oculto en móvil */
+    .hero-brand { display:none; }
+
+    /* Megamenú oculto en móvil (ya estaba) */
+    .megamenu { display:none !important; }
+  }
+
+  /* CSS del hero original */
+  .hero { position:fixed; top:0; left:0; right:0; height:100vh; display:flex; align-items:center; justify-content:center; background:transparent; z-index:0; }
+  .hero-spacer { height:100vh; pointer-events:none; }
   .hero-bg { position:absolute; inset:0; z-index:0; }
   .hero-bg img { width:100%; height:120%; object-fit:cover; object-position:center 70%; }
   .hero-overlay { position:absolute; inset:0; background:linear-gradient(135deg, rgba(30,18,8,0.7) 0%, rgba(30,18,8,0.4) 60%, rgba(30,18,8,0.55) 100%); z-index:1; }
@@ -100,8 +162,7 @@
   .hero-scroll-line { width:1px; height:48px; background:linear-gradient(to bottom, rgba(27,45,79,0.8), transparent); }
   .hero-scroll-text { font-size:8px; letter-spacing:3px; text-transform:uppercase; color:rgba(251,247,244,0.4); }
 
-  /* CLOUSA BIG TEXT */
-  .hero-brand { position:fixed; top:50%; right:0; transform:translateY(-50%); font-family:'Raleway',sans-serif; font-size:clamp(40px,7vw,90px); font-weight:900; letter-spacing:-3px; line-height:0.8; pointer-events:none; z-index:1; user-select:none; text-transform:uppercase; text-align:right; background:linear-gradient(to bottom, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .hero-brand { display:none; }
 
   /* ═══════ NUEVA COLECCIÓN FULLSCREEN ═══════ */
   .nueva-col { position:relative; z-index:10; background:var(--milk); min-height:100vh; }
@@ -163,7 +224,8 @@
 
   /* ═══════ MARCAS ═══════ */
   .marcas-section { background:transparent; padding:80px 32px; position:relative; z-index:10; }
-  .marcas-grid { display:grid; grid-template-columns:1fr 1fr; gap:2px; }
+  .marcas-grid { display:grid; grid-template-columns:1fr; gap:2px; }
+  @media(min-width:480px) { .marcas-grid { grid-template-columns:1fr 1fr; } }
   @media(min-width:768px) { .marcas-grid { grid-template-columns:repeat(3,1fr); } }
   .marca-card { border:1px solid rgba(255,255,255,0.2); padding:28px 24px; display:flex; align-items:center; gap:16px; cursor:pointer; transition:all 0.3s; background:rgba(255,255,255,0.08); backdrop-filter:blur(4px); }
   .marca-card:hover { border-color:var(--dorado); transform:translateX(4px); box-shadow:4px 0 20px rgba(90,73,59,0.06); }
@@ -193,7 +255,12 @@
   .pagos-icons { display:flex; justify-content:center; gap:20px; flex-wrap:wrap; }
   .pago-icon { background:rgba(255,255,255,0.1); backdrop-filter:blur(8px); padding:8px 20px; font-size:11px; color:rgba(255,255,255,0.8); letter-spacing:1px; text-transform:uppercase; font-weight:600; border:1px solid rgba(255,255,255,0.15); }
 
-  /* ═══════ FOOTER ═══════ */
+  /* ═══════ WHATSAPP FLOTANTE ═══════ */
+  .wa-flotante { position:fixed; bottom:80px; left:24px; z-index:3000; width:56px; height:56px; background:#25D366; border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 20px rgba(37,211,102,0.4); transition:transform 0.3s, box-shadow 0.3s; text-decoration:none; }
+  .wa-flotante:hover { transform:scale(1.1) translateY(-2px); box-shadow:0 8px 28px rgba(37,211,102,0.5); }
+  @media(max-width:767px) { .wa-flotante { bottom:72px; left:16px; width:50px; height:50px; } }
+
+  /* FOOTER */
   footer { background:var(--coffee2); padding:24px 32px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; border-top:1px solid rgba(196,168,130,0.1); position:relative; z-index:10; }
   .footer-logo { font-family:'Raleway',sans-serif; font-size:14px; font-weight:700; letter-spacing:5px; color:rgba(251,247,244,0.4); text-transform:uppercase; }
   .footer-copy { font-size:10px; color:rgba(251,247,244,0.3); letter-spacing:1px; }
@@ -249,6 +316,9 @@
   .modal-talles { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px; }
   .modal-talle { border:1px solid rgba(90,73,59,0.2); background:transparent; padding:9px 14px; font-size:11px; cursor:pointer; transition:all 0.2s; }
   .modal-talle.sel { background:var(--coffee2); color:var(--milk); border-color:var(--coffee2); }
+  .modal-talle.sin-stock { opacity:0.35; cursor:not-allowed; text-decoration:line-through; border-style:dashed; }
+  .modal-talle .stock-x { font-size:8px; margin-left:3px; color:#c0392b; }
+  .oferta-talle.sin-stock { opacity:0.35; cursor:not-allowed; text-decoration:line-through; border-style:dashed; }
   .modal-talle-error { font-size:11px; color:#c0392b; margin-bottom:12px; display:none; }
   .modal-desc { font-size:12px; color:var(--muted); line-height:1.7; margin-bottom:24px; flex:1; }
   .modal-actions { display:flex; flex-direction:column; gap:10px; margin-top:auto; }
@@ -315,7 +385,7 @@
 
 
   /* VIDEO WRAPPER */
-  .video-sections-wrap { position:relative; overflow:hidden; }
+  .video-sections-wrap { position:relative; overflow:hidden; z-index:10; }
   .video-sections-wrap .bg-video { position:absolute; inset:0; z-index:0; }
   .video-sections-wrap .bg-video video { width:100%; height:100%; object-fit:cover; object-position:center 70%; }
   .video-sections-wrap .bg-video::after { content:""; position:absolute; inset:0; background:rgba(15,12,10,0.55); }
@@ -505,10 +575,16 @@
 <!-- HERO -->
 <section class="hero" id="hero">
   <div class="hero-bg">
+    <div class="hero-video-fallback"></div>
     <video autoplay muted loop playsinline id="heroBgImg" style="width:100%;height:100%;object-fit:cover;object-position:center 70%;display:block;">
       <source src="https://res.cloudinary.com/dtw62rva1/video/upload/v1774767260/fffffff_zaoxv6.mp4" type="video/mp4">
     </video>
-    <div style="position:absolute;inset:0;background:rgba(20,18,15,0.45);"></div>
+    <style>
+      @media(max-width:767px) {
+        #heroBgImg { object-position: center 70% !important; }
+      }
+    </style>
+    <div class="hero-overlay" style="position:absolute;inset:0;background:rgba(20,18,15,0.45);"></div>
   </div>
   <div class="hero-content">
     <span class="hero-eyebrow" id="heroEyebrow">Clousa · San Miguel · Zona Norte</span>
@@ -524,6 +600,9 @@
     <span class="hero-scroll-text">Scroll</span>
   </div>
 </section>
+
+<!-- HERO SPACER -->
+<div class="hero-spacer"></div>
 
 <!-- CLOUSA BIG TEXT -->
 <div class="hero-brand" id="heroBrand">CLOUSA</div>
@@ -698,7 +777,6 @@
     <p style="font-size:13px;color:rgba(251,247,244,0.5);line-height:2;">Cnel. Charlone 1095<br>B1663 San Miguel, Buenos Aires<br>Zona Norte GBA</p>
   </div>
   <div style="display:flex;flex-direction:column;gap:12px;margin-top:32px;">
-    <a href="https://wa.me/5491166025737" target="_blank" style="display:inline-block;background:#25D366;color:white;padding:14px 32px;font-family:'Raleway',sans-serif;font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;text-decoration:none;text-align:center;">WhatsApp</a>
     <a href="https://maps.google.com/?q=Cnel.+Charlone+1095,+San+Miguel" target="_blank" style="display:inline-block;background:transparent;color:rgba(251,247,244,0.5);padding:13px 32px;font-family:'Raleway',sans-serif;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;text-decoration:none;border:1px solid rgba(251,247,244,0.15);text-align:center;">Ver en el mapa</a>
   </div>
 </section>
@@ -722,16 +800,21 @@
   <div class="footer-copy">© 2025 Clousa · San Miguel, Buenos Aires</div>
 </footer>
 
+<!-- WHATSAPP FLOTANTE -->
+<a href="https://wa.me/5491166025737?text=Hola!%20Quiero%20consultar%20sobre%20un%20producto" target="_blank" class="wa-flotante" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
 <script>
   // ── PRODUCTOS ──
   const productos = [
-    { id:1, name:"Sweater Half Zipper Waffle", brand:"Mistral", price:56000, img:"https://acdn-us.mitiendanube.com/stores/001/369/862/products/40060m012-5-65965a63895ea892bb17728402335732-1024-1024.webp", imgs:["https://acdn-us.mitiendanube.com/stores/001/369/862/products/40060m012-5-65965a63895ea892bb17728402335732-1024-1024.webp"], talles:["S","M","L","XL"], desc:"Sweater Half Zipper Waffle de Mistral. Tejido waffle premium, cierre medio. Ideal para capas." },
-    { id:2, name:"Polo Jersey Hart", brand:"Brooksfiled", price:48000, img:"https://www.brooksfieldstore.com/70503-large_default/polo-jersey-hart.jpg", imgs:["https://www.brooksfieldstore.com/70503-large_default/polo-jersey-hart.jpg"], talles:["S","M","L","XL","XXL"], desc:"Polo Jersey Hart de Brooksfiled. Tela jersey premium, corte slim fit clásico." },
-    { id:3, name:"Polo Filippo Pima Piqué", brand:"Brooksfiled", price:52000, img:"https://www.brooksfieldstore.com/68254-large_default/polo-filippo-pima-pique.jpg", imgs:["https://www.brooksfieldstore.com/68254-large_default/polo-filippo-pima-pique.jpg"], talles:["S","M","L","XL"], desc:"Polo Filippo de Brooksfiled en algodón Pima Piqué. Suave, transpirable y de larga duración." },
-    { id:4, name:"Campera Vicent", brand:"Brooksfiled", price:89990, img:"https://www.brooksfieldstore.com/71441-large_default/campera-vicent.jpg", imgs:["https://www.brooksfieldstore.com/71441-large_default/campera-vicent.jpg"], talles:["S","M","L","XL"], desc:"Campera Vicent de Brooksfiled. Relleno sintético premium, cierre central y bolsillos con cierre." },
-    { id:5, name:"Campera Moritz", brand:"Brooksfiled", price:94500, img:"https://www.brooksfieldstore.com/70857-large_default/campera-moritz.jpg", imgs:["https://www.brooksfieldstore.com/70857-large_default/campera-moritz.jpg"], talles:["M","L","XL"], desc:"Campera Moritz de Brooksfiled. Diseño moderno con capucha desmontable y abrigo superior." },
-    { id:6, name:"Campera Vicent Hoodie", brand:"Brooksfiled", price:86000, img:"https://www.brooksfieldstore.com/55727-large_default/campera-vicent-hoodie.jpg", imgs:["https://www.brooksfieldstore.com/55727-large_default/campera-vicent-hoodie.jpg"], talles:["S","M","L","XL","XXL"], desc:"Versión hoodie de la icónica Campera Vicent. Capucha regulable, bolsillo canguro." },
-    { id:7, name:"Mercedario Jeans", brand:"Superflag / Old Bridge", price:75000, img:"https://acdn-us.mitiendanube.com/stores/001/568/736/products/dsc04683-43afb91dbbf71ee5c917734057160679-1024-1024.webp", imgs:["https://acdn-us.mitiendanube.com/stores/001/568/736/products/dsc04683-43afb91dbbf71ee5c917734057160679-1024-1024.webp","https://acdn-us.mitiendanube.com/stores/001/568/736/products/dsc04690-9668c7b7c329be6b5b17734057172226-1024-1024.webp","https://acdn-us.mitiendanube.com/stores/001/568/736/products/dsc04687-be0f884e3f65e2f46317734057166214-1024-1024.webp"], talles:["40","44","46","48","50","52"], desc:"Jean Mercedario de Old Bridge. Corte recto clásico. Talles disponibles: 40 (2u), 44 (3u), 46 (3u), 48 (3u), 50 (2u), 52 (1u)." }
+    { id:1, name:"Sweater Half Zipper Waffle", brand:"Mistral", price:56000, img:"https://acdn-us.mitiendanube.com/stores/001/369/862/products/40060m012-5-65965a63895ea892bb17728402335732-1024-1024.webp", imgs:["https://acdn-us.mitiendanube.com/stores/001/369/862/products/40060m012-5-65965a63895ea892bb17728402335732-1024-1024.webp"], talles:["S","M","L","XL"], stock:{S:3,M:2,L:1,XL:0}, desc:"Sweater Half Zipper Waffle de Mistral. Tejido waffle premium, cierre medio. Ideal para capas." },
+    { id:2, name:"Polo Jersey Hart", brand:"Brooksfiled", price:48000, img:"https://www.brooksfieldstore.com/70503-large_default/polo-jersey-hart.jpg", imgs:["https://www.brooksfieldstore.com/70503-large_default/polo-jersey-hart.jpg"], talles:["S","M","L","XL","XXL"], stock:{S:2,M:3,L:3,XL:2,XXL:1}, desc:"Polo Jersey Hart de Brooksfiled. Tela jersey premium, corte slim fit clásico." },
+    { id:3, name:"Polo Filippo Pima Piqué", brand:"Brooksfiled", price:52000, img:"https://www.brooksfieldstore.com/68254-large_default/polo-filippo-pima-pique.jpg", imgs:["https://www.brooksfieldstore.com/68254-large_default/polo-filippo-pima-pique.jpg"], talles:["S","M","L","XL"], stock:{S:1,M:2,L:2,XL:1}, desc:"Polo Filippo de Brooksfiled en algodón Pima Piqué. Suave, transpirable y de larga duración." },
+    { id:4, name:"Campera Vicent", brand:"Brooksfiled", price:89990, img:"https://www.brooksfieldstore.com/71441-large_default/campera-vicent.jpg", imgs:["https://www.brooksfieldstore.com/71441-large_default/campera-vicent.jpg"], talles:["S","M","L","XL"], stock:{S:2,M:2,L:1,XL:0}, desc:"Campera Vicent de Brooksfiled. Relleno sintético premium, cierre central y bolsillos con cierre." },
+    { id:5, name:"Campera Moritz", brand:"Brooksfiled", price:94500, img:"https://www.brooksfieldstore.com/70857-large_default/campera-moritz.jpg", imgs:["https://www.brooksfieldstore.com/70857-large_default/campera-moritz.jpg"], talles:["M","L","XL"], stock:{M:2,L:2,XL:1}, desc:"Campera Moritz de Brooksfiled. Diseño moderno con capucha desmontable y abrigo superior." },
+    { id:6, name:"Campera Vicent Hoodie", brand:"Brooksfiled", price:86000, img:"https://www.brooksfieldstore.com/55727-large_default/campera-vicent-hoodie.jpg", imgs:["https://www.brooksfieldstore.com/55727-large_default/campera-vicent-hoodie.jpg"], talles:["S","M","L","XL","XXL"], stock:{S:1,M:2,L:2,XL:1,XXL:0}, desc:"Versión hoodie de la icónica Campera Vicent. Capucha regulable, bolsillo canguro." },
+    { id:7, name:"Mercedario Jeans", brand:"Superflag / Old Bridge", price:75000, img:"https://acdn-us.mitiendanube.com/stores/001/568/736/products/dsc04683-43afb91dbbf71ee5c917734057160679-1024-1024.webp", imgs:["https://acdn-us.mitiendanube.com/stores/001/568/736/products/dsc04683-43afb91dbbf71ee5c917734057160679-1024-1024.webp","https://acdn-us.mitiendanube.com/stores/001/568/736/products/dsc04690-9668c7b7c329be6b5b17734057172226-1024-1024.webp","https://acdn-us.mitiendanube.com/stores/001/568/736/products/dsc04687-be0f884e3f65e2f46317734057166214-1024-1024.webp"], talles:["40","44","46","48","50","52"], stock:{"40":2,"44":3,"46":3,"48":3,"50":2,"52":1}, desc:"Jean Mercedario de Old Bridge. Corte recto clásico." }
   ];
 
   // ── CARRITO ──
@@ -800,9 +883,11 @@
 
   // ── MODAL ──
   let modalTalle = null;
+  let modalProducto = null;
   function openModal(id) {
     const p = productos.find(x => x.id === id);
     if(!p) return;
+    modalProducto = p;
     document.getElementById('modalBrand').textContent = p.brand;
     document.getElementById('modalName').textContent = p.name;
     document.getElementById('modalPrice').textContent = '$' + p.price.toLocaleString('es-AR');
@@ -810,7 +895,11 @@
     document.getElementById('modalImgMain').src = p.img;
     modalTalle = null;
     const talles = document.getElementById('modalTalles');
-    talles.innerHTML = p.talles.map(t => `<button class="modal-talle" onclick="selModalTalle(this,'${t}')">${t}</button>`).join('');
+    talles.innerHTML = p.talles.map(t => {
+      const stockT = p.stock ? (p.stock[t] || 0) : 99;
+      const sinStock = stockT === 0;
+      return `<button class="modal-talle${sinStock?' sin-stock':''}" ${sinStock?'disabled':''} onclick="selModalTalle(this,'${t}')" title="${sinStock?'Sin stock':'Stock: '+stockT}">${t}${sinStock?'<span class="stock-x">✕</span>':''}</button>`;
+    }).join('');
     const thumbs = document.getElementById('modalThumbs');
     thumbs.innerHTML = (p.imgs||[p.img]).map((src,i) => `<img class="modal-thumb${i===0?' active':''}" src="${src}" onclick="setModalImg(this,'${src}')">`).join('');
     document.getElementById('modalOverlay').classList.add('open');
@@ -849,6 +938,7 @@
 
   // ── OFERTAS ──
   function selOfertaTalle(btn) {
+    if(btn.classList.contains('sin-stock')) return;
     const container = btn.closest('.oferta-talles');
     container.querySelectorAll('.oferta-talle').forEach(b => b.classList.remove('sel'));
     btn.classList.add('sel');
@@ -858,8 +948,9 @@
     const sel = container.querySelector('.oferta-talle.sel');
     const err = document.getElementById(errId);
     if(!sel) { err.style.display = 'block'; return; }
+    if(sel.classList.contains('sin-stock')) { err.style.display = 'block'; return; }
     err.style.display = 'none';
-    addToCart(name, brand, price, img, sel.textContent);
+    addToCart(name, brand, price, img, sel.textContent.trim());
   }
 
   // ── MENÚ ──
@@ -905,22 +996,43 @@
   }
   function buscar(query) {
     const q = query.toLowerCase().trim();
-    const cards = document.querySelectorAll('.c3d-card, .oferta-card, .marca-card');
-    let count = 0;
-    cards.forEach(card => {
+    // Buscar en productos del array y mostrar resultados
+    if (!q) {
+      // Sin query — restaurar todo
+      document.querySelectorAll('.oferta-card, .col-slide, .marca-card').forEach(c => c.style.display = '');
+      document.getElementById('searchCount').textContent = '';
+      return;
+    }
+    // Filtrar productos
+    const matches = productos.filter(p =>
+      p.name.toLowerCase().includes(q) ||
+      p.brand.toLowerCase().includes(q) ||
+      (p.desc && p.desc.toLowerCase().includes(q))
+    );
+    // Ocultar/mostrar oferta-cards por nombre
+    document.querySelectorAll('.oferta-card').forEach(card => {
+      const nombre = card.querySelector('.oferta-name')?.textContent.toLowerCase() || '';
+      const marca = card.querySelector('.oferta-brand')?.textContent.toLowerCase() || '';
+      card.style.display = (nombre.includes(q) || marca.includes(q)) ? '' : 'none';
+    });
+    // Ocultar/mostrar col-slides
+    document.querySelectorAll('.col-slide').forEach(card => {
       const text = card.textContent.toLowerCase();
-      const match = !q || text.includes(q);
-      card.style.display = match ? '' : 'none';
-      if(match) count++;
+      card.style.display = text.includes(q) ? '' : 'none';
+    });
+    // Ocultar/mostrar marcas
+    document.querySelectorAll('.marca-card').forEach(card => {
+      const text = card.textContent.toLowerCase();
+      card.style.display = text.includes(q) ? '' : 'none';
     });
     const countEl = document.getElementById('searchCount');
-    countEl.textContent = q ? count + (count===1?' resultado':' resultados') : '';
+    countEl.textContent = matches.length + (matches.length === 1 ? ' resultado' : ' resultados');
   }
   function clearSearch() {
     document.getElementById('searchInput').value = '';
     document.getElementById('searchCount').textContent = '';
     document.getElementById('searchBar').classList.remove('open');
-    document.querySelectorAll('.c3d-card, .oferta-card, .marca-card').forEach(c => c.style.display = '');
+    document.querySelectorAll('.oferta-card, .col-slide, .marca-card').forEach(c => c.style.display = '');
   }
 
   // ── MEGAMENU ──
@@ -1061,9 +1173,12 @@
     pb.style.width = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100) + '%';
   }, {passive:true});
 
-  // Nav scroll effect
+  // Nav scroll effect — se oculta al salir del hero
   window.addEventListener('scroll', () => {
-    document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 50);
+    const heroHeight = window.innerHeight;
+    const pastHero = window.scrollY > heroHeight * 0.85;
+    document.getElementById('mainNav').style.transform = pastHero ? 'translateY(-200%)' : 'translateY(0)';
+    document.querySelector('.top-bar').style.transform = pastHero ? 'translateY(-200%)' : 'translateY(0)';
   }, {passive:true});
 
   // HERO entrance — staggered sequence
@@ -1075,23 +1190,17 @@
     .fromTo('#heroBtns',    {opacity:0, y:20}, {opacity:1, y:0, duration:0.8, ease:'power3.out'}, '-=0.5')
     .fromTo('#heroScroll',  {opacity:0},       {opacity:1, duration:1, ease:'power2.out'}, '-=0.3');
 
-  // Hero image parallax
-  gsap.to('.hero-bg video', {
-    yPercent:25, ease:'none',
-    scrollTrigger:{trigger:'.hero', start:'top top', end:'bottom top', scrub:1.5}
-  });
-
   // Hero overlay deepens on scroll
   gsap.to('.hero-overlay', {
     opacity:0.85, ease:'none',
-    scrollTrigger:{trigger:'.hero', start:'top top', end:'bottom top', scrub:1}
+    scrollTrigger:{trigger:'.hero-spacer', start:'top top', end:'bottom top', scrub:1}
   });
 
   // CLOUSA brand text — appears with hero, fades as you scroll
   gsap.fromTo('#heroBrand', {opacity:0}, {opacity:1, duration:1.5, delay:1.2, ease:'power2.out'});
   gsap.to('#heroBrand', {
     opacity:0, ease:'none',
-    scrollTrigger:{trigger:'.hero', start:'30% top', end:'90% top', scrub:1}
+    scrollTrigger:{trigger:'.hero-spacer', start:'30% top', end:'90% top', scrub:1}
   });
 
   // Hero scroll indicator pulses
@@ -1203,6 +1312,18 @@
     card.addEventListener('mouseenter', () => gsap.to(card, {x:6, duration:0.3, ease:'power2.out'}));
     card.addEventListener('mouseleave', () => gsap.to(card, {x:0, duration:0.4, ease:'power3.out'}));
   });
+
+  // VIDEO FALLBACK — si el video no carga en móvil, el fallback oscuro ya está visible
+  const heroVideo = document.getElementById('heroBgImg');
+  if (heroVideo) {
+    heroVideo.play().then(() => {
+      // Video OK — ocultar fallback
+      document.querySelector('.hero-video-fallback').style.display = 'none';
+    }).catch(() => {
+      // Video bloqueado — el fallback oscuro queda visible
+      heroVideo.style.display = 'none';
+    });
+  }
 
 </script>
 </body>
