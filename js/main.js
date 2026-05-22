@@ -53,6 +53,16 @@ window.Clousa = window.Clousa || {};
         }
       });
     }
+
+    /* Hero clickeable — lleva a la colección (el cursor pointer lo indica) */
+    var hero = document.getElementById('hero');
+    if (hero) {
+      hero.addEventListener('click', function (e) {
+        if (e.target.closest('a, button')) return;
+        var cat = document.getElementById('catalogo');
+        if (cat) cat.scrollIntoView({ behavior: 'smooth' });
+      });
+    }
   }
 
   /* ---- Animaciones GSAP ---- */
@@ -62,16 +72,27 @@ window.Clousa = window.Clousa || {};
     if (typeof gsap === 'undefined') return;
     gsap.registerPlugin(ScrollTrigger);
 
-    /* Hero — parallax sobre la imagen de fondo */
-    gsap.to('#heroImg', {
-      yPercent: 16,
-      ease: 'none',
-      scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }
-    });
+    /* Hero — parallax pronunciado + zoom sobre la imagen de fondo */
+    gsap.fromTo('#heroImg',
+      { yPercent: -10, scale: 1 },
+      {
+        yPercent: 14, scale: 1.1, ease: 'none',
+        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1.2 }
+      }
+    );
 
-    /* Hero — entrada escalonada del contenido */
-    gsap.from('.hero__content > *', {
-      y: 34, opacity: 0, duration: 1, stagger: 0.12, ease: 'power3.out', delay: 0.15
+    /* Hero — entrada del contenido en secuencia */
+    gsap.from('.hero__content .eyebrow', {
+      opacity: 0, duration: 0.9, delay: 0.3, ease: 'power2.out'
+    });
+    gsap.from('.hero__title .hero__word', {
+      y: 60, opacity: 0, duration: 1, stagger: 0.08, delay: 0.5, ease: 'power3.out'
+    });
+    gsap.from('.hero__sub', {
+      opacity: 0, duration: 0.9, delay: 1, ease: 'power2.out'
+    });
+    gsap.from('.hero__content .btn', {
+      scale: 0.8, opacity: 0, duration: 0.7, delay: 1.2, ease: 'back.out(1.6)'
     });
 
     /* Encabezado de sección */
