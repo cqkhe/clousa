@@ -1,0 +1,18 @@
+{
+  "name": "clousa-mistral-scraper",
+  "version": "1.0.0",
+  "description": "Scraper automatizado para extraer catálogo de Mistral B2B",
+  "main": "scraper.js",
+  "type": "module",
+  "scripts": {
+    "scrape": "node scraper.js",
+    "scrape:debug": "node scraper.js --debug"
+  },
+  "keywords": ["scraper", "mistral", "b2b", "playwright"],
+  "author": "Santino Gallo Vazquez",
+  "license": "MIT",
+  "dependencies": {
+    "playwright": "^1.42.1"
+  },
+  "devDependencies": {}
+}
