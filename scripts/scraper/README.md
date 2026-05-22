@@ -1,192 +1,137 @@
-[README.md](https://github.com/user-attachments/files/28131496/README.md)
-# Scraper Mistral B2B - Extracción Automática de Catálogo
+[README.md](https://github.com/user-attachments/files/28131729/README.md)
+# Scraper Mistral B2B — Clousa
 
-Scraper automatizado para extraer el catálogo completo de productos, precios y stock desde Mistral B2B (https://mistralb2b.com.ar).
+Automatización que mantiene `data/productos.json` sincronizado con el
+catálogo de [Mistral B2B](https://mistralb2b.com.ar). Corre sola todos los
+días; cuando el catálogo cambia, commitea el JSON y Netlify re-deploya.
 
-## 🚀 Instalación
-
-### Prerequisitos
-
-- Node.js 18+ instalado
-- Conexión a internet
-
-### Pasos
-
-1. **Copiar esta carpeta a tu máquina local:**
-   ```bash
-   # Si estás en el repo de Clousa:
-   cd C:\clousa  # o donde tengas tu proyecto
-   mkdir scraper-mistral
-   cd scraper-mistral
-   ```
-
-2. **Copiar los archivos:**
-   - `package.json`
-   - `scraper.js`
-   - `README.md` (este archivo)
-
-3. **Instalar dependencias:**
-   ```bash
-   npm install
-   ```
-
-   Esto instalará Playwright y sus navegadores automáticamente (~200MB).
-
-## 📖 Uso
-
-### Ejecución básica (headless)
-
-```bash
-npm run scrape
+```
+scripts/scraper/
+├── scraper.js          Scraper Playwright (login + 25 categorías + JSON)
+├── package.json        Dependencias (playwright)
+├── package-lock.json   Lockfile — necesario para `npm ci`
+├── .gitignore          Ignora node_modules/, screenshots/ y dumps
+└── README.md           Este archivo
 ```
 
-Esto ejecuta el scraper en modo invisible y rápido.
+---
 
-### Ejecución en modo DEBUG (recomendado la primera vez)
+## Cómo funciona
 
-```bash
-npm run scrape:debug
-```
+1. **Disparador** — el workflow `.github/workflows/actualizar-stock.yml`
+   corre por `cron` a las **09:00 UTC (06:00 Argentina)**, y también puede
+   lanzarse a mano desde la pestaña Actions.
+2. **Login** — `scraper.js` abre Chromium con Playwright e inicia sesión en
+   Mistral B2B con las credenciales tomadas del entorno.
+3. **Recorrido** — visita las 25 categorías
+   (`catalogo.php?itemCatalogo=…&colId=I26`) y extrae cada producto.
+4. **Reglas de negocio**
+   - `precio_venta = precio_fabrica × 1.40` (markup del 40 %).
+   - Solo se publican productos **disponibles** (`agotado: false`).
+   - Se descartan los productos con `precio_venta` nulo o 0.
+   - El JSON final **excluye** `precio_fabrica` y `precio_texto`: los
+     precios de fábrica B2B nunca llegan al sitio público.
+5. **Salvaguarda** — si el scraping no devuelve productos válidos, el script
+   aborta **sin escribir** el archivo, para no romper la tienda.
+6. **Commit** — si `data/productos.json` cambió, el workflow commitea como
+   `chore: actualizar stock Mistral [bot]` y pushea. Netlify re-deploya solo.
 
-Esto abre el navegador visible para que veas qué está haciendo el scraper en tiempo real. **Usa este modo la primera vez** para verificar que el login funcione.
-
-## 📂 Archivos generados
-
-Después de ejecutar, el scraper genera:
-
-### `mistral_catalogo.json`
-Archivo principal con todos los productos extraídos. Estructura:
+### Formato de salida (`data/productos.json`)
 
 ```json
 {
   "metadata": {
-    "fecha_extraccion": "2025-05-21T...",
     "proveedor": "Mistral B2B",
-    "url_catalogo": "https://mistralb2b.com.ar/...",
-    "total_items_raw": 150
+    "coleccion": "Invierno 2026",
+    "fecha_actualizacion": "2026-05-22T09:00:00.000Z",
+    "total_productos": 172,
+    "total_categorias": 22
   },
-  "productos_raw": [
+  "categorias": ["JACKETS", "JEANS", "..."],
+  "productos": [
     {
-      "index": 0,
-      "imagen": "https://...",
-      "imagenes": ["https://...", "https://..."],
-      "textos": ["Campera North", "Talle: S M L XL", "$45.000"],
-      "link": "https://mistralb2b.com.ar/producto.php?id=123",
-      "dataAttributes": {
-        "data-id": "123",
-        "data-precio": "45000"
-      }
+      "codigo": "96093M",
+      "nombre": "PACK X 2 BOXER PREMIUM LYCRA MASCULINO",
+      "marca": "Mistral",
+      "categoria": "BOXERS",
+      "precio_venta": 26600,
+      "imagen": "https://mistralb2b.com.ar/images/productos/...",
+      "agotado": false
     }
   ]
 }
 ```
 
-### `screenshots/` (solo en modo debug)
-Capturas de pantalla del proceso:
-- `01_login_page_*.png` - Formulario de login
-- `02_form_filled_*.png` - Formulario completado
-- `03_after_login_*.png` - Página después del login
-- `04_catalogo_*.png` - Catálogo de productos
+---
 
-### `mistral_page_dump.html` (si no encuentra productos)
-HTML completo de la página para análisis manual.
+## Configurar los GitHub Secrets
 
-### `error_page_dump.html` (si hay error)
-HTML de la página donde ocurrió el error.
+Las credenciales **nunca** van en el código: se leen del entorno. En
+GitHub Actions vienen de **Secrets**.
 
-## 🔧 Configuración
+1. En GitHub: **Settings ▸ Secrets and variables ▸ Actions**.
+2. **New repository secret** y creá estos dos:
 
-Para cambiar credenciales o comportamiento, editá `scraper.js` líneas 12-21:
+   | Nombre              | Valor                       |
+   |---------------------|-----------------------------|
+   | `MISTRAL_USER`      | Usuario de Mistral B2B      |
+   | `MISTRAL_PASSWORD`  | Contraseña de Mistral B2B   |
 
-```javascript
-const CONFIG = {
-  baseUrl: 'https://mistralb2b.com.ar',
-  loginUrl: 'https://mistralb2b.com.ar/login.php',
-  credentials: {
-    usuario: '20110220643',  // ← cambiar acá
-    password: 'capo'          // ← cambiar acá
-  },
-  // ...
-};
-```
+3. El workflow los inyecta como variables de entorno al correr `scraper.js`.
 
-## 🐛 Troubleshooting
-
-### Error: "No se pudo encontrar el campo de usuario"
-
-**Causa:** El formulario de login tiene una estructura HTML diferente a la esperada.
-
-**Solución:**
-1. Ejecutá en modo debug: `npm run scrape:debug`
-2. Cuando abra el navegador, fijate qué campos tiene el formulario
-3. Abrí DevTools (F12) en el navegador
-4. Hacé click derecho en el campo usuario → Inspeccionar
-5. Copiá el atributo `name` o `id` del input
-6. Pegame ese atributo acá y actualizo el scraper
-
-### Error: "Login falló"
-
-**Causa:** Credenciales incorrectas o el sitio bloqueó el login automatizado.
-
-**Solución:**
-1. Verificá que las credenciales sean correctas (probá loguearte manualmente)
-2. Si funcionan manualmente pero no en el scraper, el sitio puede tener protección anti-bot
-3. Avisame y agrego lógica más avanzada (delays, captcha solver, etc.)
-
-### No encuentra productos
-
-**Causa:** Estamos navegando a la página correcta pero no detectamos la estructura HTML de los productos.
-
-**Solución:**
-1. El scraper guardó `mistral_page_dump.html`
-2. Abrí ese archivo en un editor de texto
-3. Buscá (Ctrl+F) por texto que veas en los productos (ej: nombre de una campera)
-4. Copiame el bloque HTML que contenga ese producto
-5. Actualizo el scraper con la estructura correcta
-
-## 📊 Próximos pasos después de extraer el catálogo
-
-Una vez que tengamos `mistral_catalogo.json` con datos correctos:
-
-### 1. Parser inteligente
-Crear `parser.js` que tome el JSON raw y lo estructure con:
-- Código de artículo
-- Nombre normalizado
-- Categoría inferida
-- Precio parseado correctamente
-- Stock por talle
-- Talles disponibles
-
-### 2. Integración con Clousa
-- Reemplazar el array hardcoded de productos en `index.html`
-- Fetch automático desde `mistral_catalogo.json`
-- Agregar tu margen de ganancia sobre los precios de fábrica
-- Filtros por marca, categoría, talle, precio
-
-### 3. Automatización
-- GitHub Actions para ejecutar el scraper cada 6 horas
-- Netlify Function que exponga el catálogo vía API
-- Sistema de alertas si hay productos nuevos o cambios de precio
-
-## 🔐 Seguridad
-
-⚠️ **NO commitees este scraper al repo público de GitHub** con las credenciales dentro.
-
-Si querés subirlo:
-1. Movete las credenciales a un archivo `.env`
-2. Agregá `.env` al `.gitignore`
-3. Usá `process.env.MISTRAL_USER` en lugar de hardcodear
-
-## 📞 Soporte
-
-Si algo no funciona o necesitás ajustar el scraper:
-1. Ejecutá en modo debug
-2. Tomá screenshots de los errores
-3. Guardá el `error_page_dump.html` si se generó
-4. Pasame esa info y lo ajusto
+> El scraper aborta con un error claro si `MISTRAL_USER` o
+> `MISTRAL_PASSWORD` no están definidos.
 
 ---
 
-**Versión:** 1.0.0  
-**Autor:** Santino Gallo Vazquez  
-**Proyecto:** Clousa Ecommerce Integration
+## Ejecutar localmente
+
+```bash
+cd scripts/scraper
+npm install                       # instala playwright
+npx playwright install chromium   # descarga el navegador
+
+# Credenciales por variables de entorno (no se hardcodean):
+MISTRAL_USER="tu_usuario" MISTRAL_PASSWORD="tu_password" npm run scrape
+```
+
+Modo **debug** — abre el navegador visible y guarda capturas en
+`screenshots/`:
+
+```bash
+MISTRAL_USER="tu_usuario" MISTRAL_PASSWORD="tu_password" npm run scrape:debug
+```
+
+El resultado se escribe en `../../data/productos.json` (la ruta se resuelve
+relativa a `scraper.js`, así que funciona desde cualquier directorio).
+
+En Windows (PowerShell):
+
+```powershell
+$env:MISTRAL_USER="tu_usuario"; $env:MISTRAL_PASSWORD="tu_password"; npm run scrape
+```
+
+---
+
+## Ejecutar manualmente en GitHub
+
+1. Pestaña **Actions** del repositorio.
+2. Workflow **«Actualizar Stock Diario Mistral»** en la lista de la izquierda.
+3. Botón **Run workflow ▸ Run workflow**.
+
+Sirve para forzar una actualización sin esperar al cron.
+
+---
+
+## Troubleshooting
+
+- **Aborta por credenciales** → faltan `MISTRAL_USER` / `MISTRAL_PASSWORD`
+  en el entorno (o en Secrets).
+- **«No se pudo encontrar el campo de usuario»** → la estructura del login
+  cambió. Corré `npm run scrape:debug` y revisá las capturas en
+  `screenshots/`.
+- **«No hay productos»** → revisá el dump `mistral_page_dump.html` o
+  `error_page_dump.html` que deja el scraper, y ajustá los selectores en
+  `scraper.js`.
+- **El workflow no commitea** → no hubo cambios en el catálogo (es el
+  comportamiento esperado) o el job no tiene permiso `contents: write`.
