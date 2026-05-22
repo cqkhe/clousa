@@ -1,23 +1,34 @@
 import { chromium } from 'playwright';
 import fs from 'fs/promises';
 import path from 'path';
+import { fileURLToPath } from 'url';
 
 // ═══════════════════════════════════════════════════════════════════
 //  CONFIGURACIÓN
 // ═══════════════════════════════════════════════════════════════════
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
 const CONFIG = {
   baseUrl: 'https://mistralb2b.com.ar',
   loginUrl: 'https://mistralb2b.com.ar/login.php',
+  // Credenciales SIEMPRE desde el entorno — nunca hardcodeadas.
+  // En GitHub Actions vienen de Secrets; en local, de variables de entorno.
   credentials: {
-    usuario: '20110220643',
-    password: 'capo'
+    usuario: process.env.MISTRAL_USER,
+    password: process.env.MISTRAL_PASSWORD
   },
   debug: process.argv.includes('--debug'),
   headless: !process.argv.includes('--debug'),
-  outputFile: 'mistral_catalogo.json',
+  // Escribe directo en data/productos.json del repo (resuelto desde este archivo).
+  outputFile: path.resolve(__dirname, '../../data/productos.json'),
   screenshotsDir: 'screenshots'
 };
+
+if (!CONFIG.credentials.usuario || !CONFIG.credentials.password) {
+  console.error('✗ Faltan credenciales. Definí MISTRAL_USER y MISTRAL_PASSWORD como variables de entorno.');
+  process.exit(1);
+}
 
 // ═══════════════════════════════════════════════════════════════════
 //  FUNCIONES AUXILIARES
@@ -340,76 +351,46 @@ async function scraper() {
     // PASO 3: ESTRUCTURAR Y GUARDAR
     // ─────────────────────────────────────────────────────────────────
     
-    log('\n💾 Guardando catálogo completo...');
-    
-    const output = {
-      metadata: {
-        fecha_extraccion: new Date().toISOString(),
-        proveedor: 'Mistral B2B',
-        url_base: CONFIG.baseUrl,
-        coleccion: 'Invierno 2026',
-        total_categorias: categorias.length,
-        categorias_procesadas: estadisticas.categorias_procesadas,
-        categorias_con_productos: estadisticas.categorias_con_productos,
-        total_productos: estadisticas.total_productos,
-        productos_disponibles: estadisticas.total_productos - estadisticas.productos_agotados,
-        productos_agotados: estadisticas.productos_agotados,
-        version_scraper: '3.0.0'
-      },
-      categorias: categorias,
-      productos: todosLosProductos.map(p => ({
+    log('\n💾 Generando catálogo público...');
+
+    // Catálogo público: SOLO disponibles y con precio válido.
+    // Se EXCLUYEN precio_fabrica y precio_texto (precios B2B — no se publican).
+    const productos = todosLosProductos
+      .map(p => ({
         codigo: p.codigo,
         nombre: p.nombre_completo,
         marca: 'Mistral',
         categoria: p.categoria,
-        precio_fabrica: p.precio,
-        precio_venta: p.precio ? Math.round(p.precio * 1.40) : null, // 40% margen por defecto
-        precio_texto: p.precio_texto,
+        precio_venta: p.precio ? Math.round(p.precio * 1.40) : null, // markup 40%
         imagen: p.imagen,
-        agotado: p.agotado,
-        stock: p.agotado ? 0 : null,
-        link_detalle: p.link_detalle
+        agotado: p.agotado
       }))
-    };
-    
-    // Guardar JSON principal
-    await fs.writeFile(
-      CONFIG.outputFile,
-      JSON.stringify(output, null, 2),
-      'utf-8'
-    );
-    
-    log(`✓ Catálogo completo guardado en: ${CONFIG.outputFile}`);
-    
-    // Guardar versión minificada para producción
-    await fs.writeFile(
-      'mistral_catalogo_min.json',
-      JSON.stringify(output),
-      'utf-8'
-    );
-    
-    log(`✓ Versión minificada guardada en: mistral_catalogo_min.json`);
-    
-    // Guardar solo productos disponibles (sin agotados)
-    const productosDisponibles = output.productos.filter(p => !p.agotado);
-    const outputDisponibles = {
-      ...output,
+      .filter(p => p.agotado === false && p.precio_venta > 0 && p.codigo && p.nombre);
+
+    // Salvaguarda: nunca pisar el catálogo con un resultado vacío.
+    if (productos.length === 0) {
+      throw new Error('No se obtuvieron productos válidos — no se escribe el archivo para no romper la tienda.');
+    }
+
+    const categoriasConProductos = [...new Set(productos.map(p => p.categoria))].sort();
+
+    const output = {
       metadata: {
-        ...output.metadata,
-        nota: 'Solo productos con stock disponible',
-        total_productos: productosDisponibles.length
+        proveedor: 'Mistral B2B',
+        coleccion: 'Invierno 2026',
+        fecha_actualizacion: new Date().toISOString(),
+        total_productos: productos.length,
+        total_categorias: categoriasConProductos.length
       },
-      productos: productosDisponibles
+      categorias: categoriasConProductos,
+      productos
     };
-    
-    await fs.writeFile(
-      'mistral_catalogo_disponibles.json',
-      JSON.stringify(outputDisponibles, null, 2),
-      'utf-8'
-    );
-    
-    log(`✓ Catálogo de disponibles guardado en: mistral_catalogo_disponibles.json`);
-    log(`✓ Total productos disponibles: ${productosDisponibles.length}`);
+
+    await fs.mkdir(path.dirname(CONFIG.outputFile), { recursive: true });
+    await fs.writeFile(CONFIG.outputFile, JSON.stringify(output, null, 2) + '\n', 'utf-8');
+
+    log(`✓ Catálogo guardado en: ${CONFIG.outputFile}`);
+    log(`✓ ${productos.length} productos disponibles en ${categoriasConProductos.length} categorías`);
     
   } catch (error) {
     log(`Error crítico: ${error.message}`, 'error');
