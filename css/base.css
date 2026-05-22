@@ -1,41 +1,57 @@
 /* ===================================================================
-   CLOUSA PREMIUM v2.0 — base.css
-   Reset · Design tokens · Tipografía · Elementos base
+   CLOUSA — base.css
+   Premium Oscuro · Reset · Design tokens · Tipografía · Elementos base
    =================================================================== */
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  /* ---- Paleta (Zara / COS — minimalismo monocromático) ---- */
-  --white:      #FFFFFF;
-  --off-white:  #F4F3F1;
-  --ink:        #1A1A1A;
-  --graphite:   #767676;
-  --line:       #E5E5E5;
-  --black:      #000000;
-  --sale:       #9A2A2A;
+  /* ---- Paleta Premium Oscuro ---- */
+  --bg-primary:    #0A0A0B;   /* fondo general */
+  --bg-secondary:  #141416;   /* cards, secciones, panels */
+  --bg-elevated:   #1C1C1F;   /* hover, modal, superficies elevadas */
+  --border:        rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.15);
+  --text-primary:  #FAFAFA;
+  --text-secondary:#A0A0A8;
+  --text-muted:    #6B6B75;
+  --accent:        #C9A961;   /* dorado champagne — acento puntual */
+  --accent-hover:  #D4B776;
+  --navy:          #1B2D4F;   /* acento secundario heredado */
+  --danger:        #E0696A;   /* errores legibles sobre oscuro */
 
   /* ---- Tipografía ---- */
   --font: 'Jost', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
 
   /* ---- Layout ---- */
-  --maxw:    1680px;
-  --gutter:  clamp(16px, 4vw, 56px);
-  --nav-h:   66px;
-  --bar-h:   34px;
+  --maxw:   1680px;
+  --gutter: clamp(16px, 4vw, 56px);
+  --nav-h:  66px;
+  --bar-h:  34px;
 
   /* ---- Motion ---- */
-  --ease:  cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease:       cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-soft:  cubic-bezier(0.4, 0, 0.2, 1);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ---- Sombra de texto sobre imágenes ---- */
+  --text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 }
 
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  background: var(--bg-primary);
+  scrollbar-color: var(--bg-elevated) var(--bg-primary);
+  scrollbar-width: thin;
+}
 
 body {
   font-family: var(--font);
-  font-weight: 300;
+  font-weight: 400;
   font-size: 15px;
-  color: var(--ink);
-  background: var(--white);
+  color: var(--text-secondary);
+  background: var(--bg-primary);
   line-height: 1.6;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
@@ -65,28 +81,33 @@ input, select {
   outline: none;
 }
 
-/* ---- Tipografía utilitaria ---- */
-h1, h2, h3, h4 { font-weight: 200; letter-spacing: 0.03em; line-height: 1.12; }
+/* ---- Tipografía ---- */
+h1, h2, h3, h4 {
+  color: var(--text-primary);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
 
 .eyebrow {
   font-size: 10px;
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--graphite);
+  color: var(--accent);
 }
 
-.h-display {
-  font-weight: 200;
-  letter-spacing: 0.04em;
-  line-height: 1.05;
-}
+.h-display { font-weight: 700; letter-spacing: -0.02em; line-height: 1.05; }
 
-/* ---- Scrollbar sobrio ---- */
+/* ---- Scrollbar custom oscuro ---- */
 ::-webkit-scrollbar { width: 10px; height: 10px; }
-::-webkit-scrollbar-track { background: var(--white); }
-::-webkit-scrollbar-thumb { background: var(--line); }
-::-webkit-scrollbar-thumb:hover { background: var(--graphite); }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb {
+  background: var(--bg-elevated);
+  border: 2px solid var(--bg-primary);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover { background: #2E2E33; }
 
 /* ---- Helpers ---- */
 .sr-only {
@@ -96,4 +117,4 @@ h1, h2, h3, h4 { font-weight: 200; letter-spacing: 0.03em; line-height: 1.12; }
 [hidden] { display: none !important; }
 .no-scroll { overflow: hidden; }
 
-::selection { background: var(--ink); color: var(--white); }
+::selection { background: var(--accent); color: var(--bg-primary); }
