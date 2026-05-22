@@ -1,0 +1,58 @@
+name: Actualizar Stock Diario Mistral
+
+# Ejecuta el scraper de Mistral B2B una vez por día y actualiza
+# data/productos.json. Si el catálogo cambió, commitea y pushea;
+# Netlify re-deploya solo al detectar el commit.
+
+on:
+  schedule:
+    # 09:00 UTC = 06:00 Argentina (UTC-3)
+    - cron: '0 9 * * *'
+  workflow_dispatch:          # permite ejecutarlo manualmente desde Actions
+
+permissions:
+  contents: write             # necesario para que el job pueda commitear y pushear
+
+concurrency:
+  group: actualizar-stock
+  cancel-in-progress: false
+
+jobs:
+  actualizar-stock:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Instalar dependencias
+        working-directory: scripts/scraper
+        run: npm ci
+
+      - name: Instalar Chromium (Playwright)
+        working-directory: scripts/scraper
+        run: npx playwright install --with-deps chromium
+
+      - name: Ejecutar scraper
+        working-directory: scripts/scraper
+        env:
+          MISTRAL_USER: ${{ secrets.MISTRAL_USER }}
+          MISTRAL_PASSWORD: ${{ secrets.MISTRAL_PASSWORD }}
+        run: node scraper.js
+
+      - name: Commit y push si hay cambios
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/productos.json
+          if git diff --cached --quiet; then
+            echo "Sin cambios en el catálogo — no se commitea nada."
+          else
+            git commit -m "chore: actualizar stock Mistral [bot]"
+            git push
+            echo "✓ Catálogo actualizado y pusheado."
+          fi
