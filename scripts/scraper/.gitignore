@@ -1,0 +1,11 @@
+# Dependencias
+node_modules/
+
+# Artefactos de depuración del scraper
+screenshots/
+error_page_dump.html
+mistral_page_dump.html
+*.log
+
+# Credenciales locales (por las dudas) — NUNCA commitear
+.env
