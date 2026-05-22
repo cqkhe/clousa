@@ -1,0 +1,99 @@
+/* ===================================================================
+   CLOUSA PREMIUM v2.0 — base.css
+   Reset · Design tokens · Tipografía · Elementos base
+   =================================================================== */
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  /* ---- Paleta (Zara / COS — minimalismo monocromático) ---- */
+  --white:      #FFFFFF;
+  --off-white:  #F4F3F1;
+  --ink:        #1A1A1A;
+  --graphite:   #767676;
+  --line:       #E5E5E5;
+  --black:      #000000;
+  --sale:       #9A2A2A;
+
+  /* ---- Tipografía ---- */
+  --font: 'Jost', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+
+  /* ---- Layout ---- */
+  --maxw:    1680px;
+  --gutter:  clamp(16px, 4vw, 56px);
+  --nav-h:   66px;
+  --bar-h:   34px;
+
+  /* ---- Motion ---- */
+  --ease:  cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: var(--font);
+  font-weight: 300;
+  font-size: 15px;
+  color: var(--ink);
+  background: var(--white);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img { display: block; max-width: 100%; height: auto; }
+a   { color: inherit; text-decoration: none; }
+ul  { list-style: none; }
+
+button {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+input, select {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+/* ---- Tipografía utilitaria ---- */
+h1, h2, h3, h4 { font-weight: 200; letter-spacing: 0.03em; line-height: 1.12; }
+
+.eyebrow {
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--graphite);
+}
+
+.h-display {
+  font-weight: 200;
+  letter-spacing: 0.04em;
+  line-height: 1.05;
+}
+
+/* ---- Scrollbar sobrio ---- */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--white); }
+::-webkit-scrollbar-thumb { background: var(--line); }
+::-webkit-scrollbar-thumb:hover { background: var(--graphite); }
+
+/* ---- Helpers ---- */
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+}
+[hidden] { display: none !important; }
+.no-scroll { overflow: hidden; }
+
+::selection { background: var(--ink); color: var(--white); }
