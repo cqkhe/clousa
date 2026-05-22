@@ -1,29 +1,32 @@
 /* ===================================================================
-   CLOUSA PREMIUM v2.0 — layout.css
-   Barra · Nav · Hero · Grilla de catálogo · Footer
+   CLOUSA — layout.css
+   Premium Oscuro · Barra · Nav · Hero · Grilla · Footer
    =================================================================== */
 
 /* ---- Announcement bar ---- */
 .announce {
-  background: var(--ink);
-  color: var(--white);
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
   text-align: center;
   font-size: 10px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   padding: 10px 16px;
   line-height: 1.4;
+  border-bottom: 1px solid var(--border);
 }
-.announce strong { font-weight: 500; }
-.announce span { opacity: 0.55; padding: 0 6px; }
+.announce strong { font-weight: 500; color: var(--text-primary); }
+.announce span { color: var(--text-muted); padding: 0 6px; }
 
-/* ---- Nav ---- */
+/* ---- Nav (glassmorphism) ---- */
 .nav {
   position: sticky;
   top: 0;
   z-index: 200;
-  background: var(--white);
-  border-bottom: 1px solid var(--line);
+  background: rgba(10, 10, 11, 0.72);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
   height: var(--nav-h);
   display: flex;
   align-items: center;
@@ -32,30 +35,31 @@
 }
 .nav__logo {
   font-size: 21px;
-  font-weight: 300;
+  font-weight: 500;
   letter-spacing: 0.34em;
   text-transform: uppercase;
+  color: var(--text-primary);
 }
 .nav__links { display: none; gap: 34px; }
 .nav__links a {
   font-size: 11px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--graphite);
+  color: var(--text-secondary);
   padding: 4px 0;
   position: relative;
-  transition: color 0.2s var(--ease);
+  transition: var(--transition);
 }
 .nav__links a::after {
   content: "";
   position: absolute;
   left: 0; bottom: 0;
   width: 0; height: 1px;
-  background: var(--ink);
+  background: var(--accent);
   transition: width 0.3s var(--ease);
 }
 .nav__links a:hover,
-.nav__links a.is-active { color: var(--ink); }
+.nav__links a.is-active { color: var(--text-primary); }
 .nav__links a:hover::after,
 .nav__links a.is-active::after { width: 100%; }
 
@@ -64,21 +68,21 @@
   font-size: 11px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--ink);
+  color: var(--text-secondary);
   position: relative;
-  transition: opacity 0.2s var(--ease);
+  transition: var(--transition);
 }
-.nav__btn:hover { opacity: 0.55; }
+.nav__btn:hover { color: var(--text-primary); }
 .nav__cart-count {
   position: absolute;
   top: -8px; right: -12px;
   min-width: 16px; height: 16px;
   padding: 0 4px;
-  background: var(--ink);
-  color: var(--white);
+  background: var(--accent);
+  color: var(--bg-primary);
   border-radius: 999px;
   font-size: 9px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0;
   display: flex;
   align-items: center;
@@ -88,7 +92,7 @@
 .nav__toggle span {
   display: block;
   width: 22px; height: 1px;
-  background: var(--ink);
+  background: var(--text-primary);
   transition: transform 0.3s var(--ease), opacity 0.3s var(--ease);
 }
 .nav.is-open .nav__toggle span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
@@ -99,8 +103,8 @@
 .nav__mobile {
   position: fixed;
   top: var(--nav-h); left: 0; right: 0;
-  background: var(--white);
-  border-bottom: 1px solid var(--line);
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-strong);
   z-index: 199;
   padding: 24px var(--gutter) 32px;
   display: flex;
@@ -114,7 +118,7 @@
   font-size: 13px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--ink);
+  color: var(--text-primary);
 }
 
 @media (min-width: 900px) {
@@ -128,7 +132,7 @@
   position: relative;
   height: clamp(420px, 72vh, 720px);
   overflow: hidden;
-  background: var(--off-white);
+  background: var(--bg-secondary);
   cursor: pointer;
 }
 /* inset amplio: deja recorrido para el parallax sin revelar bordes */
@@ -140,10 +144,11 @@
 }
 .hero__overlay {
   position: absolute; inset: 0; z-index: 1;
-  /* gradiente dramático + vignette radial en los bordes */
+  /* vignette radial intensa en bordes + gradiente vertical;
+     el centro queda transparente para no tapar la imagen */
   background:
-    radial-gradient(ellipse at 50% 42%, transparent 48%, rgba(0,0,0,0.5) 100%),
-    linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.6) 100%);
+    radial-gradient(ellipse at 50% 45%, transparent 36%, rgba(0, 0, 0, 0.88) 100%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(10, 10, 11, 0.75) 100%);
 }
 .hero__content {
   position: relative;
@@ -155,15 +160,21 @@
   justify-content: center;
   text-align: center;
   padding: 0 var(--gutter);
-  color: var(--white);
+  color: var(--text-primary);
 }
-.hero__content .eyebrow { color: rgba(255,255,255,0.7); margin-bottom: 20px; }
+.hero__content .eyebrow {
+  color: var(--accent);
+  margin-bottom: 20px;
+  text-shadow: var(--text-shadow);
+}
 .hero__title {
   font-size: clamp(44px, 9vw, 116px);
-  font-weight: 200;
-  letter-spacing: 0.02em;
+  font-weight: 700;
+  letter-spacing: -2px;
   line-height: 0.98;
   margin-bottom: 18px;
+  color: var(--text-primary);
+  text-shadow: var(--text-shadow);
 }
 /* cada palabra es inline-block para poder animarla por separado */
 .hero__word { display: inline-block; }
@@ -174,14 +185,15 @@
 }
 .hero__content .btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 14px 34px rgba(0,0,0,0.42);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.55);
 }
 .hero__sub {
   font-size: 12px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.72);
+  color: rgba(250, 250, 250, 0.78);
   margin-bottom: 36px;
+  text-shadow: var(--text-shadow);
 }
 
 /* ---- Page container ---- */
@@ -193,7 +205,9 @@
 .section-head .eyebrow { display: block; margin-bottom: 14px; }
 .section-head h2 {
   font-size: clamp(28px, 4.5vw, 54px);
-  font-weight: 200;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
 }
 
 /* ---- Grilla de catálogo ---- */
@@ -207,8 +221,9 @@
 
 /* ---- Footer ---- */
 .footer {
-  background: var(--ink);
-  color: rgba(255,255,255,0.62);
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border);
+  color: var(--text-secondary);
   padding: clamp(48px, 7vw, 88px) var(--gutter) 32px;
 }
 .footer__grid {
@@ -221,32 +236,33 @@
 @media (min-width: 720px) { .footer__grid { grid-template-columns: 1.4fr 1fr 1fr; } }
 .footer__brand {
   font-size: 22px;
-  font-weight: 300;
+  font-weight: 500;
   letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: var(--white);
+  color: var(--text-primary);
   margin-bottom: 18px;
 }
-.footer__brand + p { font-size: 13px; line-height: 1.9; max-width: 320px; }
+.footer__brand + p { font-size: 13px; line-height: 1.9; max-width: 320px; color: var(--text-muted); }
 .footer__col h4 {
   font-size: 10px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.45);
+  color: var(--text-muted);
   margin-bottom: 18px;
 }
 .footer__col a, .footer__col p {
   display: block;
   font-size: 13px;
   line-height: 2.1;
-  transition: color 0.2s var(--ease);
+  color: var(--text-secondary);
+  transition: var(--transition);
 }
-.footer__col a:hover { color: var(--white); }
+.footer__col a:hover { color: var(--accent); }
 .footer__bottom {
   max-width: var(--maxw);
   margin: 56px auto 0;
   padding-top: 24px;
-  border-top: 1px solid rgba(255,255,255,0.12);
+  border-top: 1px solid var(--border);
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -254,7 +270,7 @@
   font-size: 10px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.4);
+  color: var(--text-muted);
 }
 
 /* ---- WhatsApp flotante ---- */
@@ -263,13 +279,18 @@
   bottom: 26px; right: 26px;
   z-index: 150;
   width: 54px; height: 54px;
-  background: var(--ink);
-  color: var(--white);
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  border: 1px solid var(--border-strong);
   border-radius: 999px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.3s var(--ease);
+  transition: transform 0.3s var(--ease), background 0.3s var(--ease), color 0.3s var(--ease);
 }
-.wa-float:hover { transform: scale(1.08); }
+.wa-float:hover {
+  transform: scale(1.08);
+  background: var(--accent);
+  color: var(--bg-primary);
+}
 .wa-float svg { width: 26px; height: 26px; }
