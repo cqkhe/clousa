@@ -361,7 +361,7 @@ async function scraper() {
         nombre: p.nombre_completo,
         marca: 'Mistral',
         categoria: p.categoria,
-        precio_venta: p.precio ? Math.round(p.precio * 1.40) : null, // markup 40%
+        precio_venta: p.precio ? Math.round(p.precio * 2.10) : null, // markup 110%
         imagen: p.imagen,
         agotado: p.agotado
       }))
