@@ -1,0 +1,1468 @@
+{
+  "metadata": {
+    "proveedor": "Brooksfield B2B",
+    "coleccion": "Invierno 2026",
+    "fecha_actualizacion": "2026-05-26T21:03:40.700Z",
+    "total_productos": 159,
+    "total_categorias": 24
+  },
+  "categorias": [
+    "BILLETERAS",
+    "BOLSOS",
+    "BOXERS",
+    "BUFANDAS",
+    "BUZOS FRISADOS",
+    "BUZOS RUSTICOS",
+    "CAMISAS ML",
+    "CAMPERAS FRISADAS",
+    "CANGUROS FRISADOS",
+    "CANGUROS RUSTICOS",
+    "CHALECOS",
+    "CINTURONES",
+    "GORRAS",
+    "GORROS",
+    "JACKETS",
+    "JEANS",
+    "MEDIAS",
+    "PANTALONES",
+    "PANTALONES CORDEROY",
+    "PERFUMERIA",
+    "POLOS MC",
+    "REMERAS MC",
+    "REMERAS ML",
+    "SWEATERS"
+  ],
+  "productos": [
+    {
+      "codigo": "9032B",
+      "nombre": "BILLETERA NACH",
+      "marca": "Brooksfield",
+      "categoria": "BILLETERAS",
+      "precio_venta": 19740,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/9032B/9032B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "9033B",
+      "nombre": "BILLETERA SCOTT",
+      "marca": "Brooksfield",
+      "categoria": "BILLETERAS",
+      "precio_venta": 20790,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/9033B/9033B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "9034B",
+      "nombre": "BILLETERA MERVYN",
+      "marca": "Brooksfield",
+      "categoria": "BILLETERAS",
+      "precio_venta": 22470,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/9034B/9034B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "9035B",
+      "nombre": "BILLETERA RUPERT",
+      "marca": "Brooksfield",
+      "categoria": "BILLETERAS",
+      "precio_venta": 14910,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/9035B/9035B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "9036B",
+      "nombre": "PORTADOCUMENTOS MILLARD",
+      "marca": "Brooksfield",
+      "categoria": "BILLETERAS",
+      "precio_venta": 10080,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/9036B/9036B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "9037B",
+      "nombre": "BILLETERA KURT",
+      "marca": "Brooksfield",
+      "categoria": "BILLETERAS",
+      "precio_venta": 18060,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/9037B/9037B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "9038B",
+      "nombre": "BAG ADAM",
+      "marca": "Brooksfield",
+      "categoria": "BOLSOS",
+      "precio_venta": 58380,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/9038B/9038B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "9039B",
+      "nombre": "BAG CHESTER",
+      "marca": "Brooksfield",
+      "categoria": "BOLSOS",
+      "precio_venta": 52080,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/9039B/9039B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "9040B",
+      "nombre": "RIÑONERA TRENTO",
+      "marca": "Brooksfield",
+      "categoria": "BOLSOS",
+      "precio_venta": 34440,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/9040B/9040B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "9041B",
+      "nombre": "RIÑONERA WELLNES",
+      "marca": "Brooksfield",
+      "categoria": "BOLSOS",
+      "precio_venta": 43890,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/9041B/9041B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "9004B",
+      "nombre": "BOXER THOMAS",
+      "marca": "Brooksfield",
+      "categoria": "BOXERS",
+      "precio_venta": 18060,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/9004B/9004B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "9005B",
+      "nombre": "BOXER THOMAS STRIPE",
+      "marca": "Brooksfield",
+      "categoria": "BOXERS",
+      "precio_venta": 19320,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/9005B/9005B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "9026B",
+      "nombre": "BOXER BASIC",
+      "marca": "Brooksfield",
+      "categoria": "BOXERS",
+      "precio_venta": 18060,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/9026B/9026B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "9027B",
+      "nombre": "BOXER STRIPES",
+      "marca": "Brooksfield",
+      "categoria": "BOXERS",
+      "precio_venta": 19320,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/9027B/9027B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "9028B",
+      "nombre": "BOXER PACK",
+      "marca": "Brooksfield",
+      "categoria": "BOXERS",
+      "precio_venta": 32550,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/9028B/9028B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "9541B",
+      "nombre": "BUFANDA KENT",
+      "marca": "Brooksfield",
+      "categoria": "BUFANDAS",
+      "precio_venta": 27300,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/9541B/9541B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "8022B",
+      "nombre": "BUZO CAMPAÑA FRISA",
+      "marca": "Brooksfield",
+      "categoria": "BUZOS FRISADOS",
+      "precio_venta": 69300,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/8022B/8022B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "8023B",
+      "nombre": "BUZO HARLOW FRISA",
+      "marca": "Brooksfield",
+      "categoria": "BUZOS FRISADOS",
+      "precio_venta": 77700,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/8023B/8023B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "8026B",
+      "nombre": "BUZO MEDIO CIERRE FLOYD FRISA",
+      "marca": "Brooksfield",
+      "categoria": "BUZOS FRISADOS",
+      "precio_venta": 77700,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/8026B/8026B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "8030B",
+      "nombre": "BUZO MEDIO CIERRE HARLOW",
+      "marca": "Brooksfield",
+      "categoria": "BUZOS RUSTICOS",
+      "precio_venta": 77700,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/8030B/8030B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "3583B",
+      "nombre": "SHIRT DEBBIE LS",
+      "marca": "Brooksfield",
+      "categoria": "CAMISAS ML",
+      "precio_venta": 96390,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/3583B/3583B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "3584B",
+      "nombre": "SHIRT BRIGHTON POCKET LS",
+      "marca": "Brooksfield",
+      "categoria": "CAMISAS ML",
+      "precio_venta": 96390,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/3584B/3584B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "3585B",
+      "nombre": "SHIRT MAO LS",
+      "marca": "Brooksfield",
+      "categoria": "CAMISAS ML",
+      "precio_venta": 84000,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/3585B/3585B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "3592B",
+      "nombre": "SHIRT SEERSUCKER PREMIUM LS",
+      "marca": "Brooksfield",
+      "categoria": "CAMISAS ML",
+      "precio_venta": 96390,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/3592B/3592B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "3601B",
+      "nombre": "SHIRT CAGLIARI REGULAR LS",
+      "marca": "Brooksfield",
+      "categoria": "CAMISAS ML",
+      "precio_venta": 96390,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/3601B/3601B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "3602B",
+      "nombre": "SHIRT STRIPES PREMIUM LS",
+      "marca": "Brooksfield",
+      "categoria": "CAMISAS ML",
+      "precio_venta": 96390,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/3602B/3602B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "3603B",
+      "nombre": "SHIRT PRINT PREMIUM LS",
+      "marca": "Brooksfield",
+      "categoria": "CAMISAS ML",
+      "precio_venta": 96390,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/3603B/3603B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "8630B",
+      "nombre": "CAMPERA PRATO FRISA",
+      "marca": "Brooksfield",
+      "categoria": "CAMPERAS FRISADAS",
+      "precio_venta": 88200,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/8630B/8630B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "8322B",
+      "nombre": "CANGURO COEL FRISA",
+      "marca": "Brooksfield",
+      "categoria": "CANGUROS FRISADOS",
+      "precio_venta": 79800,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/8322B/8322B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "8328B",
+      "nombre": "CANGURO COEL RUS",
+      "marca": "Brooksfield",
+      "categoria": "CANGUROS RUSTICOS",
+      "precio_venta": 79800,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/8328B/8328B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "8329B",
+      "nombre": "CANGURO COEL RUS SPECIAL",
+      "marca": "Brooksfield",
+      "categoria": "CANGUROS RUSTICOS",
+      "precio_venta": 79800,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/8329B/8329B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "7081B",
+      "nombre": "VEST GIOVANNI",
+      "marca": "Brooksfield",
+      "categoria": "CHALECOS",
+      "precio_venta": 116130,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/7081B/7081B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "9043B",
+      "nombre": "CINTO WESS",
+      "marca": "Brooksfield",
+      "categoria": "CINTURONES",
+      "precio_venta": 19740,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/9043B/9043B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "9044b",
+      "nombre": "CINTO GARY",
+      "marca": "Brooksfield",
+      "categoria": "CINTURONES",
+      "precio_venta": 21210,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/9044b/9044b-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "9516B",
+      "nombre": "CAP INWOOD",
+      "marca": "Brooksfield",
+      "categoria": "GORRAS",
+      "precio_venta": 29400,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/9516B/9516B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "9561B",
+      "nombre": "CAP NASH",
+      "marca": "Brooksfield",
+      "categoria": "GORRAS",
+      "precio_venta": 31290,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/9561B/9561B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "9562B",
+      "nombre": "CAP BRIGGS",
+      "marca": "Brooksfield",
+      "categoria": "GORRAS",
+      "precio_venta": 29820,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/9562B/9562B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "9042B",
+      "nombre": "HAT JASON",
+      "marca": "Brooksfield",
+      "categoria": "GORROS",
+      "precio_venta": 34020,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/9042B/9042B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "9045B",
+      "nombre": "HAT JOYCE",
+      "marca": "Brooksfield",
+      "categoria": "GORROS",
+      "precio_venta": 23310,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/9045B/9045B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "7035B",
+      "nombre": "JACKET BRIGHAM",
+      "marca": "Brooksfield",
+      "categoria": "JACKETS",
+      "precio_venta": 121380,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/7035B/7035B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "7064B",
+      "nombre": "JACKET VERBIER",
+      "marca": "Brooksfield",
+      "categoria": "JACKETS",
+      "precio_venta": 159180,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/7064B/7064B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "7069B",
+      "nombre": "JACKET OSWALD",
+      "marca": "Brooksfield",
+      "categoria": "JACKETS",
+      "precio_venta": 159180,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/7069B/7069B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "7070B",
+      "nombre": "JACKET NICHOLAS",
+      "marca": "Brooksfield",
+      "categoria": "JACKETS",
+      "precio_venta": 180180,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/7070B/7070B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "7071B",
+      "nombre": "JACKET MORGAN",
+      "marca": "Brooksfield",
+      "categoria": "JACKETS",
+      "precio_venta": 178500,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/7071B/7071B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "7072B",
+      "nombre": "TAPADO WAYLEN",
+      "marca": "Brooksfield",
+      "categoria": "JACKETS",
+      "precio_venta": 176190,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/7072B/7072B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "7073B",
+      "nombre": "TAPADO EDWARD",
+      "marca": "Brooksfield",
+      "categoria": "JACKETS",
+      "precio_venta": 176400,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/7073B/7073B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "7074B",
+      "nombre": "JACKET BRANDON",
+      "marca": "Brooksfield",
+      "categoria": "JACKETS",
+      "precio_venta": 172200,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/7074B/7074B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "7075B",
+      "nombre": "JACKET LUKE",
+      "marca": "Brooksfield",
+      "categoria": "JACKETS",
+      "precio_venta": 183960,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/7075B/7075B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "7076B",
+      "nombre": "JACKET BROOKLYN",
+      "marca": "Brooksfield",
+      "categoria": "JACKETS",
+      "precio_venta": 145950,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/7076B/7076B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "7077B",
+      "nombre": "JACKET LIAM",
+      "marca": "Brooksfield",
+      "categoria": "JACKETS",
+      "precio_venta": 194460,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/7077B/7077B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "7078B",
+      "nombre": "JACKET MORRISON",
+      "marca": "Brooksfield",
+      "categoria": "JACKETS",
+      "precio_venta": 165690,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/7078B/7078B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "7079B",
+      "nombre": "JACKET GIOVANNI",
+      "marca": "Brooksfield",
+      "categoria": "JACKETS",
+      "precio_venta": 141540,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/7079B/7079B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "7080B",
+      "nombre": "TAPADO RAPHAEL",
+      "marca": "Brooksfield",
+      "categoria": "JACKETS",
+      "precio_venta": 242970,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/7080B/7080B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "7082B",
+      "nombre": "JACKET ETHAN",
+      "marca": "Brooksfield",
+      "categoria": "JACKETS",
+      "precio_venta": 178710,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/7082B/7082B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "5019B",
+      "nombre": "JEAN ROMA DARK GRAY",
+      "marca": "Brooksfield",
+      "categoria": "JEANS",
+      "precio_venta": 100800,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/5019B/5019B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "5105B",
+      "nombre": "JEAN ROMA VINTAGE PREMIUM",
+      "marca": "Brooksfield",
+      "categoria": "JEANS",
+      "precio_venta": 101010,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/5105B/5105B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "5106B",
+      "nombre": "JEAN ROMA DARK BLUE PREMIUM",
+      "marca": "Brooksfield",
+      "categoria": "JEANS",
+      "precio_venta": 101010,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/5106B/5106B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "5115B",
+      "nombre": "JEAN ROMA HEAVY VINTAGE",
+      "marca": "Brooksfield",
+      "categoria": "JEANS",
+      "precio_venta": 100800,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/5115B/5115B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "5121B",
+      "nombre": "JEAN MAN BKF XTRASLIM MID BLUE",
+      "marca": "Brooksfield",
+      "categoria": "JEANS",
+      "precio_venta": 101010,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/5121B/5121B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "5122B",
+      "nombre": "JEAN MAN BKF XTRASLIM DARK BLUE",
+      "marca": "Brooksfield",
+      "categoria": "JEANS",
+      "precio_venta": 101010,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/5122B/5122B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "5123B",
+      "nombre": "JEAN MAN BKF XTRASLIM GREY",
+      "marca": "Brooksfield",
+      "categoria": "JEANS",
+      "precio_venta": 101010,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/5123B/5123B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "5124B",
+      "nombre": "JEAN MAN BKF XTRASLIM BLACK",
+      "marca": "Brooksfield",
+      "categoria": "JEANS",
+      "precio_venta": 101010,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/5124B/5124B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "5125B",
+      "nombre": "JEAN MAN BKF SLIM MID BLUE",
+      "marca": "Brooksfield",
+      "categoria": "JEANS",
+      "precio_venta": 101010,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/5125B/5125B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "5126B",
+      "nombre": "JEAN MAN BKF SLIM DARK BLUE",
+      "marca": "Brooksfield",
+      "categoria": "JEANS",
+      "precio_venta": 101010,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/5126B/5126B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "5127B",
+      "nombre": "JEAN MAN BKF SLIM GREY",
+      "marca": "Brooksfield",
+      "categoria": "JEANS",
+      "precio_venta": 101010,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/5127B/5127B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "5128B",
+      "nombre": "JEAN MAN BKF SLIM BLACK",
+      "marca": "Brooksfield",
+      "categoria": "JEANS",
+      "precio_venta": 101010,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/5128B/5128B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "5129B",
+      "nombre": "JEAN MAN BKF STRAIGHT MID BLUE",
+      "marca": "Brooksfield",
+      "categoria": "JEANS",
+      "precio_venta": 101010,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/5129B/5129B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "5130B",
+      "nombre": "JEAN MAN BKF STRAIGHT DARK BLUE",
+      "marca": "Brooksfield",
+      "categoria": "JEANS",
+      "precio_venta": 101010,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/5130B/5130B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "5131B",
+      "nombre": "JEAN MAN BKF STRAIGHT BLACK",
+      "marca": "Brooksfield",
+      "categoria": "JEANS",
+      "precio_venta": 101010,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/5131B/5131B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "9011B",
+      "nombre": "MEDIA INVISIBLE B",
+      "marca": "Brooksfield",
+      "categoria": "MEDIAS",
+      "precio_venta": 5670,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/9011B/9011B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "9602B",
+      "nombre": "BROOKSFIELD MEDIA LISA PACK X 3",
+      "marca": "Brooksfield",
+      "categoria": "MEDIAS",
+      "precio_venta": 15960,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/9602B/9602B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "9603B",
+      "nombre": "MEDIA CLASICA RAYADA PACKX3",
+      "marca": "Brooksfield",
+      "categoria": "MEDIAS",
+      "precio_venta": 15960,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/9603B/9603B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "9010B",
+      "nombre": "SOCKS TRIPACK",
+      "marca": "Brooksfield",
+      "categoria": "MEDIAS",
+      "precio_venta": 13650,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/9010B/9010B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "5520B",
+      "nombre": "CARGO PANTS CLASSIC",
+      "marca": "Brooksfield",
+      "categoria": "PANTALONES",
+      "precio_venta": 81900,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/5520B/5520B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "5521B",
+      "nombre": "CHINO PANTS CLASSIC",
+      "marca": "Brooksfield",
+      "categoria": "PANTALONES",
+      "precio_venta": 92400,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/5521B/5521B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "5517B",
+      "nombre": "PANT CHINO NEW MARMI",
+      "marca": "Brooksfield",
+      "categoria": "PANTALONES",
+      "precio_venta": 98700,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/5517B/5517B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "5531B",
+      "nombre": "PANTALON CHINO CORDEROY",
+      "marca": "Brooksfield",
+      "categoria": "PANTALONES CORDEROY",
+      "precio_venta": 92400,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/5531B/5531B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "9900b",
+      "nombre": "B. E. PARFUM SILVER BLACK X100ML",
+      "marca": "Brooksfield",
+      "categoria": "PERFUMERIA",
+      "precio_venta": 44100,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/9900b/9900b-001.png",
+      "agotado": true
+    },
+    {
+      "codigo": "9901b",
+      "nombre": "B. E.PARFUM SILVER BLACK X18ML",
+      "marca": "Brooksfield",
+      "categoria": "PERFUMERIA",
+      "precio_venta": 18900,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/9901b/9901b-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "9902B",
+      "nombre": "B. E. PARFUM SILVER GRAY X100ML",
+      "marca": "Brooksfield",
+      "categoria": "PERFUMERIA",
+      "precio_venta": 44100,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/9902B/9902B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "9906B",
+      "nombre": "B. BODY DEORODANT SILVER BLACK",
+      "marca": "Brooksfield",
+      "categoria": "PERFUMERIA",
+      "precio_venta": 9660,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/9906B/9906B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "9907B",
+      "nombre": "B. BODY DEORODANT SILVER GRAY",
+      "marca": "Brooksfield",
+      "categoria": "PERFUMERIA",
+      "precio_venta": 9660,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/9907B/9907B-001.png",
+      "agotado": true
+    },
+    {
+      "codigo": "9910B",
+      "nombre": "B. E.PARFUM ADVENTURE X100ML",
+      "marca": "Brooksfield",
+      "categoria": "PERFUMERIA",
+      "precio_venta": 67200,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/9910B/9910B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "9911B",
+      "nombre": "B. E.PARFUM ROYAL BLUE X100ML",
+      "marca": "Brooksfield",
+      "categoria": "PERFUMERIA",
+      "precio_venta": 44100,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/9911B/9911B-001.png",
+      "agotado": true
+    },
+    {
+      "codigo": "9916B",
+      "nombre": "B. PERFUMINA ROYAL BLUE X120ML",
+      "marca": "Brooksfield",
+      "categoria": "PERFUMERIA",
+      "precio_venta": 18690,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/9916B/9916B-001.png",
+      "agotado": true
+    },
+    {
+      "codigo": "9903B",
+      "nombre": "B. E. PARFUM SILVER GRAY X18ML",
+      "marca": "Brooksfield",
+      "categoria": "PERFUMERIA",
+      "precio_venta": 18900,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/9903B/9903B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "9914B",
+      "nombre": "B. PERFUMINA ROYAL BLUE X 500ML",
+      "marca": "Brooksfield",
+      "categoria": "PERFUMERIA",
+      "precio_venta": 27300,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/9914B/9914B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "9931B",
+      "nombre": "B. E.PARFUM ADVENTURE X18ML",
+      "marca": "Brooksfield",
+      "categoria": "PERFUMERIA",
+      "precio_venta": 27300,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/9931B/9931B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "2046B",
+      "nombre": "POLO FILIPPO BASIC PIQUE",
+      "marca": "Brooksfield",
+      "categoria": "POLOS MC",
+      "precio_venta": 69300,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/2046B/2046B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "2047B",
+      "nombre": "POLO FILIPPO BASIC JERSEY",
+      "marca": "Brooksfield",
+      "categoria": "POLOS MC",
+      "precio_venta": 64470,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/2047B/2047B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "2051B",
+      "nombre": "POLO JERSEY HART SS",
+      "marca": "Brooksfield",
+      "categoria": "POLOS MC",
+      "precio_venta": 56280,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/2051B/2051B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "2066B",
+      "nombre": "POLO STRIPE COMFORT SS",
+      "marca": "Brooksfield",
+      "categoria": "POLOS MC",
+      "precio_venta": 61950,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/2066B/2066B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "2502B",
+      "nombre": "KNITTED POLO DAMON LS",
+      "marca": "Brooksfield",
+      "categoria": "POLOS MC",
+      "precio_venta": 95550,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/2502B/2502B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "2048B",
+      "nombre": "POLO PIQUE DYLAN SS",
+      "marca": "Brooksfield",
+      "categoria": "POLOS MC",
+      "precio_venta": 47880,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/2048B/2048B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "1066B",
+      "nombre": "T-SHIRT BASIC PIMA GENNARO",
+      "marca": "Brooksfield",
+      "categoria": "REMERAS MC",
+      "precio_venta": 42630,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/1066B/1066B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "1075B",
+      "nombre": "T-SHIRT LOGO EMBOSSED OVERSIZE S",
+      "marca": "Brooksfield",
+      "categoria": "REMERAS MC",
+      "precio_venta": 37800,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/1075B/1075B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "1081B",
+      "nombre": "T-SHIRT BOXY FIT SS",
+      "marca": "Brooksfield",
+      "categoria": "REMERAS MC",
+      "precio_venta": 37800,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/1081B/1081B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "1089B10",
+      "nombre": "TSHIRT PRINT #10 SS",
+      "marca": "Brooksfield",
+      "categoria": "REMERAS MC",
+      "precio_venta": 32550,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/1089B10/1089B10-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "1089B13",
+      "nombre": "T SHIRT PRINT #13 SS",
+      "marca": "Brooksfield",
+      "categoria": "REMERAS MC",
+      "precio_venta": 32550,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/1089B13/1089B13-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "1089B15",
+      "nombre": "T SHIRT PRINT #15 SS",
+      "marca": "Brooksfield",
+      "categoria": "REMERAS MC",
+      "precio_venta": 32550,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/1089B15/1089B15-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "1089B16",
+      "nombre": "T SHIRT PRINT #16 SS",
+      "marca": "Brooksfield",
+      "categoria": "REMERAS MC",
+      "precio_venta": 32550,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/1089B16/1089B16-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "1089B18",
+      "nombre": "T SHIRT PRINT #18 SS",
+      "marca": "Brooksfield",
+      "categoria": "REMERAS MC",
+      "precio_venta": 32550,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/1089B18/1089B18-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "1089B19",
+      "nombre": "T SHIRT PRINT #19 SS",
+      "marca": "Brooksfield",
+      "categoria": "REMERAS MC",
+      "precio_venta": 32550,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/1089B19/1089B19-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "1089B3",
+      "nombre": "TSHIRT PRINT #3 SS",
+      "marca": "Brooksfield",
+      "categoria": "REMERAS MC",
+      "precio_venta": 32550,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/1089B3/1089B3-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "1089B5",
+      "nombre": "TSHIRT PRINT #5 SS",
+      "marca": "Brooksfield",
+      "categoria": "REMERAS MC",
+      "precio_venta": 32550,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/1089B5/1089B5-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "1090B",
+      "nombre": "TSHIRT PRINT LOGO 3D SS",
+      "marca": "Brooksfield",
+      "categoria": "REMERAS MC",
+      "precio_venta": 32550,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/1090B/1090B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "1091B",
+      "nombre": "T SHIRT DUCK EMBROIDERY SS",
+      "marca": "Brooksfield",
+      "categoria": "REMERAS MC",
+      "precio_venta": 30450,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/1091B/1091B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "1093B",
+      "nombre": "T-SHIRT BASIC PIMA GENNARO V",
+      "marca": "Brooksfield",
+      "categoria": "REMERAS MC",
+      "precio_venta": 42630,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/1093B/1093B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "1095B",
+      "nombre": "T-SHIRT STRIPE COMFORT SS",
+      "marca": "Brooksfield",
+      "categoria": "REMERAS MC",
+      "precio_venta": 51870,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/1095B/1095B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "1097B",
+      "nombre": "T SHIRT OVER HEAVY PRINT SS",
+      "marca": "Brooksfield",
+      "categoria": "REMERAS MC",
+      "precio_venta": 37800,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/1097B/1097B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "1099B",
+      "nombre": "T SHIRT OVER DUCK EMB SS",
+      "marca": "Brooksfield",
+      "categoria": "REMERAS MC",
+      "precio_venta": 37800,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/1099B/1099B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "1103B1",
+      "nombre": "T SHIRT PRINT #1 SS",
+      "marca": "Brooksfield",
+      "categoria": "REMERAS MC",
+      "precio_venta": 32550,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/1103B1/1103B1-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "1103B11",
+      "nombre": "T-SHIRT PRINT #11 SS",
+      "marca": "Brooksfield",
+      "categoria": "REMERAS MC",
+      "precio_venta": 32550,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/1103B11/1103B11-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "1103B17",
+      "nombre": "T-SHIRT PRINT #17 SS",
+      "marca": "Brooksfield",
+      "categoria": "REMERAS MC",
+      "precio_venta": 32550,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/1103B17/1103B17-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "1103B18",
+      "nombre": "T-SHIRT PRINT #18 SS",
+      "marca": "Brooksfield",
+      "categoria": "REMERAS MC",
+      "precio_venta": 32550,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/1103B18/1103B18-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "1103B6",
+      "nombre": "T-SHIRT PRINT #6 SS",
+      "marca": "Brooksfield",
+      "categoria": "REMERAS MC",
+      "precio_venta": 32550,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/1103B6/1103B6-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "1103B9",
+      "nombre": "T-SHIRT PRINT #9 SS",
+      "marca": "Brooksfield",
+      "categoria": "REMERAS MC",
+      "precio_venta": 32550,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/1103B9/1103B9-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "1109B",
+      "nombre": "T-SHIRT ORGANIC COTTON SS",
+      "marca": "Brooksfield",
+      "categoria": "REMERAS MC",
+      "precio_venta": 30450,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/1109B/1109B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "1110B",
+      "nombre": "T-SHIRT VERONA SS",
+      "marca": "Brooksfield",
+      "categoria": "REMERAS MC",
+      "precio_venta": 37800,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/1110B/1110B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "1100B",
+      "nombre": "T-SHIRT DYED LOGO SS",
+      "marca": "Brooksfield",
+      "categoria": "REMERAS MC",
+      "precio_venta": 38220,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/1100B/1100B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "1101B",
+      "nombre": "T-SHIRT DYED #2 SS",
+      "marca": "Brooksfield",
+      "categoria": "REMERAS MC",
+      "precio_venta": 40530,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/1101B/1101B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "1103B12",
+      "nombre": "T-SHIRT PRINT #12 SS",
+      "marca": "Brooksfield",
+      "categoria": "REMERAS MC",
+      "precio_venta": 32550,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/1103B12/1103B12-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "1103B13",
+      "nombre": "T-SHIRT PRINT #13 SS",
+      "marca": "Brooksfield",
+      "categoria": "REMERAS MC",
+      "precio_venta": 32550,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/1103B13/1103B13-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "1103B14",
+      "nombre": "T-SHIRT PRINT #14 SS",
+      "marca": "Brooksfield",
+      "categoria": "REMERAS MC",
+      "precio_venta": 32550,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/1103B14/1103B14-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "1103B15",
+      "nombre": "T-SHIRT PRINT #15 SS",
+      "marca": "Brooksfield",
+      "categoria": "REMERAS MC",
+      "precio_venta": 32550,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/1103B15/1103B15-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "1103B5",
+      "nombre": "T-SHIRT PRINT #5 SS",
+      "marca": "Brooksfield",
+      "categoria": "REMERAS MC",
+      "precio_venta": 32550,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/1103B5/1103B5-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "1103B7",
+      "nombre": "T-SHIRT PRINT #7 SS",
+      "marca": "Brooksfield",
+      "categoria": "REMERAS MC",
+      "precio_venta": 32550,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/1103B7/1103B7-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "1103B8",
+      "nombre": "T-SHIRT PRINT #8 SS",
+      "marca": "Brooksfield",
+      "categoria": "REMERAS MC",
+      "precio_venta": 32550,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/1103B8/1103B8-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "1104B",
+      "nombre": "T-SHIRT PACK SS",
+      "marca": "Brooksfield",
+      "categoria": "REMERAS MC",
+      "precio_venta": 54600,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/1104B/1104B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "1105B1",
+      "nombre": "T-SHIRT PRINT #1 SS",
+      "marca": "Brooksfield",
+      "categoria": "REMERAS MC",
+      "precio_venta": 32550,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/1105B1/1105B1-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "1105B10",
+      "nombre": "T-SHIRT PRINT #10 SS",
+      "marca": "Brooksfield",
+      "categoria": "REMERAS MC",
+      "precio_venta": 32550,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/1105B10/1105B10-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "1105B11",
+      "nombre": "T-SHIRT PRINT #11 SS",
+      "marca": "Brooksfield",
+      "categoria": "REMERAS MC",
+      "precio_venta": 32550,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/1105B11/1105B11-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "1105B2",
+      "nombre": "T-SHIRT PRINT #2 SS",
+      "marca": "Brooksfield",
+      "categoria": "REMERAS MC",
+      "precio_venta": 32550,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/1105B2/1105B2-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "1105B3",
+      "nombre": "T-SHIRT PRINT #3 SS",
+      "marca": "Brooksfield",
+      "categoria": "REMERAS MC",
+      "precio_venta": 32550,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/1105B3/1105B3-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "1105B4",
+      "nombre": "T-SHIRT PRINT #4 SS",
+      "marca": "Brooksfield",
+      "categoria": "REMERAS MC",
+      "precio_venta": 32550,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/1105B4/1105B4-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "1105B5",
+      "nombre": "T-SHIRT PRINT #5 SS",
+      "marca": "Brooksfield",
+      "categoria": "REMERAS MC",
+      "precio_venta": 32550,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/1105B5/1105B5-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "1105B6",
+      "nombre": "T-SHIRT PRINT #6 SS",
+      "marca": "Brooksfield",
+      "categoria": "REMERAS MC",
+      "precio_venta": 32550,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/1105B6/1105B6-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "1105B7",
+      "nombre": "T-SHIRT PRINT #7 SS",
+      "marca": "Brooksfield",
+      "categoria": "REMERAS MC",
+      "precio_venta": 32550,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/1105B7/1105B7-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "1105B8",
+      "nombre": "T-SHIRT PRINT #8 SS",
+      "marca": "Brooksfield",
+      "categoria": "REMERAS MC",
+      "precio_venta": 32550,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/1105B8/1105B8-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "1105B9",
+      "nombre": "T-SHIRT PRINT #9 SS",
+      "marca": "Brooksfield",
+      "categoria": "REMERAS MC",
+      "precio_venta": 32550,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/1105B9/1105B9-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "1106B",
+      "nombre": "T-SHIRT BLANK",
+      "marca": "Brooksfield",
+      "categoria": "REMERAS MC",
+      "precio_venta": 30450,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/1106B/1106B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "1513B2",
+      "nombre": "T-SHIRT PRINTFLAME LS #2",
+      "marca": "Brooksfield",
+      "categoria": "REMERAS ML",
+      "precio_venta": 30450,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/1513B2/1513B2-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "1519B",
+      "nombre": "T SHIRT EMBOSSED LS",
+      "marca": "Brooksfield",
+      "categoria": "REMERAS ML",
+      "precio_venta": 39900,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/1519B/1519B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "1520B",
+      "nombre": "T SHIRT RHETT LS",
+      "marca": "Brooksfield",
+      "categoria": "REMERAS ML",
+      "precio_venta": 39900,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/1520B/1520B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "4017B",
+      "nombre": "SWEATER MILAN R",
+      "marca": "Brooksfield",
+      "categoria": "SWEATERS",
+      "precio_venta": 72030,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/4017B/4017B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "4018B",
+      "nombre": "SWEATER MILAN V",
+      "marca": "Brooksfield",
+      "categoria": "SWEATERS",
+      "precio_venta": 72030,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/4018B/4018B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "4070B",
+      "nombre": "HALF ZIPPER MILAN",
+      "marca": "Brooksfield",
+      "categoria": "SWEATERS",
+      "precio_venta": 84000,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/4070B/4070B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "4071B",
+      "nombre": "FULL ZIPPER MILAN",
+      "marca": "Brooksfield",
+      "categoria": "SWEATERS",
+      "precio_venta": 93450,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/4071B/4071B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "4081B",
+      "nombre": "POLERA EDWARD",
+      "marca": "Brooksfield",
+      "categoria": "SWEATERS",
+      "precio_venta": 90300,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/4081B/4081B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "4086B",
+      "nombre": "SWEATER LANDON R",
+      "marca": "Brooksfield",
+      "categoria": "SWEATERS",
+      "precio_venta": 90300,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/4086B/4086B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "4087B",
+      "nombre": "CARDIGAN JASON",
+      "marca": "Brooksfield",
+      "categoria": "SWEATERS",
+      "precio_venta": 125370,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/4087B/4087B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "4088B",
+      "nombre": "CARDIGAN FREDDY",
+      "marca": "Brooksfield",
+      "categoria": "SWEATERS",
+      "precio_venta": 125370,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/4088B/4088B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "4089B",
+      "nombre": "HOODIE MILAN",
+      "marca": "Brooksfield",
+      "categoria": "SWEATERS",
+      "precio_venta": 88200,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/4089B/4089B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "4090B",
+      "nombre": "CARDIGAN HENRIK",
+      "marca": "Brooksfield",
+      "categoria": "SWEATERS",
+      "precio_venta": 106050,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/4090B/4090B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "4092B",
+      "nombre": "HALF ZIPPER ELIO",
+      "marca": "Brooksfield",
+      "categoria": "SWEATERS",
+      "precio_venta": 121800,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/4092B/4092B-001.png",
+      "agotado": true
+    },
+    {
+      "codigo": "4093B",
+      "nombre": "CARDIGAN NICK",
+      "marca": "Brooksfield",
+      "categoria": "SWEATERS",
+      "precio_venta": 125370,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/4093B/4093B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "4094B",
+      "nombre": "SWEATER BRAID",
+      "marca": "Brooksfield",
+      "categoria": "SWEATERS",
+      "precio_venta": 88410,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/4094B/4094B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "4095B",
+      "nombre": "SWEATER ADRIAN",
+      "marca": "Brooksfield",
+      "categoria": "SWEATERS",
+      "precio_venta": 85050,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/4095B/4095B-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "4097B",
+      "nombre": "HALF ZIPPER BLAIR",
+      "marca": "Brooksfield",
+      "categoria": "SWEATERS",
+      "precio_venta": 121800,
+      "imagen": "https://brooksfieldb2b.com.ar/images/productos/4097B/4097B-001.png",
+      "agotado": false
+    }
+  ]
+}
