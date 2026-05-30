@@ -127,74 +127,95 @@
   .nav__mobile { display: none; }
 }
 
-/* ---- Hero (cinematográfico) ---- */
+/* ---- Hero (split-screen) ---- */
 .hero {
-  position: relative;
-  height: clamp(540px, 86vh, 880px);
+  display: flex;
+  width: 100%;
+  min-height: calc(100vh - var(--nav-h, 80px));
+  background: var(--bg-primary);
   overflow: hidden;
-  background: var(--bg-section);
-  cursor: pointer;
-}
-/* inset amplio: deja recorrido para el parallax GSAP */
-.hero__media { position: absolute; inset: -18% 0; z-index: 0; will-change: transform; }
-.hero__media img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  object-position: center 32%;
-}
-.hero__overlay {
-  position: absolute; inset: 0; z-index: 1;
-  /* transparente arriba → oscuro abajo, para anclar el texto */
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.64) 0%,
-    rgba(0, 0, 0, 0.18) 46%,
-    transparent 74%
-  );
 }
 .hero__content {
-  position: relative;
-  z-index: 2;
-  height: 100%;
+  flex: 0 0 38%;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-end;
-  text-align: left;
-  padding: 0 var(--gutter) clamp(44px, 8vw, 92px);
-  max-width: 1100px;
-  color: #FFFFFF;
+  justify-content: center;
+  padding: clamp(40px, 6vw, 80px) clamp(24px, 5vw, 64px);
 }
-.hero__content .eyebrow {
-  color: rgba(255, 255, 255, 0.82);
-  margin-bottom: 18px;
-  text-shadow: var(--text-shadow);
+.hero__brand-block {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 36px;
 }
 .hero__title {
-  font-size: clamp(56px, 9vw, 140px);
+  font-family: 'Jost', sans-serif;
+  font-size: clamp(2.8rem, 5.5vw, 6rem);
   font-weight: 800;
   letter-spacing: -0.02em;
   line-height: 0.92;
-  margin-bottom: 22px;
-  color: #FFFFFF;
-  text-shadow: var(--text-shadow);
+  color: var(--ink);
+  margin: 0 0 20px;
 }
-/* cada palabra es inline-block para que GSAP la anime por separado */
-.hero__word { display: inline-block; }
-.hero__sub {
-  font-size: 12px;
-  letter-spacing: 0.2em;
+.hero__subtitle {
+  font-family: 'Jost', sans-serif;
+  font-size: clamp(0.7rem, 1vw, 0.85rem);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+  margin: 0 0 6px;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.78);
-  margin-bottom: 32px;
-  text-shadow: var(--text-shadow);
+  line-height: 1.6;
 }
-/* CTA del hero — micro-interacción */
-.hero__content .btn {
-  transition: background 0.3s var(--ease), color 0.3s var(--ease),
-              transform 0.3s var(--ease), border-color 0.3s var(--ease);
+.hero__tag {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  color: var(--graphite);
+  text-transform: uppercase;
+  margin-top: 4px;
 }
-.hero__content .btn:hover { transform: translateY(-2px); }
+.hero__actions { display: flex; margin-top: 36px; }
+.hero__cta {
+  display: inline-block;
+  background: var(--ink);
+  color: var(--bg-primary);
+  padding: 14px 36px;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  text-transform: none;
+  transition: opacity 0.2s ease;
+}
+.hero__cta:hover { opacity: 0.82; }
+.hero__visual {
+  flex: 1;
+  position: relative;
+  min-height: 60vh;
+}
+.hero__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  display: block;
+}
+@media (max-width: 900px) {
+  .hero {
+    flex-direction: column-reverse;
+    min-height: auto;
+  }
+  .hero__content {
+    flex: none;
+    padding: 44px 24px;
+  }
+  .hero__visual {
+    height: 55vh;
+    min-height: auto;
+  }
+}
 
 /* ---- Page container ---- */
 .section { padding: clamp(56px, 8vw, 110px) var(--gutter); }

@@ -72,29 +72,6 @@ window.Clousa = window.Clousa || {};
     if (typeof gsap === 'undefined') return;
     gsap.registerPlugin(ScrollTrigger);
 
-    /* Hero — parallax pronunciado + zoom sobre la imagen de fondo */
-    gsap.fromTo('#heroImg',
-      { yPercent: -10, scale: 1 },
-      {
-        yPercent: 14, scale: 1.1, ease: 'none',
-        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1.2 }
-      }
-    );
-
-    /* Hero — entrada del contenido en secuencia */
-    gsap.from('.hero__content .eyebrow', {
-      opacity: 0, duration: 0.9, delay: 0.3, ease: 'power2.out'
-    });
-    gsap.from('.hero__title .hero__word', {
-      y: 60, opacity: 0, duration: 1, stagger: 0.08, delay: 0.5, ease: 'power3.out'
-    });
-    gsap.from('.hero__sub', {
-      opacity: 0, duration: 0.9, delay: 1, ease: 'power2.out'
-    });
-    gsap.from('.hero__content .btn', {
-      scale: 0.8, opacity: 0, duration: 0.7, delay: 1.2, ease: 'back.out(1.6)'
-    });
-
     /* Encabezado de sección */
     gsap.utils.toArray('.section-head').forEach(function (head) {
       gsap.from(head.children, {
@@ -117,10 +94,10 @@ window.Clousa = window.Clousa || {};
     cardTriggers = ScrollTrigger.batch(cards, {
       start: 'top 94%',
       onEnter: function (batch) {
-        gsap.from(batch, {
-          y: 44, opacity: 0, duration: 0.7, stagger: 0.07,
-          ease: 'power2.out', overwrite: true
-        });
+        gsap.fromTo(batch,
+          { y: 44 },
+          { y: 0, duration: 0.7, stagger: 0.07, ease: 'power2.out', overwrite: true, clearProps: 'transform' }
+        );
       }
     });
     ScrollTrigger.refresh();
