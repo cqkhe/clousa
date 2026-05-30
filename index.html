@@ -77,6 +77,11 @@
     <div class="select"><select id="sortFilter" aria-label="Ordenar"></select></div>
   </div>
 </div>
+<div class="brand-chips" id="brandChips" aria-label="Filtrar por marca">
+  <button class="brand-chip is-active" data-brand="all">Todas</button>
+  <button class="brand-chip" data-brand="Mistral">Mistral</button>
+  <button class="brand-chip" data-brand="Brooksfield">Brooksfield</button>
+</div>
 <div class="cat-chips" id="catChips"></div>
 
 <!-- ════════ CATÁLOGO ════════ -->
@@ -153,7 +158,12 @@
       <div class="modal__brand" id="modalBrand"></div>
       <h2 class="modal__name" id="modalName"></h2>
       <div class="modal__price" id="modalPrice"></div>
-      <div class="modal__label">Seleccioná tu talle</div>
+      <p class="modal__desc" id="modalDesc"></p>
+      <div class="modal__color-block" id="modalColorBlock">
+        <p class="modal__label" id="modalColorLabel">Seleccioná tu color · <span id="modalColorName">—</span></p>
+        <div class="modal__colors" id="modalColors"></div>
+      </div>
+      <div class="modal__label" id="modalSizeLabel">Seleccioná tu talle</div>
       <div class="modal__sizes" id="modalSizes"></div>
       <p class="modal__error" id="modalError">Elegí un talle para continuar.</p>
       <div class="modal__meta" id="modalMeta"></div>
@@ -165,7 +175,6 @@
   </div>
 </div>
 
-<script src="js/toast.js"></script>
 <script src="js/data.js"></script>
 <script src="js/cart.js"></script>
 <script src="js/modal.js"></script>

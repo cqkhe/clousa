@@ -24,7 +24,13 @@ window.Clousa = window.Clousa || {};
     { id: 'nombre',     label: 'Nombre A–Z' }
   ];
 
-  var state = { category: 'all', price: 'all', sort: 'destacados', query: '' };
+  function getProductImage(p) {
+    if (p.imagenes && p.imagenes.length > 0) return p.imagenes[0];
+    if (p.img) return p.img;
+    return 'assets/placeholder.svg';
+  }
+
+  var state = { category: 'all', price: 'all', sort: 'destacados', query: '', brand: 'all' };
   var dom = {};
 
   function buildCategoryChips() {
@@ -51,6 +57,7 @@ window.Clousa = window.Clousa || {};
     var q = state.query.trim().toLowerCase();
 
     var list = C.productos.filter(function (p) {
+      if (state.brand !== 'all' && p.brand !== state.brand) return false;
       if (state.category !== 'all' && p.category !== state.category) return false;
       if (p.price < bracket.min || p.price > bracket.max) return false;
       if (q && p.name.toLowerCase().indexOf(q) === -1 &&
@@ -72,7 +79,7 @@ window.Clousa = window.Clousa || {};
         C.escapeHtml(p.id) + '">' +
         '<div class="product-card__media">' +
           (p.soldOut ? '<span class="product-card__badge">Agotado</span>' : '') +
-          '<img loading="lazy" src="' + C.escapeHtml(p.img) + '" alt="' +
+          '<img loading="lazy" src="' + C.escapeHtml(getProductImage(p)) + '" alt="' +
             C.escapeHtml(p.name) + '" ' +
             'onerror="this.onerror=null;this.src=\'assets/placeholder.svg\';this.classList.add(\'img-error\')">' +
           '<button class="product-card__quick">Vista rápida</button>' +
@@ -103,16 +110,27 @@ window.Clousa = window.Clousa || {};
   }
 
   function init() {
-    dom.grid  = document.getElementById('catalogGrid');
-    dom.count = document.getElementById('resultCount');
-    dom.empty = document.getElementById('emptyState');
-    dom.chips = document.getElementById('catChips');
-    dom.price = document.getElementById('priceFilter');
-    dom.sort  = document.getElementById('sortFilter');
-    dom.search = document.getElementById('searchInput');
+    dom.grid       = document.getElementById('catalogGrid');
+    dom.count      = document.getElementById('resultCount');
+    dom.empty      = document.getElementById('emptyState');
+    dom.chips      = document.getElementById('catChips');
+    dom.brandChips = document.getElementById('brandChips');
+    dom.price      = document.getElementById('priceFilter');
+    dom.sort       = document.getElementById('sortFilter');
+    dom.search     = document.getElementById('searchInput');
 
     buildCategoryChips();
     buildSelects();
+
+    dom.brandChips.addEventListener('click', function (e) {
+      var chip = e.target.closest('[data-brand]');
+      if (!chip) return;
+      state.brand = chip.getAttribute('data-brand');
+      var all = dom.brandChips.querySelectorAll('.brand-chip');
+      for (var i = 0; i < all.length; i++) all[i].classList.remove('is-active');
+      chip.classList.add('is-active');
+      render();
+    });
 
     dom.chips.addEventListener('click', function (e) {
       var chip = e.target.closest('[data-cat]');

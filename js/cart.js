@@ -59,7 +59,8 @@ window.Clousa = window.Clousa || {};
             '<div class="cart-item__brand">' + C.escapeHtml(it.brand) + '</div>' +
             '<div class="cart-item__name">' + C.escapeHtml(it.name) + '</div>' +
             '<div class="cart-item__price">' + C.formatPrice(it.price) +
-              ' · Talle ' + C.escapeHtml(it.talle) + '</div>' +
+              ' · Talle ' + C.escapeHtml(it.talle) +
+              (it.colorNombre ? ' · ' + C.escapeHtml(it.colorNombre) : '') + '</div>' +
             '<div class="cart-item__row">' +
               '<div class="qty">' +
                 '<button data-cart-qty="' + i + '" data-d="-1" aria-label="Restar">−</button>' +
@@ -75,22 +76,31 @@ window.Clousa = window.Clousa || {};
     if (dom.total) dom.total.textContent = C.formatPrice(total());
   }
 
-  function add(product, talle, qty) {
+  function add(product, talle, qty, color) {
     qty = qty || 1;
+    var colorCodigo = color ? color.codigo : null;
+    var colorNombre = color
+      ? (color.hex
+          ? color.nombre
+          : 'Estampa ' + (parseInt(String(color.codigo).replace(/[^0-9]/g, ''), 10) || color.codigo))
+      : null;
+
     var existing = items.filter(function (i) {
-      return i.id === product.id && i.talle === talle;
+      return i.id === product.id && i.talle === talle && i.colorCodigo === colorCodigo;
     })[0];
     if (existing) {
       existing.qty += qty;
     } else {
       items.push({
-        id: product.id,
-        name: product.name,
-        brand: product.brand,
-        price: product.price,
-        img: product.img,
-        talle: talle,
-        qty: qty
+        id:          product.id,
+        name:        product.name,
+        brand:       product.brand,
+        price:       product.price,
+        img:         product.img,
+        talle:       talle,
+        colorCodigo: colorCodigo,
+        colorNombre: colorNombre,
+        qty:         qty
       });
     }
     save();
@@ -127,7 +137,8 @@ window.Clousa = window.Clousa || {};
   function checkoutWA() {
     if (items.length === 0) return;
     var lines = items.map(function (i) {
-      return '• ' + i.name + ' (Talle ' + i.talle + ') x' + i.qty +
+      var talleColor = 'Talle ' + i.talle + (i.colorNombre ? ' · ' + i.colorNombre : '');
+      return '• ' + i.name + ' (' + talleColor + ') x' + i.qty +
         ' — ' + C.formatPrice(i.price * i.qty);
     }).join('\n');
     var msg = 'Hola! Quiero realizar este pedido:\n\n' + lines +
@@ -146,7 +157,8 @@ window.Clousa = window.Clousa || {};
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         items: items.map(function (i) {
-          return { name: i.name + ' (Talle ' + i.talle + ')', price: i.price, qty: i.qty };
+          var talleColor = 'Talle ' + i.talle + (i.colorNombre ? ' · ' + i.colorNombre : '');
+          return { name: i.name + ' (' + talleColor + ')', price: i.price, qty: i.qty };
         })
       })
     })

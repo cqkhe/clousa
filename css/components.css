@@ -130,6 +130,34 @@
   border-color: var(--ink);
 }
 
+/* ---- Brand chips ---- */
+.brand-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+  justify-content: center;
+}
+.brand-chip {
+  background: transparent;
+  border: 1px solid var(--line, #DDD6CA);
+  color: var(--ink, #1F1B16);
+  padding: 6px 18px;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  border-radius: 0;
+}
+.brand-chip:hover { border-color: var(--ink, #1F1B16); }
+.brand-chip.is-active {
+  background: var(--ink, #1F1B16);
+  color: #fff;
+  border-color: var(--ink, #1F1B16);
+}
+
 .result-count {
   font-size: 11px;
   letter-spacing: 0.14em;
@@ -418,7 +446,13 @@
   margin-bottom: 14px;
 }
 /* el precio del modal es el único uso del dorado — acento puntual */
-.modal__price { font-size: 24px; font-weight: 500; color: var(--gold); margin-bottom: 28px; }
+.modal__price { font-size: 24px; font-weight: 500; color: var(--gold); margin-bottom: 14px; }
+.modal__desc {
+  font-size: 12px;
+  color: var(--graphite);
+  line-height: 1.75;
+  margin-bottom: 20px;
+}
 .modal__label {
   font-size: 10px;
   letter-spacing: 0.2em;
@@ -426,7 +460,64 @@
   color: var(--graphite);
   margin-bottom: 12px;
 }
+/* ---- Color selector ---- */
+.modal__color-block { margin-bottom: 24px; }
+.modal__colors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  max-height: 180px;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+.modal__color {
+  width: 36px;
+  height: 36px;
+  border-radius: 4px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  position: relative;
+  transition: border-color .15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: #444;
+  flex-shrink: 0;
+}
+.modal__color:hover { border-color: #999; }
+.modal__color.is-selected { border-color: var(--ink); }
+.modal__color.is-out-of-stock { opacity: 0.35; cursor: not-allowed; }
+.modal__color.is-out-of-stock::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top right,
+    transparent calc(50% - 1px),
+    rgba(0,0,0,0.5),
+    transparent calc(50% + 1px));
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+/* ---- Size buttons (modal) ---- */
 .modal__sizes { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.modal__size {
+  min-width: 44px;
+  padding: 11px 12px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--line);
+  color: var(--ink-soft);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-align: center;
+  transition: var(--transition);
+  cursor: pointer;
+}
+.modal__size:hover { border-color: var(--ink); color: var(--ink); }
+.modal__size.is-active { background: var(--ink); color: #FFFFFF; border-color: var(--ink); }
+.modal__size.is-disabled { opacity: 0.35; cursor: not-allowed; pointer-events: none; }
+
 .size {
   min-width: 44px;
   padding: 11px 12px;

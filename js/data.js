@@ -9,7 +9,6 @@ window.Clousa = window.Clousa || {};
 (function (C) {
   'use strict';
 
-  var DATA_URL = 'data/productos.json';
   var WHATSAPP = '5491166025737';
 
   C.WHATSAPP = WHATSAPP;
@@ -44,46 +43,65 @@ window.Clousa = window.Clousa || {};
     return ['S', 'M', 'L', 'XL', 'XXL'];
   };
 
+  function normalizeSize(t) {
+    return String(t).replace(/^0+/, '') || String(t);
+  }
+
   /* Mistral JSON -> modelo interno del sitio.
      Se descartan deliberadamente: precio_fabrica, precio_texto, link_detalle. */
   function normalize(p) {
+    var rawTalles = Array.isArray(p.talles) && p.talles.length ? p.talles : null;
+    var desc = p.descripcion && p.descripcion !== '0' ? String(p.descripcion).trim() : '';
     return {
-      id:       String(p.codigo || ''),
-      name:     cleanName(p.nombre),
-      brand:    p.marca || 'Mistral',
-      category: p.categoria || '',
-      price:    Number(p.precio_venta) || 0,
-      img:      p.imagen || '',
-      soldOut:  !!p.agotado,
-      talles:   C.tallesFor(p.categoria)
+      id:          String(p.codigo || ''),
+      name:        cleanName(p.nombre),
+      brand:       p.marca || 'Mistral',
+      category:    p.categoria || '',
+      price:       Number(p.precio_venta) || 0,
+      img:         (Array.isArray(p.imagenes) && p.imagenes[0]) || p.imagen || '',
+      imagenes:    Array.isArray(p.imagenes) ? p.imagenes : (p.imagen ? [p.imagen] : []),
+      soldOut:     !!p.agotado,
+      talles:      rawTalles ? rawTalles.map(normalizeSize) : C.tallesFor(p.categoria),
+      description: desc,
+      colores:     Array.isArray(p.colores) ? p.colores : []
     };
   }
 
   /* Carga el catálogo. Acepta el formato {metadata, categorias, productos}
      o un array plano de productos. */
   C.loadProducts = function () {
-    return fetch(DATA_URL)
+    var mistralFetch = fetch('data/productos.json')
       .then(function (res) {
-        if (!res.ok) throw new Error('No se pudo cargar el catálogo (' + res.status + ')');
+        if (!res.ok) throw new Error('No se pudo cargar el catálogo Mistral (' + res.status + ')');
+        return res.json();
+      });
+
+    var brooksfieldFetch = fetch('data/productos-brooksfield.json')
+      .then(function (res) {
+        if (!res.ok) throw new Error('HTTP ' + res.status);
         return res.json();
       })
-      .then(function (json) {
-        var raw = Array.isArray(json) ? json : (json.productos || []);
-        /* Se descartan productos sin id, sin nombre o sin precio válido
-           (el JSON de origen trae algunos con precio_venta = null). */
-        C.productos = raw.map(normalize).filter(function (p) {
+      .catch(function (err) {
+        console.warn('[Clousa] productos-brooksfield.json no disponible:', err.message);
+        return { productos: [], categorias: [] };
+      });
+
+    return Promise.all([mistralFetch, brooksfieldFetch])
+      .then(function (results) {
+        var mistralData     = results[0];
+        var brooksfieldData = results[1];
+
+        var rawCombined = (mistralData.productos || []).concat(brooksfieldData.productos || []);
+        C.productos = rawCombined.map(normalize).filter(function (p) {
           return p.id && p.name && p.price > 0;
         });
 
-        var cats = (json && Array.isArray(json.categorias) && json.categorias.length)
-          ? json.categorias.slice()
-          : C.productos.map(function (p) { return p.category; });
-
-        /* Solo categorías que efectivamente tienen productos */
+        var allCats = (mistralData.categorias || []).concat(brooksfieldData.categorias || []);
         var withProducts = {};
         C.productos.forEach(function (p) { withProducts[p.category] = true; });
-        C.categorias = cats.filter(function (c) { return withProducts[c]; })
+        C.categorias = allCats
           .filter(function (c, i, a) { return a.indexOf(c) === i; })
+          .filter(function (c) { return withProducts[c]; })
           .sort();
 
         return C.productos;
