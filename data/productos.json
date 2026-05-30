@@ -2,8 +2,8 @@
   "metadata": {
     "proveedor": "Mistral B2B",
     "coleccion": "Invierno 2026",
-    "fecha_actualizacion": "2026-05-29T12:03:41.671Z",
-    "total_productos": 172,
+    "fecha_actualizacion": "2026-05-30T10:34:37.276Z",
+    "total_productos": 171,
     "total_categorias": 22
   },
   "categorias": [
@@ -766,15 +766,6 @@
       "marca": "Mistral",
       "categoria": "PERFUMERIA",
       "precio_venta": 38850,
-      "imagen": "https://mistralb2b.com.ar/images/productos/sin_image.png",
-      "agotado": false
-    },
-    {
-      "codigo": "99025M",
-      "nombre": "M. TESTER EDT NAUTIQUE X100ML MASCULINO",
-      "marca": "Mistral",
-      "categoria": "PERFUMERIA",
-      "precio_venta": 25200,
       "imagen": "https://mistralb2b.com.ar/images/productos/sin_image.png",
       "agotado": false
     },
