@@ -90,6 +90,56 @@ window.Clousa = window.Clousa || {};
     return result;
   }
 
+  /* Jeans destacados fijos (8 productos por nombre).
+     Intercala las 3 familias CARGO / CARPENTER / ROMA round-robin
+     para diversidad visual. */
+  function getFeaturedJeans() {
+    var targets = [
+      'JEAN CARGO BLUE PREMIUM MASCULINO',
+      'JEAN CARGO LIGHT BLUE PREMIUM MASCULINO',
+      'JEAN CARPENTER BLUE PREMIUM MASCULINO',
+      'JEAN CARPENTER L. BLUE PREMIUM MASCULINO',
+      'JEAN CARPEN PATCH L. BLUE PREM MASCULINO',
+      'JEAN ROMA HEAVY VINTAGE',
+      'JEAN ROMA VINTAGE PREMIUM',
+      'JEAN ROMA DARK BLUE PREMIUM'
+    ];
+    function norm(s) {
+      return String(s || '').toUpperCase().replace(/\s+/g, ' ').trim();
+    }
+    var matched = [];
+    targets.forEach(function (target) {
+      var t = norm(target);
+      var p = C.productos.filter(function (pr) { return norm(pr.name) === t; })[0];
+      if (!p) {
+        p = C.productos.filter(function (pr) { return norm(pr.name).indexOf(t) >= 0; })[0];
+      }
+      if (p) matched.push(p);
+    });
+
+    var byFamily = { CARGO: [], CARPENTER: [], ROMA: [] };
+    matched.forEach(function (p) {
+      var n = norm(p.name);
+      if (/CARGO/.test(n))             byFamily.CARGO.push(p);
+      else if (/CARPEN/.test(n))       byFamily.CARPENTER.push(p);
+      else if (/ROMA/.test(n))         byFamily.ROMA.push(p);
+    });
+
+    var families = ['CARGO', 'CARPENTER', 'ROMA'];
+    var result = [];
+    var idx = 0;
+    while (result.length < 8) {
+      var added = false;
+      for (var i = 0; i < families.length && result.length < 8; i++) {
+        var p = byFamily[families[i]][idx];
+        if (p) { result.push(p); added = true; }
+      }
+      if (!added) break;
+      idx++;
+    }
+    return result;
+  }
+
   function isInitialDefault() {
     return !state.showAll
       && state.brand === 'all'
@@ -185,16 +235,44 @@ window.Clousa = window.Clousa || {};
     dom.sort         = document.getElementById('sortFilter');
     dom.search       = document.getElementById('searchInput');
     dom.featuredWrap = document.getElementById('featuredWrap');
+    dom.jeansGrid    = document.getElementById('featuredJeansGrid');
 
-    function scrollFeatured(dir) {
-      var card = dom.grid.querySelector('.product-card');
+    function scrollGrid(gridEl, dir) {
+      var card = gridEl.querySelector('.product-card');
       if (!card) return;
-      dom.grid.scrollBy({ left: dir * (card.offsetWidth + 18), behavior: 'smooth' });
+      gridEl.scrollBy({ left: dir * (card.offsetWidth + 18), behavior: 'smooth' });
     }
-    var prevBtn = document.getElementById('featuredPrev');
-    var nextBtn = document.getElementById('featuredNext');
-    if (prevBtn) prevBtn.addEventListener('click', function () { scrollFeatured(-1); });
-    if (nextBtn) nextBtn.addEventListener('click', function () { scrollFeatured(1); });
+    function bindNavButtons(prevId, nextId, gridEl) {
+      var p = document.getElementById(prevId);
+      var n = document.getElementById(nextId);
+      if (p) p.addEventListener('click', function () { scrollGrid(gridEl, -1); });
+      if (n) n.addEventListener('click', function () { scrollGrid(gridEl, 1); });
+    }
+    bindNavButtons('featuredPrev', 'featuredNext', dom.grid);
+    bindNavButtons('featuredJeansPrev', 'featuredJeansNext', dom.jeansGrid);
+
+    /* Click en card de jeans → abre modal (mismo handler que el grid principal) */
+    if (dom.jeansGrid) {
+      dom.jeansGrid.addEventListener('click', function (e) {
+        var card = e.target.closest('.product-card');
+        if (!card) return;
+        var p = C.getById(card.getAttribute('data-id'));
+        if (p) C.modal.open(p);
+      });
+    }
+
+    /* Render fila de jeans destacados (una sola vez al cargar) */
+    function renderJeans() {
+      if (!dom.jeansGrid) return;
+      var list = getFeaturedJeans();
+      if (list.length === 0) {
+        var section = dom.jeansGrid.closest('section');
+        if (section) section.hidden = true;
+        return;
+      }
+      dom.jeansGrid.innerHTML = list.map(cardHtml).join('');
+    }
+    renderJeans();
 
     document.getElementById('loadMoreBtn').addEventListener('click', function () {
       state.showAll = true;
