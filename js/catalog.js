@@ -161,6 +161,7 @@ window.Clousa = window.Clousa || {};
       : list;
 
     dom.grid.innerHTML = visible.map(cardHtml).join('');
+    dom.grid.classList.toggle('is-featured', initialMode);
 
     /* En vista inicial siempre mostramos el CTA para acceder al catálogo completo */
     if (initialMode) {
