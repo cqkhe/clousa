@@ -235,12 +235,15 @@
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   gap: clamp(8px, 1vw, 14px);
+  height: 100%;
+  min-height: 0;
 }
 .editorial__item {
   position: relative;
   overflow: hidden;
   display: block;
   text-decoration: none;
+  min-height: 0;
 }
 .editorial__item img {
   width: 100%;
