@@ -30,7 +30,8 @@ window.Clousa = window.Clousa || {};
     return 'assets/placeholder.svg';
   }
 
-  var state = { category: 'all', price: 'all', sort: 'destacados', query: '', brand: 'all' };
+  var INITIAL_LIMIT = 12;
+  var state = { category: 'all', price: 'all', sort: 'destacados', query: '', brand: 'all', showAll: false };
   var dom = {};
 
   function buildCategoryChips() {
@@ -101,23 +102,37 @@ window.Clousa = window.Clousa || {};
     if (list.length === 0) {
       dom.grid.innerHTML = '';
       dom.empty.hidden = false;
+      dom.loadMoreWrap.hidden = true;
       return;
     }
+
     dom.empty.hidden = true;
-    dom.grid.innerHTML = list.map(cardHtml).join('');
+
+    var visible = (!state.showAll && list.length > INITIAL_LIMIT)
+      ? list.slice(0, INITIAL_LIMIT)
+      : list;
+
+    dom.grid.innerHTML = visible.map(cardHtml).join('');
+    dom.loadMoreWrap.hidden = state.showAll || list.length <= INITIAL_LIMIT;
 
     if (C.revealGrid) C.revealGrid();
   }
 
   function init() {
-    dom.grid       = document.getElementById('catalogGrid');
-    dom.count      = document.getElementById('resultCount');
-    dom.empty      = document.getElementById('emptyState');
-    dom.chips      = document.getElementById('catChips');
-    dom.brandChips = document.getElementById('brandChips');
-    dom.price      = document.getElementById('priceFilter');
-    dom.sort       = document.getElementById('sortFilter');
-    dom.search     = document.getElementById('searchInput');
+    dom.grid         = document.getElementById('catalogGrid');
+    dom.count        = document.getElementById('resultCount');
+    dom.empty        = document.getElementById('emptyState');
+    dom.loadMoreWrap = document.getElementById('loadMoreWrap');
+    dom.chips        = document.getElementById('catChips');
+    dom.brandChips   = document.getElementById('brandChips');
+    dom.price        = document.getElementById('priceFilter');
+    dom.sort         = document.getElementById('sortFilter');
+    dom.search       = document.getElementById('searchInput');
+
+    document.getElementById('loadMoreBtn').addEventListener('click', function () {
+      state.showAll = true;
+      render();
+    });
 
     buildCategoryChips();
     buildSelects();
@@ -126,6 +141,7 @@ window.Clousa = window.Clousa || {};
       var chip = e.target.closest('[data-brand]');
       if (!chip) return;
       state.brand = chip.getAttribute('data-brand');
+      state.showAll = false;
       var all = dom.brandChips.querySelectorAll('.brand-chip');
       for (var i = 0; i < all.length; i++) all[i].classList.remove('is-active');
       chip.classList.add('is-active');
@@ -136,6 +152,7 @@ window.Clousa = window.Clousa || {};
       var chip = e.target.closest('[data-cat]');
       if (!chip) return;
       state.category = chip.getAttribute('data-cat');
+      state.showAll = false;
       var all = dom.chips.querySelectorAll('.chip');
       for (var i = 0; i < all.length; i++) all[i].classList.remove('is-active');
       chip.classList.add('is-active');
@@ -143,17 +160,17 @@ window.Clousa = window.Clousa || {};
     });
 
     dom.price.addEventListener('change', function () {
-      state.price = dom.price.value; render();
+      state.price = dom.price.value; state.showAll = false; render();
     });
     dom.sort.addEventListener('change', function () {
-      state.sort = dom.sort.value; render();
+      state.sort = dom.sort.value; state.showAll = false; render();
     });
 
     var t;
     dom.search.addEventListener('input', function () {
       clearTimeout(t);
       t = setTimeout(function () {
-        state.query = dom.search.value; render();
+        state.query = dom.search.value; state.showAll = false; render();
       }, 160);
     });
 
