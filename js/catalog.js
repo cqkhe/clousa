@@ -52,6 +52,53 @@ window.Clousa = window.Clousa || {};
     }).join('');
   }
 
+  /* Vista inicial destacada: top 8 Brooksfield ≥ $120.000,
+     intercalando categorías para diversidad visual.
+     Solo se usa cuando todos los filtros están en default. */
+  function getInitialFeatured() {
+    var brooks = C.productos
+      .filter(function (p) { return p.brand === 'Brooksfield' && p.price >= 120000; })
+      .sort(function (a, b) { return b.price - a.price; });
+
+    if (brooks.length < 8) {
+      brooks = C.productos
+        .filter(function (p) { return p.brand === 'Brooksfield'; })
+        .sort(function (a, b) { return b.price - a.price; });
+    }
+
+    var byCategory = {};
+    brooks.forEach(function (p) {
+      if (!byCategory[p.category]) byCategory[p.category] = [];
+      byCategory[p.category].push(p);
+    });
+
+    var categories = Object.keys(byCategory);
+    var result = [];
+    var idx = 0;
+    while (result.length < 8) {
+      var added = false;
+      for (var i = 0; i < categories.length && result.length < 8; i++) {
+        var cat = categories[i];
+        if (byCategory[cat][idx]) {
+          result.push(byCategory[cat][idx]);
+          added = true;
+        }
+      }
+      if (!added) break;
+      idx++;
+    }
+    return result;
+  }
+
+  function isInitialDefault() {
+    return !state.showAll
+      && state.brand === 'all'
+      && state.category === 'all'
+      && state.price === 'all'
+      && state.sort === 'destacados'
+      && !state.query;
+  }
+
   function getFiltered() {
     var bracket = PRICE_BRACKETS.filter(function (b) { return b.id === state.price; })[0]
       || PRICE_BRACKETS[0];
@@ -94,7 +141,8 @@ window.Clousa = window.Clousa || {};
   }
 
   function render() {
-    var list = getFiltered();
+    var initialMode = isInitialDefault();
+    var list = initialMode ? getInitialFeatured() : getFiltered();
 
     dom.count.textContent = list.length +
       (list.length === 1 ? ' producto' : ' productos');
@@ -113,7 +161,13 @@ window.Clousa = window.Clousa || {};
       : list;
 
     dom.grid.innerHTML = visible.map(cardHtml).join('');
-    dom.loadMoreWrap.hidden = state.showAll || list.length <= INITIAL_LIMIT;
+
+    /* En vista inicial siempre mostramos el CTA para acceder al catálogo completo */
+    if (initialMode) {
+      dom.loadMoreWrap.hidden = false;
+    } else {
+      dom.loadMoreWrap.hidden = state.showAll || list.length <= INITIAL_LIMIT;
+    }
 
     if (C.revealGrid) C.revealGrid();
   }
