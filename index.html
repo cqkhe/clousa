@@ -97,8 +97,12 @@
 <p class="result-count" id="resultCount" hidden></p>
 <main class="section section--tight">
   <div class="container">
-    <div class="catalog-grid" id="catalogGrid">
-      <div class="loader">Cargando catálogo…</div>
+    <div class="featured-wrap" id="featuredWrap">
+      <button class="featured-nav featured-nav--prev" id="featuredPrev" aria-label="Anterior" type="button">‹</button>
+      <div class="catalog-grid" id="catalogGrid">
+        <div class="loader">Cargando catálogo…</div>
+      </div>
+      <button class="featured-nav featured-nav--next" id="featuredNext" aria-label="Siguiente" type="button">›</button>
     </div>
     <div class="empty-state" id="emptyState" hidden>
       <p>No encontramos productos con esos filtros.</p>

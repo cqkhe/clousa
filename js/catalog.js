@@ -162,6 +162,7 @@ window.Clousa = window.Clousa || {};
 
     dom.grid.innerHTML = visible.map(cardHtml).join('');
     dom.grid.classList.toggle('is-featured', initialMode);
+    if (dom.featuredWrap) dom.featuredWrap.classList.toggle('is-featured', initialMode);
 
     /* En vista inicial siempre mostramos el CTA para acceder al catálogo completo */
     if (initialMode) {
@@ -183,6 +184,17 @@ window.Clousa = window.Clousa || {};
     dom.price        = document.getElementById('priceFilter');
     dom.sort         = document.getElementById('sortFilter');
     dom.search       = document.getElementById('searchInput');
+    dom.featuredWrap = document.getElementById('featuredWrap');
+
+    function scrollFeatured(dir) {
+      var card = dom.grid.querySelector('.product-card');
+      if (!card) return;
+      dom.grid.scrollBy({ left: dir * (card.offsetWidth + 18), behavior: 'smooth' });
+    }
+    var prevBtn = document.getElementById('featuredPrev');
+    var nextBtn = document.getElementById('featuredNext');
+    if (prevBtn) prevBtn.addEventListener('click', function () { scrollFeatured(-1); });
+    if (nextBtn) nextBtn.addEventListener('click', function () { scrollFeatured(1); });
 
     document.getElementById('loadMoreBtn').addEventListener('click', function () {
       state.showAll = true;
