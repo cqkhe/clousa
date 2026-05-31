@@ -30,7 +30,7 @@ window.Clousa = window.Clousa || {};
     return 'assets/placeholder.svg';
   }
 
-  var INITIAL_LIMIT = 12;
+  var INITIAL_LIMIT = 8;
   var state = { category: 'all', price: 'all', sort: 'destacados', query: '', brand: 'all', showAll: false };
   var dom = {};
 
