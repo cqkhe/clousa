@@ -111,29 +111,44 @@
   </div>
 </section>
 
-<!-- ════════ FILTROS ════════ -->
-<div class="filters" id="catalogo">
-  <div class="filters__row">
-    <label class="filters__search">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-        <circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-      </svg>
-      <input type="text" id="searchInput" placeholder="Buscar producto o categoría…">
-    </label>
-    <div class="select"><select id="priceFilter" aria-label="Filtrar por precio"></select></div>
-    <div class="select"><select id="sortFilter" aria-label="Ordenar"></select></div>
+<!-- ════════ CAMPAIGN STORY ════════ -->
+<section class="campaign">
+  <div class="campaign__media">
+    <img src="assets/campaign-wide.jpg" alt="Brooksfield Campaign Winter 26" loading="lazy">
   </div>
-</div>
-<div class="brand-chips" id="brandChips" aria-label="Filtrar por marca">
-  <button class="brand-chip is-active" data-brand="all">Todas</button>
-  <button class="brand-chip" data-brand="Mistral">Mistral</button>
-  <button class="brand-chip" data-brand="Brooksfield">Brooksfield</button>
-</div>
-<div class="cat-chips" id="catChips"></div>
+  <div class="campaign__caption">
+    <span class="campaign__eyebrow">CAMPAIGN 26</span>
+    <h2 class="campaign__title">Una narrativa de invierno.<br>Texturas, gestos y atmósfera.</h2>
+  </div>
+</section>
 
 <!-- ════════ CATÁLOGO ════════ -->
-<h2 class="section-heading">ESENCIALES</h2>
-<p class="result-count" id="resultCount">Cargando…</p>
+<h2 class="section-heading" id="catalogo">ESENCIALES</h2>
+<p class="result-count-sub">Una selección curada de la colección Invierno 2026</p>
+
+<!-- Filtros — ocultos hasta click en VER TODA LA COLECCIÓN -->
+<div class="catalog-controls" id="catalogControls" hidden>
+  <div class="filters">
+    <div class="filters__row">
+      <label class="filters__search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="searchInput" placeholder="Buscar producto o categoría…">
+      </label>
+      <div class="select"><select id="priceFilter" aria-label="Filtrar por precio"></select></div>
+      <div class="select"><select id="sortFilter" aria-label="Ordenar"></select></div>
+    </div>
+  </div>
+  <div class="brand-chips" id="brandChips" aria-label="Filtrar por marca">
+    <button class="brand-chip is-active" data-brand="all">Todas</button>
+    <button class="brand-chip" data-brand="Mistral">Mistral</button>
+    <button class="brand-chip" data-brand="Brooksfield">Brooksfield</button>
+  </div>
+  <div class="cat-chips" id="catChips"></div>
+</div>
+
+<p class="result-count" id="resultCount" hidden></p>
 <main class="section section--tight">
   <div class="container">
     <div class="catalog-grid" id="catalogGrid">

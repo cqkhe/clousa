@@ -131,6 +131,10 @@ window.Clousa = window.Clousa || {};
 
     document.getElementById('loadMoreBtn').addEventListener('click', function () {
       state.showAll = true;
+      var controls = document.getElementById('catalogControls');
+      if (controls) controls.hidden = false;
+      var rc = document.getElementById('resultCount');
+      if (rc) rc.hidden = false;
       render();
     });
 
