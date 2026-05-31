@@ -426,12 +426,12 @@
 .catalog-grid.is-featured::-webkit-scrollbar-thumb { background: var(--line); border-radius: 3px; }
 .catalog-grid.is-featured .product-card {
   flex: 0 0 calc((100% - 54px) / 4);
-  min-width: 220px;
+  min-width: 240px;
   scroll-snap-align: start;
 }
-@media (min-width: 1400px) {
+@media (max-width: 1099px) {
   .catalog-grid.is-featured .product-card {
-    flex: 0 0 calc((100% - 126px) / 8);
+    flex: 0 0 calc((100% - 36px) / 3);
   }
 }
 @media (max-width: 760px) {

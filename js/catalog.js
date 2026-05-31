@@ -57,12 +57,12 @@ window.Clousa = window.Clousa || {};
      Solo se usa cuando todos los filtros están en default. */
   function getInitialFeatured() {
     var brooks = C.productos
-      .filter(function (p) { return p.brand === 'Brooksfield' && p.price >= 120000; })
+      .filter(function (p) { return p.brand === 'Brooksfield' && p.price >= 120000 && !p.soldOut; })
       .sort(function (a, b) { return b.price - a.price; });
 
     if (brooks.length < 8) {
       brooks = C.productos
-        .filter(function (p) { return p.brand === 'Brooksfield'; })
+        .filter(function (p) { return p.brand === 'Brooksfield' && !p.soldOut; })
         .sort(function (a, b) { return b.price - a.price; });
     }
 
