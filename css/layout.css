@@ -210,17 +210,18 @@
 .editorial__grid {
   display: grid;
   grid-template-columns: 55% 1fr;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 clamp(16px, 3vw, 40px);
-  height: 78vh;
-  min-height: 480px;
-  max-height: 860px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  height: 82vh;
+  min-height: 520px;
+  max-height: 900px;
   overflow: hidden;
   gap: clamp(8px, 1vw, 14px);
 }
 .editorial__main {
   overflow: hidden;
+  filter: grayscale(100%);
 }
 .editorial__main img {
   width: 100%;
