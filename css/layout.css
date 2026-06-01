@@ -418,6 +418,47 @@
   max-width: 720px;
 }
 
+/* ---- Modo colección (vista de catálogo de marca específica) ---- */
+.collection-header { display: none; }
+.collection-header__inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: clamp(32px, 5vw, 64px) var(--gutter) clamp(24px, 3vw, 40px);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.collection-header__back {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--graphite);
+  text-decoration: none;
+  align-self: flex-start;
+  transition: color 0.2s ease;
+}
+.collection-header__back:hover { color: var(--ink); }
+.collection-header__title {
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin: 0;
+  line-height: 1.15;
+}
+
+body.mode-collection .hero,
+body.mode-collection .editorial,
+body.mode-collection .campaign,
+body.mode-collection .jeans-section,
+body.mode-collection .featured-only,
+body.mode-collection .featured-wrap .featured-nav {
+  display: none !important;
+}
+body.mode-collection .collection-header { display: block; }
+body.mode-collection #loadMoreWrap { display: none !important; }
+
 /* ---- Section heading ---- */
 .section-heading {
   text-align: center;

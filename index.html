@@ -75,8 +75,16 @@
 </section>
 
 <!-- ════════ CATÁLOGO (destacados arriba del editorial) ════════ -->
-<h2 class="section-heading" id="catalogo">ESENCIALES</h2>
-<p class="result-count-sub">Una selección curada de la colección Invierno 2026</p>
+<!-- Header del modo "colección completa" (solo visible cuando body.mode-collection) -->
+<div class="collection-header" id="collectionHeader" hidden>
+  <div class="collection-header__inner">
+    <a href="#" class="collection-header__back" id="collectionBack">← Volver al inicio</a>
+    <h1 class="collection-header__title" id="collectionTitle">Colección</h1>
+  </div>
+</div>
+
+<h2 class="section-heading featured-only" id="catalogo">ESENCIALES</h2>
+<p class="result-count-sub featured-only">Una selección curada de la colección Invierno 2026</p>
 
 <!-- Filtros — ocultos hasta click en VER TODA LA COLECCIÓN -->
 <div class="catalog-controls" id="catalogControls" hidden>
@@ -159,7 +167,7 @@
 </section>
 
 <!-- ════════ JEANS DESTACADOS ════════ -->
-<section class="section section--tight">
+<section class="section section--tight jeans-section">
   <h2 class="section-heading">JEANS</h2>
   <p class="result-count-sub">Tiros, lavados y siluetas premium</p>
   <div class="container">

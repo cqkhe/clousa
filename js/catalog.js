@@ -225,9 +225,9 @@ window.Clousa = window.Clousa || {};
   }
 
   /* Activa el catálogo completo filtrado por una marca específica.
-     Usado desde el dropdown de "Colección" en el nav. */
+     Modo "colección": oculta hero/editorial/jeans/campaign y muestra
+     un header con título de la marca + link de regreso. */
   function filterByBrand(brand) {
-    /* Estado: expandir y filtrar por marca, resetear el resto */
     state.showAll  = true;
     state.brand    = brand;
     state.category = 'all';
@@ -240,6 +240,13 @@ window.Clousa = window.Clousa || {};
     if (controls) controls.hidden = false;
     var rc = document.getElementById('resultCount');
     if (rc) rc.hidden = false;
+
+    /* Activar modo colección y setear título */
+    document.body.classList.add('mode-collection');
+    var header = document.getElementById('collectionHeader');
+    var title  = document.getElementById('collectionTitle');
+    if (header) header.hidden = false;
+    if (title)  title.textContent = 'Colección ' + brand + ' Invierno 2026';
 
     /* Sincronizar UI de los chips de marca */
     if (dom.brandChips) {
@@ -264,9 +271,49 @@ window.Clousa = window.Clousa || {};
 
     render();
 
-    /* Scroll al inicio del catálogo */
-    var target = document.getElementById('catalogo');
-    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    /* Scroll al header del catálogo */
+    window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
+  }
+
+  /* Salir del modo colección: restaura la home con destacados */
+  function exitCollectionMode() {
+    document.body.classList.remove('mode-collection');
+    var header = document.getElementById('collectionHeader');
+    if (header) header.hidden = true;
+
+    /* Resetear estado para volver a la vista inicial featured */
+    state.showAll  = false;
+    state.brand    = 'all';
+    state.category = 'all';
+    state.price    = 'all';
+    state.sort     = 'destacados';
+    state.query    = '';
+
+    /* Ocultar controles otra vez */
+    var controls = document.getElementById('catalogControls');
+    if (controls) controls.hidden = true;
+    var rc = document.getElementById('resultCount');
+    if (rc) rc.hidden = true;
+
+    /* Resetear UI */
+    if (dom.brandChips) {
+      var chips = dom.brandChips.querySelectorAll('.brand-chip');
+      Array.prototype.forEach.call(chips, function (c) {
+        c.classList.toggle('is-active', c.getAttribute('data-brand') === 'all');
+      });
+    }
+    if (dom.chips) {
+      var catChips = dom.chips.querySelectorAll('.chip');
+      Array.prototype.forEach.call(catChips, function (c) {
+        c.classList.toggle('is-active', c.getAttribute('data-cat') === 'all');
+      });
+    }
+    if (dom.price)  dom.price.value  = 'all';
+    if (dom.sort)   dom.sort.value   = 'destacados';
+    if (dom.search) dom.search.value = '';
+
+    render();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   function init() {
@@ -316,6 +363,25 @@ window.Clousa = window.Clousa || {};
         filterByBrand(brand);
       });
     });
+
+    /* Link "Volver al inicio" del header de colección */
+    var backLink = document.getElementById('collectionBack');
+    if (backLink) {
+      backLink.addEventListener('click', function (e) {
+        e.preventDefault();
+        exitCollectionMode();
+      });
+    }
+
+    /* Click en logo o links del nav que apuntan al hero → salir del modo colección */
+    var logoLink = document.querySelector('.nav__logo');
+    if (logoLink) {
+      logoLink.addEventListener('click', function () {
+        if (document.body.classList.contains('mode-collection')) {
+          exitCollectionMode();
+        }
+      });
+    }
 
     /* Render fila de jeans destacados (una sola vez al cargar) */
     function renderJeans() {
