@@ -31,7 +31,7 @@ window.Clousa = window.Clousa || {};
   }
 
   var INITIAL_LIMIT = 8;
-  var state = { category: 'all', price: 'all', sort: 'destacados', query: '', brand: 'all', showAll: false };
+  var state = { category: 'all', categoryGroup: null, price: 'all', sort: 'destacados', query: '', brand: 'all', showAll: false };
   var dom = {};
 
   function buildCategoryChips() {
@@ -156,6 +156,7 @@ window.Clousa = window.Clousa || {};
 
     var list = C.productos.filter(function (p) {
       if (state.brand !== 'all' && p.brand !== state.brand) return false;
+      if (state.categoryGroup && state.categoryGroup.indexOf(p.category) === -1) return false;
       if (state.category !== 'all' && p.category !== state.category) return false;
       if (p.price < bracket.min || p.price > bracket.max) return false;
       if (q && p.name.toLowerCase().indexOf(q) === -1 &&
@@ -228,12 +229,13 @@ window.Clousa = window.Clousa || {};
      Modo "colección": oculta hero/editorial/jeans/campaign y muestra
      un header con título de la marca + link de regreso. */
   function filterByBrand(brand) {
-    state.showAll  = true;
-    state.brand    = brand;
-    state.category = 'all';
-    state.price    = 'all';
-    state.sort     = 'destacados';
-    state.query    = '';
+    state.showAll       = true;
+    state.brand         = brand;
+    state.category      = 'all';
+    state.categoryGroup = null;
+    state.price         = 'all';
+    state.sort          = 'destacados';
+    state.query         = '';
 
     /* Mostrar los controles ocultos */
     var controls = document.getElementById('catalogControls');
@@ -275,6 +277,50 @@ window.Clousa = window.Clousa || {};
     window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
   }
 
+  /* Filtra por marca + grupo de categorías (ej: "Mistral · Remeras"
+     que incluye REMERAS MC + REMERAS ML). */
+  function filterByBrandAndCategory(brand, categoriesStr, label) {
+    state.showAll       = true;
+    state.brand         = brand;
+    state.category      = 'all';
+    state.categoryGroup = categoriesStr
+      ? categoriesStr.split(',').map(function (s) { return s.trim(); })
+      : null;
+    state.price = 'all';
+    state.sort  = 'destacados';
+    state.query = '';
+
+    var controls = document.getElementById('catalogControls');
+    if (controls) controls.hidden = false;
+    var rc = document.getElementById('resultCount');
+    if (rc) rc.hidden = false;
+
+    document.body.classList.add('mode-collection');
+    var header = document.getElementById('collectionHeader');
+    var title  = document.getElementById('collectionTitle');
+    if (header) header.hidden = false;
+    if (title)  title.textContent = label || (brand + ' · Categoría');
+
+    if (dom.brandChips) {
+      var chips = dom.brandChips.querySelectorAll('.brand-chip');
+      Array.prototype.forEach.call(chips, function (c) {
+        c.classList.toggle('is-active', c.getAttribute('data-brand') === brand);
+      });
+    }
+    if (dom.chips) {
+      var catChips = dom.chips.querySelectorAll('.chip');
+      Array.prototype.forEach.call(catChips, function (c) {
+        c.classList.toggle('is-active', c.getAttribute('data-cat') === 'all');
+      });
+    }
+    if (dom.price)  dom.price.value  = 'all';
+    if (dom.sort)   dom.sort.value   = 'destacados';
+    if (dom.search) dom.search.value = '';
+
+    render();
+    window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
+  }
+
   /* Salir del modo colección: restaura la home con destacados */
   function exitCollectionMode() {
     document.body.classList.remove('mode-collection');
@@ -282,12 +328,13 @@ window.Clousa = window.Clousa || {};
     if (header) header.hidden = true;
 
     /* Resetear estado para volver a la vista inicial featured */
-    state.showAll  = false;
-    state.brand    = 'all';
-    state.category = 'all';
-    state.price    = 'all';
-    state.sort     = 'destacados';
-    state.query    = '';
+    state.showAll       = false;
+    state.brand         = 'all';
+    state.category      = 'all';
+    state.categoryGroup = null;
+    state.price         = 'all';
+    state.sort          = 'destacados';
+    state.query         = '';
 
     /* Ocultar controles otra vez */
     var controls = document.getElementById('catalogControls');
@@ -353,14 +400,20 @@ window.Clousa = window.Clousa || {};
       });
     }
 
-    /* Dropdown del nav: links con data-brand → expanden el catálogo
-       filtrando por esa marca y scrollean al grid */
+    /* Dropdown del nav: links con data-brand → expanden el catálogo.
+       Si tienen data-categories, filtran además por ese conjunto. */
     var brandLinks = document.querySelectorAll('.nav__dropdown a[data-brand]');
     Array.prototype.forEach.call(brandLinks, function (link) {
       link.addEventListener('click', function (e) {
         e.preventDefault();
-        var brand = link.getAttribute('data-brand');
-        filterByBrand(brand);
+        var brand      = link.getAttribute('data-brand');
+        var categories = link.getAttribute('data-categories');
+        var label      = link.getAttribute('data-label');
+        if (categories) {
+          filterByBrandAndCategory(brand, categories, label);
+        } else {
+          filterByBrand(brand);
+        }
       });
     });
 
@@ -413,6 +466,7 @@ window.Clousa = window.Clousa || {};
       if (!chip) return;
       state.brand = chip.getAttribute('data-brand');
       state.showAll = false;
+      state.categoryGroup = null;
       var all = dom.brandChips.querySelectorAll('.brand-chip');
       for (var i = 0; i < all.length; i++) all[i].classList.remove('is-active');
       chip.classList.add('is-active');
@@ -424,6 +478,7 @@ window.Clousa = window.Clousa || {};
       if (!chip) return;
       state.category = chip.getAttribute('data-cat');
       state.showAll = false;
+      state.categoryGroup = null;
       var all = dom.chips.querySelectorAll('.chip');
       for (var i = 0; i < all.length; i++) all[i].classList.remove('is-active');
       chip.classList.add('is-active');
@@ -431,17 +486,17 @@ window.Clousa = window.Clousa || {};
     });
 
     dom.price.addEventListener('change', function () {
-      state.price = dom.price.value; state.showAll = false; render();
+      state.price = dom.price.value; state.showAll = false; state.categoryGroup = null; render();
     });
     dom.sort.addEventListener('change', function () {
-      state.sort = dom.sort.value; state.showAll = false; render();
+      state.sort = dom.sort.value; state.showAll = false; state.categoryGroup = null; render();
     });
 
     var t;
     dom.search.addEventListener('input', function () {
       clearTimeout(t);
       t = setTimeout(function () {
-        state.query = dom.search.value; state.showAll = false; render();
+        state.query = dom.search.value; state.showAll = false; state.categoryGroup = null; render();
       }, 160);
     });
 
@@ -469,6 +524,11 @@ window.Clousa = window.Clousa || {};
     render();
   }
 
-  C.catalog = { init: init, render: render, filterByBrand: filterByBrand };
+  C.catalog = {
+    init: init,
+    render: render,
+    filterByBrand: filterByBrand,
+    filterByBrandAndCategory: filterByBrandAndCategory
+  };
 
 })(window.Clousa);
