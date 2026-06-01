@@ -224,6 +224,51 @@ window.Clousa = window.Clousa || {};
     if (C.revealGrid) C.revealGrid();
   }
 
+  /* Activa el catálogo completo filtrado por una marca específica.
+     Usado desde el dropdown de "Colección" en el nav. */
+  function filterByBrand(brand) {
+    /* Estado: expandir y filtrar por marca, resetear el resto */
+    state.showAll  = true;
+    state.brand    = brand;
+    state.category = 'all';
+    state.price    = 'all';
+    state.sort     = 'destacados';
+    state.query    = '';
+
+    /* Mostrar los controles ocultos */
+    var controls = document.getElementById('catalogControls');
+    if (controls) controls.hidden = false;
+    var rc = document.getElementById('resultCount');
+    if (rc) rc.hidden = false;
+
+    /* Sincronizar UI de los chips de marca */
+    if (dom.brandChips) {
+      var chips = dom.brandChips.querySelectorAll('.brand-chip');
+      Array.prototype.forEach.call(chips, function (c) {
+        c.classList.toggle('is-active', c.getAttribute('data-brand') === brand);
+      });
+    }
+
+    /* Resetear chip de categoría a "Todas" */
+    if (dom.chips) {
+      var catChips = dom.chips.querySelectorAll('.chip');
+      Array.prototype.forEach.call(catChips, function (c) {
+        c.classList.toggle('is-active', c.getAttribute('data-cat') === 'all');
+      });
+    }
+
+    /* Resetear selects e input de búsqueda */
+    if (dom.price)  dom.price.value  = 'all';
+    if (dom.sort)   dom.sort.value   = 'destacados';
+    if (dom.search) dom.search.value = '';
+
+    render();
+
+    /* Scroll al inicio del catálogo */
+    var target = document.getElementById('catalogo');
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
   function init() {
     dom.grid         = document.getElementById('catalogGrid');
     dom.count        = document.getElementById('resultCount');
@@ -260,6 +305,17 @@ window.Clousa = window.Clousa || {};
         if (p) C.modal.open(p);
       });
     }
+
+    /* Dropdown del nav: links con data-brand → expanden el catálogo
+       filtrando por esa marca y scrollean al grid */
+    var brandLinks = document.querySelectorAll('.nav__dropdown a[data-brand]');
+    Array.prototype.forEach.call(brandLinks, function (link) {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        var brand = link.getAttribute('data-brand');
+        filterByBrand(brand);
+      });
+    });
 
     /* Render fila de jeans destacados (una sola vez al cargar) */
     function renderJeans() {
@@ -347,6 +403,6 @@ window.Clousa = window.Clousa || {};
     render();
   }
 
-  C.catalog = { init: init, render: render };
+  C.catalog = { init: init, render: render, filterByBrand: filterByBrand };
 
 })(window.Clousa);
