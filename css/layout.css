@@ -162,6 +162,11 @@
   text-transform: uppercase;
   color: var(--ink);
 }
+.nav__mobile-divider {
+  height: 1px;
+  background: var(--line);
+  margin: 6px 0;
+}
 
 @media (min-width: 900px) {
   .nav__links { display: flex; }
@@ -634,6 +639,20 @@ body.mode-collection #loadMoreWrap { display: none !important; }
 .wa-float svg { width: 26px; height: 26px; }
 
 /* ═══════════════════════════════════════════════════════════════════
+   RESPONSIVE — Tablet/Mobile (≤ 899px)
+   Forzar nav mobile aunque @media (min-width: 900px) suba prioridad
+   ═══════════════════════════════════════════════════════════════════ */
+@media (max-width: 899px) {
+  /* Ocultar nav__links y dropdowns en mobile/tablet — el menú vive en el burger */
+  .nav__links { display: none !important; }
+  .nav__dropdown { display: none !important; }
+  /* Ocultar los botones de texto Buscar / Carrito en mobile (se acceden desde el burger menu) */
+  .nav__btn { display: none !important; }
+  /* Asegurar que el toggle (burger) sea visible y esté a la derecha */
+  .nav__toggle { display: flex !important; margin-left: auto; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
    RESPONSIVE — Mobile (≤ 760px)
    Optimizaciones agrupadas para mantener consistencia visual en mobile
    ═══════════════════════════════════════════════════════════════════ */
@@ -642,10 +661,13 @@ body.mode-collection #loadMoreWrap { display: none !important; }
   .announce { font-size: 9px; padding: 8px 12px; letter-spacing: 0.16em; }
   .announce span { padding: 0 4px; }
 
-  /* Nav logo más chico en mobile para evitar overlap con burger */
-  .nav__logo { font-size: 18px; letter-spacing: 0.26em; }
-  .nav__actions { gap: 14px; }
-  .nav__btn { font-size: 10px; letter-spacing: 0.12em; }
+  /* Nav: logo a la izquierda (no centrado) para evitar overlap con burger */
+  .nav__logo {
+    position: static;
+    transform: none;
+    font-size: 18px;
+    letter-spacing: 0.26em;
+  }
 
   /* Hero: contenido con padding más generoso, visual con altura controlada */
   .hero__content { padding: 36px 22px 44px; }

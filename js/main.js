@@ -54,6 +54,26 @@ window.Clousa = window.Clousa || {};
       });
     }
 
+    /* Versión mobile del buscar/carrito (dentro del menú burger) */
+    var mobileSearch = document.getElementById('navMobileSearch');
+    if (mobileSearch) {
+      mobileSearch.addEventListener('click', function (e) {
+        e.preventDefault();
+        var input = document.getElementById('searchInput');
+        if (input) {
+          input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          setTimeout(function () { input.focus(); }, 400);
+        }
+      });
+    }
+    var mobileCart = document.getElementById('navMobileCart');
+    if (mobileCart) {
+      mobileCart.addEventListener('click', function (e) {
+        e.preventDefault();
+        if (C.cart && C.cart.open) C.cart.open();
+      });
+    }
+
     /* Hero clickeable — lleva a la colección (el cursor pointer lo indica) */
     var hero = document.getElementById('hero');
     if (hero) {
