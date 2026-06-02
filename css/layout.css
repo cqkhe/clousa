@@ -786,39 +786,55 @@ body.mode-collection #loadMoreWrap { display: none !important; }
   .collection-header__back { font-size: 10px; }
 
   /* Filters: stack vertical compacto */
-  .filters { padding: 10px 18px; }
-  .filters__row { flex-direction: column; gap: 6px; align-items: stretch; }
-  .filters__search {
-    flex: none;
-    width: 100%;
-    padding: 6px 10px;
-    gap: 6px;
-    min-height: 0;
-    box-sizing: border-box;
+  .filters { padding: 10px 18px !important; }
+  .filters__row {
+    flex-direction: column !important;
+    gap: 6px !important;
+    align-items: stretch !important;
+    flex-wrap: nowrap !important;
   }
-  .filters__search svg { width: 13px; height: 13px; }
+  .filters__search {
+    flex: 0 0 auto !important;
+    width: 100% !important;
+    padding: 0 10px !important;
+    gap: 6px !important;
+    height: 38px !important;
+    min-height: 0 !important;
+    max-height: 38px !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+  .filters__search svg {
+    width: 13px !important;
+    height: 13px !important;
+    flex-shrink: 0;
+  }
   .filters__search input {
-    font-size: 13px;
-    height: 26px;
-    line-height: 26px;
-    padding: 0;
-    background: transparent;
-    border: none;
-    width: 100%;
-    min-width: 0;
-    box-sizing: border-box;
+    font-size: 13px !important;
+    line-height: 1 !important;
+    height: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    outline: none !important;
   }
   .select {
-    width: 100%;
-    display: block;
+    width: 100% !important;
+    display: block !important;
+    height: 38px !important;
   }
   .select select {
-    width: 100%;
-    padding: 8px 32px 8px 10px;
-    font-size: 11px;
-    height: 36px;
-    line-height: 1;
-    box-sizing: border-box;
+    width: 100% !important;
+    padding: 0 32px 0 10px !important;
+    font-size: 11px !important;
+    height: 38px !important;
+    line-height: 38px !important;
+    box-sizing: border-box !important;
   }
 
   /* Modal: ajustes mobile (imagen contenida + texto legible) */
