@@ -9,9 +9,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/base.css?v=20260601d">
-<link rel="stylesheet" href="css/layout.css?v=20260601d">
-<link rel="stylesheet" href="css/components.css?v=20260601d">
+<link rel="stylesheet" href="css/base.css?v=20260602a">
+<link rel="stylesheet" href="css/layout.css?v=20260602a">
+<link rel="stylesheet" href="css/components.css?v=20260602a">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 </head>
@@ -70,8 +70,12 @@
     <li><a href="#contacto">Sobre Clousa</a></li>
   </ul>
   <div class="nav__actions">
-    <button class="nav__btn" id="navCartBtn" aria-label="Carrito">
-      Carrito<span class="nav__cart-count" id="navCartCount" hidden>0</span>
+    <button class="nav__btn nav__btn--icon" id="navCartBtn" aria-label="Carrito">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M5 8h14l-1.2 11.5a1 1 0 0 1-1 .9H7.2a1 1 0 0 1-1-.9L5 8z"/>
+        <path d="M9 8V5.5a3 3 0 0 1 6 0V8"/>
+      </svg>
+      <span class="nav__cart-count" id="navCartCount" hidden>0</span>
     </button>
     <button class="nav__toggle" id="navToggle" aria-label="Menú">
       <span></span><span></span><span></span>
