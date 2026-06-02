@@ -522,14 +522,15 @@
 .collection-header__inner {
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: clamp(32px, 5vw, 64px) var(--gutter) clamp(24px, 3vw, 40px);
+  padding: clamp(40px, 6vw, 88px) var(--gutter) clamp(28px, 4vw, 48px);
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 18px;
 }
 .collection-header__back {
-  font-size: 11px;
-  letter-spacing: 0.18em;
+  font-size: 10.5px;
+  font-weight: 400;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--graphite);
   text-decoration: none;
@@ -538,25 +539,89 @@
 }
 .collection-header__back:hover { color: var(--ink); }
 .collection-header__title {
-  font-size: clamp(1.4rem, 3vw, 2.2rem);
-  font-weight: 500;
-  letter-spacing: 0.14em;
+  font-size: clamp(1.5rem, 3.2vw, 2.4rem);
+  font-weight: 400;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--ink);
   margin: 0;
-  line-height: 1.15;
+  line-height: 1.2;
+}
+.collection-header__count {
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--graphite);
+  margin: 0;
+}
+.collection-header__divider {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  height: 1px;
+  background: var(--line);
+  margin-left: var(--gutter);
+  margin-right: var(--gutter);
 }
 
+/* En modo colección, ocultar elementos redundantes y simplificar filtros */
 body.mode-collection .hero,
 body.mode-collection .editorial,
 body.mode-collection .campaign,
 body.mode-collection .jeans-section,
 body.mode-collection .featured-only,
-body.mode-collection .featured-wrap .featured-nav {
+body.mode-collection .featured-wrap .featured-nav,
+body.mode-collection .brand-chips,
+body.mode-collection .filters__search,
+body.mode-collection #resultCount {
   display: none !important;
 }
 body.mode-collection .collection-header { display: block; }
 body.mode-collection #loadMoreWrap { display: none !important; }
+
+/* Filtros en modo colección: solo selects (precio + orden) alineados a derecha */
+body.mode-collection .filters {
+  position: relative;
+  top: auto;
+  border-bottom: none;
+  padding: 0 var(--gutter) clamp(20px, 3vw, 32px);
+  background: transparent;
+}
+body.mode-collection .filters__row {
+  justify-content: flex-end;
+  gap: 12px;
+}
+body.mode-collection .select {
+  flex: 0 0 auto;
+  min-width: 180px;
+}
+
+/* Chips de categoría: refinados y centrados en modo colección */
+body.mode-collection .cat-chips {
+  padding: 0 var(--gutter) clamp(28px, 3vw, 40px);
+  border-bottom: 1px solid var(--line);
+  margin-bottom: clamp(32px, 4vw, 56px);
+  justify-content: center;
+  flex-wrap: wrap;
+  overflow-x: visible;
+}
+body.mode-collection .chip {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  padding: 7px 14px;
+  background: transparent;
+  border-color: transparent;
+  color: var(--graphite);
+}
+body.mode-collection .chip:hover {
+  color: var(--ink);
+  border-color: var(--line);
+}
+body.mode-collection .chip.is-active {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
 
 /* ---- Section heading ---- */
 .section-heading {

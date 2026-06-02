@@ -198,6 +198,13 @@ window.Clousa = window.Clousa || {};
     dom.count.textContent = list.length +
       (list.length === 1 ? ' producto' : ' productos');
 
+    /* Sincroniza el contador del header de colección */
+    var collCount = document.getElementById('collectionCount');
+    if (collCount) {
+      collCount.textContent = list.length +
+        (list.length === 1 ? ' producto' : ' productos');
+    }
+
     if (list.length === 0) {
       dom.grid.innerHTML = '';
       dom.empty.hidden = false;
