@@ -328,7 +328,7 @@ async function scraper() {
           nombre: p.nombre,
           marca: 'Brooksfield',
           categoria: p.categoria,
-          precio_venta: precio_mayorista ? Math.round(precio_mayorista * 2.10) : null,
+          precio_venta: precio_mayorista ? Math.round(precio_mayorista * 2.40) : null,
           imagen: `${CONFIG.baseUrl}/images/productos/${p.codigo}/${p.codigo}-001.png`,
           agotado: p.agotado
         };

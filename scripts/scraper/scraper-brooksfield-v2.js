@@ -35,7 +35,7 @@ const CONFIG = {
   baseUrl: 'https://brooksfieldb2b.com.ar',
   loginUrl: 'https://brooksfieldb2b.com.ar/login.php',
   ajaxEndpoint: '/api/ajax/producto.ajax.php',
-  markup: 2.10,
+  markup: 2.40,
   curvaPrincipal: 'CE1',  // CE1 aparece en todos los productos (C54/CE1/M54, C84/CE1/M84, etc.) y tiene DISPONIBLES idénticos a las otras curvas.
 
   // Credenciales SIEMPRE desde el entorno — nunca hardcodeadas.
