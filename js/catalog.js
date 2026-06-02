@@ -201,7 +201,7 @@ window.Clousa = window.Clousa || {};
     if (list.length === 0) {
       dom.grid.innerHTML = '';
       dom.empty.hidden = false;
-      dom.loadMoreWrap.hidden = true;
+      if (dom.loadMoreWrap) dom.loadMoreWrap.hidden = true;
       return;
     }
 
@@ -217,9 +217,9 @@ window.Clousa = window.Clousa || {};
 
     /* En vista inicial siempre mostramos el CTA para acceder al catálogo completo */
     if (initialMode) {
-      dom.loadMoreWrap.hidden = false;
+      if (dom.loadMoreWrap) dom.loadMoreWrap.hidden = false;
     } else {
-      dom.loadMoreWrap.hidden = state.showAll || list.length <= INITIAL_LIMIT;
+      if (dom.loadMoreWrap) dom.loadMoreWrap.hidden = state.showAll || list.length <= INITIAL_LIMIT;
     }
 
     if (C.revealGrid) C.revealGrid();
@@ -449,14 +449,17 @@ window.Clousa = window.Clousa || {};
     }
     renderJeans();
 
-    document.getElementById('loadMoreBtn').addEventListener('click', function () {
-      state.showAll = true;
-      var controls = document.getElementById('catalogControls');
-      if (controls) controls.hidden = false;
-      var rc = document.getElementById('resultCount');
-      if (rc) rc.hidden = false;
-      render();
-    });
+    var loadMoreBtn = document.getElementById('loadMoreBtn');
+    if (loadMoreBtn) {
+      loadMoreBtn.addEventListener('click', function () {
+        state.showAll = true;
+        var controls = document.getElementById('catalogControls');
+        if (controls) controls.hidden = false;
+        var rc = document.getElementById('resultCount');
+        if (rc) rc.hidden = false;
+        render();
+      });
+    }
 
     buildCategoryChips();
     buildSelects();
