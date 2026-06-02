@@ -32,11 +32,54 @@ window.Clousa = window.Clousa || {};
 
   var INITIAL_LIMIT = 8;
   var state = { category: 'all', categoryGroup: null, price: 'all', sort: 'destacados', query: '', brand: 'all', showAll: false };
+
+  /* ────────────────────────────────────────────────────────────────────
+     Orden de prioridad comercial — Invierno 2026
+     Las prendas fuertes de la temporada arriba, accesorios al final.
+     Se aplica cuando el sort es "destacados" (default) y también para
+     ordenar los chips de categoría.
+     ──────────────────────────────────────────────────────────────────── */
+  var CATEGORY_PRIORITY = [
+    /* Top invierno — abrigo y outerwear */
+    'JACKETS',
+    'CAMPERAS FRISADAS', 'CAMPERAS RUSTICAS', 'CAMPERAS POLAR',
+    'SWEATERS',
+    /* Buzos y canguros */
+    'BUZOS FRISADOS', 'BUZOS RUSTICOS', 'BUZOS POLAR',
+    'CANGUROS FRISADOS', 'CANGUROS RUSTICOS',
+    'CHALECOS',
+    /* Camisas y remeras de manga larga */
+    'CAMISAS ML',
+    'REMERAS ML',
+    /* Pantalones */
+    'JEANS',
+    'PANTALONES', 'PANTALONES CORDEROY',
+    'JOGGINGS FRISADOS', 'JOGGINGS RUSTICOS',
+    /* Manga corta (menor prioridad en invierno) */
+    'POLOS MC',
+    'REMERAS MC',
+    /* Ropa interior */
+    'BOXERS',
+    /* Accesorios al final */
+    'BUFANDAS', 'GORROS', 'GORRAS',
+    'CINTURONES', 'MEDIAS',
+    'BILLETERAS', 'BOLSOS',
+    /* Perfumería al cierre */
+    'PERFUMERIA'
+  ];
+  function categoryRank(cat) {
+    var idx = CATEGORY_PRIORITY.indexOf(cat);
+    return idx === -1 ? 999 : idx;
+  }
   var dom = {};
 
   function buildCategoryChips() {
+    /* Ordenar por prioridad comercial (jackets primero, accesorios al final) */
+    var sorted = C.categorias.slice().sort(function (a, b) {
+      return categoryRank(a) - categoryRank(b);
+    });
     var chips = ['<button class="chip is-active" data-cat="all">Todas</button>'];
-    C.categorias.forEach(function (cat) {
+    sorted.forEach(function (cat) {
       chips.push('<button class="chip" data-cat="' + C.escapeHtml(cat) + '">' +
         C.escapeHtml(cat) + '</button>');
     });
@@ -168,6 +211,17 @@ window.Clousa = window.Clousa || {};
     if (state.sort === 'precio-asc')  list.sort(function (a, b) { return a.price - b.price; });
     if (state.sort === 'precio-desc') list.sort(function (a, b) { return b.price - a.price; });
     if (state.sort === 'nombre')      list.sort(function (a, b) { return a.name.localeCompare(b.name); });
+    if (state.sort === 'destacados') {
+      list.sort(function (a, b) {
+        /* 1) por prioridad comercial de categoría */
+        var diff = categoryRank(a.category) - categoryRank(b.category);
+        if (diff !== 0) return diff;
+        /* 2) agotados al final dentro de la misma categoría */
+        if (a.soldOut !== b.soldOut) return a.soldOut ? 1 : -1;
+        /* 3) precio descendente (premium primero) */
+        return b.price - a.price;
+      });
+    }
 
     return list;
   }
