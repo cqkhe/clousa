@@ -26,23 +26,108 @@ window.Clousa = window.Clousa || {};
 
   /* ---- Navegación ---- */
   function initNav() {
-    var nav = document.getElementById('nav');
-    var toggle = document.getElementById('navToggle');
-    var mobile = document.getElementById('navMobile');
-    if (toggle && mobile) {
-      toggle.addEventListener('click', function () {
-        var opening = !nav.classList.contains('is-open');
-        if (opening) mobile.style.top = nav.getBoundingClientRect().bottom + 'px';
-        nav.classList.toggle('is-open');
-        mobile.classList.toggle('is-open');
-      });
-      mobile.addEventListener('click', function (e) {
-        if (e.target.tagName === 'A') {
-          nav.classList.remove('is-open');
-          mobile.classList.remove('is-open');
+    var nav     = document.getElementById('nav');
+    var toggle  = document.getElementById('navToggle');
+    var mobile  = document.getElementById('navMobile');
+    var closeBtn = document.getElementById('mobileMenuClose');
+
+    function openMobileMenu() {
+      if (!mobile) return;
+      mobile.classList.add('is-open');
+      if (nav) nav.classList.add('is-open');
+      document.body.classList.add('no-scroll');
+    }
+    function closeMobileMenu() {
+      if (!mobile) return;
+      mobile.classList.remove('is-open');
+      if (nav) nav.classList.remove('is-open');
+      document.body.classList.remove('no-scroll');
+    }
+
+    if (toggle) {
+      toggle.addEventListener('click', function (e) {
+        e.preventDefault();
+        if (mobile && mobile.classList.contains('is-open')) {
+          closeMobileMenu();
+        } else {
+          openMobileMenu();
         }
       });
     }
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeMobileMenu);
+    }
+
+    if (mobile) {
+      /* Acordeones del menú mobile: click en "Colección/Mistral/Brooksfield" expande sub */
+      var expandBtns = mobile.querySelectorAll('.mobile-menu__expand');
+      Array.prototype.forEach.call(expandBtns, function (btn) {
+        btn.addEventListener('click', function () {
+          var targetId = btn.getAttribute('data-target');
+          var sub = document.getElementById(targetId);
+          if (!sub) return;
+          var isOpen = sub.classList.contains('is-open');
+          /* Cerrar otros sub-menús primero (acordeón mutuamente exclusivo) */
+          mobile.querySelectorAll('.mobile-menu__sub').forEach(function (s) {
+            s.classList.remove('is-open');
+          });
+          mobile.querySelectorAll('.mobile-menu__expand').forEach(function (b) {
+            b.setAttribute('aria-expanded', 'false');
+          });
+          if (!isOpen) {
+            sub.classList.add('is-open');
+            btn.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
+
+      /* Click en links del menú mobile — cerrar después de navegar */
+      mobile.addEventListener('click', function (e) {
+        var link = e.target.closest('a');
+        if (!link) return;
+        var brand      = link.getAttribute('data-brand');
+        var categories = link.getAttribute('data-categories');
+        var label      = link.getAttribute('data-label');
+
+        if (brand && C.catalog) {
+          e.preventDefault();
+          if (categories && C.catalog.filterByBrandAndCategory) {
+            C.catalog.filterByBrandAndCategory(brand, categories, label);
+          } else if (C.catalog.filterByBrand) {
+            C.catalog.filterByBrand(brand);
+          }
+          closeMobileMenu();
+          return;
+        }
+
+        /* Link Buscar mobile */
+        if (link.id === 'navMobileSearch') {
+          e.preventDefault();
+          closeMobileMenu();
+          setTimeout(function () {
+            var input = document.getElementById('searchInput');
+            if (input) {
+              input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              setTimeout(function () { input.focus(); }, 400);
+            }
+          }, 350);
+          return;
+        }
+        /* Link Carrito mobile */
+        if (link.id === 'navMobileCart') {
+          e.preventDefault();
+          closeMobileMenu();
+          if (C.cart && C.cart.open) setTimeout(C.cart.open, 350);
+          return;
+        }
+        /* Links normales con href interno → cerrar menú al click */
+        if (link.getAttribute('href') && link.getAttribute('href') !== '#') {
+          closeMobileMenu();
+        }
+      });
+    }
+
+    /* Botón Buscar del nav desktop */
     var searchBtn = document.getElementById('navSearchBtn');
     if (searchBtn) {
       searchBtn.addEventListener('click', function () {
@@ -51,26 +136,6 @@ window.Clousa = window.Clousa || {};
           input.scrollIntoView({ behavior: 'smooth', block: 'center' });
           setTimeout(function () { input.focus(); }, 400);
         }
-      });
-    }
-
-    /* Versión mobile del buscar/carrito (dentro del menú burger) */
-    var mobileSearch = document.getElementById('navMobileSearch');
-    if (mobileSearch) {
-      mobileSearch.addEventListener('click', function (e) {
-        e.preventDefault();
-        var input = document.getElementById('searchInput');
-        if (input) {
-          input.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          setTimeout(function () { input.focus(); }, 400);
-        }
-      });
-    }
-    var mobileCart = document.getElementById('navMobileCart');
-    if (mobileCart) {
-      mobileCart.addEventListener('click', function (e) {
-        e.preventDefault();
-        if (C.cart && C.cart.open) C.cart.open();
       });
     }
 

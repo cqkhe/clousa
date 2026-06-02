@@ -9,9 +9,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/base.css">
-<link rel="stylesheet" href="css/layout.css">
-<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/base.css?v=20260601a">
+<link rel="stylesheet" href="css/layout.css?v=20260601a">
+<link rel="stylesheet" href="css/components.css?v=20260601a">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 </head>
@@ -79,15 +79,74 @@
     </button>
   </div>
 </nav>
-<div class="nav__mobile" id="navMobile">
-  <a href="#catalogo">Colección</a>
-  <a href="#catalogo">Mistral</a>
-  <a href="#catalogo">Brooksfield</a>
-  <a href="#catalogo">Productos</a>
-  <a href="#contacto">Sobre Clousa</a>
-  <div class="nav__mobile-divider"></div>
-  <a href="#" id="navMobileSearch">Buscar</a>
-  <a href="#" id="navMobileCart">Carrito</a>
+<!-- Mobile menu overlay full-screen -->
+<div class="mobile-menu" id="navMobile">
+  <div class="mobile-menu__header">
+    <span class="mobile-menu__title">Menú</span>
+    <button class="mobile-menu__close" id="mobileMenuClose" aria-label="Cerrar">✕</button>
+  </div>
+
+  <div class="mobile-menu__body">
+    <!-- Colección (con sub-items) -->
+    <div class="mobile-menu__group">
+      <button class="mobile-menu__expand" data-target="mobileColeccion" aria-expanded="false">
+        Colección<span class="mobile-menu__arrow">›</span>
+      </button>
+      <div class="mobile-menu__sub" id="mobileColeccion">
+        <a href="#" data-brand="Brooksfield">Brooksfield Invierno 2026</a>
+        <a href="#" data-brand="Mistral">Mistral Invierno 2026</a>
+      </div>
+    </div>
+
+    <!-- Mistral (con sub-items) -->
+    <div class="mobile-menu__group">
+      <button class="mobile-menu__expand" data-target="mobileMistral" aria-expanded="false">
+        Mistral<span class="mobile-menu__arrow">›</span>
+      </button>
+      <div class="mobile-menu__sub" id="mobileMistral">
+        <a href="#" data-brand="Mistral" data-categories="REMERAS MC,REMERAS ML" data-label="Mistral · Remeras">Remeras</a>
+        <a href="#" data-brand="Mistral" data-categories="POLOS MC" data-label="Mistral · Polos">Polos</a>
+        <a href="#" data-brand="Mistral" data-categories="CAMISAS ML" data-label="Mistral · Camisas">Camisas</a>
+        <a href="#" data-brand="Mistral" data-categories="SWEATERS" data-label="Mistral · Sweaters">Sweaters</a>
+        <a href="#" data-brand="Mistral" data-categories="BUZOS FRISADOS,BUZOS POLAR,BUZOS RUSTICOS" data-label="Mistral · Buzos">Buzos</a>
+        <a href="#" data-brand="Mistral" data-categories="CANGUROS FRISADOS,CANGUROS RUSTICOS" data-label="Mistral · Canguros">Canguros</a>
+        <a href="#" data-brand="Mistral" data-categories="CAMPERAS FRISADAS,CAMPERAS POLAR,CAMPERAS RUSTICAS,JACKETS" data-label="Mistral · Camperas">Camperas</a>
+        <a href="#" data-brand="Mistral" data-categories="PANTALONES" data-label="Mistral · Pantalones">Pantalones</a>
+        <a href="#" data-brand="Mistral" data-categories="JEANS" data-label="Mistral · Jeans">Jeans</a>
+        <a href="#" data-brand="Mistral" data-categories="JOGGINGS FRISADOS,JOGGINGS RUSTICOS" data-label="Mistral · Joggings">Joggings</a>
+        <a href="#" data-brand="Mistral" data-categories="CHALECOS" data-label="Mistral · Chalecos">Chalecos</a>
+        <a href="#" data-brand="Mistral" data-categories="BUFANDAS,CINTURONES,GORRAS,GORROS,BOXERS,PERFUMERIA" data-label="Mistral · Accesorios">Accesorios</a>
+      </div>
+    </div>
+
+    <!-- Brooksfield (con sub-items) -->
+    <div class="mobile-menu__group">
+      <button class="mobile-menu__expand" data-target="mobileBrooksfield" aria-expanded="false">
+        Brooksfield<span class="mobile-menu__arrow">›</span>
+      </button>
+      <div class="mobile-menu__sub" id="mobileBrooksfield">
+        <a href="#" data-brand="Brooksfield" data-categories="REMERAS MC,REMERAS ML" data-label="Brooksfield · Remeras">Remeras</a>
+        <a href="#" data-brand="Brooksfield" data-categories="POLOS MC" data-label="Brooksfield · Polos">Polos</a>
+        <a href="#" data-brand="Brooksfield" data-categories="CAMISAS ML" data-label="Brooksfield · Camisas">Camisas</a>
+        <a href="#" data-brand="Brooksfield" data-categories="SWEATERS" data-label="Brooksfield · Sweaters">Sweaters</a>
+        <a href="#" data-brand="Brooksfield" data-categories="BUZOS FRISADOS,BUZOS RUSTICOS" data-label="Brooksfield · Buzos">Buzos</a>
+        <a href="#" data-brand="Brooksfield" data-categories="CANGUROS FRISADOS,CANGUROS RUSTICOS" data-label="Brooksfield · Canguros">Canguros</a>
+        <a href="#" data-brand="Brooksfield" data-categories="CAMPERAS FRISADAS,JACKETS" data-label="Brooksfield · Camperas">Camperas</a>
+        <a href="#" data-brand="Brooksfield" data-categories="PANTALONES,PANTALONES CORDEROY" data-label="Brooksfield · Pantalones">Pantalones</a>
+        <a href="#" data-brand="Brooksfield" data-categories="JEANS" data-label="Brooksfield · Jeans">Jeans</a>
+        <a href="#" data-brand="Brooksfield" data-categories="CHALECOS" data-label="Brooksfield · Chalecos">Chalecos</a>
+        <a href="#" data-brand="Brooksfield" data-categories="BILLETERAS,BOLSOS,BUFANDAS,CINTURONES,GORRAS,GORROS,MEDIAS,BOXERS,PERFUMERIA" data-label="Brooksfield · Accesorios">Accesorios</a>
+      </div>
+    </div>
+
+    <a class="mobile-menu__link" href="#catalogo">Productos</a>
+    <a class="mobile-menu__link" href="#contacto">Sobre Clousa</a>
+
+    <div class="mobile-menu__divider"></div>
+
+    <a class="mobile-menu__link" href="#" id="navMobileSearch">Buscar</a>
+    <a class="mobile-menu__link" href="#" id="navMobileCart">Carrito</a>
+  </div>
 </div>
 
 <!-- ════════ HERO ════════ -->
@@ -302,10 +361,10 @@
   </div>
 </div>
 
-<script src="js/data.js"></script>
-<script src="js/cart.js"></script>
-<script src="js/modal.js"></script>
-<script src="js/catalog.js"></script>
-<script src="js/main.js"></script>
+<script src="js/data.js?v=20260601a"></script>
+<script src="js/cart.js?v=20260601a"></script>
+<script src="js/modal.js?v=20260601a"></script>
+<script src="js/catalog.js?v=20260601a"></script>
+<script src="js/main.js?v=20260601a"></script>
 </body>
 </html>
