@@ -478,6 +478,16 @@ window.Clousa = window.Clousa || {};
       });
     });
 
+    /* CTAs de la home (Comprar Brooksfield / Comprar Mistral) → modo colección */
+    var ctaLinks = document.querySelectorAll('[data-collection-brand]');
+    Array.prototype.forEach.call(ctaLinks, function (cta) {
+      cta.addEventListener('click', function (e) {
+        e.preventDefault();
+        var brand = cta.getAttribute('data-collection-brand');
+        if (brand) filterByBrand(brand);
+      });
+    });
+
     /* Link "Volver al inicio" del header de colección */
     var backLink = document.getElementById('collectionBack');
     if (backLink) {
