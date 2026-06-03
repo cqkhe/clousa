@@ -2,18 +2,16 @@
   "metadata": {
     "proveedor": "Mistral B2B",
     "coleccion": "Invierno 2026",
-    "fecha_actualizacion": "2026-06-02T12:35:51.006Z",
-    "total_productos": 171,
-    "total_categorias": 22
+    "fecha_actualizacion": "2026-06-03T13:06:21.787Z",
+    "total_productos": 148,
+    "total_categorias": 19
   },
   "categorias": [
     "BUZOS FRISADOS",
     "BUZOS POLAR",
     "BUZOS RUSTICOS",
     "CAMISAS ML",
-    "CAMPERAS FRISADAS",
     "CAMPERAS POLAR",
-    "CAMPERAS RUSTICAS",
     "CANGUROS FRISADOS",
     "CANGUROS RUSTICOS",
     "CINTURONES",
@@ -22,7 +20,6 @@
     "JACKETS",
     "JEANS",
     "JOGGINGS FRISADOS",
-    "JOGGINGS RUSTICOS",
     "PANTALONES",
     "PERFUMERIA",
     "POLOS MC",
@@ -32,48 +29,12 @@
   ],
   "productos": [
     {
-      "codigo": "80061M1",
-      "nombre": "BUZO JOHN\nPRINT FRISA # 1 MASCULINO",
-      "marca": "Mistral",
-      "categoria": "BUZOS FRISADOS",
-      "precio_venta": 82800,
-      "imagen": "https://mistralb2b.com.ar/images/productos/80061M1/80061M1-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "80061M2",
-      "nombre": "BUZO JOHN\nPRINT FRISA # 2 MASCULINO",
-      "marca": "Mistral",
-      "categoria": "BUZOS FRISADOS",
-      "precio_venta": 82800,
-      "imagen": "https://mistralb2b.com.ar/images/productos/80061M2/80061M2-001.png",
-      "agotado": false
-    },
-    {
       "codigo": "80061M3",
       "nombre": "BUZO JOHN\nPRINT FRISA # 3 MASCULINO",
       "marca": "Mistral",
       "categoria": "BUZOS FRISADOS",
       "precio_venta": 82800,
       "imagen": "https://mistralb2b.com.ar/images/productos/80061M3/80061M3-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "80062M",
-      "nombre": "BUZO MATT PRINT FRISA MASCULINO",
-      "marca": "Mistral",
-      "categoria": "BUZOS FRISADOS",
-      "precio_venta": 90000,
-      "imagen": "https://mistralb2b.com.ar/images/productos/80062M/80062M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "80063M",
-      "nombre": "BUZO JOHN OVERSIZED FRISA MASCULINO",
-      "marca": "Mistral",
-      "categoria": "BUZOS FRISADOS",
-      "precio_venta": 85200,
-      "imagen": "https://mistralb2b.com.ar/images/productos/80063M/80063M-001.png",
       "agotado": false
     },
     {
@@ -92,15 +53,6 @@
       "categoria": "BUZOS RUSTICOS",
       "precio_venta": 84000,
       "imagen": "https://mistralb2b.com.ar/images/productos/80059M/80059M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "86057M",
-      "nombre": "BUZO WARD R RUS MASCULINO",
-      "marca": "Mistral",
-      "categoria": "BUZOS RUSTICOS",
-      "precio_venta": 65880,
-      "imagen": "https://mistralb2b.com.ar/images/productos/86057M/86057M-001.png",
       "agotado": false
     },
     {
@@ -140,15 +92,6 @@
       "agotado": false
     },
     {
-      "codigo": "86060M",
-      "nombre": "CAMPERA MATT RANGLAN FRISA MASCULINO",
-      "marca": "Mistral",
-      "categoria": "CAMPERAS FRISADAS",
-      "precio_venta": 111600,
-      "imagen": "https://mistralb2b.com.ar/images/productos/86060M/86060M-001.png",
-      "agotado": false
-    },
-    {
       "codigo": "86063M",
       "nombre": "CAMPERA POLAR MASCULINO",
       "marca": "Mistral",
@@ -158,30 +101,12 @@
       "agotado": false
     },
     {
-      "codigo": "86056M",
-      "nombre": "CAMPERA BRIGGS RUS MASCULINO",
-      "marca": "Mistral",
-      "categoria": "CAMPERAS RUSTICAS",
-      "precio_venta": 91200,
-      "imagen": "https://mistralb2b.com.ar/images/productos/86056M/86056M-001.png",
-      "agotado": false
-    },
-    {
       "codigo": "83052M2",
       "nombre": "CANGURO BEN PRINT # 2 FRISA MASCULINO",
       "marca": "Mistral",
       "categoria": "CANGUROS FRISADOS",
       "precio_venta": 94800,
       "imagen": "https://mistralb2b.com.ar/images/productos/83052M2/83052M2-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "83052M4",
-      "nombre": "CANGURO BEN PRINT # 4 FRISA MASCULINO",
-      "marca": "Mistral",
-      "categoria": "CANGUROS FRISADOS",
-      "precio_venta": 94800,
-      "imagen": "https://mistralb2b.com.ar/images/productos/83052M4/83052M4-001.png",
       "agotado": false
     },
     {
@@ -200,15 +125,6 @@
       "categoria": "CANGUROS RUSTICOS",
       "precio_venta": 91200,
       "imagen": "https://mistralb2b.com.ar/images/productos/83050M/83050M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "86055M",
-      "nombre": "HOODIE CREEK RUS MASCULINO",
-      "marca": "Mistral",
-      "categoria": "CANGUROS RUSTICOS",
-      "precio_venta": 75600,
-      "imagen": "https://mistralb2b.com.ar/images/productos/86055M/86055M-001.png",
       "agotado": false
     },
     {
@@ -572,15 +488,6 @@
       "agotado": false
     },
     {
-      "codigo": "50194M",
-      "nombre": "JEAN MAN CONFORT SLIM BLACK MASCULINO",
-      "marca": "Mistral",
-      "categoria": "JEANS",
-      "precio_venta": 105600,
-      "imagen": "https://mistralb2b.com.ar/images/productos/50194M/50194M-001.png",
-      "agotado": false
-    },
-    {
       "codigo": "50195M",
       "nombre": "JEAN MAN REGULAR MID BLUE MASCULINO",
       "marca": "Mistral",
@@ -626,39 +533,12 @@
       "agotado": false
     },
     {
-      "codigo": "89038M",
-      "nombre": "JOGGING MATT FRISA MASCULINO",
-      "marca": "Mistral",
-      "categoria": "JOGGINGS FRISADOS",
-      "precio_venta": 80400,
-      "imagen": "https://mistralb2b.com.ar/images/productos/89038M/89038M-001.png",
-      "agotado": false
-    },
-    {
       "codigo": "89039M",
       "nombre": "JOGGING JOHN FRISA MASCULINO",
       "marca": "Mistral",
       "categoria": "JOGGINGS FRISADOS",
       "precio_venta": 80400,
       "imagen": "https://mistralb2b.com.ar/images/productos/89039M/89039M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "89037M",
-      "nombre": "JOGGING CREEK RUS MASCULINO",
-      "marca": "Mistral",
-      "categoria": "JOGGINGS RUSTICOS",
-      "precio_venta": 63720,
-      "imagen": "https://mistralb2b.com.ar/images/productos/89037M/89037M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "89036M",
-      "nombre": "JOGGING WARD RUS MASCULINO",
-      "marca": "Mistral",
-      "categoria": "JOGGINGS RUSTICOS",
-      "precio_venta": 63720,
-      "imagen": "https://mistralb2b.com.ar/images/productos/89036M/89036M-001.png",
       "agotado": false
     },
     {
@@ -803,60 +683,6 @@
       "categoria": "POLOS MC",
       "precio_venta": 57360,
       "imagen": "https://mistralb2b.com.ar/images/productos/20078M/20078M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "20081M",
-      "nombre": "POLO JERSEY HENRY MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "POLOS MC",
-      "precio_venta": 41280,
-      "imagen": "https://mistralb2b.com.ar/images/productos/20081M/20081M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "20082M",
-      "nombre": "POLO JERSEY OLIVER MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "POLOS MC",
-      "precio_venta": 41280,
-      "imagen": "https://mistralb2b.com.ar/images/productos/20082M/20082M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "20083M",
-      "nombre": "POLO JERSEY LIAM MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "POLOS MC",
-      "precio_venta": 41280,
-      "imagen": "https://mistralb2b.com.ar/images/productos/20083M/20083M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "20086M",
-      "nombre": "POLO PIQUE DUTTON MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "POLOS MC",
-      "precio_venta": 41280,
-      "imagen": "https://mistralb2b.com.ar/images/productos/20086M/20086M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "20087M",
-      "nombre": "POLO PIQUE NASH MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "POLOS MC",
-      "precio_venta": 41280,
-      "imagen": "https://mistralb2b.com.ar/images/productos/20087M/20087M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "20088M",
-      "nombre": "POLO PIQUE AUSTIN MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "POLOS MC",
-      "precio_venta": 41280,
-      "imagen": "https://mistralb2b.com.ar/images/productos/20088M/20088M-001.png",
       "agotado": false
     },
     {
@@ -1163,42 +989,6 @@
       "categoria": "REMERAS MC",
       "precio_venta": 40800,
       "imagen": "https://mistralb2b.com.ar/images/productos/10212M/10212M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "10213M",
-      "nombre": "REMERA PACK BASIC MC X 2 MASCULINO",
-      "marca": "Mistral",
-      "categoria": "REMERAS MC",
-      "precio_venta": 57600,
-      "imagen": "https://mistralb2b.com.ar/images/productos/10213M/10213M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "10214M",
-      "nombre": "REMERA LOGO PRINT MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "REMERAS MC",
-      "precio_venta": 32400,
-      "imagen": "https://mistralb2b.com.ar/images/productos/10214M/10214M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "10215M",
-      "nombre": "REMERA LOGO MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "REMERAS MC",
-      "precio_venta": 30960,
-      "imagen": "https://mistralb2b.com.ar/images/productos/10215M/10215M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "10216M",
-      "nombre": "REMERA BASIC OVERSIZE MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "REMERAS MC",
-      "precio_venta": 40800,
-      "imagen": "https://mistralb2b.com.ar/images/productos/10216M/10216M-001.png",
       "agotado": false
     },
     {
