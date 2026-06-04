@@ -183,6 +183,25 @@ window.Clousa = window.Clousa || {};
     return result;
   }
 
+  /* Asigna la imagen de cada category-card desde un producto representativo
+     del JSON. Toma el primero con stock; si no hay, el primero a secas. */
+  function setCategoryCardImages() {
+    var cards = document.querySelectorAll('.category-card[data-rep-cat]');
+    Array.prototype.forEach.call(cards, function (card) {
+      var repCat = card.getAttribute('data-rep-cat');
+      var match = C.productos.filter(function (p) {
+        return p.category === repCat && !p.soldOut && p.img;
+      })[0];
+      if (!match) {
+        match = C.productos.filter(function (p) { return p.category === repCat && p.img; })[0];
+      }
+      if (match) {
+        var img = card.querySelector('img');
+        if (img) img.src = match.img;
+      }
+    });
+  }
+
   function isInitialDefault() {
     return !state.showAll
       && state.brand === 'all'
@@ -338,6 +357,51 @@ window.Clousa = window.Clousa || {};
     window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
   }
 
+  /* Filtra solo por grupo de categorías, ambas marcas. Usado por el nav
+     simplificado (CAMPERAS / BUZOS / PANTALONES / REMERAS / ACCESORIOS)
+     y por las cards de categoría de la home. */
+  function filterByCategory(categoriesStr, label) {
+    state.showAll       = true;
+    state.brand         = 'all';
+    state.category      = 'all';
+    state.categoryGroup = categoriesStr
+      ? categoriesStr.split(',').map(function (s) { return s.trim(); })
+      : null;
+    state.price = 'all';
+    state.sort  = 'destacados';
+    state.query = '';
+
+    var controls = document.getElementById('catalogControls');
+    if (controls) controls.hidden = false;
+    var rc = document.getElementById('resultCount');
+    if (rc) rc.hidden = false;
+
+    document.body.classList.add('mode-collection');
+    var header = document.getElementById('collectionHeader');
+    var title  = document.getElementById('collectionTitle');
+    if (header) header.hidden = false;
+    if (title)  title.textContent = label || 'Categoría';
+
+    if (dom.brandChips) {
+      var chips = dom.brandChips.querySelectorAll('.brand-chip');
+      Array.prototype.forEach.call(chips, function (c) {
+        c.classList.toggle('is-active', c.getAttribute('data-brand') === 'all');
+      });
+    }
+    if (dom.chips) {
+      var catChips = dom.chips.querySelectorAll('.chip');
+      Array.prototype.forEach.call(catChips, function (c) {
+        c.classList.toggle('is-active', c.getAttribute('data-cat') === 'all');
+      });
+    }
+    if (dom.price)  dom.price.value  = 'all';
+    if (dom.sort)   dom.sort.value   = 'destacados';
+    if (dom.search) dom.search.value = '';
+
+    render();
+    window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
+  }
+
   /* Filtra por marca + grupo de categorías (ej: "Mistral · Remeras"
      que incluye REMERAS MC + REMERAS ML). */
   function filterByBrandAndCategory(brand, categoriesStr, label) {
@@ -461,32 +525,52 @@ window.Clousa = window.Clousa || {};
       });
     }
 
-    /* Dropdown del nav: links con data-brand → expanden el catálogo.
-       Si tienen data-categories, filtran además por ese conjunto. */
-    var brandLinks = document.querySelectorAll('.nav__dropdown a[data-brand]');
+    /* Links del nav simplificado y mobile menu — filtrar por categorías */
+    var categoryLinks = document.querySelectorAll('[data-categories]:not([data-brand])');
+    Array.prototype.forEach.call(categoryLinks, function (link) {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        var categories = link.getAttribute('data-categories');
+        var label      = link.getAttribute('data-label');
+        filterByCategory(categories, label);
+      });
+    });
+
+    /* Links viejos data-brand (por compatibilidad si quedan en algún lado) */
+    var brandLinks = document.querySelectorAll('a[data-brand]');
     Array.prototype.forEach.call(brandLinks, function (link) {
       link.addEventListener('click', function (e) {
         e.preventDefault();
         var brand      = link.getAttribute('data-brand');
         var categories = link.getAttribute('data-categories');
         var label      = link.getAttribute('data-label');
-        if (categories) {
-          filterByBrandAndCategory(brand, categories, label);
-        } else {
-          filterByBrand(brand);
+        if (categories) filterByBrandAndCategory(brand, categories, label);
+        else            filterByBrand(brand);
+      });
+    });
+
+    /* CTAs de "Comprar Invierno" / "Comprar Online" → modo colección con TODO */
+    var ctaAllLinks = document.querySelectorAll('[data-cta-all]');
+    Array.prototype.forEach.call(ctaAllLinks, function (cta) {
+      cta.addEventListener('click', function (e) {
+        e.preventDefault();
+        filterByCategory('', 'Colección Invierno 2026');
+      });
+    });
+
+    /* "Inicio" del nav — salir del modo colección si está activo, ir al hero */
+    var homeLinks = document.querySelectorAll('[data-nav-home]');
+    Array.prototype.forEach.call(homeLinks, function (link) {
+      link.addEventListener('click', function (e) {
+        if (document.body.classList.contains('mode-collection')) {
+          e.preventDefault();
+          exitCollectionMode();
         }
       });
     });
 
-    /* CTAs de la home (Comprar Brooksfield / Comprar Mistral) → modo colección */
-    var ctaLinks = document.querySelectorAll('[data-collection-brand]');
-    Array.prototype.forEach.call(ctaLinks, function (cta) {
-      cta.addEventListener('click', function (e) {
-        e.preventDefault();
-        var brand = cta.getAttribute('data-collection-brand');
-        if (brand) filterByBrand(brand);
-      });
-    });
+    /* Set imágenes de las cards de categoría desde productos representativos */
+    setCategoryCardImages();
 
     /* Link "Volver al inicio" del header de colección */
     var backLink = document.getElementById('collectionBack');

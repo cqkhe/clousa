@@ -343,6 +343,234 @@
   .hero__visual { height: 55vh; min-height: auto; }
 }
 
+/* ---- Trust bar (post-hero: confianza comercial) ---- */
+.trust-bar {
+  background: var(--bg-section);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: clamp(20px, 2.5vw, 28px) var(--gutter);
+}
+.trust-bar__inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(14px, 2vw, 32px);
+  align-items: center;
+}
+.trust-bar__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+  font-weight: 500;
+}
+.trust-bar__item svg {
+  width: 24px; height: 24px;
+  flex-shrink: 0;
+  color: var(--ink);
+}
+.trust-bar__item span { line-height: 1.4; }
+.trust-bar__item small {
+  display: block;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  color: var(--graphite);
+  margin-top: 2px;
+}
+@media (max-width: 900px) {
+  .trust-bar__inner { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+}
+@media (max-width: 480px) {
+  .trust-bar { padding: 18px 18px; }
+  .trust-bar__inner { grid-template-columns: 1fr 1fr; gap: 14px 12px; }
+  .trust-bar__item { font-size: 10px; gap: 8px; }
+  .trust-bar__item svg { width: 20px; height: 20px; }
+  .trust-bar__item small { font-size: 9px; }
+}
+
+/* ---- Categorías destacadas (comprar por categoría) ---- */
+.categories {
+  padding: clamp(64px, 8vw, 110px) var(--gutter) clamp(32px, 4vw, 56px);
+  max-width: var(--maxw);
+  margin: 0 auto;
+}
+.categories__header {
+  text-align: center;
+  margin-bottom: clamp(32px, 4vw, 56px);
+}
+.categories__eyebrow {
+  display: inline-block;
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--graphite);
+  margin-bottom: 14px;
+}
+.categories__heading {
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  margin: 0;
+  line-height: 1.15;
+}
+.categories__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(14px, 1.5vw, 22px);
+}
+.category-card {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  background: var(--bg-secondary);
+  transition: transform 0.35s var(--ease);
+}
+.category-card:hover { transform: translateY(-4px); }
+.category-card__media {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--bg-section);
+}
+.category-card__media img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+.category-card:hover .category-card__media img { transform: scale(1.04); }
+.category-card__info {
+  padding: 18px 4px 4px;
+}
+.category-card__title {
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin: 0 0 6px;
+}
+.category-card__sub {
+  font-size: 0.78rem;
+  color: var(--graphite);
+  margin: 0 0 12px;
+  line-height: 1.5;
+}
+.category-card__cta {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink);
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 2px;
+  align-self: flex-start;
+  transition: gap 0.2s ease;
+}
+@media (max-width: 900px) {
+  .categories__grid { grid-template-columns: repeat(2, 1fr); gap: 18px; }
+}
+@media (max-width: 480px) {
+  .categories { padding: 56px 18px 32px; }
+  .category-card__info { padding: 14px 2px 4px; }
+  .category-card__title { font-size: 0.82rem; }
+  .category-card__sub { font-size: 0.7rem; }
+}
+
+/* ---- Sobre Clousa ---- */
+.about {
+  background: var(--bg-primary);
+  padding: clamp(80px, 9vw, 130px) var(--gutter);
+}
+.about__grid {
+  max-width: 1300px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 5vw, 80px);
+  align-items: center;
+}
+.about__media {
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  filter: grayscale(100%);
+}
+.about__media img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.about__eyebrow {
+  display: inline-block;
+  font-size: 0.7rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--graphite);
+  margin-bottom: 18px;
+}
+.about__heading {
+  font-size: clamp(1.6rem, 3vw, 2.5rem);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  color: var(--ink);
+  margin: 0 0 24px;
+}
+.about__text {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: var(--ink-soft);
+  margin: 0 0 16px;
+}
+.about__actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 28px;
+  flex-wrap: wrap;
+}
+.about__cta {
+  display: inline-block;
+  background: var(--ink);
+  color: var(--bg-primary);
+  padding: 14px 32px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid var(--ink);
+  transition: all 0.3s ease;
+}
+.about__cta:hover { background: transparent; color: var(--ink); }
+.about__cta--outline {
+  background: transparent;
+  color: var(--ink);
+}
+.about__cta--outline:hover { background: var(--ink); color: var(--bg-primary); }
+@media (max-width: 900px) {
+  .about__grid { grid-template-columns: 1fr; gap: 32px; }
+  .about__media { aspect-ratio: 16 / 10; max-height: 50vh; }
+}
+@media (max-width: 480px) {
+  .about { padding: 64px 22px; }
+  .about__heading { font-size: 1.4rem; }
+  .about__text { font-size: 0.88rem; }
+  .about__cta { width: 100%; text-align: center; }
+}
+
+/* En modo collection, ocultar todas las secciones home */
+body.mode-collection .trust-bar,
+body.mode-collection .categories,
+body.mode-collection .about { display: none !important; }
+
 /* ---- Home CTAs (post destacados → invitar a comprar) ---- */
 .home-cta-row {
   display: flex;
