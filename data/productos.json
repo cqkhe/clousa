@@ -2,9 +2,9 @@
   "metadata": {
     "proveedor": "Mistral B2B",
     "coleccion": "Invierno 2026",
-    "fecha_actualizacion": "2026-06-03T13:06:21.787Z",
-    "total_productos": 148,
-    "total_categorias": 19
+    "fecha_actualizacion": "2026-06-04T11:45:42.137Z",
+    "total_productos": 146,
+    "total_categorias": 18
   },
   "categorias": [
     "BUZOS FRISADOS",
@@ -12,7 +12,6 @@
     "BUZOS RUSTICOS",
     "CAMISAS ML",
     "CAMPERAS POLAR",
-    "CANGUROS FRISADOS",
     "CANGUROS RUSTICOS",
     "CINTURONES",
     "GORRAS",
@@ -98,15 +97,6 @@
       "categoria": "CAMPERAS POLAR",
       "precio_venta": 50400,
       "imagen": "https://mistralb2b.com.ar/images/productos/sin_image.png",
-      "agotado": false
-    },
-    {
-      "codigo": "83052M2",
-      "nombre": "CANGURO BEN PRINT # 2 FRISA MASCULINO",
-      "marca": "Mistral",
-      "categoria": "CANGUROS FRISADOS",
-      "precio_venta": 94800,
-      "imagen": "https://mistralb2b.com.ar/images/productos/83052M2/83052M2-001.png",
       "agotado": false
     },
     {
@@ -224,15 +214,6 @@
       "categoria": "JACKETS",
       "precio_venta": 144000,
       "imagen": "https://mistralb2b.com.ar/images/productos/70095M/70095M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "70096M",
-      "nombre": "TAPADO HARRY MASCULINO",
-      "marca": "Mistral",
-      "categoria": "JACKETS",
-      "precio_venta": 144000,
-      "imagen": "https://mistralb2b.com.ar/images/productos/70096M/70096M-001.png",
       "agotado": false
     },
     {
