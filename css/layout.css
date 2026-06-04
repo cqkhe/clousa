@@ -268,79 +268,108 @@
   .mobile-menu { display: none; }
 }
 
-/* ---- Hero (split-screen) ---- */
+/* ---- Hero (Todd Snyder style — full-bleed con texto centrado) ---- */
 .hero {
-  display: flex;
+  position: relative;
   width: 100%;
-  min-height: calc(100vh - var(--nav-h, 80px));
-  background: var(--bg-primary);
+  height: clamp(580px, 88vh, 920px);
   overflow: hidden;
+  background: var(--ink);
 }
-.hero__content {
-  flex: 0 0 38%;
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 35%;
+  display: block;
+}
+.hero__overlay {
+  position: absolute;
+  inset: 0;
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
-  padding: clamp(72px, 9vw, 120px) clamp(24px, 5vw, 64px) clamp(56px, 7vw, 96px);
+  text-align: center;
+  padding: 0 var(--gutter);
+  background: linear-gradient(180deg,
+    rgba(0,0,0,0.10) 0%,
+    rgba(0,0,0,0.18) 50%,
+    rgba(0,0,0,0.42) 100%);
+  color: #fff;
 }
-.hero__brand-block {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 36px;
+.hero__eyebrow {
+  display: inline-block;
+  font-size: clamp(0.7rem, 0.85vw, 0.78rem);
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.92);
+  margin-bottom: 28px;
+  font-weight: 400;
 }
 .hero__title {
   font-family: 'Jost', sans-serif;
-  font-size: clamp(2.8rem, 5.5vw, 6rem);
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  line-height: 0.92;
-  color: var(--ink);
-  margin: 0 0 20px;
-}
-.hero__subtitle {
-  font-size: clamp(0.7rem, 1vw, 0.85rem);
+  font-size: clamp(3rem, 8.5vw, 7rem);
   font-weight: 400;
-  letter-spacing: 0.08em;
-  color: var(--ink);
-  margin: 0 0 6px;
+  letter-spacing: 0.05em;
+  line-height: 1;
   text-transform: uppercase;
-  line-height: 1.6;
+  color: #fff;
+  margin: 0 0 22px;
+  text-shadow: 0 2px 14px rgba(0,0,0,0.18);
 }
-.hero__tag {
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
-  color: var(--graphite);
+.hero__sub {
+  font-size: clamp(0.78rem, 1vw, 0.92rem);
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  margin-top: 4px;
+  color: rgba(255,255,255,0.88);
+  margin: 0 0 40px;
+  font-weight: 400;
 }
-.hero__actions { display: flex; margin-top: 36px; }
 .hero__cta {
   display: inline-block;
-  background: var(--ink);
-  color: var(--bg-primary);
-  padding: 14px 36px;
-  font-size: 0.8rem;
-  font-weight: 500;
-  letter-spacing: 0.12em;
+  background: transparent;
+  color: #fff;
+  padding: 0 0 6px;
+  font-size: 0.78rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
   text-decoration: none;
-  transition: opacity 0.2s ease;
+  border-bottom: 1px solid #fff;
+  font-weight: 400;
+  transition: opacity 0.2s ease, letter-spacing 0.3s ease;
 }
-.hero__cta:hover { opacity: 0.82; }
-.hero__visual {
-  flex: 1;
-  position: relative;
-  min-height: 60vh;
+.hero__cta:hover {
+  opacity: 0.85;
+  letter-spacing: 0.32em;
 }
-.hero__img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  object-position: center 30%;
-  display: block;
+
+/* Editorial intro (bajada centrada post-hero, Todd Snyder style) */
+.editorial-intro {
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+  padding: clamp(48px, 6vw, 90px) var(--gutter);
 }
-@media (max-width: 900px) {
-  .hero { flex-direction: column-reverse; min-height: auto; }
-  .hero__content { flex: none; padding: 44px 24px; }
-  .hero__visual { height: 55vh; min-height: auto; }
+.editorial-intro__text {
+  font-size: clamp(0.95rem, 1.15vw, 1.05rem);
+  line-height: 1.85;
+  color: var(--ink-soft);
+  margin: 0;
+  font-weight: 400;
+}
+.editorial-intro__text strong { color: var(--ink); font-weight: 500; }
+
+@media (max-width: 760px) {
+  .hero { height: 85vh; min-height: 540px; }
+  .hero__eyebrow { font-size: 0.62rem; letter-spacing: 0.28em; margin-bottom: 20px; }
+  .hero__title { font-size: clamp(2.2rem, 11vw, 3.4rem); letter-spacing: 0.04em; margin-bottom: 16px; }
+  .hero__sub { font-size: 0.7rem; letter-spacing: 0.18em; margin-bottom: 28px; }
+  .hero__cta { font-size: 0.7rem; letter-spacing: 0.22em; }
+  .editorial-intro { padding: 44px 22px; }
+  .editorial-intro__text { font-size: 0.88rem; line-height: 1.75; }
 }
 
 /* ---- Trust bar (post-hero: confianza comercial) ---- */
