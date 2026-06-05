@@ -3,19 +3,32 @@
    Premium Claro · Barra · Nav · Hero · Grilla · Footer
    =================================================================== */
 
-/* ---- Announcement bar ---- */
-.announce {
+/* ---- Topbar (trust bar arriba, estilo Bowen/Taylor Stitch) ---- */
+.topbar {
   background: var(--ink);
-  color: rgba(255, 255, 255, 0.72);
-  text-align: center;
-  font-size: 10px;
-  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  padding: 10px 16px;
-  line-height: 1.4;
+  padding: 9px 16px;
+  overflow: hidden;
 }
-.announce strong { font-weight: 600; color: #FFFFFF; }
-.announce span { color: rgba(255, 255, 255, 0.32); padding: 0 6px; }
+.topbar__inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+.topbar__item { font-weight: 500; color: #fff; }
+.topbar__sep { color: rgba(255,255,255,0.35); }
+@media (max-width: 760px) {
+  .topbar { padding: 8px 14px; font-size: 9px; letter-spacing: 0.1em; }
+  .topbar__inner { gap: 10px; }
+  .topbar__sep { display: none; }
+}
 
 /* ---- Nav (logo centrado, sólido) ---- */
 .nav {
@@ -451,8 +464,8 @@
 }
 .categories__grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: clamp(14px, 1.5vw, 22px);
+  grid-template-columns: repeat(6, 1fr);
+  gap: clamp(10px, 1vw, 16px);
 }
 .category-card {
   display: flex;
@@ -504,15 +517,245 @@
   align-self: flex-start;
   transition: gap 0.2s ease;
 }
-@media (max-width: 900px) {
-  .categories__grid { grid-template-columns: repeat(2, 1fr); gap: 18px; }
+@media (max-width: 1100px) {
+  .categories__grid { grid-template-columns: repeat(3, 1fr); gap: 14px; }
+}
+@media (max-width: 600px) {
+  .categories__grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
 }
 @media (max-width: 480px) {
   .categories { padding: 56px 18px 32px; }
-  .category-card__info { padding: 14px 2px 4px; }
-  .category-card__title { font-size: 0.82rem; }
-  .category-card__sub { font-size: 0.7rem; }
+  .category-card__info { padding: 12px 2px 4px; }
+  .category-card__title { font-size: 0.78rem; }
+  .category-card__sub { font-size: 0.65rem; }
 }
+
+/* ---- Promo pair (Brooksfield + Mistral, estilo Drake's) ---- */
+.promo-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(8px, 1vw, 14px);
+  padding: clamp(40px, 5vw, 72px) var(--gutter);
+  max-width: var(--maxw);
+  margin: 0 auto;
+}
+.promo-card {
+  position: relative;
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  aspect-ratio: 5 / 6;
+  overflow: hidden;
+  background: var(--ink);
+}
+.promo-card__media { position: absolute; inset: 0; }
+.promo-card__img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(100%);
+  transition: transform 0.6s ease, filter 0.6s ease;
+}
+.promo-card:hover .promo-card__img { transform: scale(1.04); filter: grayscale(40%); }
+.promo-card__content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: clamp(28px, 4vw, 52px);
+  color: #fff;
+  background: linear-gradient(180deg, rgba(0,0,0,0.05) 40%, rgba(0,0,0,0.55) 100%);
+}
+.promo-card__eyebrow {
+  font-size: 0.7rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.85);
+  margin-bottom: 14px;
+}
+.promo-card__title {
+  font-size: clamp(1.4rem, 2.4vw, 2.2rem);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  color: #fff;
+  margin: 0 0 24px;
+}
+.promo-card__cta {
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #fff;
+  border-bottom: 1px solid #fff;
+  padding-bottom: 3px;
+}
+@media (max-width: 760px) {
+  .promo-pair { grid-template-columns: 1fr; padding: 32px 18px; }
+  .promo-card { aspect-ratio: 4 / 5; }
+}
+
+/* ---- Reviews (estilo Taylor Stitch) ---- */
+.reviews {
+  background: var(--bg-section);
+  padding: clamp(64px, 8vw, 110px) var(--gutter);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.reviews__header {
+  text-align: center;
+  margin-bottom: clamp(36px, 4vw, 60px);
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.reviews__eyebrow {
+  display: inline-block;
+  color: var(--gold);
+  font-size: 1.1rem;
+  letter-spacing: 0.5em;
+  margin-bottom: 12px;
+}
+.reviews__heading {
+  font-size: clamp(1.4rem, 2.6vw, 2.1rem);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  margin: 0;
+}
+.reviews__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(16px, 2vw, 32px);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.review {
+  background: var(--bg-primary);
+  padding: clamp(20px, 2.5vw, 32px);
+  border: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+}
+.review__stars {
+  color: var(--gold);
+  font-size: 0.95rem;
+  letter-spacing: 0.4em;
+  margin: 0 0 14px;
+}
+.review__text {
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  margin: 0 0 18px;
+  font-style: italic;
+  flex: 1;
+}
+.review__author {
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin: 0;
+}
+.review__author span {
+  font-weight: 400;
+  color: var(--graphite);
+  text-transform: none;
+  letter-spacing: 0;
+  margin-left: 6px;
+}
+@media (max-width: 1100px) { .reviews__grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) {
+  .reviews__grid { grid-template-columns: 1fr; }
+  .reviews { padding: 56px 22px; }
+  .review__text { font-size: 0.85rem; }
+}
+
+/* ---- Newsletter (estilo Taylor Stitch) ---- */
+.newsletter {
+  background: var(--ink);
+  color: #fff;
+  padding: clamp(64px, 8vw, 110px) var(--gutter);
+  text-align: center;
+}
+.newsletter__inner {
+  max-width: 600px;
+  margin: 0 auto;
+}
+.newsletter__eyebrow {
+  display: inline-block;
+  font-size: 0.72rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 18px;
+}
+.newsletter__heading {
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: #fff;
+  margin: 0 0 14px;
+}
+.newsletter__sub {
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.75);
+  margin: 0 0 32px;
+}
+.newsletter__form {
+  display: flex;
+  gap: 0;
+  max-width: 480px;
+  margin: 0 auto 16px;
+}
+.newsletter__input {
+  flex: 1;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.4);
+  border-right: none;
+  padding: 14px 18px;
+  color: #fff;
+  font-size: 0.92rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+.newsletter__input:focus { border-color: #fff; }
+.newsletter__input::placeholder { color: rgba(255,255,255,0.5); }
+.newsletter__btn {
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid #fff;
+  padding: 0 28px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+.newsletter__btn:hover { opacity: 0.85; }
+.newsletter__legal {
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.5);
+  margin: 0;
+  letter-spacing: 0.04em;
+}
+@media (max-width: 600px) {
+  .newsletter { padding: 56px 22px; }
+  .newsletter__form { flex-direction: column; gap: 8px; }
+  .newsletter__input { border-right: 1px solid rgba(255,255,255,0.4); }
+  .newsletter__btn { padding: 14px; width: 100%; }
+}
+
+/* Ocultar todas estas secciones nuevas en modo collection */
+body.mode-collection .topbar,
+body.mode-collection .promo-pair,
+body.mode-collection .reviews,
+body.mode-collection .newsletter { display: none !important; }
 
 /* ---- Sobre Clousa ---- */
 .about {

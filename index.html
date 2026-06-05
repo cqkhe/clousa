@@ -9,17 +9,25 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/base.css?v=20260603c">
-<link rel="stylesheet" href="css/layout.css?v=20260603c">
-<link rel="stylesheet" href="css/components.css?v=20260603c">
+<link rel="stylesheet" href="css/base.css?v=20260605a">
+<link rel="stylesheet" href="css/layout.css?v=20260605a">
+<link rel="stylesheet" href="css/components.css?v=20260605a">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 </head>
 <body>
 
-<!-- ════════ ANNOUNCEMENT ════════ -->
-<div class="announce">
-  <strong>3 cuotas sin interés</strong><span>·</span><strong>10% OFF</strong> con transferencia bancaria
+<!-- ════════ TRUST BAR (top) ════════ -->
+<div class="topbar">
+  <div class="topbar__inner">
+    <span class="topbar__item">✓ Envío gratis +$80.000</span>
+    <span class="topbar__sep">·</span>
+    <span class="topbar__item">✓ 3 cuotas sin interés</span>
+    <span class="topbar__sep">·</span>
+    <span class="topbar__item">✓ 10% OFF con transferencia</span>
+    <span class="topbar__sep">·</span>
+    <span class="topbar__item">✓ Pickup en San Miguel</span>
+  </div>
 </div>
 
 <!-- ════════ NAV ════════ -->
@@ -82,14 +90,6 @@
   </div>
 </section>
 
-<!-- Bajada editorial post-hero (Todd Snyder style) -->
-<div class="editorial-intro featured-only">
-  <p class="editorial-intro__text">
-    Indumentaria masculina seleccionada para que cada prenda dure.
-    Trabajamos con <strong>Mistral</strong> y <strong>Brooksfield</strong> para
-    traer una colección de invierno pensada para quienes saben que vestirse bien es un arte.
-  </p>
-</div>
 
 <!-- ════════ CATÁLOGO (destacados arriba del editorial) ════════ -->
 <!-- Header del modo "colección completa" (solo visible cuando body.mode-collection) -->
@@ -115,51 +115,53 @@
   </div>
 </div>
 
-<!-- ════════ COMPRAR POR CATEGORÍA ════════ -->
+<!-- ════════ COMPRAR POR CATEGORÍA (6 cards estilo Taylor Stitch) ════════ -->
 <section class="categories featured-only">
   <div class="categories__header">
-    <span class="categories__eyebrow">Colección Invierno 2026</span>
-    <h2 class="categories__heading">Comprar por categoría</h2>
+    <span class="categories__eyebrow">Comprar por categoría</span>
+    <h2 class="categories__heading">Colección Invierno 2026</h2>
   </div>
   <div class="categories__grid">
     <a class="category-card" href="#" data-categories="CAMPERAS FRISADAS,CAMPERAS RUSTICAS,CAMPERAS POLAR,JACKETS" data-label="Camperas" data-rep-cat="JACKETS">
-      <div class="category-card__media">
-        <img alt="Camperas" loading="lazy">
-      </div>
+      <div class="category-card__media"><img alt="Camperas" loading="lazy"></div>
       <div class="category-card__info">
         <h3 class="category-card__title">Camperas</h3>
-        <p class="category-card__sub">Peacoats, parkas y jackets de invierno</p>
-        <span class="category-card__cta">Ver Camperas →</span>
+        <span class="category-card__cta">Comprar →</span>
+      </div>
+    </a>
+    <a class="category-card" href="#" data-categories="BUZOS FRISADOS,BUZOS RUSTICOS,BUZOS POLAR,CANGUROS FRISADOS,CANGUROS RUSTICOS" data-label="Buzos" data-rep-cat="BUZOS FRISADOS">
+      <div class="category-card__media"><img alt="Buzos" loading="lazy"></div>
+      <div class="category-card__info">
+        <h3 class="category-card__title">Buzos</h3>
+        <span class="category-card__cta">Comprar →</span>
       </div>
     </a>
     <a class="category-card" href="#" data-categories="SWEATERS" data-label="Sweaters" data-rep-cat="SWEATERS">
-      <div class="category-card__media">
-        <img alt="Sweaters" loading="lazy">
-      </div>
+      <div class="category-card__media"><img alt="Sweaters" loading="lazy"></div>
       <div class="category-card__info">
         <h3 class="category-card__title">Sweaters</h3>
-        <p class="category-card__sub">Punto y lana premium</p>
-        <span class="category-card__cta">Ver Sweaters →</span>
+        <span class="category-card__cta">Comprar →</span>
       </div>
     </a>
-    <a class="category-card" href="#" data-categories="PANTALONES,PANTALONES CORDEROY,JEANS" data-label="Pantalones" data-rep-cat="PANTALONES">
-      <div class="category-card__media">
-        <img alt="Pantalones" loading="lazy">
-      </div>
+    <a class="category-card" href="#" data-categories="PANTALONES,PANTALONES CORDEROY,JEANS,JOGGINGS FRISADOS,JOGGINGS RUSTICOS" data-label="Pantalones" data-rep-cat="PANTALONES">
+      <div class="category-card__media"><img alt="Pantalones" loading="lazy"></div>
       <div class="category-card__info">
         <h3 class="category-card__title">Pantalones</h3>
-        <p class="category-card__sub">Chinos, jeans y corduroy</p>
-        <span class="category-card__cta">Ver Pantalones →</span>
+        <span class="category-card__cta">Comprar →</span>
       </div>
     </a>
-    <a class="category-card" href="#" data-categories="BUFANDAS,GORROS,GORRAS,CINTURONES,BILLETERAS,BOLSOS" data-label="Accesorios" data-rep-cat="BILLETERAS">
-      <div class="category-card__media">
-        <img alt="Accesorios" loading="lazy">
+    <a class="category-card" href="#" data-categories="REMERAS MC,REMERAS ML,POLOS MC,CAMISAS ML" data-label="Remeras &amp; Polos" data-rep-cat="REMERAS ML">
+      <div class="category-card__media"><img alt="Remeras y Polos" loading="lazy"></div>
+      <div class="category-card__info">
+        <h3 class="category-card__title">Remeras &amp; Polos</h3>
+        <span class="category-card__cta">Comprar →</span>
       </div>
+    </a>
+    <a class="category-card" href="#" data-categories="BUFANDAS,GORROS,GORRAS,CINTURONES,MEDIAS,BILLETERAS,BOLSOS,BOXERS,PERFUMERIA" data-label="Accesorios" data-rep-cat="BILLETERAS">
+      <div class="category-card__media"><img alt="Accesorios" loading="lazy"></div>
       <div class="category-card__info">
         <h3 class="category-card__title">Accesorios</h3>
-        <p class="category-card__sub">Bufandas, gorros y billeteras</p>
-        <span class="category-card__cta">Ver Accesorios →</span>
+        <span class="category-card__cta">Comprar →</span>
       </div>
     </a>
   </div>
@@ -214,12 +216,32 @@
     </div>
   </div>
 
-  <!-- CTAs comerciales — invitan a explorar la colección completa -->
-  <div class="featured-only home-cta-row">
-    <a class="home-cta" href="#" data-collection-brand="Brooksfield">Comprar Brooksfield</a>
-    <a class="home-cta home-cta--outline" href="#" data-collection-brand="Mistral">Comprar Mistral</a>
   </div>
 </main>
+
+<!-- ════════ BLOQUE PROMOCIONAL DOBLE (Brooksfield + Mistral, estilo Drake's) ════════ -->
+<section class="promo-pair featured-only">
+  <a class="promo-card" href="#" data-collection-brand="Brooksfield">
+    <div class="promo-card__media">
+      <img src="assets/editorial-1.jpg" alt="Brooksfield" loading="lazy" class="promo-card__img">
+    </div>
+    <div class="promo-card__content">
+      <span class="promo-card__eyebrow">Brooksfield</span>
+      <h3 class="promo-card__title">Sastrería italiana<br>para hombres modernos</h3>
+      <span class="promo-card__cta">Comprar Brooksfield →</span>
+    </div>
+  </a>
+  <a class="promo-card" href="#" data-collection-brand="Mistral">
+    <div class="promo-card__media">
+      <img src="assets/editorial-3.jpg" alt="Mistral" loading="lazy" class="promo-card__img">
+    </div>
+    <div class="promo-card__content">
+      <span class="promo-card__eyebrow">Mistral</span>
+      <h3 class="promo-card__title">Texturas de invierno<br>hechas en Argentina</h3>
+      <span class="promo-card__cta">Comprar Mistral →</span>
+    </div>
+  </a>
+</section>
 
 <!-- ════════ LOOKBOOK ════════ -->
 <section class="editorial featured-only" id="lookbook">
@@ -281,6 +303,50 @@
   <div class="campaign__caption">
     <span class="campaign__eyebrow">CAMPAIGN 26</span>
     <h2 class="campaign__title">Una narrativa de invierno.<br>Texturas, gestos y atmósfera.</h2>
+  </div>
+</section>
+
+<!-- ════════ REVIEWS / TESTIMONIOS (estilo Taylor Stitch) ════════ -->
+<section class="reviews featured-only">
+  <div class="reviews__header">
+    <span class="reviews__eyebrow">★★★★★</span>
+    <h2 class="reviews__heading">Lo que dicen nuestros clientes</h2>
+  </div>
+  <div class="reviews__grid">
+    <article class="review">
+      <p class="review__stars">★★★★★</p>
+      <p class="review__text">"Compré un peacoat Brooksfield y llegó al día siguiente. Calce perfecto, calidad impecable. Ya hice mi segundo pedido."</p>
+      <p class="review__author">Martín G. <span>· San Isidro</span></p>
+    </article>
+    <article class="review">
+      <p class="review__stars">★★★★★</p>
+      <p class="review__text">"Los sweaters de Mistral son top. El proceso de compra fue rápido y el envío llegó cuando dijeron. Recomiendo 100%."</p>
+      <p class="review__author">Federico A. <span>· CABA</span></p>
+    </article>
+    <article class="review">
+      <p class="review__stars">★★★★★</p>
+      <p class="review__text">"Atención de primera. Fui al local en San Miguel a buscar un cambio y me asesoraron sin problema. La camisa Brooksfield es excelente."</p>
+      <p class="review__author">Lautaro P. <span>· Pilar</span></p>
+    </article>
+    <article class="review">
+      <p class="review__stars">★★★★★</p>
+      <p class="review__text">"Probé las 3 cuotas sin interés y funciona perfecto. Los jeans Mistral me quedaron impecables. Pagué con MercadoPago y todo bien."</p>
+      <p class="review__author">Joaquín R. <span>· Tigre</span></p>
+    </article>
+  </div>
+</section>
+
+<!-- ════════ NEWSLETTER (estilo Taylor Stitch / Bowen — 10% bienvenida) ════════ -->
+<section class="newsletter featured-only">
+  <div class="newsletter__inner">
+    <span class="newsletter__eyebrow">10% off en tu primera compra</span>
+    <h2 class="newsletter__heading">Sumate al newsletter</h2>
+    <p class="newsletter__sub">Recibí novedades de colección, drops exclusivos y un descuento de bienvenida del 10%.</p>
+    <form class="newsletter__form" onsubmit="event.preventDefault(); alert('¡Gracias! Pronto recibirás tu cupón de bienvenida.');">
+      <input type="email" required placeholder="Tu email" class="newsletter__input" aria-label="Email">
+      <button type="submit" class="newsletter__btn">Suscribirme</button>
+    </form>
+    <p class="newsletter__legal">Al suscribirte aceptás recibir emails comerciales. Podés darte de baja cuando quieras.</p>
   </div>
 </section>
 
