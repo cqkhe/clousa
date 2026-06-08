@@ -464,8 +464,8 @@
 }
 .categories__grid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: clamp(10px, 1vw, 16px);
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(14px, 1.5vw, 22px);
 }
 .category-card {
   display: flex;
@@ -529,6 +529,53 @@
   .category-card__title { font-size: 0.78rem; }
   .category-card__sub { font-size: 0.65rem; }
 }
+
+/* ---- Banner promocional (Saleor pattern, entre categorías y destacados) ---- */
+.promo-banner {
+  background: var(--ink);
+  color: #FFFFFF;
+  padding: var(--s-5) var(--gutter);
+  margin: var(--s-7) 0 0;
+}
+.promo-banner__inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--s-3) var(--s-5);
+  text-align: center;
+}
+.promo-banner__item {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--s-2);
+  font-size: var(--fs-sm);
+  letter-spacing: var(--tr-wider);
+  text-transform: uppercase;
+}
+.promo-banner__strong {
+  font-weight: 600;
+  color: #FFFFFF;
+  letter-spacing: var(--tr-wider);
+}
+.promo-banner__weak {
+  font-weight: 400;
+  color: rgba(255,255,255,0.72);
+  letter-spacing: var(--tr-wide);
+}
+.promo-banner__sep {
+  color: rgba(255,255,255,0.32);
+  font-size: var(--fs-md);
+}
+@media (max-width: 760px) {
+  .promo-banner { padding: var(--s-4) var(--s-4); margin-top: var(--s-6); }
+  .promo-banner__inner { gap: var(--s-2); }
+  .promo-banner__sep { display: none; }
+  .promo-banner__item { font-size: 10px; letter-spacing: var(--tr-wide); flex-direction: column; gap: 2px; }
+}
+body.mode-collection .promo-banner { display: none !important; }
 
 /* ---- Promo pair (Brooksfield + Mistral, estilo Drake's) ---- */
 .promo-pair {
