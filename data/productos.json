@@ -2,8 +2,8 @@
   "metadata": {
     "proveedor": "Mistral B2B",
     "coleccion": "Invierno 2026",
-    "fecha_actualizacion": "2026-06-07T11:01:49.019Z",
-    "total_productos": 147,
+    "fecha_actualizacion": "2026-06-08T12:58:19.357Z",
+    "total_productos": 146,
     "total_categorias": 18
   },
   "categorias": [
@@ -214,15 +214,6 @@
       "categoria": "JACKETS",
       "precio_venta": 144000,
       "imagen": "https://mistralb2b.com.ar/images/productos/70095M/70095M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "70096M",
-      "nombre": "TAPADO HARRY MASCULINO",
-      "marca": "Mistral",
-      "categoria": "JACKETS",
-      "precio_venta": 144000,
-      "imagen": "https://mistralb2b.com.ar/images/productos/70096M/70096M-001.png",
       "agotado": false
     },
     {
