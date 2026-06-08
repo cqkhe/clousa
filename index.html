@@ -9,9 +9,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/base.css?v=20260608d">
-<link rel="stylesheet" href="css/layout.css?v=20260608d">
-<link rel="stylesheet" href="css/components.css?v=20260608d">
+<link rel="stylesheet" href="css/base.css?v=20260608e">
+<link rel="stylesheet" href="css/layout.css?v=20260608e">
+<link rel="stylesheet" href="css/components.css?v=20260608e">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 </head>
@@ -427,35 +427,51 @@
 </aside>
 
 <!-- ════════ MODAL (VISTA RÁPIDA) ════════ -->
-<div class="modal" id="modal" aria-label="Detalle de producto">
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalName" aria-describedby="modalDesc">
   <div class="modal__box">
     <button class="modal__close" id="modalClose" aria-label="Cerrar">✕</button>
-    <div class="modal__media"><img id="modalImg" src="" alt=""></div>
+
+    <!-- Galería: imagen principal + thumbnails -->
+    <div class="modal__media">
+      <img id="modalImg" src="" alt="">
+      <div class="modal__thumbs" id="modalThumbs" hidden></div>
+    </div>
+
     <div class="modal__info">
-      <div class="modal__brand" id="modalBrand"></div>
-      <h2 class="modal__name" id="modalName"></h2>
-      <div class="modal__price" id="modalPrice"></div>
+      <div class="modal__head">
+        <div class="modal__brand" id="modalBrand"></div>
+        <h2 class="modal__name" id="modalName"></h2>
+        <div class="modal__price-row">
+          <span class="modal__price" id="modalPrice"></span>
+          <span class="modal__code" id="modalCode"></span>
+        </div>
+      </div>
+
       <p class="modal__desc" id="modalDesc"></p>
+
       <div class="modal__color-block" id="modalColorBlock">
         <p class="modal__label" id="modalColorLabel">Seleccioná tu color · <span id="modalColorName">—</span></p>
         <div class="modal__colors" id="modalColors"></div>
       </div>
+
       <div class="modal__label" id="modalSizeLabel">Seleccioná tu talle</div>
       <div class="modal__sizes" id="modalSizes"></div>
-      <p class="modal__error" id="modalError">Elegí un talle para continuar.</p>
+      <p class="modal__error" id="modalError" aria-live="polite">Elegí un talle para continuar.</p>
+
       <div class="modal__meta" id="modalMeta"></div>
+
       <div class="modal__actions">
-        <button class="btn btn--block" id="modalAdd">Agregar al carrito</button>
-        <button class="btn btn--outline btn--block" id="modalWA">Consultar por WhatsApp</button>
+        <button class="btn btn--primary btn--block" id="modalAdd">Agregar al carrito</button>
+        <button class="btn-link" id="modalWA">Consultar por WhatsApp →</button>
       </div>
     </div>
   </div>
 </div>
 
-<script src="js/data.js?v=20260608a"></script>
-<script src="js/cart.js?v=20260608a"></script>
-<script src="js/modal.js?v=20260608a"></script>
-<script src="js/catalog.js?v=20260608a"></script>
-<script src="js/main.js?v=20260608a"></script>
+<script src="js/data.js?v=20260608e"></script>
+<script src="js/cart.js?v=20260608e"></script>
+<script src="js/modal.js?v=20260608e"></script>
+<script src="js/catalog.js?v=20260608e"></script>
+<script src="js/main.js?v=20260608e"></script>
 </body>
 </html>

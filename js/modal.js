@@ -11,6 +11,7 @@ window.Clousa = window.Clousa || {};
   var current       = null;
   var size          = null;
   var selectedColor = null;
+  var lastFocused   = null;  /* para restaurar foco al cerrar (a11y) */
   var dom           = {};
 
   var DUMMY_SIZES = { 'U': true, '99': true };
@@ -117,17 +118,80 @@ window.Clousa = window.Clousa || {};
 
   // ── open / close ──────────────────────────────────────────────────
 
+  /* Renderiza la galería: imagen principal + thumbnails clickeables.
+     Si el producto tiene 1 sola imagen, oculta los thumbs. */
+  function renderGallery(product) {
+    var imgs = (product.imagenes && product.imagenes.length > 0)
+      ? product.imagenes
+      : [product.img];
+
+    dom.img.src = imgs[0];
+    dom.img.alt = product.name;
+
+    if (imgs.length <= 1) {
+      dom.thumbs.hidden = true;
+      dom.thumbs.innerHTML = '';
+      return;
+    }
+
+    dom.thumbs.hidden = false;
+    dom.thumbs.innerHTML = imgs.map(function (src, i) {
+      var safeSrc = C.escapeHtml(src);
+      var isActive = i === 0 ? ' is-active' : '';
+      return '<button type="button" class="modal__thumb' + isActive +
+        '" data-thumb-index="' + i + '" aria-label="Imagen ' + (i + 1) + '">' +
+        '<img src="' + safeSrc + '" alt="" loading="lazy">' +
+      '</button>';
+    }).join('');
+  }
+
+  function onThumbClick(e) {
+    var btn = e.target.closest('[data-thumb-index]');
+    if (!btn) return;
+    var idx = parseInt(btn.getAttribute('data-thumb-index'), 10);
+    var imgs = (current && current.imagenes) ? current.imagenes : [];
+    if (!imgs[idx]) return;
+    dom.img.src = imgs[idx];
+    var all = dom.thumbs.querySelectorAll('.modal__thumb');
+    for (var i = 0; i < all.length; i++) all[i].classList.remove('is-active');
+    btn.classList.add('is-active');
+  }
+
+  /* Focus trap: cicla Tab dentro del modal mientras está abierto. */
+  function onTrapTab(e) {
+    if (e.key !== 'Tab' || !dom.modal.classList.contains('is-open')) return;
+    var focusables = dom.modal.querySelectorAll(
+      'button:not([disabled]), [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+    var visible = Array.prototype.filter.call(focusables, function (el) {
+      return el.offsetParent !== null;
+    });
+    if (visible.length === 0) return;
+    var first = visible[0];
+    var last  = visible[visible.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault(); last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault(); first.focus();
+    }
+  }
+
   function open(product) {
     if (!product) return;
     current       = product;
     size          = null;
     selectedColor = null;
 
-    dom.img.src           = product.img;
-    dom.img.alt           = product.name;
+    /* Guardar el elemento que tenía foco para restaurar al cerrar */
+    lastFocused = document.activeElement;
+
+    /* Galería con thumbnails (usa product.imagenes si existe) */
+    renderGallery(product);
+
     dom.brand.textContent = product.brand;
     dom.name.textContent  = product.name;
     dom.price.textContent = C.formatPrice(product.price);
+    dom.code.textContent  = product.id ? 'Cód. ' + product.id : '';
     dom.meta.textContent  = product.category + (product.soldOut ? ' · Sin stock' : '');
     dom.error.classList.remove('is-visible');
 
@@ -146,6 +210,13 @@ window.Clousa = window.Clousa || {};
 
     dom.modal.classList.add('is-open');
     document.body.classList.add('no-scroll');
+
+    /* Foco al botón cerrar (accesibilidad keyboard nav).
+       Pequeño delay para que el modal sea focusable después de la transición. */
+    setTimeout(function () {
+      var closeBtn = document.getElementById('modalClose');
+      if (closeBtn) closeBtn.focus();
+    }, 50);
   }
 
   function close() {
@@ -154,6 +225,12 @@ window.Clousa = window.Clousa || {};
     current       = null;
     size          = null;
     selectedColor = null;
+
+    /* Restaurar foco al elemento que abrió el modal */
+    if (lastFocused && typeof lastFocused.focus === 'function') {
+      try { lastFocused.focus(); } catch (e) {}
+      lastFocused = null;
+    }
   }
 
   // ── Interacciones ─────────────────────────────────────────────────
@@ -203,9 +280,11 @@ window.Clousa = window.Clousa || {};
   function init() {
     dom.modal      = document.getElementById('modal');
     dom.img        = document.getElementById('modalImg');
+    dom.thumbs     = document.getElementById('modalThumbs');
     dom.brand      = document.getElementById('modalBrand');
     dom.name       = document.getElementById('modalName');
     dom.price      = document.getElementById('modalPrice');
+    dom.code       = document.getElementById('modalCode');
     dom.desc       = document.getElementById('modalDesc');
     dom.colorBlock = document.getElementById('modalColorBlock');
     dom.colorName  = document.getElementById('modalColorName');
@@ -218,6 +297,7 @@ window.Clousa = window.Clousa || {};
 
     dom.sizes.addEventListener('click', onSizeClick);
     dom.colorsEl.addEventListener('click', onColorClick);
+    if (dom.thumbs) dom.thumbs.addEventListener('click', onThumbClick);
     dom.add.addEventListener('click', addToCart);
 
     var waBtn    = document.getElementById('modalWA');
@@ -232,6 +312,8 @@ window.Clousa = window.Clousa || {};
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && dom.modal.classList.contains('is-open')) close();
     });
+    /* Focus trap dentro del modal (a11y — Radix pattern) */
+    document.addEventListener('keydown', onTrapTab);
   }
 
   C.modal = { init: init, open: open, close: close };

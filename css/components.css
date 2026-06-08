@@ -37,7 +37,38 @@
 .btn--block { width: 100%; }
 .btn--wa { background: #1F9D56; border-color: #1F9D56; color: #FFFFFF; }
 .btn--wa:hover { background: #1A7F46; border-color: #1A7F46; color: #FFFFFF; }
+/* Alias semántico (Etapa 5) — `.btn--primary` = default ink-on-ink */
+.btn--primary { background: var(--ink); color: #FFFFFF; border-color: var(--ink); }
+.btn--primary:hover { opacity: 0.88; background: var(--ink); color: #FFFFFF; border-color: var(--ink); }
 .btn:disabled { opacity: 0.4; pointer-events: none; }
+
+/* Botón tipo link — para CTAs secundarios sutiles (ej: "Consultar por WhatsApp" en modal) */
+.btn-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  padding: 8px 0;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  cursor: pointer;
+  border-bottom: 1px solid transparent;
+  transition: color var(--duration-fast, 0.2s) ease, border-color var(--duration-fast, 0.2s) ease;
+  align-self: center;
+  margin-top: 4px;
+}
+.btn-link:hover {
+  color: var(--ink);
+  border-bottom-color: var(--ink);
+}
+.btn-link:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 4px;
+}
 
 /* ---- Filtros ---- */
 .filters {
@@ -534,8 +565,57 @@
   flex: 1 1 50%;
   background: var(--bg-section);
   min-height: 320px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
 }
-.modal__media img { width: 100%; height: 100%; object-fit: cover; }
+.modal__media > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+/* Thumbnails de la galería (debajo de la imagen en desktop, scroll horizontal mobile) */
+.modal__thumbs {
+  display: flex;
+  gap: 8px;
+  padding: 10px;
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--line);
+  overflow-x: auto;
+  scrollbar-width: thin;
+  flex-shrink: 0;
+}
+.modal__thumbs::-webkit-scrollbar { height: 4px; }
+.modal__thumbs::-webkit-scrollbar-thumb { background: var(--line); border-radius: 2px; }
+.modal__thumb {
+  flex: 0 0 auto;
+  width: 56px;
+  height: 72px;
+  padding: 0;
+  border: 1px solid transparent;
+  background: var(--bg-section);
+  cursor: pointer;
+  overflow: hidden;
+  transition: border-color var(--duration-fast, 0.2s) ease, opacity var(--duration-fast, 0.2s) ease;
+  opacity: 0.6;
+}
+.modal__thumb img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.modal__thumb:hover { opacity: 1; }
+.modal__thumb.is-active {
+  border-color: var(--ink);
+  opacity: 1;
+}
+.modal__thumb:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
 .modal__info {
   flex: 1 1 50%;
   padding: clamp(28px, 4vw, 48px);
@@ -549,6 +629,7 @@
   color: var(--graphite);
   margin-bottom: 12px;
 }
+.modal__head { margin-bottom: 18px; }
 .modal__name {
   font-size: 22px;
   font-weight: 700;
@@ -556,10 +637,29 @@
   text-transform: uppercase;
   line-height: 1.2;
   color: var(--ink);
-  margin-bottom: 14px;
+  margin-bottom: 10px;
 }
-/* el precio del modal es el único uso del dorado — acento puntual */
-.modal__price { font-size: 24px; font-weight: 500; color: var(--gold); margin-bottom: 14px; }
+.modal__price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+/* Precio principal — color ink (contraste WCAG correcto). El dorado quedaba bajo en accesibilidad */
+.modal__price {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.modal__code {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--graphite);
+  border-left: 1px solid var(--line);
+  padding-left: 14px;
+}
 .modal__desc {
   font-size: 12px;
   color: var(--graphite);
