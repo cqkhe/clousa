@@ -6,6 +6,11 @@
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
+  /* ─────────────────────────────────────────────────────────────────────
+     LEGACY TOKENS (Etapa 1 — quedan vigentes, no se tocan para no romper)
+     Las clases existentes los siguen usando: --bg-primary, --ink, etc.
+     ───────────────────────────────────────────────────────────────────── */
+
   /* ---- Paleta — Premium claro cálido ---- */
   --bg-primary:   #FAFAF7;   /* blanco hueso — fondo general */
   --bg-secondary: #FFFFFF;   /* cards — contraste sutil con el fondo */
@@ -34,6 +39,92 @@
 
   /* ---- Sombra de texto sobre imágenes ---- */
   --text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+
+  /* ═════════════════════════════════════════════════════════════════════
+     NEW DESIGN SYSTEM TOKENS (Etapa 1 — Sprint 1)
+     Inspirado en Adobe Spectrum + shadcn + Saleor.
+     Estos tokens son la fuente de verdad para las próximas etapas.
+     Convivirán con los legacy hasta migrar componente por componente.
+     ═════════════════════════════════════════════════════════════════════ */
+
+  /* ─── Color tokens (semánticos, no por nombre) ─── */
+  --c-bg:           #FAFAF7;   /* fondo principal */
+  --c-bg-elevated:  #FFFFFF;   /* cards, modal, drawer */
+  --c-bg-muted:     #F0EFEB;   /* secciones alternas, hover de buttons */
+  --c-ink:          #0A0A0A;   /* texto principal */
+  --c-ink-2:        #4A4A4A;   /* texto secundario */
+  --c-ink-3:        #8A8A8A;   /* muted, captions, placeholder */
+  --c-line:         #E5E3DE;   /* bordes default */
+  --c-line-strong:  #C8C5BD;   /* bordes destacados (focus, active) */
+  --c-accent:       #D4A574;   /* champagne — hover sutil, badges "Nuevo" */
+  --c-sale:         #9A2A2A;   /* precio oferta */
+  --c-success:      #2E7D5A;   /* confirmaciones */
+  --c-warning:      #B8924F;   /* alertas suaves */
+  --c-wa:           #25D366;   /* solo logo WhatsApp */
+  --c-mp:           #009EE3;   /* solo logo MercadoPago */
+
+  /* ─── Spacing scale (8px base, Spectrum-style) ─── */
+  --s-1:  4px;
+  --s-2:  8px;
+  --s-3:  12px;
+  --s-4:  16px;
+  --s-5:  24px;
+  --s-6:  32px;
+  --s-7:  48px;
+  --s-8:  64px;
+  --s-9:  96px;
+  --s-10: 128px;
+
+  /* ─── Typography scale ─── */
+  --fs-xs:   11px;   /* micro */
+  --fs-sm:   12px;   /* caption */
+  --fs-base: 14px;   /* body small */
+  --fs-md:   15px;   /* body */
+  --fs-lg:   18px;   /* subtitle */
+  --fs-xl:   24px;   /* h3 */
+  --fs-2xl:  32px;   /* h2 */
+  --fs-3xl:  48px;   /* h1 section */
+  --fs-display: clamp(48px, 7vw, 96px); /* hero display */
+
+  /* ─── Tracking (letter-spacing) ─── */
+  --tr-tight:   -0.02em;   /* display, h1 */
+  --tr-snug:    -0.01em;   /* h2, h3 */
+  --tr-normal:   0em;       /* body */
+  --tr-wide:     0.04em;    /* card name */
+  --tr-wider:    0.12em;    /* small caps, button */
+  --tr-eyebrow:  0.32em;    /* eyebrow text */
+
+  /* ─── Line height ─── */
+  --lh-tight:   1.1;
+  --lh-snug:    1.3;
+  --lh-base:    1.6;
+  --lh-relaxed: 1.8;
+
+  /* ─── Radius ─── */
+  --r-0:    0;         /* cards de producto, hero */
+  --r-sm:   2px;       /* tags chicos */
+  --r-md:   4px;       /* inputs, buttons, badges */
+  --r-lg:   8px;       /* cards de UI (no producto), modals contenedor */
+  --r-pill: 999px;     /* cart count, chips activos */
+
+  /* ─── Shadows (Spectrum elevation scale, 3 niveles) ─── */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.06);
+  --shadow-lg: 0 16px 40px rgba(0,0,0,0.10);
+  --shadow-xl: 0 24px 60px rgba(0,0,0,0.14);   /* modal, drawer */
+
+  /* ─── Motion duration ─── */
+  --duration-fast: 0.2s;
+  --duration-base: 0.3s;
+  --duration-slow: 0.5s;
+
+  /* ─── Z-index scale ─── */
+  --z-base:     1;
+  --z-sticky:   100;     /* nav sticky */
+  --z-overlay:  200;     /* overlay del cart/modal */
+  --z-drawer:   300;     /* cart drawer */
+  --z-modal:    310;     /* modal producto */
+  --z-toast:    400;     /* toast notifications */
 }
 
 html {
