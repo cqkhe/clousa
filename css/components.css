@@ -169,64 +169,136 @@
 }
 
 /* ---- Product card ---- */
+/* ════════════════════════════════════════════════════════════════════
+   Product card (Etapa 2 — Dawn + shadcn refined)
+   ──────────────────────────────────────────────────────────────────── */
 .product-card {
   cursor: pointer;
   position: relative;
   background: var(--bg-secondary);
   transition: var(--transition);
+  outline: none;
 }
+.product-card:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
 .product-card__media {
   position: relative;
   aspect-ratio: 3 / 4;
   background: var(--bg-section);
   overflow: hidden;
 }
-.product-card__media img {
-  width: 100%; height: 100%;
+
+/* Primary + hover image — cross-fade */
+.product-card__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   object-position: center;
-  transition: transform 0.65s var(--ease), opacity 0.4s;
+  transition: opacity 0.5s var(--ease), transform 0.7s var(--ease);
+  will-change: opacity, transform;
 }
-.product-card:hover .product-card__media img { transform: scale(1.04); }
-.product-card__media img.img-error { object-fit: contain; padding: 24%; opacity: 0.4; }
+.product-card__img--primary { opacity: 1; }
+.product-card__img--hover { opacity: 0; }
+.product-card:hover .product-card__img--primary { opacity: 0; }
+.product-card:hover .product-card__img--hover { opacity: 1; }
 
-/* "Vista rápida" — aparece desde abajo en hover */
+/* Si NO hay imagen hover, el primary hace zoom sutil */
+.product-card:not(:has(.product-card__img--hover)):hover .product-card__img--primary {
+  transform: scale(1.04);
+  opacity: 1;
+}
+.product-card__img.img-error { object-fit: contain; padding: 24%; opacity: 0.4; }
+
+/* Quick view label (no es botón funcional — abre el modal por el click del card) */
 .product-card__quick {
   position: absolute;
   left: 0; right: 0; bottom: 0;
   z-index: 1;
-  padding: 14px;
+  padding: 12px 14px;
   background: rgba(10, 10, 10, 0.9);
   color: #FFFFFF;
   font-size: 10px;
+  font-weight: 500;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   text-align: center;
   opacity: 0;
   transform: translateY(100%);
   transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
+  pointer-events: none;
 }
-.product-card:hover .product-card__quick { opacity: 1; transform: translateY(0); }
-@media (hover: none) { .product-card__quick { display: none; } }
+.product-card:hover .product-card__quick {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (hover: none) {
+  .product-card__quick { display: none; }
+}
 
+/* Badges con variantes */
 .product-card__badge {
   position: absolute;
   top: 12px; left: 12px;
-  z-index: 1;
+  z-index: 2;
   padding: 5px 10px;
   background: var(--bg-secondary);
   border: 1px solid var(--line);
-  color: var(--graphite);
+  color: var(--ink-soft);
   font-size: 9px;
+  font-weight: 500;
   letter-spacing: 0.16em;
   text-transform: uppercase;
 }
-.product-card.is-sold .product-card__media img { opacity: 0.45; }
+.product-card__badge--sold {
+  background: var(--ink);
+  color: #FFFFFF;
+  border-color: var(--ink);
+}
+.product-card__badge--new {
+  background: var(--bg-secondary);
+  color: var(--ink);
+  border-color: var(--ink);
+}
+.product-card__badge--sale {
+  background: var(--sale);
+  color: #FFFFFF;
+  border-color: var(--sale);
+}
 
+/* Estado is-sold — atenúa imagen y suma overlay diagonal */
+.product-card.is-sold {
+  cursor: default;
+}
+.product-card.is-sold .product-card__img {
+  opacity: 0.5;
+}
+.product-card__sold-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: rgba(250, 250, 247, 0.35);
+  pointer-events: none;
+}
+
+/* Info */
 .product-card__info { padding-top: 14px; }
 .product-card__brand {
   font-size: 9px;
-  letter-spacing: 0.2em;
+  font-weight: 500;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--graphite);
   margin-bottom: 6px;
@@ -244,7 +316,24 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-.product-card__price { font-size: 14px; font-weight: 500; color: var(--ink); }
+.product-card__price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.product-card__price {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: 0.01em;
+}
+/* Preparado para Etapa 8 — precio tachado / oferta */
+.product-card__price--old {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--graphite);
+  text-decoration: line-through;
+}
 
 /* ---- Load more button ---- */
 .load-more-wrap {

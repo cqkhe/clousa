@@ -246,20 +246,40 @@ window.Clousa = window.Clousa || {};
   }
 
   function cardHtml(p) {
+    /* Imagen secundaria opcional para el hover swap (Dawn pattern). */
+    var imgPrimary   = C.escapeHtml(getProductImage(p));
+    var imgSecondary = (p.imagenes && p.imagenes.length > 1)
+      ? C.escapeHtml(p.imagenes[1])
+      : '';
+    var hasSecondary = imgSecondary && imgSecondary !== imgPrimary;
+
+    /* Badges con clases modificadoras (sumar --new / --sale después sin tocar lógica). */
+    var badgeHtml = '';
+    if (p.soldOut) {
+      badgeHtml = '<span class="product-card__badge product-card__badge--sold">Sin stock</span>';
+    }
+
     return '' +
       '<article class="product-card' + (p.soldOut ? ' is-sold' : '') + '" data-id="' +
-        C.escapeHtml(p.id) + '">' +
+        C.escapeHtml(p.id) + '" tabindex="0" aria-label="' + C.escapeHtml(p.name) + '">' +
         '<div class="product-card__media">' +
-          (p.soldOut ? '<span class="product-card__badge">Agotado</span>' : '') +
-          '<img loading="lazy" src="' + C.escapeHtml(getProductImage(p)) + '" alt="' +
+          badgeHtml +
+          '<img class="product-card__img product-card__img--primary" loading="lazy" src="' + imgPrimary + '" alt="' +
             C.escapeHtml(p.name) + '" ' +
             'onerror="this.onerror=null;this.src=\'assets/placeholder.svg\';this.classList.add(\'img-error\')">' +
-          '<button class="product-card__quick">Vista rápida</button>' +
+          (hasSecondary
+            ? '<img class="product-card__img product-card__img--hover" loading="lazy" src="' + imgSecondary + '" alt="" aria-hidden="true" ' +
+              'onerror="this.onerror=null;this.style.display=\'none\'">'
+            : '') +
+          (p.soldOut ? '<div class="product-card__sold-overlay" aria-hidden="true">Agotado</div>' : '') +
+          '<span class="product-card__quick" aria-hidden="true">+ Vista rápida</span>' +
         '</div>' +
         '<div class="product-card__info">' +
           '<p class="product-card__brand">' + C.escapeHtml(p.brand) + '</p>' +
           '<h3 class="product-card__name">' + C.escapeHtml(p.name) + '</h3>' +
-          '<p class="product-card__price">' + C.formatPrice(p.price) + '</p>' +
+          '<div class="product-card__price-row">' +
+            '<span class="product-card__price">' + C.formatPrice(p.price) + '</span>' +
+          '</div>' +
         '</div>' +
       '</article>';
   }
