@@ -2,8 +2,8 @@
   "metadata": {
     "proveedor": "Mistral B2B",
     "coleccion": "Invierno 2026",
-    "fecha_actualizacion": "2026-06-08T12:58:19.357Z",
-    "total_productos": 146,
+    "fecha_actualizacion": "2026-06-09T11:54:13.367Z",
+    "total_productos": 145,
     "total_categorias": 18
   },
   "categorias": [
@@ -196,15 +196,6 @@
       "categoria": "JACKETS",
       "precio_venta": 162000,
       "imagen": "https://mistralb2b.com.ar/images/productos/70087M/70087M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "70094M",
-      "nombre": "JACKET EDWARD MASCULINO",
-      "marca": "Mistral",
-      "categoria": "JACKETS",
-      "precio_venta": 132000,
-      "imagen": "https://mistralb2b.com.ar/images/productos/70094M/70094M-001.png",
       "agotado": false
     },
     {
