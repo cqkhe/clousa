@@ -9,9 +9,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/base.css?v=20260610c">
-<link rel="stylesheet" href="css/layout.css?v=20260610c">
-<link rel="stylesheet" href="css/components.css?v=20260610c">
+<link rel="stylesheet" href="css/base.css?v=20260610d">
+<link rel="stylesheet" href="css/layout.css?v=20260610d">
+<link rel="stylesheet" href="css/components.css?v=20260610d">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 </head>
@@ -242,36 +242,37 @@
 
 <div class="collection-header" id="collectionHeader" hidden>
   <div class="collection-header__inner">
-    <a href="#" class="collection-header__back" id="collectionBack">← Volver al inicio</a>
-    <h1 class="collection-header__title" id="collectionTitle">Colección</h1>
-    <p class="collection-header__count" id="collectionCount"></p>
-  </div>
-  <div class="collection-header__divider"></div>
-</div>
+    <nav class="breadcrumb" aria-label="Migas de pan">
+      <a href="#" data-nav-home>Inicio</a>
+      <span class="breadcrumb__sep" aria-hidden="true">/</span>
+      <a href="#" data-cta-all>Hombre</a>
+      <span class="breadcrumb__sep" aria-hidden="true">/</span>
+      <span id="collectionBreadcrumb" class="breadcrumb__current">Colección</span>
+    </nav>
 
-<!-- Filtros — ocultos hasta click en VER TODA LA COLECCIÓN -->
-<div class="catalog-controls" id="catalogControls" hidden>
-  <div class="filters">
-    <div class="filters__row">
-      <label class="filters__search">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-        </svg>
-        <input type="text" id="searchInput" placeholder="Buscar producto o categoría…">
-      </label>
-      <div class="select"><select id="priceFilter" aria-label="Filtrar por precio"></select></div>
-      <div class="select"><select id="sortFilter" aria-label="Ordenar"></select></div>
+    <h1 class="collection-header__title" id="collectionTitle">COLECCIÓN HOMBRE</h1>
+
+    <div class="collection-header__bar">
+      <p class="collection-header__count" id="collectionCount">0 productos</p>
+      <div class="collection-header__controls">
+        <button type="button" class="btn-filter" id="filterToggleBtn" aria-label="Abrir filtros" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="4" y1="6" x2="20" y2="6"/><circle cx="9" cy="6" r="2.2" fill="var(--bg-primary)"/>
+            <line x1="4" y1="12" x2="20" y2="12"/><circle cx="15" cy="12" r="2.2" fill="var(--bg-primary)"/>
+            <line x1="4" y1="18" x2="20" y2="18"/><circle cx="8" cy="18" r="2.2" fill="var(--bg-primary)"/>
+          </svg>
+          <span>Filtrar</span>
+        </button>
+        <label class="sort-select">
+          <span class="sort-select__label">Ordenar por</span>
+          <select id="sortFilter" aria-label="Ordenar productos"></select>
+        </label>
+      </div>
     </div>
   </div>
-  <div class="brand-chips" id="brandChips" aria-label="Filtrar por marca">
-    <button class="brand-chip is-active" data-brand="all">Todas</button>
-    <button class="brand-chip" data-brand="Mistral">Mistral</button>
-    <button class="brand-chip" data-brand="Brooksfield">Brooksfield</button>
-  </div>
-  <div class="cat-chips" id="catChips"></div>
 </div>
 
-<p class="result-count collection-only" id="resultCount" hidden></p>
+<p class="result-count collection-only sr-only" id="resultCount" hidden></p>
 <main class="section section--tight collection-only" id="catalogo">
   <div class="container">
     <div class="featured-wrap" id="featuredWrap">
@@ -438,10 +439,10 @@
   </div>
 </div>
 
-<script src="js/data.js?v=20260610b"></script>
-<script src="js/cart.js?v=20260610b"></script>
-<script src="js/modal.js?v=20260610b"></script>
-<script src="js/catalog.js?v=20260610b"></script>
-<script src="js/main.js?v=20260610b"></script>
+<script src="js/data.js?v=20260610d"></script>
+<script src="js/cart.js?v=20260610d"></script>
+<script src="js/modal.js?v=20260610d"></script>
+<script src="js/catalog.js?v=20260610d"></script>
+<script src="js/main.js?v=20260610d"></script>
 </body>
 </html>

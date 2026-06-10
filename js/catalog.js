@@ -74,6 +74,7 @@ window.Clousa = window.Clousa || {};
   var dom = {};
 
   function buildCategoryChips() {
+    if (!dom.chips) return;
     /* Ordenar por prioridad comercial (jackets primero, accesorios al final) */
     var sorted = C.categorias.slice().sort(function (a, b) {
       return categoryRank(a) - categoryRank(b);
@@ -87,12 +88,22 @@ window.Clousa = window.Clousa || {};
   }
 
   function buildSelects() {
-    dom.price.innerHTML = PRICE_BRACKETS.map(function (b) {
-      return '<option value="' + b.id + '">' + b.label + '</option>';
-    }).join('');
-    dom.sort.innerHTML = SORTS.map(function (s) {
-      return '<option value="' + s.id + '">' + s.label + '</option>';
-    }).join('');
+    if (dom.price) {
+      dom.price.innerHTML = PRICE_BRACKETS.map(function (b) {
+        return '<option value="' + b.id + '">' + b.label + '</option>';
+      }).join('');
+    }
+    if (dom.sort) {
+      dom.sort.innerHTML = SORTS.map(function (s) {
+        return '<option value="' + s.id + '">' + s.label + '</option>';
+      }).join('');
+    }
+  }
+
+  /* Actualiza el texto del último item del breadcrumb (#collectionBreadcrumb) */
+  function setBreadcrumb(label) {
+    var bc = document.getElementById('collectionBreadcrumb');
+    if (bc) bc.textContent = label;
   }
 
   /* Asigna la imagen de cada category-card desde un producto representativo
@@ -319,7 +330,8 @@ window.Clousa = window.Clousa || {};
     var header = document.getElementById('collectionHeader');
     var title  = document.getElementById('collectionTitle');
     if (header) header.hidden = false;
-    if (title)  title.textContent = 'Colección ' + brand + ' Invierno 2026';
+    if (title)  title.textContent = brand.toUpperCase();
+    setBreadcrumb(brand);
 
     /* Sincronizar UI de los chips de marca */
     if (dom.brandChips) {
@@ -368,7 +380,8 @@ window.Clousa = window.Clousa || {};
     var header = document.getElementById('collectionHeader');
     var title  = document.getElementById('collectionTitle');
     if (header) header.hidden = false;
-    if (title)  title.textContent = 'Resultados: "' + q + '"';
+    if (title)  title.textContent = 'RESULTADOS · ' + q.toUpperCase();
+    setBreadcrumb('Búsqueda: ' + q);
 
     /* Resetear UI de chips/selects al estado neutral */
     if (dom.brandChips) {
@@ -414,7 +427,9 @@ window.Clousa = window.Clousa || {};
     var header = document.getElementById('collectionHeader');
     var title  = document.getElementById('collectionTitle');
     if (header) header.hidden = false;
-    if (title)  title.textContent = label || 'Categoría';
+    var catLabel = label || 'Colección';
+    if (title)  title.textContent = catLabel.toUpperCase();
+    setBreadcrumb(catLabel);
 
     if (dom.brandChips) {
       var chips = dom.brandChips.querySelectorAll('.brand-chip');
@@ -458,7 +473,9 @@ window.Clousa = window.Clousa || {};
     var header = document.getElementById('collectionHeader');
     var title  = document.getElementById('collectionTitle');
     if (header) header.hidden = false;
-    if (title)  title.textContent = label || (brand + ' · Categoría');
+    var bcLabel = label || (brand + ' · Categoría');
+    if (title)  title.textContent = bcLabel.toUpperCase();
+    setBreadcrumb(bcLabel);
 
     if (dom.brandChips) {
       var chips = dom.brandChips.querySelectorAll('.brand-chip');
@@ -485,6 +502,11 @@ window.Clousa = window.Clousa || {};
     document.body.classList.remove('mode-collection');
     var header = document.getElementById('collectionHeader');
     if (header) header.hidden = true;
+
+    /* Resetear título y breadcrumb a los defaults */
+    var title = document.getElementById('collectionTitle');
+    if (title) title.textContent = 'COLECCIÓN HOMBRE';
+    setBreadcrumb('Colección');
 
     /* Resetear estado para volver a la vista inicial featured */
     state.showAll       = false;
@@ -571,12 +593,12 @@ window.Clousa = window.Clousa || {};
       });
     });
 
-    /* CTAs de "Comprar Invierno" / "Comprar Online" → modo colección con TODO */
+    /* CTAs "Hombre" / "Ver colección" → modo colección con todos los productos */
     var ctaAllLinks = document.querySelectorAll('[data-cta-all]');
     Array.prototype.forEach.call(ctaAllLinks, function (cta) {
       cta.addEventListener('click', function (e) {
         e.preventDefault();
-        filterByCategory('', 'Colección Invierno 2026');
+        filterByCategory('', 'Colección Hombre');
       });
     });
 
@@ -628,39 +650,47 @@ window.Clousa = window.Clousa || {};
     buildCategoryChips();
     buildSelects();
 
-    dom.brandChips.addEventListener('click', function (e) {
-      var chip = e.target.closest('[data-brand]');
-      if (!chip) return;
-      state.brand = chip.getAttribute('data-brand');
-      state.showAll = false;
-      state.categoryGroup = null;
-      var all = dom.brandChips.querySelectorAll('.brand-chip');
-      for (var i = 0; i < all.length; i++) all[i].classList.remove('is-active');
-      chip.classList.add('is-active');
-      render();
-    });
+    if (dom.brandChips) {
+      dom.brandChips.addEventListener('click', function (e) {
+        var chip = e.target.closest('[data-brand]');
+        if (!chip) return;
+        state.brand = chip.getAttribute('data-brand');
+        state.showAll = false;
+        state.categoryGroup = null;
+        var all = dom.brandChips.querySelectorAll('.brand-chip');
+        for (var i = 0; i < all.length; i++) all[i].classList.remove('is-active');
+        chip.classList.add('is-active');
+        render();
+      });
+    }
 
-    dom.chips.addEventListener('click', function (e) {
-      var chip = e.target.closest('[data-cat]');
-      if (!chip) return;
-      state.category = chip.getAttribute('data-cat');
-      state.showAll = false;
-      state.categoryGroup = null;
-      var all = dom.chips.querySelectorAll('.chip');
-      for (var i = 0; i < all.length; i++) all[i].classList.remove('is-active');
-      chip.classList.add('is-active');
-      render();
-    });
+    if (dom.chips) {
+      dom.chips.addEventListener('click', function (e) {
+        var chip = e.target.closest('[data-cat]');
+        if (!chip) return;
+        state.category = chip.getAttribute('data-cat');
+        state.showAll = false;
+        state.categoryGroup = null;
+        var all = dom.chips.querySelectorAll('.chip');
+        for (var i = 0; i < all.length; i++) all[i].classList.remove('is-active');
+        chip.classList.add('is-active');
+        render();
+      });
+    }
 
-    dom.price.addEventListener('change', function () {
-      state.price = dom.price.value; state.showAll = false; state.categoryGroup = null; render();
-    });
-    dom.sort.addEventListener('change', function () {
-      state.sort = dom.sort.value; state.showAll = false; state.categoryGroup = null; render();
-    });
+    if (dom.price) {
+      dom.price.addEventListener('change', function () {
+        state.price = dom.price.value; state.showAll = false; state.categoryGroup = null; render();
+      });
+    }
+    if (dom.sort) {
+      dom.sort.addEventListener('change', function () {
+        state.sort = dom.sort.value; state.showAll = false; state.categoryGroup = null; render();
+      });
+    }
 
     var t;
-    dom.search.addEventListener('input', function () {
+    if (dom.search) dom.search.addEventListener('input', function () {
       clearTimeout(t);
       t = setTimeout(function () {
         state.query = dom.search.value; state.showAll = false; state.categoryGroup = null; render();
@@ -677,7 +707,7 @@ window.Clousa = window.Clousa || {};
 
     /* Filtrado por categoría desde un enlace externo (ej. nav) */
     var hash = decodeURIComponent(location.hash.replace('#cat=', ''));
-    if (hash && location.hash.indexOf('#cat=') === 0) {
+    if (hash && location.hash.indexOf('#cat=') === 0 && dom.chips) {
       state.category = hash;
       var target = dom.chips.querySelector('[data-cat="' + hash + '"]');
       if (target) {
@@ -686,6 +716,16 @@ window.Clousa = window.Clousa || {};
         });
         target.classList.add('is-active');
       }
+    }
+
+    /* Botón "Filtrar" — stub (Commits E y F implementan sidebar y drawer) */
+    var filterBtn = document.getElementById('filterToggleBtn');
+    if (filterBtn) {
+      filterBtn.addEventListener('click', function () {
+        var expanded = filterBtn.getAttribute('aria-expanded') === 'true';
+        filterBtn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+        /* TODO Commit E/F: abrir sidebar/drawer de filtros */
+      });
     }
 
     /* Render de los bloques de marca destacados de la home */
