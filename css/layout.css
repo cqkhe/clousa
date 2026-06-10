@@ -1373,6 +1373,13 @@ body.mode-collection .chip.is-active {
   gap: 44px;
 }
 @media (min-width: 720px) { .footer__grid { grid-template-columns: 1.5fr 1fr 1fr; } }
+@media (min-width: 960px) {
+  .footer__grid--4 {
+    grid-template-columns: 1.4fr 1fr 1.1fr 1fr;
+    gap: 48px;
+  }
+}
+.footer__col--brand { max-width: 380px; }
 .footer__brand {
   font-size: 26px;
   font-weight: 400;
@@ -1396,6 +1403,8 @@ body.mode-collection .chip.is-active {
   color: var(--ink-soft);
   transition: var(--transition);
 }
+/* Info no-clickable más sutil que los links para diferenciar visualmente */
+.footer__col p { color: var(--graphite); }
 .footer__col a:hover { color: var(--ink); }
 .footer__bottom {
   max-width: var(--maxw);

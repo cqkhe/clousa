@@ -9,9 +9,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/base.css?v=20260609c">
-<link rel="stylesheet" href="css/layout.css?v=20260609c">
-<link rel="stylesheet" href="css/components.css?v=20260609c">
+<link rel="stylesheet" href="css/base.css?v=20260609d">
+<link rel="stylesheet" href="css/layout.css?v=20260609d">
+<link rel="stylesheet" href="css/components.css?v=20260609d">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 </head>
@@ -271,28 +271,64 @@
   </div>
 </section>
 
-<!-- ════════ FOOTER ════════ -->
+<!-- ════════ CARRUSEL DE MARCAS (loop infinito CSS-only) ════════ -->
+<section class="brand-carousel" aria-label="Marcas que vendemos">
+  <div class="brand-carousel__track">
+    <span class="brand-carousel__item">Mistral</span>
+    <span class="brand-carousel__item" aria-hidden="true">·</span>
+    <span class="brand-carousel__item">Brooksfield</span>
+    <span class="brand-carousel__item" aria-hidden="true">·</span>
+    <span class="brand-carousel__item">Mistral</span>
+    <span class="brand-carousel__item" aria-hidden="true">·</span>
+    <span class="brand-carousel__item">Brooksfield</span>
+    <span class="brand-carousel__item" aria-hidden="true">·</span>
+    <!-- Set duplicado para el loop suave (transform 0 → -50%) -->
+    <span class="brand-carousel__item" aria-hidden="true">Mistral</span>
+    <span class="brand-carousel__item" aria-hidden="true">·</span>
+    <span class="brand-carousel__item" aria-hidden="true">Brooksfield</span>
+    <span class="brand-carousel__item" aria-hidden="true">·</span>
+    <span class="brand-carousel__item" aria-hidden="true">Mistral</span>
+    <span class="brand-carousel__item" aria-hidden="true">·</span>
+    <span class="brand-carousel__item" aria-hidden="true">Brooksfield</span>
+    <span class="brand-carousel__item" aria-hidden="true">·</span>
+  </div>
+</section>
+
+<!-- ════════ FOOTER (expandido 4 columnas) ════════ -->
 <footer class="footer" id="contacto">
-  <div class="footer__grid">
-    <div>
+  <div class="footer__grid footer__grid--4">
+    <div class="footer__col footer__col--brand">
       <div class="footer__brand">Clousa</div>
-      <p>Indumentaria masculina de calidad en San Miguel, Zona Norte. Colección Invierno 2026.</p>
+      <p>Indumentaria masculina en San Miguel, Zona Norte. Selección curada de Brooksfield y Mistral — atemporal, bien hecha y al precio justo.</p>
     </div>
     <div class="footer__col">
-      <h4>Navegación</h4>
-      <a href="#hero">Novedades</a>
-      <a href="#" data-cta-all>Colección</a>
-      <a href="#contacto">Contacto</a>
+      <h4>Comprar</h4>
+      <a href="#hero" data-nav-home>Novedades</a>
+      <a href="#" data-brand-cta="Brooksfield">Brooksfield</a>
+      <a href="#" data-brand-cta="Mistral">Mistral</a>
+      <a href="#" data-categories="CAMPERAS FRISADAS,CAMPERAS RUSTICAS,CAMPERAS POLAR,JACKETS" data-label="Camperas">Camperas</a>
+      <a href="#" data-categories="SWEATERS,BUZOS FRISADOS,BUZOS RUSTICOS,BUZOS POLAR,CANGUROS FRISADOS,CANGUROS RUSTICOS" data-label="Buzos & Sweaters">Sweaters &amp; Buzos</a>
+      <a href="#" data-categories="PANTALONES,PANTALONES CORDEROY,JEANS,JOGGINGS FRISADOS,JOGGINGS RUSTICOS" data-label="Pantalones">Pantalones</a>
+      <a href="#" data-categories="BUFANDAS,GORROS,GORRAS,CINTURONES,MEDIAS,BILLETERAS,BOLSOS,BOXERS,PERFUMERIA" data-label="Accesorios">Accesorios</a>
+    </div>
+    <div class="footer__col">
+      <h4>Atención</h4>
+      <a href="https://wa.me/5491166025737?text=Hola!%20Quiero%20consultar%20sobre%20un%20producto" target="_blank" rel="noopener">Consultas por WhatsApp</a>
+      <p>Envíos a todo el país</p>
+      <p>Cambios sin cargo a 15 días</p>
+      <p>3 cuotas sin interés con MercadoPago</p>
+      <p>10% OFF con transferencia bancaria</p>
     </div>
     <div class="footer__col">
       <h4>Contacto</h4>
       <p>Cnel. Charlone 1095</p>
       <p>San Miguel, Buenos Aires</p>
-      <a href="https://wa.me/5491166025737" target="_blank" rel="noopener">WhatsApp</a>
+      <p>Lun a Sáb · 10 a 19hs</p>
+      <a href="https://wa.me/5491166025737" target="_blank" rel="noopener">+54 9 11 6602-5737</a>
     </div>
   </div>
   <div class="footer__bottom">
-    <span>© 2026 Clousa</span>
+    <span>© 2026 Clousa · Todos los derechos reservados</span>
     <span>Visa · Mastercard · Mercado Pago · Transferencia</span>
   </div>
 </footer>
