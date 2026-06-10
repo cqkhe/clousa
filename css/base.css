@@ -7,29 +7,30 @@
 
 :root {
   /* ─────────────────────────────────────────────────────────────────────
-     LEGACY TOKENS (Etapa 1 — quedan vigentes, no se tocan para no romper)
-     Las clases existentes los siguen usando: --bg-primary, --ink, etc.
+     LEGACY TOKENS (los nombres se mantienen — no se rompen imports.
+     Los valores se neutralizan: paleta editorial fría blanco/negro/gris,
+     sin tonos cálidos crema/dorado/navy).
      ───────────────────────────────────────────────────────────────────── */
 
-  /* ---- Paleta — Premium claro cálido ---- */
-  --bg-primary:   #FAFAF7;   /* blanco hueso — fondo general */
-  --bg-secondary: #FFFFFF;   /* cards — contraste sutil con el fondo */
-  --bg-section:   #F0EFEB;   /* secciones alternas, gris cálido muy claro */
-  --ink:          #0A0A0A;   /* texto principal, casi negro */
-  --ink-soft:     #4A4A4A;   /* texto secundario */
-  --graphite:     #8A8A8A;   /* texto muted, captions */
-  --line:         #E5E3DE;   /* bordes sutiles */
-  --accent:       #1B2D4F;   /* navy — acento de marca */
-  --gold:         #B8924F;   /* champagne — acento puntual (precio destacado) */
-  --sale:         #9A2A2A;   /* precio de oferta */
+  /* ---- Paleta — Editorial frío premium ---- */
+  --bg-primary:   #FAFAFA;   /* blanco neutro — fondo general */
+  --bg-secondary: #FFFFFF;   /* cards y elementos elevados */
+  --bg-section:   #F4F4F4;   /* secciones alternas, gris frío muy claro */
+  --ink:          #111111;   /* texto principal, casi negro */
+  --ink-soft:     #404040;   /* texto secundario */
+  --graphite:     #757575;   /* texto muted, captions */
+  --line:         #E5E5E5;   /* bordes sutiles, frío */
+  --accent:       #111111;   /* acento = ink (Frank Store no usa color de marca) */
+  --gold:         #757575;   /* alias compat — neutraliza cualquier resto a graphite */
+  --sale:         #B91C1C;   /* precio de oferta — rojo sobrio */
 
   /* ---- Tipografía ---- */
   --font: 'Jost', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
 
   /* ---- Layout ---- */
-  --maxw:   1680px;
-  --gutter: clamp(16px, 4vw, 56px);
-  --nav-h:  72px;
+  --maxw:   1440px;          /* más editorial que 1680, evita líneas demasiado largas */
+  --gutter: clamp(18px, 4vw, 48px);
+  --nav-h:  76px;
   --bar-h:  34px;
 
   /* ---- Motion ---- */
@@ -48,18 +49,18 @@
      ═════════════════════════════════════════════════════════════════════ */
 
   /* ─── Color tokens (semánticos, no por nombre) ─── */
-  --c-bg:           #FAFAF7;   /* fondo principal */
+  --c-bg:           #FAFAFA;   /* fondo principal */
   --c-bg-elevated:  #FFFFFF;   /* cards, modal, drawer */
-  --c-bg-muted:     #F0EFEB;   /* secciones alternas, hover de buttons */
-  --c-ink:          #0A0A0A;   /* texto principal */
-  --c-ink-2:        #4A4A4A;   /* texto secundario */
-  --c-ink-3:        #8A8A8A;   /* muted, captions, placeholder */
-  --c-line:         #E5E3DE;   /* bordes default */
-  --c-line-strong:  #C8C5BD;   /* bordes destacados (focus, active) */
-  --c-accent:       #D4A574;   /* champagne — hover sutil, badges "Nuevo" */
-  --c-sale:         #9A2A2A;   /* precio oferta */
+  --c-bg-muted:     #F4F4F4;   /* secciones alternas, hover de buttons */
+  --c-ink:          #111111;   /* texto principal */
+  --c-ink-2:        #404040;   /* texto secundario */
+  --c-ink-3:        #757575;   /* muted, captions, placeholder */
+  --c-line:         #E5E5E5;   /* bordes default */
+  --c-line-strong:  #BFBFBF;   /* bordes destacados (focus, active) */
+  --c-accent:       #111111;   /* sin color de marca — acento = ink */
+  --c-sale:         #B91C1C;   /* precio oferta — rojo sobrio */
   --c-success:      #2E7D5A;   /* confirmaciones */
-  --c-warning:      #B8924F;   /* alertas suaves */
+  --c-warning:      #757575;   /* alertas suaves — neutralizado */
   --c-wa:           #25D366;   /* solo logo WhatsApp */
   --c-mp:           #009EE3;   /* solo logo MercadoPago */
 
@@ -86,13 +87,13 @@
   --fs-3xl:  48px;   /* h1 section */
   --fs-display: clamp(48px, 7vw, 96px); /* hero display */
 
-  /* ─── Tracking (letter-spacing) ─── */
+  /* ─── Tracking (letter-spacing) — escala más sutil, editorial ─── */
   --tr-tight:   -0.02em;   /* display, h1 */
   --tr-snug:    -0.01em;   /* h2, h3 */
   --tr-normal:   0em;       /* body */
-  --tr-wide:     0.04em;    /* card name */
-  --tr-wider:    0.12em;    /* small caps, button */
-  --tr-eyebrow:  0.32em;    /* eyebrow text */
+  --tr-wide:     0.02em;    /* card name */
+  --tr-wider:    0.08em;    /* small caps, button */
+  --tr-eyebrow:  0.14em;    /* eyebrow / nav uppercase */
 
   /* ─── Line height ─── */
   --lh-tight:   1.1;
