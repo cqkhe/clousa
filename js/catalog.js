@@ -286,7 +286,16 @@ window.Clousa = window.Clousa || {};
 
   function render() {
     var initialMode = isInitialDefault();
-    var list = initialMode ? getInitialFeatured() : getFiltered();
+
+    /* En home (initialMode), el #catalogGrid está oculto (collection-only).
+       Los brand-blocks ya cubren el render destacado. Salir temprano. */
+    if (initialMode) {
+      if (dom.loadMoreWrap) dom.loadMoreWrap.hidden = true;
+      if (dom.empty) dom.empty.hidden = true;
+      return;
+    }
+
+    var list = getFiltered();
 
     dom.count.textContent = list.length +
       (list.length === 1 ? ' producto' : ' productos');
@@ -312,17 +321,67 @@ window.Clousa = window.Clousa || {};
       : list;
 
     dom.grid.innerHTML = visible.map(cardHtml).join('');
-    dom.grid.classList.toggle('is-featured', initialMode);
-    if (dom.featuredWrap) dom.featuredWrap.classList.toggle('is-featured', initialMode);
+    dom.grid.classList.remove('is-featured');
+    if (dom.featuredWrap) dom.featuredWrap.classList.remove('is-featured');
 
-    /* En vista inicial siempre mostramos el CTA para acceder al catálogo completo */
-    if (initialMode) {
-      if (dom.loadMoreWrap) dom.loadMoreWrap.hidden = false;
-    } else {
-      if (dom.loadMoreWrap) dom.loadMoreWrap.hidden = state.showAll || list.length <= INITIAL_LIMIT;
-    }
+    if (dom.loadMoreWrap) dom.loadMoreWrap.hidden = state.showAll || list.length <= INITIAL_LIMIT;
 
     if (C.revealGrid) C.revealGrid();
+  }
+
+  /* Render de los 2 bloques de marca de la home (Brooksfield + Mistral).
+     Toma top 4 productos con stock de cada marca, intercalando categorías
+     para diversidad visual. Bind del CTA "Ver toda la colección" + click
+     en card → modal. */
+  function renderBrandBlocks() {
+    var marcas = ['Brooksfield', 'Mistral'];
+    marcas.forEach(function (brand) {
+      var grid = document.getElementById('brandGrid' + brand);
+      if (!grid) return;
+
+      var pool = C.productos
+        .filter(function (p) { return p.brand === brand && !p.soldOut; })
+        .sort(function (a, b) { return b.price - a.price; });
+
+      /* Round-robin por categoría para no repetir tipos */
+      var byCategory = {};
+      pool.forEach(function (p) {
+        if (!byCategory[p.category]) byCategory[p.category] = [];
+        byCategory[p.category].push(p);
+      });
+      var categories = Object.keys(byCategory).sort(function (a, b) {
+        return categoryRank(a) - categoryRank(b);
+      });
+      var picked = [];
+      var idx = 0;
+      while (picked.length < 4) {
+        var added = false;
+        for (var i = 0; i < categories.length && picked.length < 4; i++) {
+          var p = byCategory[categories[i]][idx];
+          if (p) { picked.push(p); added = true; }
+        }
+        if (!added) break;
+        idx++;
+      }
+
+      grid.innerHTML = picked.map(cardHtml).join('');
+
+      grid.addEventListener('click', function (e) {
+        var card = e.target.closest('.product-card');
+        if (!card) return;
+        var p = C.getById(card.getAttribute('data-id'));
+        if (p) C.modal.open(p);
+      });
+    });
+
+    /* CTAs "Ver toda la colección" — entran al modo colección filtrado */
+    var ctas = document.querySelectorAll('[data-brand-cta]');
+    Array.prototype.forEach.call(ctas, function (cta) {
+      cta.addEventListener('click', function (e) {
+        e.preventDefault();
+        filterByBrand(cta.getAttribute('data-brand-cta'));
+      });
+    });
   }
 
   /* Activa el catálogo completo filtrado por una marca específica.
@@ -698,6 +757,9 @@ window.Clousa = window.Clousa || {};
         target.classList.add('is-active');
       }
     }
+
+    /* Render de los bloques de marca destacados de la home */
+    renderBrandBlocks();
 
     render();
   }

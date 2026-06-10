@@ -868,8 +868,12 @@
 /* ═════════════════════════════════════════════════════════════════════
    FRANK STORE REDESIGN — Componentes nuevos
    USP row · Bloque por marca · Brand carousel
-   Aún no renderizados desde HTML/JS (vienen en Commits 3 y 4).
    ═════════════════════════════════════════════════════════════════════ */
+
+/* ── Visibilidad opuesta a .featured-only ─────────────────────────
+   Por defecto oculto en home; visible al activar mode-collection. */
+.collection-only { display: none; }
+body.mode-collection .collection-only { display: block; }
 
 /* ── USP row — fila de 4 garantías ─────────────────────────────── */
 .usp-row {
@@ -905,6 +909,8 @@
   height: 100%;
   stroke: currentColor;
   stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
   fill: none;
 }
 .usp-row__title {
