@@ -864,3 +864,184 @@
   .skeleton::after { animation: none; }
   .nav__cart-count.is-bump { animation: none; }
 }
+
+/* ═════════════════════════════════════════════════════════════════════
+   FRANK STORE REDESIGN — Componentes nuevos
+   USP row · Bloque por marca · Brand carousel
+   Aún no renderizados desde HTML/JS (vienen en Commits 3 y 4).
+   ═════════════════════════════════════════════════════════════════════ */
+
+/* ── USP row — fila de 4 garantías ─────────────────────────────── */
+.usp-row {
+  background: var(--c-bg-elevated);
+  border-top: 1px solid var(--c-line);
+  border-bottom: 1px solid var(--c-line);
+}
+.usp-row__grid {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: var(--s-5) var(--gutter);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--s-5);
+}
+.usp-row__item {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  text-align: left;
+}
+.usp-row__icon {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--c-ink);
+}
+.usp-row__icon svg {
+  width: 100%;
+  height: 100%;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  fill: none;
+}
+.usp-row__title {
+  font-size: var(--fs-base);
+  font-weight: 600;
+  color: var(--c-ink);
+  letter-spacing: var(--tr-snug);
+  line-height: 1.2;
+  margin-bottom: 2px;
+}
+.usp-row__sub {
+  font-size: var(--fs-sm);
+  color: var(--c-ink-3);
+  line-height: 1.35;
+}
+@media (max-width: 768px) {
+  .usp-row__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--s-4);
+    padding: var(--s-4) var(--gutter);
+  }
+  .usp-row__item { gap: var(--s-2); }
+  .usp-row__icon { width: 24px; height: 24px; }
+  .usp-row__title { font-size: var(--fs-sm); }
+  .usp-row__sub { font-size: var(--fs-xs); }
+}
+
+/* ── Bloque por marca ──────────────────────────────────────────────
+   Header (logo de marca + tagline + CTA) + grilla 4 productos. */
+.brand-block {
+  padding: var(--s-9) var(--gutter) var(--s-7);
+  max-width: var(--maxw);
+  margin: 0 auto;
+}
+.brand-block + .brand-block {
+  border-top: 1px solid var(--c-line);
+}
+.brand-block__header {
+  text-align: center;
+  margin-bottom: var(--s-7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s-3);
+}
+.brand-block__logo {
+  font-family: var(--font);
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 800;
+  letter-spacing: var(--tr-tight);
+  color: var(--c-ink);
+  line-height: 1;
+  text-transform: uppercase;
+}
+.brand-block__tagline {
+  font-size: var(--fs-md);
+  color: var(--c-ink-2);
+  max-width: 540px;
+  line-height: var(--lh-base);
+}
+.brand-block__cta {
+  display: inline-block;
+  margin-top: var(--s-3);
+  padding: var(--s-3) var(--s-6);
+  border: 1px solid var(--c-ink);
+  color: var(--c-ink);
+  background: transparent;
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  letter-spacing: var(--tr-wider);
+  text-transform: uppercase;
+  transition: background var(--duration-fast) var(--ease),
+              color var(--duration-fast) var(--ease);
+}
+.brand-block__cta:hover {
+  background: var(--c-ink);
+  color: var(--c-bg-elevated);
+}
+.brand-block__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--s-5);
+}
+@media (max-width: 1024px) {
+  .brand-block { padding: var(--s-8) var(--gutter) var(--s-6); }
+  .brand-block__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-4);
+  }
+}
+@media (max-width: 768px) {
+  .brand-block { padding: var(--s-7) var(--gutter) var(--s-6); }
+  .brand-block__header { margin-bottom: var(--s-6); }
+  .brand-block__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--s-4);
+  }
+}
+
+/* ── Brand carousel — track infinito de marcas ────────────────────
+   Track con items duplicados; el keyframe va de 0 a -50% para que
+   al terminar el primer set, el segundo está exactamente donde
+   estaba el primero. Pausa al hover. */
+.brand-carousel {
+  background: var(--c-bg-muted);
+  padding: var(--s-6) 0;
+  overflow: hidden;
+  border-top: 1px solid var(--c-line);
+  border-bottom: 1px solid var(--c-line);
+}
+.brand-carousel__track {
+  display: flex;
+  gap: var(--s-9);
+  width: max-content;
+  animation: brand-scroll 25s linear infinite;
+}
+.brand-carousel:hover .brand-carousel__track {
+  animation-play-state: paused;
+}
+.brand-carousel__item {
+  font-family: var(--font);
+  font-size: clamp(20px, 2.4vw, 32px);
+  font-weight: 700;
+  letter-spacing: var(--tr-wider);
+  color: var(--c-ink-3);
+  text-transform: uppercase;
+  white-space: nowrap;
+  user-select: none;
+}
+@keyframes brand-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .brand-carousel__track { animation: none; }
+}
+@media (max-width: 768px) {
+  .brand-carousel { padding: var(--s-5) 0; }
+  .brand-carousel__track { gap: var(--s-7); }
+}
