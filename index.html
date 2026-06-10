@@ -9,9 +9,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/base.css?v=20260610d">
-<link rel="stylesheet" href="css/layout.css?v=20260610d">
-<link rel="stylesheet" href="css/components.css?v=20260610d">
+<link rel="stylesheet" href="css/base.css?v=20260610e">
+<link rel="stylesheet" href="css/layout.css?v=20260610e">
+<link rel="stylesheet" href="css/components.css?v=20260610e">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 </head>
@@ -273,8 +273,34 @@
 </div>
 
 <p class="result-count collection-only sr-only" id="resultCount" hidden></p>
-<main class="section section--tight collection-only" id="catalogo">
-  <div class="container">
+
+<div class="collection-layout collection-only" id="catalogo">
+  <aside class="filters-sidebar" id="filtersSidebar" aria-label="Filtros">
+    <!-- Los grupos los renderiza JS (renderFiltersSidebar) -->
+    <div class="filter-group" data-facet="availability">
+      <h3 class="filter-group__title">Disponibilidad</h3>
+      <ul class="filter-group__list" id="facetAvailability"></ul>
+    </div>
+    <div class="filter-group" data-facet="brand">
+      <h3 class="filter-group__title">Marca</h3>
+      <ul class="filter-group__list" id="facetBrand"></ul>
+    </div>
+    <div class="filter-group" data-facet="category">
+      <h3 class="filter-group__title">Categoría</h3>
+      <ul class="filter-group__list" id="facetCategory"></ul>
+    </div>
+    <div class="filter-group" data-facet="size">
+      <h3 class="filter-group__title">Talle</h3>
+      <ul class="filter-group__list" id="facetSize"></ul>
+    </div>
+    <div class="filter-group" data-facet="price">
+      <h3 class="filter-group__title">Precio</h3>
+      <ul class="filter-group__list" id="facetPrice"></ul>
+    </div>
+    <button type="button" class="filters-sidebar__clear" id="filtersClearBtn">Limpiar filtros</button>
+  </aside>
+
+  <main class="collection-main">
     <div class="featured-wrap" id="featuredWrap">
       <button class="featured-nav featured-nav--prev" id="featuredPrev" aria-label="Anterior" type="button">‹</button>
       <div class="catalog-grid" id="catalogGrid">
@@ -285,10 +311,8 @@
     <div class="empty-state" id="emptyState" hidden>
       <p>No encontramos productos con esos filtros.</p>
     </div>
-  </div>
-
-  </div>
-</main>
+  </main>
+</div>
 
 <!-- ════════ SOBRE CLOUSA ════════ -->
 <section class="about featured-only" id="sobre-clousa">
@@ -439,10 +463,10 @@
   </div>
 </div>
 
-<script src="js/data.js?v=20260610d"></script>
-<script src="js/cart.js?v=20260610d"></script>
-<script src="js/modal.js?v=20260610d"></script>
-<script src="js/catalog.js?v=20260610d"></script>
-<script src="js/main.js?v=20260610d"></script>
+<script src="js/data.js?v=20260610e"></script>
+<script src="js/cart.js?v=20260610e"></script>
+<script src="js/modal.js?v=20260610e"></script>
+<script src="js/catalog.js?v=20260610e"></script>
+<script src="js/main.js?v=20260610e"></script>
 </body>
 </html>

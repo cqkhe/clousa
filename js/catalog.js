@@ -31,7 +31,19 @@ window.Clousa = window.Clousa || {};
   }
 
   var INITIAL_LIMIT = 8;
-  var state = { category: 'all', categoryGroup: null, price: 'all', sort: 'destacados', query: '', brand: 'all', showAll: false };
+  /* State con arrays multi-select para el sidebar (Commit E).
+     Cada facet es un array — vacío = no filtra, items = OR dentro del facet.
+     Entre facets: AND. */
+  var state = {
+    brandList:    [],          /* multi: ['Mistral', 'Brooksfield'] */
+    categoryList: [],          /* multi: nombres de categoría del JSON */
+    priceList:    [],          /* multi: ids de PRICE_BRACKETS */
+    sizes:        [],          /* multi: ['S','M','L','XL','XXL'] */
+    inStockOnly:  false,       /* checkbox único disponibilidad */
+    sort:         'destacados',
+    query:        '',
+    showAll:      false
+  };
 
   /* ────────────────────────────────────────────────────────────────────
      Orden de prioridad comercial — Invierno 2026
@@ -127,28 +139,50 @@ window.Clousa = window.Clousa || {};
 
   function isInitialDefault() {
     return !state.showAll
-      && state.brand === 'all'
-      && state.category === 'all'
-      && state.price === 'all'
+      && state.brandList.length === 0
+      && state.categoryList.length === 0
+      && state.priceList.length === 0
+      && state.sizes.length === 0
+      && !state.inStockOnly
       && state.sort === 'destacados'
       && !state.query;
   }
 
-  function getFiltered() {
-    var bracket = PRICE_BRACKETS.filter(function (b) { return b.id === state.price; })[0]
-      || PRICE_BRACKETS[0];
+  /* Verifica si un producto pasa todos los filtros activos excepto el indicado.
+     Si excludeFacet === null, aplica todos los filtros.
+     Esto permite calcular conteos por facet sin que el propio facet se filtre a sí mismo. */
+  function passesFilters(p, excludeFacet) {
+    if (excludeFacet !== 'availability' && state.inStockOnly && p.soldOut) return false;
+    if (excludeFacet !== 'brand' && state.brandList.length > 0 &&
+        state.brandList.indexOf(p.brand) === -1) return false;
+    if (excludeFacet !== 'category' && state.categoryList.length > 0 &&
+        state.categoryList.indexOf(p.category) === -1) return false;
+    if (excludeFacet !== 'size' && state.sizes.length > 0) {
+      var talles = p.talles || [];
+      var ok = false;
+      for (var i = 0; i < talles.length; i++) {
+        if (state.sizes.indexOf(talles[i]) !== -1) { ok = true; break; }
+      }
+      if (!ok) return false;
+    }
+    if (excludeFacet !== 'price' && state.priceList.length > 0) {
+      var inAny = false;
+      for (var j = 0; j < state.priceList.length; j++) {
+        var bid = state.priceList[j];
+        var b = PRICE_BRACKETS.filter(function (br) { return br.id === bid; })[0];
+        if (b && p.price >= b.min && p.price <= b.max) { inAny = true; break; }
+      }
+      if (!inAny) return false;
+    }
     var q = state.query.trim().toLowerCase();
+    if (q && p.name.toLowerCase().indexOf(q) === -1 &&
+            p.category.toLowerCase().indexOf(q) === -1 &&
+            p.brand.toLowerCase().indexOf(q) === -1) return false;
+    return true;
+  }
 
-    var list = C.productos.filter(function (p) {
-      if (state.brand !== 'all' && p.brand !== state.brand) return false;
-      if (state.categoryGroup && state.categoryGroup.indexOf(p.category) === -1) return false;
-      if (state.category !== 'all' && p.category !== state.category) return false;
-      if (p.price < bracket.min || p.price > bracket.max) return false;
-      if (q && p.name.toLowerCase().indexOf(q) === -1 &&
-              p.category.toLowerCase().indexOf(q) === -1 &&
-              p.brand.toLowerCase().indexOf(q) === -1) return false;
-      return true;
-    });
+  function getFiltered() {
+    var list = C.productos.filter(function (p) { return passesFilters(p, null); });
 
     if (state.sort === 'precio-asc')  list.sort(function (a, b) { return a.price - b.price; });
     if (state.sort === 'precio-desc') list.sort(function (a, b) { return b.price - a.price; });
@@ -311,21 +345,15 @@ window.Clousa = window.Clousa || {};
      Modo "colección": oculta los bloques featured-only de la home y
      muestra un header con título de la marca + link de regreso. */
   function filterByBrand(brand) {
-    state.showAll       = true;
-    state.brand         = brand;
-    state.category      = 'all';
-    state.categoryGroup = null;
-    state.price         = 'all';
-    state.sort          = 'destacados';
-    state.query         = '';
+    state.showAll      = true;
+    state.brandList    = [brand];
+    state.categoryList = [];
+    state.priceList    = [];
+    state.sizes        = [];
+    state.inStockOnly  = false;
+    state.sort         = 'destacados';
+    state.query        = '';
 
-    /* Mostrar los controles ocultos */
-    var controls = document.getElementById('catalogControls');
-    if (controls) controls.hidden = false;
-    var rc = document.getElementById('resultCount');
-    if (rc) rc.hidden = false;
-
-    /* Activar modo colección y setear título */
     document.body.classList.add('mode-collection');
     var header = document.getElementById('collectionHeader');
     var title  = document.getElementById('collectionTitle');
@@ -333,48 +361,24 @@ window.Clousa = window.Clousa || {};
     if (title)  title.textContent = brand.toUpperCase();
     setBreadcrumb(brand);
 
-    /* Sincronizar UI de los chips de marca */
-    if (dom.brandChips) {
-      var chips = dom.brandChips.querySelectorAll('.brand-chip');
-      Array.prototype.forEach.call(chips, function (c) {
-        c.classList.toggle('is-active', c.getAttribute('data-brand') === brand);
-      });
-    }
-
-    /* Resetear chip de categoría a "Todas" */
-    if (dom.chips) {
-      var catChips = dom.chips.querySelectorAll('.chip');
-      Array.prototype.forEach.call(catChips, function (c) {
-        c.classList.toggle('is-active', c.getAttribute('data-cat') === 'all');
-      });
-    }
-
-    /* Resetear selects e input de búsqueda */
-    if (dom.price)  dom.price.value  = 'all';
     if (dom.sort)   dom.sort.value   = 'destacados';
-    if (dom.search) dom.search.value = '';
 
+    renderFiltersSidebar();
     render();
-
-    /* Scroll al header del catálogo */
     window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
   }
 
   /* Busca por texto libre — entra al modo colección y filtra por state.query.
      Se llama desde el search bar del header. */
   function filterByQuery(q) {
-    state.showAll       = true;
-    state.brand         = 'all';
-    state.category      = 'all';
-    state.categoryGroup = null;
-    state.price         = 'all';
-    state.sort          = 'destacados';
-    state.query         = q || '';
-
-    var controls = document.getElementById('catalogControls');
-    if (controls) controls.hidden = false;
-    var rc = document.getElementById('resultCount');
-    if (rc) rc.hidden = false;
+    state.showAll      = true;
+    state.brandList    = [];
+    state.categoryList = [];
+    state.priceList    = [];
+    state.sizes        = [];
+    state.inStockOnly  = false;
+    state.sort         = 'destacados';
+    state.query        = q || '';
 
     document.body.classList.add('mode-collection');
     var header = document.getElementById('collectionHeader');
@@ -383,23 +387,9 @@ window.Clousa = window.Clousa || {};
     if (title)  title.textContent = 'RESULTADOS · ' + q.toUpperCase();
     setBreadcrumb('Búsqueda: ' + q);
 
-    /* Resetear UI de chips/selects al estado neutral */
-    if (dom.brandChips) {
-      var chips = dom.brandChips.querySelectorAll('.brand-chip');
-      Array.prototype.forEach.call(chips, function (c) {
-        c.classList.toggle('is-active', c.getAttribute('data-brand') === 'all');
-      });
-    }
-    if (dom.chips) {
-      var catChips = dom.chips.querySelectorAll('.chip');
-      Array.prototype.forEach.call(catChips, function (c) {
-        c.classList.toggle('is-active', c.getAttribute('data-cat') === 'all');
-      });
-    }
-    if (dom.price)  dom.price.value  = 'all';
     if (dom.sort)   dom.sort.value   = 'destacados';
-    if (dom.search) dom.search.value = q;
 
+    renderFiltersSidebar();
     render();
     window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
   }
@@ -408,20 +398,16 @@ window.Clousa = window.Clousa || {};
      simplificado (CAMPERAS / BUZOS / PANTALONES / REMERAS / ACCESORIOS)
      y por las cards de categoría de la home. */
   function filterByCategory(categoriesStr, label) {
-    state.showAll       = true;
-    state.brand         = 'all';
-    state.category      = 'all';
-    state.categoryGroup = categoriesStr
+    state.showAll      = true;
+    state.brandList    = [];
+    state.categoryList = categoriesStr
       ? categoriesStr.split(',').map(function (s) { return s.trim(); })
-      : null;
-    state.price = 'all';
-    state.sort  = 'destacados';
-    state.query = '';
-
-    var controls = document.getElementById('catalogControls');
-    if (controls) controls.hidden = false;
-    var rc = document.getElementById('resultCount');
-    if (rc) rc.hidden = false;
+      : [];
+    state.priceList    = [];
+    state.sizes        = [];
+    state.inStockOnly  = false;
+    state.sort         = 'destacados';
+    state.query        = '';
 
     document.body.classList.add('mode-collection');
     var header = document.getElementById('collectionHeader');
@@ -431,43 +417,25 @@ window.Clousa = window.Clousa || {};
     if (title)  title.textContent = catLabel.toUpperCase();
     setBreadcrumb(catLabel);
 
-    if (dom.brandChips) {
-      var chips = dom.brandChips.querySelectorAll('.brand-chip');
-      Array.prototype.forEach.call(chips, function (c) {
-        c.classList.toggle('is-active', c.getAttribute('data-brand') === 'all');
-      });
-    }
-    if (dom.chips) {
-      var catChips = dom.chips.querySelectorAll('.chip');
-      Array.prototype.forEach.call(catChips, function (c) {
-        c.classList.toggle('is-active', c.getAttribute('data-cat') === 'all');
-      });
-    }
-    if (dom.price)  dom.price.value  = 'all';
     if (dom.sort)   dom.sort.value   = 'destacados';
-    if (dom.search) dom.search.value = '';
 
+    renderFiltersSidebar();
     render();
     window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
   }
 
-  /* Filtra por marca + grupo de categorías (ej: "Mistral · Remeras"
-     que incluye REMERAS MC + REMERAS ML). */
+  /* Filtra por marca + grupo de categorías (ej: "Mistral · Remeras"). */
   function filterByBrandAndCategory(brand, categoriesStr, label) {
-    state.showAll       = true;
-    state.brand         = brand;
-    state.category      = 'all';
-    state.categoryGroup = categoriesStr
+    state.showAll      = true;
+    state.brandList    = [brand];
+    state.categoryList = categoriesStr
       ? categoriesStr.split(',').map(function (s) { return s.trim(); })
-      : null;
-    state.price = 'all';
-    state.sort  = 'destacados';
-    state.query = '';
-
-    var controls = document.getElementById('catalogControls');
-    if (controls) controls.hidden = false;
-    var rc = document.getElementById('resultCount');
-    if (rc) rc.hidden = false;
+      : [];
+    state.priceList    = [];
+    state.sizes        = [];
+    state.inStockOnly  = false;
+    state.sort         = 'destacados';
+    state.query        = '';
 
     document.body.classList.add('mode-collection');
     var header = document.getElementById('collectionHeader');
@@ -477,22 +445,9 @@ window.Clousa = window.Clousa || {};
     if (title)  title.textContent = bcLabel.toUpperCase();
     setBreadcrumb(bcLabel);
 
-    if (dom.brandChips) {
-      var chips = dom.brandChips.querySelectorAll('.brand-chip');
-      Array.prototype.forEach.call(chips, function (c) {
-        c.classList.toggle('is-active', c.getAttribute('data-brand') === brand);
-      });
-    }
-    if (dom.chips) {
-      var catChips = dom.chips.querySelectorAll('.chip');
-      Array.prototype.forEach.call(catChips, function (c) {
-        c.classList.toggle('is-active', c.getAttribute('data-cat') === 'all');
-      });
-    }
-    if (dom.price)  dom.price.value  = 'all';
     if (dom.sort)   dom.sort.value   = 'destacados';
-    if (dom.search) dom.search.value = '';
 
+    renderFiltersSidebar();
     render();
     window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
   }
@@ -508,38 +463,19 @@ window.Clousa = window.Clousa || {};
     if (title) title.textContent = 'COLECCIÓN HOMBRE';
     setBreadcrumb('Colección');
 
-    /* Resetear estado para volver a la vista inicial featured */
-    state.showAll       = false;
-    state.brand         = 'all';
-    state.category      = 'all';
-    state.categoryGroup = null;
-    state.price         = 'all';
-    state.sort          = 'destacados';
-    state.query         = '';
+    /* Resetear estado a la vista inicial */
+    state.showAll      = false;
+    state.brandList    = [];
+    state.categoryList = [];
+    state.priceList    = [];
+    state.sizes        = [];
+    state.inStockOnly  = false;
+    state.sort         = 'destacados';
+    state.query        = '';
 
-    /* Ocultar controles otra vez */
-    var controls = document.getElementById('catalogControls');
-    if (controls) controls.hidden = true;
-    var rc = document.getElementById('resultCount');
-    if (rc) rc.hidden = true;
+    if (dom.sort) dom.sort.value = 'destacados';
 
-    /* Resetear UI */
-    if (dom.brandChips) {
-      var chips = dom.brandChips.querySelectorAll('.brand-chip');
-      Array.prototype.forEach.call(chips, function (c) {
-        c.classList.toggle('is-active', c.getAttribute('data-brand') === 'all');
-      });
-    }
-    if (dom.chips) {
-      var catChips = dom.chips.querySelectorAll('.chip');
-      Array.prototype.forEach.call(catChips, function (c) {
-        c.classList.toggle('is-active', c.getAttribute('data-cat') === 'all');
-      });
-    }
-    if (dom.price)  dom.price.value  = 'all';
-    if (dom.sort)   dom.sort.value   = 'destacados';
-    if (dom.search) dom.search.value = '';
-
+    renderFiltersSidebar();
     render();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
@@ -650,52 +586,11 @@ window.Clousa = window.Clousa || {};
     buildCategoryChips();
     buildSelects();
 
-    if (dom.brandChips) {
-      dom.brandChips.addEventListener('click', function (e) {
-        var chip = e.target.closest('[data-brand]');
-        if (!chip) return;
-        state.brand = chip.getAttribute('data-brand');
-        state.showAll = false;
-        state.categoryGroup = null;
-        var all = dom.brandChips.querySelectorAll('.brand-chip');
-        for (var i = 0; i < all.length; i++) all[i].classList.remove('is-active');
-        chip.classList.add('is-active');
-        render();
-      });
-    }
-
-    if (dom.chips) {
-      dom.chips.addEventListener('click', function (e) {
-        var chip = e.target.closest('[data-cat]');
-        if (!chip) return;
-        state.category = chip.getAttribute('data-cat');
-        state.showAll = false;
-        state.categoryGroup = null;
-        var all = dom.chips.querySelectorAll('.chip');
-        for (var i = 0; i < all.length; i++) all[i].classList.remove('is-active');
-        chip.classList.add('is-active');
-        render();
-      });
-    }
-
-    if (dom.price) {
-      dom.price.addEventListener('change', function () {
-        state.price = dom.price.value; state.showAll = false; state.categoryGroup = null; render();
-      });
-    }
     if (dom.sort) {
       dom.sort.addEventListener('change', function () {
-        state.sort = dom.sort.value; state.showAll = false; state.categoryGroup = null; render();
+        state.sort = dom.sort.value; render();
       });
     }
-
-    var t;
-    if (dom.search) dom.search.addEventListener('input', function () {
-      clearTimeout(t);
-      t = setTimeout(function () {
-        state.query = dom.search.value; state.showAll = false; state.categoryGroup = null; render();
-      }, 160);
-    });
 
     /* Click en card -> abre la vista rápida */
     dom.grid.addEventListener('click', function (e) {
@@ -705,32 +600,190 @@ window.Clousa = window.Clousa || {};
       if (p) C.modal.open(p);
     });
 
-    /* Filtrado por categoría desde un enlace externo (ej. nav) */
-    var hash = decodeURIComponent(location.hash.replace('#cat=', ''));
-    if (hash && location.hash.indexOf('#cat=') === 0 && dom.chips) {
-      state.category = hash;
-      var target = dom.chips.querySelector('[data-cat="' + hash + '"]');
-      if (target) {
-        dom.chips.querySelectorAll('.chip').forEach(function (c) {
-          c.classList.remove('is-active');
-        });
-        target.classList.add('is-active');
-      }
-    }
-
-    /* Botón "Filtrar" — stub (Commits E y F implementan sidebar y drawer) */
+    /* Botón "Filtrar" del bar de colección — stub visual (drawer mobile en Commit F) */
     var filterBtn = document.getElementById('filterToggleBtn');
     if (filterBtn) {
       filterBtn.addEventListener('click', function () {
         var expanded = filterBtn.getAttribute('aria-expanded') === 'true';
         filterBtn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-        /* TODO Commit E/F: abrir sidebar/drawer de filtros */
+        /* TODO Commit F: abrir drawer de filtros en mobile */
       });
     }
+
+    /* Botón "Limpiar filtros" del sidebar */
+    var clearBtn = document.getElementById('filtersClearBtn');
+    if (clearBtn) clearBtn.addEventListener('click', clearAllFilters);
+
+    /* Event delegation para checkboxes del sidebar (renderizados dinámicamente) */
+    var sidebar = document.getElementById('filtersSidebar');
+    if (sidebar) sidebar.addEventListener('change', handleFacetChange);
+
+    /* Inicializar facets (cuenta inicial sobre todo el catálogo) */
+    renderFiltersSidebar();
 
     /* Render de los bloques de marca destacados de la home */
     renderBrandBlocks();
 
+    render();
+  }
+
+  /* ── Sidebar de filtros (Commit E) ─────────────────────────────────
+     Renderea los 5 facet groups con checkboxes + conteo dinámico.
+     Cada facet calcula su count aplicando todos los filtros EXCEPTO el suyo
+     (patrón estándar de ecommerce: el conteo refleja qué pasaría al activar
+     ese checkbox sin tocar los otros filtros activos). */
+
+  /* Talles reales del catálogo (excluye dummies "U"/"99" que no son talles) */
+  function getRealSizes() {
+    var seen = {};
+    C.productos.forEach(function (p) {
+      (p.talles || []).forEach(function (t) {
+        if (t !== 'U' && t !== '99' && t) seen[t] = true;
+      });
+    });
+    /* Orden lógico de talles */
+    var preferred = ['XS','S','M','L','XL','XXL','XXXL','38','40','42','44','46','48','50','52','54'];
+    var ordered = preferred.filter(function (s) { return seen[s]; });
+    Object.keys(seen).forEach(function (s) {
+      if (ordered.indexOf(s) === -1) ordered.push(s);
+    });
+    return ordered;
+  }
+
+  /* Categorías reales del catálogo, ordenadas por prioridad comercial */
+  function getRealCategories() {
+    var seen = {};
+    C.productos.forEach(function (p) { if (p.category) seen[p.category] = true; });
+    return Object.keys(seen).sort(function (a, b) {
+      return categoryRank(a) - categoryRank(b);
+    });
+  }
+
+  /* Marcas reales del catálogo */
+  function getRealBrands() {
+    var seen = {};
+    C.productos.forEach(function (p) { if (p.brand) seen[p.brand] = true; });
+    return Object.keys(seen).sort();
+  }
+
+  /* Cuenta cuántos productos pasarían si activamos cada valor del facet
+     (excluyendo el propio facet del filtrado). */
+  function getFacetCounts(facetName, values) {
+    var counts = {};
+    values.forEach(function (v) { counts[v] = 0; });
+    C.productos.forEach(function (p) {
+      if (!passesFilters(p, facetName)) return;
+      if (facetName === 'availability') {
+        if (!p.soldOut) counts['in-stock'] = (counts['in-stock'] || 0) + 1;
+      } else if (facetName === 'brand') {
+        if (counts.hasOwnProperty(p.brand)) counts[p.brand]++;
+      } else if (facetName === 'category') {
+        if (counts.hasOwnProperty(p.category)) counts[p.category]++;
+      } else if (facetName === 'size') {
+        (p.talles || []).forEach(function (t) {
+          if (counts.hasOwnProperty(t)) counts[t]++;
+        });
+      } else if (facetName === 'price') {
+        PRICE_BRACKETS.forEach(function (b) {
+          if (b.id === 'all') return;
+          if (p.price >= b.min && p.price <= b.max && counts.hasOwnProperty(b.id)) {
+            counts[b.id]++;
+          }
+        });
+      }
+    });
+    return counts;
+  }
+
+  /* Renderea un grupo de facets en su <ul> correspondiente */
+  function renderFacetGroup(facetName, listId, items, activeList) {
+    var ul = document.getElementById(listId);
+    if (!ul) return;
+    var values = items.map(function (it) { return it.value; });
+    var counts = getFacetCounts(facetName, values);
+
+    ul.innerHTML = items.map(function (it) {
+      var c = counts[it.value] || 0;
+      var checked = activeList.indexOf(it.value) !== -1;
+      var emptyClass = (c === 0 && !checked) ? ' is-empty' : '';
+      return '' +
+        '<li class="filter-group__item' + emptyClass + '">' +
+          '<label>' +
+            '<input type="checkbox" data-facet="' + facetName + '" ' +
+              'value="' + C.escapeHtml(it.value) + '"' +
+              (checked ? ' checked' : '') + '>' +
+            '<span class="filter-group__label-text">' + C.escapeHtml(it.label) + '</span>' +
+            '<span class="filter-group__count">(' + c + ')</span>' +
+          '</label>' +
+        '</li>';
+    }).join('');
+  }
+
+  function renderFiltersSidebar() {
+    /* Disponibilidad — checkbox único */
+    renderFacetGroup('availability', 'facetAvailability',
+      [{ value: 'in-stock', label: 'Con stock' }],
+      state.inStockOnly ? ['in-stock'] : []);
+
+    /* Marca */
+    renderFacetGroup('brand', 'facetBrand',
+      getRealBrands().map(function (b) { return { value: b, label: b }; }),
+      state.brandList);
+
+    /* Categoría */
+    renderFacetGroup('category', 'facetCategory',
+      getRealCategories().map(function (c) { return { value: c, label: c }; }),
+      state.categoryList);
+
+    /* Talle */
+    renderFacetGroup('size', 'facetSize',
+      getRealSizes().map(function (s) { return { value: s, label: s }; }),
+      state.sizes);
+
+    /* Precio — usa labels de PRICE_BRACKETS sin el "all" */
+    renderFacetGroup('price', 'facetPrice',
+      PRICE_BRACKETS.filter(function (b) { return b.id !== 'all'; })
+        .map(function (b) { return { value: b.id, label: b.label }; }),
+      state.priceList);
+  }
+
+  /* Aplica cambio de checkbox al state correspondiente y re-renderea */
+  function handleFacetChange(e) {
+    var input = e.target;
+    if (input.tagName !== 'INPUT' || input.type !== 'checkbox') return;
+    var facet = input.getAttribute('data-facet');
+    var value = input.value;
+    var checked = input.checked;
+
+    if (facet === 'availability') {
+      state.inStockOnly = checked;
+    } else {
+      var listName = ({
+        brand: 'brandList',
+        category: 'categoryList',
+        size: 'sizes',
+        price: 'priceList'
+      })[facet];
+      if (!listName) return;
+      var list = state[listName];
+      var idx = list.indexOf(value);
+      if (checked && idx === -1) list.push(value);
+      if (!checked && idx !== -1) list.splice(idx, 1);
+    }
+
+    state.showAll = true;
+    renderFiltersSidebar();
+    render();
+  }
+
+  /* Resetea todos los filtros del sidebar (mantiene query y sort) */
+  function clearAllFilters() {
+    state.brandList    = [];
+    state.categoryList = [];
+    state.priceList    = [];
+    state.sizes        = [];
+    state.inStockOnly  = false;
+    renderFiltersSidebar();
     render();
   }
 
