@@ -9,9 +9,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/base.css?v=20260610a">
-<link rel="stylesheet" href="css/layout.css?v=20260610a">
-<link rel="stylesheet" href="css/components.css?v=20260610a">
+<link rel="stylesheet" href="css/base.css?v=20260610b">
+<link rel="stylesheet" href="css/layout.css?v=20260610b">
+<link rel="stylesheet" href="css/components.css?v=20260610b">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 </head>
@@ -30,29 +30,50 @@
   </div>
 </div>
 
-<!-- ════════ NAV ════════ -->
+<!-- ════════ NAV (3 zonas: logo · nav · acciones) ════════ -->
 <nav class="nav" id="nav">
-  <a href="#hero" class="nav__logo">Clousa</a>
-  <ul class="nav__links">
-    <li><a href="#hero" data-nav-home>Novedades</a></li>
-    <li><a href="#" data-categories="CAMPERAS FRISADAS,CAMPERAS RUSTICAS,CAMPERAS POLAR,JACKETS" data-label="Camperas">Camperas</a></li>
-    <li><a href="#" data-categories="BUZOS FRISADOS,BUZOS RUSTICOS,BUZOS POLAR,CANGUROS FRISADOS,CANGUROS RUSTICOS,SWEATERS" data-label="Buzos & Sweaters">Buzos</a></li>
-    <li><a href="#" data-categories="PANTALONES,PANTALONES CORDEROY,JEANS,JOGGINGS FRISADOS,JOGGINGS RUSTICOS" data-label="Pantalones">Pantalones</a></li>
-    <li><a href="#" data-categories="REMERAS MC,REMERAS ML,POLOS MC,CAMISAS ML" data-label="Remeras & Polos">Remeras</a></li>
-    <li><a href="#" data-categories="BUFANDAS,GORROS,GORRAS,CINTURONES,MEDIAS,BILLETERAS,BOLSOS,BOXERS,PERFUMERIA" data-label="Accesorios">Accesorios</a></li>
-    <li><a href="#contacto">Contacto</a></li>
-  </ul>
-  <div class="nav__actions">
-    <button class="nav__btn nav__btn--icon" id="navCartBtn" aria-label="Carrito">
+  <div class="nav__inner">
+    <a href="#hero" class="nav__logo" data-nav-home>CLOUSA</a>
+
+    <ul class="nav__links">
+      <li><a href="#" data-cta-all>Hombre</a></li>
+      <li><a href="#" data-brand-cta="Mistral">Mistral</a></li>
+      <li><a href="#" data-brand-cta="Brooksfield">Brooksfield</a></li>
+      <li><a href="#categorias">Categorías</a></li>
+      <li><a href="#como-comprar">Cómo comprar</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+
+    <div class="nav__actions">
+      <button class="nav__btn nav__btn--icon" id="navSearchBtn" aria-label="Buscar" aria-expanded="false" aria-controls="navSearchBar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"/>
+          <path d="m21 21-4.35-4.35"/>
+        </svg>
+      </button>
+      <button class="nav__btn nav__btn--icon" id="navCartBtn" aria-label="Cesta">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 8h14l-1.2 11.5a1 1 0 0 1-1 .9H7.2a1 1 0 0 1-1-.9L5 8z"/>
+          <path d="M9 8V5.5a3 3 0 0 1 6 0V8"/>
+        </svg>
+        <span class="nav__cart-count" id="navCartCount" hidden>0</span>
+      </button>
+      <button class="nav__toggle" id="navToggle" aria-label="Menú">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Barra de búsqueda expandible (toggle desde la lupa) -->
+  <div class="nav__search" id="navSearchBar" hidden>
+    <div class="nav__search-inner">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M5 8h14l-1.2 11.5a1 1 0 0 1-1 .9H7.2a1 1 0 0 1-1-.9L5 8z"/>
-        <path d="M9 8V5.5a3 3 0 0 1 6 0V8"/>
+        <circle cx="11" cy="11" r="7"/>
+        <path d="m21 21-4.35-4.35"/>
       </svg>
-      <span class="nav__cart-count" id="navCartCount" hidden>0</span>
-    </button>
-    <button class="nav__toggle" id="navToggle" aria-label="Menú">
-      <span></span><span></span><span></span>
-    </button>
+      <input type="search" id="navSearchInput" placeholder="Buscar productos, marcas, categorías…" autocomplete="off">
+      <button type="button" class="nav__search-close" id="navSearchClose" aria-label="Cerrar búsqueda">✕</button>
+    </div>
   </div>
 </nav>
 <!-- Mobile menu overlay full-screen -->
@@ -63,17 +84,23 @@
   </div>
 
   <div class="mobile-menu__body">
-    <a class="mobile-menu__link" href="#hero" data-nav-home>Novedades</a>
-    <a class="mobile-menu__link" href="#" data-categories="CAMPERAS FRISADAS,CAMPERAS RUSTICAS,CAMPERAS POLAR,JACKETS" data-label="Camperas">Camperas</a>
-    <a class="mobile-menu__link" href="#" data-categories="BUZOS FRISADOS,BUZOS RUSTICOS,BUZOS POLAR,CANGUROS FRISADOS,CANGUROS RUSTICOS,SWEATERS" data-label="Buzos & Sweaters">Buzos</a>
-    <a class="mobile-menu__link" href="#" data-categories="PANTALONES,PANTALONES CORDEROY,JEANS,JOGGINGS FRISADOS,JOGGINGS RUSTICOS" data-label="Pantalones">Pantalones</a>
-    <a class="mobile-menu__link" href="#" data-categories="REMERAS MC,REMERAS ML,POLOS MC,CAMISAS ML" data-label="Remeras & Polos">Remeras</a>
-    <a class="mobile-menu__link" href="#" data-categories="BUFANDAS,GORROS,GORRAS,CINTURONES,MEDIAS,BILLETERAS,BOLSOS,BOXERS,PERFUMERIA" data-label="Accesorios">Accesorios</a>
-    <a class="mobile-menu__link" href="#contacto">Contacto</a>
+    <a class="mobile-menu__link" href="#" data-cta-all>Hombre</a>
+    <a class="mobile-menu__link" href="#" data-brand-cta="Mistral">Mistral</a>
+    <a class="mobile-menu__link" href="#" data-brand-cta="Brooksfield">Brooksfield</a>
 
     <div class="mobile-menu__divider"></div>
 
-    <a class="mobile-menu__link" href="#" id="navMobileCart">Carrito</a>
+    <a class="mobile-menu__link" href="#" data-categories="CAMPERAS FRISADAS,CAMPERAS RUSTICAS,CAMPERAS POLAR,JACKETS" data-label="Camperas">Camperas</a>
+    <a class="mobile-menu__link" href="#" data-categories="BUZOS FRISADOS,BUZOS RUSTICOS,BUZOS POLAR,CANGUROS FRISADOS,CANGUROS RUSTICOS,SWEATERS" data-label="Buzos & Sweaters">Buzos & Sweaters</a>
+    <a class="mobile-menu__link" href="#" data-categories="PANTALONES,PANTALONES CORDEROY,JEANS,JOGGINGS FRISADOS,JOGGINGS RUSTICOS" data-label="Pantalones">Pantalones</a>
+    <a class="mobile-menu__link" href="#" data-categories="REMERAS MC,REMERAS ML,POLOS MC,CAMISAS ML" data-label="Remeras & Polos">Remeras & Polos</a>
+    <a class="mobile-menu__link" href="#" data-categories="BUFANDAS,GORROS,GORRAS,CINTURONES,MEDIAS,BILLETERAS,BOLSOS,BOXERS,PERFUMERIA" data-label="Accesorios">Accesorios</a>
+
+    <div class="mobile-menu__divider"></div>
+
+    <a class="mobile-menu__link" href="#como-comprar">Cómo comprar</a>
+    <a class="mobile-menu__link" href="#contacto">Contacto</a>
+    <a class="mobile-menu__link" href="#" id="navMobileCart">Cesta</a>
   </div>
 </div>
 
@@ -401,10 +428,10 @@
   </div>
 </div>
 
-<script src="js/data.js?v=20260609e"></script>
-<script src="js/cart.js?v=20260609e"></script>
-<script src="js/modal.js?v=20260609e"></script>
-<script src="js/catalog.js?v=20260609e"></script>
-<script src="js/main.js?v=20260609e"></script>
+<script src="js/data.js?v=20260610b"></script>
+<script src="js/cart.js?v=20260610b"></script>
+<script src="js/modal.js?v=20260610b"></script>
+<script src="js/catalog.js?v=20260610b"></script>
+<script src="js/main.js?v=20260610b"></script>
 </body>
 </html>

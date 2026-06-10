@@ -127,26 +127,73 @@ window.Clousa = window.Clousa || {};
       });
     }
 
-    /* Botón Buscar del nav desktop */
-    var searchBtn = document.getElementById('navSearchBtn');
+    /* Search bar expandible del nav */
+    var searchBtn   = document.getElementById('navSearchBtn');
+    var searchBar   = document.getElementById('navSearchBar');
+    var searchInput = document.getElementById('navSearchInput');
+    var searchClose = document.getElementById('navSearchClose');
+
+    function openSearch() {
+      if (!searchBar) return;
+      searchBar.hidden = false;
+      if (searchBtn) searchBtn.setAttribute('aria-expanded', 'true');
+      setTimeout(function () { if (searchInput) searchInput.focus(); }, 30);
+    }
+    function closeSearch() {
+      if (!searchBar) return;
+      searchBar.hidden = true;
+      if (searchBtn) searchBtn.setAttribute('aria-expanded', 'false');
+      if (searchInput) searchInput.value = '';
+    }
+
     if (searchBtn) {
       searchBtn.addEventListener('click', function () {
-        var input = document.getElementById('searchInput');
-        if (input) {
-          input.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          setTimeout(function () { input.focus(); }, 400);
+        if (searchBar && searchBar.hidden) openSearch();
+        else closeSearch();
+      });
+    }
+    if (searchClose) searchClose.addEventListener('click', closeSearch);
+
+    /* Debounce de la búsqueda → entra al modo colección con state.query */
+    if (searchInput) {
+      var sT;
+      searchInput.addEventListener('input', function () {
+        clearTimeout(sT);
+        sT = setTimeout(function () {
+          var q = searchInput.value.trim();
+          if (q.length >= 2 && C.catalog && C.catalog.filterByQuery) {
+            C.catalog.filterByQuery(q);
+          }
+        }, 220);
+      });
+      searchInput.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+          var q = searchInput.value.trim();
+          if (q && C.catalog && C.catalog.filterByQuery) {
+            C.catalog.filterByQuery(q);
+          }
+          closeSearch();
         }
       });
     }
 
-    /* Hero clickeable — lleva a la colección (el cursor pointer lo indica) */
-    var hero = document.getElementById('hero');
-    if (hero) {
-      hero.addEventListener('click', function (e) {
-        if (e.target.closest('a, button')) return;
-        var cat = document.getElementById('catalogo');
-        if (cat) cat.scrollIntoView({ behavior: 'smooth' });
-      });
+    /* ESC cierra el search bar abierto */
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && searchBar && !searchBar.hidden) closeSearch();
+    });
+
+    /* Sticky nav: clase .is-scrolled cuando bajás del primer 1px */
+    if (nav) {
+      var rafScroll;
+      function onScroll() {
+        if (rafScroll) return;
+        rafScroll = requestAnimationFrame(function () {
+          rafScroll = null;
+          nav.classList.toggle('is-scrolled', window.scrollY > 4);
+        });
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
     }
   }
 

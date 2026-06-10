@@ -348,6 +348,49 @@ window.Clousa = window.Clousa || {};
     window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
   }
 
+  /* Busca por texto libre — entra al modo colección y filtra por state.query.
+     Se llama desde el search bar del header. */
+  function filterByQuery(q) {
+    state.showAll       = true;
+    state.brand         = 'all';
+    state.category      = 'all';
+    state.categoryGroup = null;
+    state.price         = 'all';
+    state.sort          = 'destacados';
+    state.query         = q || '';
+
+    var controls = document.getElementById('catalogControls');
+    if (controls) controls.hidden = false;
+    var rc = document.getElementById('resultCount');
+    if (rc) rc.hidden = false;
+
+    document.body.classList.add('mode-collection');
+    var header = document.getElementById('collectionHeader');
+    var title  = document.getElementById('collectionTitle');
+    if (header) header.hidden = false;
+    if (title)  title.textContent = 'Resultados: "' + q + '"';
+
+    /* Resetear UI de chips/selects al estado neutral */
+    if (dom.brandChips) {
+      var chips = dom.brandChips.querySelectorAll('.brand-chip');
+      Array.prototype.forEach.call(chips, function (c) {
+        c.classList.toggle('is-active', c.getAttribute('data-brand') === 'all');
+      });
+    }
+    if (dom.chips) {
+      var catChips = dom.chips.querySelectorAll('.chip');
+      Array.prototype.forEach.call(catChips, function (c) {
+        c.classList.toggle('is-active', c.getAttribute('data-cat') === 'all');
+      });
+    }
+    if (dom.price)  dom.price.value  = 'all';
+    if (dom.sort)   dom.sort.value   = 'destacados';
+    if (dom.search) dom.search.value = q;
+
+    render();
+    window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
+  }
+
   /* Filtra solo por grupo de categorías, ambas marcas. Usado por el nav
      simplificado (CAMPERAS / BUZOS / PANTALONES / REMERAS / ACCESORIOS)
      y por las cards de categoría de la home. */
@@ -655,7 +698,8 @@ window.Clousa = window.Clousa || {};
     init: init,
     render: render,
     filterByBrand: filterByBrand,
-    filterByBrandAndCategory: filterByBrandAndCategory
+    filterByBrandAndCategory: filterByBrandAndCategory,
+    filterByQuery: filterByQuery
   };
 
 })(window.Clousa);
