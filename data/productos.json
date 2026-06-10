@@ -2,8 +2,8 @@
   "metadata": {
     "proveedor": "Mistral B2B",
     "coleccion": "Invierno 2026",
-    "fecha_actualizacion": "2026-06-09T11:54:13.367Z",
-    "total_productos": 145,
+    "fecha_actualizacion": "2026-06-10T12:15:12.735Z",
+    "total_productos": 143,
     "total_categorias": 18
   },
   "categorias": [
@@ -547,24 +547,6 @@
       "categoria": "PANTALONES",
       "precio_venta": 95760,
       "imagen": "https://mistralb2b.com.ar/images/productos/55040M/55040M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "99001M",
-      "nombre": "M. BODY DEORODANT BLUE WATER MASCULINO",
-      "marca": "Mistral",
-      "categoria": "PERFUMERIA",
-      "precio_venta": 9120,
-      "imagen": "https://mistralb2b.com.ar/images/productos/99001M/99001M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "99002M",
-      "nombre": "M. ANTITRANSPIRANTE EQUIPE MASCULINO",
-      "marca": "Mistral",
-      "categoria": "PERFUMERIA",
-      "precio_venta": 9120,
-      "imagen": "https://mistralb2b.com.ar/images/productos/99002M/99002M-001.png",
       "agotado": false
     },
     {
