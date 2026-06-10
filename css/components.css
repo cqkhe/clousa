@@ -564,36 +564,41 @@
 .modal__media {
   flex: 1 1 50%;
   background: var(--bg-section);
-  min-height: 320px;
+  min-height: 0;
+  max-height: 100%;
   position: relative;
   display: flex;
   flex-direction: column;
+  overflow: hidden;           /* CRÍTICO: corta cualquier exceso vertical de la galería */
 }
 .modal__media > img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  flex: 1 1 auto;
+  flex: 1 1 0;                /* basis 0 → no expande el box por su altura natural */
   min-height: 0;
+  object-fit: cover;
+  object-position: top;       /* mantiene cabeza/torso visibles */
+  display: block;
 }
 
-/* Thumbnails de la galería (debajo de la imagen en desktop, scroll horizontal mobile) */
+/* Thumbnails de la galería — altura fija para que no empujen el box */
 .modal__thumbs {
+  flex: 0 0 auto;
+  height: 92px;
   display: flex;
   gap: 8px;
   padding: 10px;
   background: var(--bg-secondary);
   border-top: 1px solid var(--line);
   overflow-x: auto;
+  overflow-y: hidden;
   scrollbar-width: thin;
-  flex-shrink: 0;
 }
 .modal__thumbs::-webkit-scrollbar { height: 4px; }
 .modal__thumbs::-webkit-scrollbar-thumb { background: var(--line); border-radius: 2px; }
 .modal__thumb {
   flex: 0 0 auto;
-  width: 56px;
-  height: 72px;
+  width: 54px;
+  height: 100%;
   padding: 0;
   border: 1px solid transparent;
   background: var(--bg-section);
