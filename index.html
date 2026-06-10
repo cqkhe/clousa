@@ -9,9 +9,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/base.css?v=20260610b">
-<link rel="stylesheet" href="css/layout.css?v=20260610b">
-<link rel="stylesheet" href="css/components.css?v=20260610b">
+<link rel="stylesheet" href="css/base.css?v=20260610c">
+<link rel="stylesheet" href="css/layout.css?v=20260610c">
+<link rel="stylesheet" href="css/components.css?v=20260610c">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 </head>
@@ -104,10 +104,20 @@
   </div>
 </div>
 
-<!-- ════════ HERO (Frank Store style — full-bleed sin texto, deja hablar a la imagen) ════════ -->
-<section class="hero hero--clean" id="hero">
-  <h1 class="sr-only">Clousa — Indumentaria masculina · Invierno 2026</h1>
-  <img src="assets/hero-invierno-2026.jpg" alt="Clousa Invierno 2026" class="hero__bg" loading="eager">
+<!-- ════════ HERO (editorial premium con texto + 2 CTAs) ════════ -->
+<section class="hero" id="hero">
+  <img src="assets/hero-clousa.jpg" alt="Clousa — Indumentaria masculina seleccionada" class="hero__bg" loading="eager">
+  <div class="hero__overlay" aria-hidden="true"></div>
+  <div class="hero__inner">
+    <div class="hero__content">
+      <h1 class="hero__title">INDUMENTARIA<br>MASCULINA<br>SELECCIONADA</h1>
+      <p class="hero__sub">Prendas Mistral y Brooksfield para vestir bien todos los días.</p>
+      <div class="hero__ctas">
+        <a href="#" class="btn-hero btn-hero--primary" data-cta-all>Ver colección</a>
+        <a href="#como-comprar" class="btn-hero btn-hero--ghost">Cómo comprar</a>
+      </div>
+    </div>
+  </div>
 </section>
 
 
