@@ -95,94 +95,6 @@ window.Clousa = window.Clousa || {};
     }).join('');
   }
 
-  /* Vista inicial destacada: top 8 Brooksfield ≥ $120.000,
-     intercalando categorías para diversidad visual.
-     Solo se usa cuando todos los filtros están en default. */
-  function getInitialFeatured() {
-    var brooks = C.productos
-      .filter(function (p) { return p.brand === 'Brooksfield' && p.price >= 120000 && !p.soldOut; })
-      .sort(function (a, b) { return b.price - a.price; });
-
-    if (brooks.length < 8) {
-      brooks = C.productos
-        .filter(function (p) { return p.brand === 'Brooksfield' && !p.soldOut; })
-        .sort(function (a, b) { return b.price - a.price; });
-    }
-
-    var byCategory = {};
-    brooks.forEach(function (p) {
-      if (!byCategory[p.category]) byCategory[p.category] = [];
-      byCategory[p.category].push(p);
-    });
-
-    var categories = Object.keys(byCategory);
-    var result = [];
-    var idx = 0;
-    while (result.length < 8) {
-      var added = false;
-      for (var i = 0; i < categories.length && result.length < 8; i++) {
-        var cat = categories[i];
-        if (byCategory[cat][idx]) {
-          result.push(byCategory[cat][idx]);
-          added = true;
-        }
-      }
-      if (!added) break;
-      idx++;
-    }
-    return result;
-  }
-
-  /* Jeans destacados fijos (8 productos por nombre).
-     Intercala las 3 familias CARGO / CARPENTER / ROMA round-robin
-     para diversidad visual. */
-  function getFeaturedJeans() {
-    var targets = [
-      'JEAN CARGO BLUE PREMIUM MASCULINO',
-      'JEAN CARGO LIGHT BLUE PREMIUM MASCULINO',
-      'JEAN CARPENTER BLUE PREMIUM MASCULINO',
-      'JEAN CARPENTER L. BLUE PREMIUM MASCULINO',
-      'JEAN CARPEN PATCH L. BLUE PREM MASCULINO',
-      'JEAN ROMA HEAVY VINTAGE',
-      'JEAN ROMA VINTAGE PREMIUM',
-      'JEAN ROMA DARK BLUE PREMIUM'
-    ];
-    function norm(s) {
-      return String(s || '').toUpperCase().replace(/\s+/g, ' ').trim();
-    }
-    var matched = [];
-    targets.forEach(function (target) {
-      var t = norm(target);
-      var p = C.productos.filter(function (pr) { return norm(pr.name) === t; })[0];
-      if (!p) {
-        p = C.productos.filter(function (pr) { return norm(pr.name).indexOf(t) >= 0; })[0];
-      }
-      if (p) matched.push(p);
-    });
-
-    var byFamily = { CARGO: [], CARPENTER: [], ROMA: [] };
-    matched.forEach(function (p) {
-      var n = norm(p.name);
-      if (/CARGO/.test(n))             byFamily.CARGO.push(p);
-      else if (/CARPEN/.test(n))       byFamily.CARPENTER.push(p);
-      else if (/ROMA/.test(n))         byFamily.ROMA.push(p);
-    });
-
-    var families = ['CARGO', 'CARPENTER', 'ROMA'];
-    var result = [];
-    var idx = 0;
-    while (result.length < 8) {
-      var added = false;
-      for (var i = 0; i < families.length && result.length < 8; i++) {
-        var p = byFamily[families[i]][idx];
-        if (p) { result.push(p); added = true; }
-      }
-      if (!added) break;
-      idx++;
-    }
-    return result;
-  }
-
   /* Asigna la imagen de cada category-card desde un producto representativo
      del JSON. Toma el primero con stock; si no hay, el primero a secas. */
   function setCategoryCardImages() {
@@ -385,8 +297,8 @@ window.Clousa = window.Clousa || {};
   }
 
   /* Activa el catálogo completo filtrado por una marca específica.
-     Modo "colección": oculta hero/editorial/jeans/campaign y muestra
-     un header con título de la marca + link de regreso. */
+     Modo "colección": oculta los bloques featured-only de la home y
+     muestra un header con título de la marca + link de regreso. */
   function filterByBrand(brand) {
     state.showAll       = true;
     state.brand         = brand;
@@ -578,7 +490,6 @@ window.Clousa = window.Clousa || {};
     dom.sort         = document.getElementById('sortFilter');
     dom.search       = document.getElementById('searchInput');
     dom.featuredWrap = document.getElementById('featuredWrap');
-    dom.jeansGrid    = document.getElementById('featuredJeansGrid');
 
     function scrollGrid(gridEl, dir) {
       var card = gridEl.querySelector('.product-card');
@@ -592,17 +503,6 @@ window.Clousa = window.Clousa || {};
       if (n) n.addEventListener('click', function () { scrollGrid(gridEl, 1); });
     }
     bindNavButtons('featuredPrev', 'featuredNext', dom.grid);
-    bindNavButtons('featuredJeansPrev', 'featuredJeansNext', dom.jeansGrid);
-
-    /* Click en card de jeans → abre modal (mismo handler que el grid principal) */
-    if (dom.jeansGrid) {
-      dom.jeansGrid.addEventListener('click', function (e) {
-        var card = e.target.closest('.product-card');
-        if (!card) return;
-        var p = C.getById(card.getAttribute('data-id'));
-        if (p) C.modal.open(p);
-      });
-    }
 
     /* Links del nav simplificado y mobile menu — filtrar por categorías */
     var categoryLinks = document.querySelectorAll('[data-categories]:not([data-brand])');
@@ -669,19 +569,6 @@ window.Clousa = window.Clousa || {};
         }
       });
     }
-
-    /* Render fila de jeans destacados (una sola vez al cargar) */
-    function renderJeans() {
-      if (!dom.jeansGrid) return;
-      var list = getFeaturedJeans();
-      if (list.length === 0) {
-        var section = dom.jeansGrid.closest('section');
-        if (section) section.hidden = true;
-        return;
-      }
-      dom.jeansGrid.innerHTML = list.map(cardHtml).join('');
-    }
-    renderJeans();
 
     var loadMoreBtn = document.getElementById('loadMoreBtn');
     if (loadMoreBtn) {
