@@ -9,9 +9,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/base.css?v=20260610e">
-<link rel="stylesheet" href="css/layout.css?v=20260610e">
-<link rel="stylesheet" href="css/components.css?v=20260610e">
+<link rel="stylesheet" href="css/base.css?v=20260611a">
+<link rel="stylesheet" href="css/layout.css?v=20260611a">
+<link rel="stylesheet" href="css/components.css?v=20260611a">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 </head>
@@ -276,6 +276,12 @@
 
 <div class="collection-layout collection-only" id="catalogo">
   <aside class="filters-sidebar" id="filtersSidebar" aria-label="Filtros">
+    <!-- Header solo visible en mobile (drawer mode) -->
+    <div class="filters-sidebar__header">
+      <span class="filters-sidebar__title">Filtros</span>
+      <button type="button" class="filters-sidebar__close" id="filtersCloseBtn" aria-label="Cerrar filtros">✕</button>
+    </div>
+
     <!-- Los grupos los renderiza JS (renderFiltersSidebar) -->
     <div class="filter-group" data-facet="availability">
       <h3 class="filter-group__title">Disponibilidad</h3>
@@ -299,6 +305,8 @@
     </div>
     <button type="button" class="filters-sidebar__clear" id="filtersClearBtn">Limpiar filtros</button>
   </aside>
+
+  <div class="filters-overlay" id="filtersOverlay" hidden></div>
 
   <main class="collection-main">
     <div class="featured-wrap" id="featuredWrap">
@@ -463,10 +471,10 @@
   </div>
 </div>
 
-<script src="js/data.js?v=20260610e"></script>
-<script src="js/cart.js?v=20260610e"></script>
-<script src="js/modal.js?v=20260610e"></script>
-<script src="js/catalog.js?v=20260610e"></script>
-<script src="js/main.js?v=20260610e"></script>
+<script src="js/data.js?v=20260611a"></script>
+<script src="js/cart.js?v=20260611a"></script>
+<script src="js/modal.js?v=20260611a"></script>
+<script src="js/catalog.js?v=20260611a"></script>
+<script src="js/main.js?v=20260611a"></script>
 </body>
 </html>

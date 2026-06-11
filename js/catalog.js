@@ -600,15 +600,54 @@ window.Clousa = window.Clousa || {};
       if (p) C.modal.open(p);
     });
 
-    /* Botón "Filtrar" del bar de colección — stub visual (drawer mobile en Commit F) */
-    var filterBtn = document.getElementById('filterToggleBtn');
+    /* Drawer de filtros mobile — abre/cierra el sidebar con backdrop overlay.
+       En desktop CSS oculta el botón porque el sidebar es siempre visible. */
+    var filterBtn   = document.getElementById('filterToggleBtn');
+    var filterClose = document.getElementById('filtersCloseBtn');
+    var filterOverlay = document.getElementById('filtersOverlay');
+    var sidebarEl   = document.getElementById('filtersSidebar');
+
+    function openFiltersDrawer() {
+      if (!sidebarEl) return;
+      sidebarEl.classList.add('is-open');
+      if (filterOverlay) {
+        filterOverlay.hidden = false;
+        /* Forzar reflow para que la transición de opacity se aplique */
+        filterOverlay.offsetHeight;
+        filterOverlay.classList.add('is-open');
+      }
+      document.body.classList.add('no-scroll');
+      if (filterBtn) filterBtn.setAttribute('aria-expanded', 'true');
+      /* Focus al primer checkbox o close button para a11y */
+      setTimeout(function () { if (filterClose) filterClose.focus(); }, 50);
+    }
+    function closeFiltersDrawer() {
+      if (!sidebarEl) return;
+      sidebarEl.classList.remove('is-open');
+      if (filterOverlay) {
+        filterOverlay.classList.remove('is-open');
+        /* Esperar fin de transición antes de hidden para mantener fade-out visible */
+        setTimeout(function () { filterOverlay.hidden = true; }, 250);
+      }
+      document.body.classList.remove('no-scroll');
+      if (filterBtn) filterBtn.setAttribute('aria-expanded', 'false');
+    }
+
     if (filterBtn) {
       filterBtn.addEventListener('click', function () {
-        var expanded = filterBtn.getAttribute('aria-expanded') === 'true';
-        filterBtn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-        /* TODO Commit F: abrir drawer de filtros en mobile */
+        if (sidebarEl && sidebarEl.classList.contains('is-open')) closeFiltersDrawer();
+        else openFiltersDrawer();
       });
     }
+    if (filterClose)   filterClose.addEventListener('click', closeFiltersDrawer);
+    if (filterOverlay) filterOverlay.addEventListener('click', closeFiltersDrawer);
+
+    /* ESC cierra el drawer si está abierto */
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && sidebarEl && sidebarEl.classList.contains('is-open')) {
+        closeFiltersDrawer();
+      }
+    });
 
     /* Botón "Limpiar filtros" del sidebar */
     var clearBtn = document.getElementById('filtersClearBtn');
