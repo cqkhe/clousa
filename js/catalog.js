@@ -229,7 +229,7 @@ window.Clousa = window.Clousa || {};
               'onerror="this.onerror=null;this.style.display=\'none\'">'
             : '') +
           (p.soldOut ? '<div class="product-card__sold-overlay" aria-hidden="true">Agotado</div>' : '') +
-          '<span class="product-card__quick" aria-hidden="true">+ Vista rápida</span>' +
+          '<span class="product-card__quick" aria-hidden="true">Ver opciones</span>' +
         '</div>' +
         '<div class="product-card__info">' +
           '<p class="product-card__brand">' + C.escapeHtml(p.brand) + '</p>' +
