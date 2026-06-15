@@ -30,6 +30,16 @@ window.Clousa = window.Clousa || {};
     return 'assets/placeholder.svg';
   }
 
+  /* Detecta imágenes placeholder / "sin foto" del B2B (ej: 'sin_image.png').
+     Se usa SOLO para excluir productos sin foto real de los bloques destacados
+     y de las imágenes representativas de categoría — el catálogo completo
+     sigue mostrando todos los productos (con fallback a placeholder.svg). */
+  function hasRealImage(p) {
+    var src = (p.imagenes && p.imagenes[0]) || p.img || '';
+    if (!src) return false;
+    return !/sin[_-]?image|no[_-]?image|placeholder|default|logo/i.test(src);
+  }
+
   var INITIAL_LIMIT = 8;
   /* State con arrays multi-select para el sidebar (Commit E).
      Cada facet es un array — vacío = no filtra, items = OR dentro del facet.
@@ -124,15 +134,16 @@ window.Clousa = window.Clousa || {};
     var cards = document.querySelectorAll('.category-card[data-rep-cat]');
     Array.prototype.forEach.call(cards, function (card) {
       var repCat = card.getAttribute('data-rep-cat');
+      /* Preferir un producto con stock y foto real (sin placeholders/logos) */
       var match = C.productos.filter(function (p) {
-        return p.category === repCat && !p.soldOut && p.img;
+        return p.category === repCat && !p.soldOut && hasRealImage(p);
       })[0];
       if (!match) {
-        match = C.productos.filter(function (p) { return p.category === repCat && p.img; })[0];
+        match = C.productos.filter(function (p) { return p.category === repCat && hasRealImage(p); })[0];
       }
       if (match) {
         var img = card.querySelector('img');
-        if (img) img.src = match.img;
+        if (img) img.src = (match.imagenes && match.imagenes[0]) || match.img;
       }
     });
   }
@@ -278,47 +289,83 @@ window.Clousa = window.Clousa || {};
       : list;
 
     dom.grid.innerHTML = visible.map(cardHtml).join('');
-    dom.grid.classList.remove('is-featured');
-    if (dom.featuredWrap) dom.featuredWrap.classList.remove('is-featured');
 
     if (dom.loadMoreWrap) dom.loadMoreWrap.hidden = state.showAll || list.length <= INITIAL_LIMIT;
 
     if (C.revealGrid) C.revealGrid();
   }
 
+  /* ── Productos destacados CURADOS a mano por marca ──────────────────
+     Se eligen por nombre (no random). El B2B sigue siendo la fuente de
+     precio, stock, código, talles, colores y disponibilidad — acá solo
+     definimos QUÉ productos mostrar destacados y en qué orden. */
+  var FEATURED_PRODUCT_NAMES = {
+    Brooksfield: [
+      'TAPADO RAPHAEL',
+      'TAPADO WAYLEN',
+      'JACKET OSWALD',
+      'TAPADO EDWARD',
+      'JACKET BRANDON',
+      'JACKET LIAM'
+    ],
+    Mistral: [
+      'JACKET SELWAY MASCULINO',
+      'JACKET HUGH MASCULINO',
+      'JACKET GILMOUR MASCULINO',
+      'JACKET AMBROSE MASCULINO',
+      'HALF ZIPPER FUNNY MASCULINO',
+      'JACKET BRUCE MASCULINO'
+    ]
+  };
+
+  /* Normaliza para comparar: mayúsculas, espacios colapsados, sin acentos. */
+  function normName(s) {
+    return String(s || '')
+      .toUpperCase()
+      .normalize('NFD').replace(/[̀-ͯ]/g, '')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  /* Busca los productos curados de una marca dentro del catálogo, en el
+     orden de la lista. Match tolerante: igualdad normalizada o inclusión
+     (el nombre real puede tener palabras extra como "MASCULINO").
+     Devuelve { found: [...], missing: [...] } sin romper si falta alguno. */
+  function findCuratedProducts(brand, names) {
+    var pool = C.productos.filter(function (p) { return p.brand === brand; });
+    var found = [], missing = [];
+    names.forEach(function (want) {
+      var w = normName(want);
+      /* 1) igualdad exacta normalizada  2) el real contiene lo buscado
+         3) lo buscado contiene al real (por si la lista trae palabra extra) */
+      var hit = pool.filter(function (p) { return normName(p.name) === w; })[0]
+             || pool.filter(function (p) { return normName(p.name).indexOf(w) !== -1; })[0]
+             || pool.filter(function (p) { return w.indexOf(normName(p.name)) !== -1; })[0];
+      if (hit && found.indexOf(hit) === -1) found.push(hit);
+      else if (!hit) missing.push(want);
+    });
+    return { found: found, missing: missing };
+  }
+
   /* Render de los 2 bloques de marca de la home (Brooksfield + Mistral).
-     Toma top 4 productos con stock de cada marca, intercalando categorías
-     para diversidad visual. Bind del CTA "Ver toda la colección" + click
-     en card → modal. */
+     Productos curados a mano (FEATURED_PRODUCT_NAMES). Bind click → modal. */
   function renderBrandBlocks() {
     var marcas = ['Brooksfield', 'Mistral'];
     marcas.forEach(function (brand) {
       var grid = document.getElementById('brandGrid' + brand);
       if (!grid) return;
 
-      var pool = C.productos
-        .filter(function (p) { return p.brand === brand && !p.soldOut; })
-        .sort(function (a, b) { return b.price - a.price; });
-
-      /* Round-robin por categoría para no repetir tipos */
-      var byCategory = {};
-      pool.forEach(function (p) {
-        if (!byCategory[p.category]) byCategory[p.category] = [];
-        byCategory[p.category].push(p);
-      });
-      var categories = Object.keys(byCategory).sort(function (a, b) {
-        return categoryRank(a) - categoryRank(b);
-      });
-      var picked = [];
-      var idx = 0;
-      while (picked.length < 4) {
-        var added = false;
-        for (var i = 0; i < categories.length && picked.length < 4; i++) {
-          var p = byCategory[categories[i]][idx];
-          if (p) { picked.push(p); added = true; }
-        }
-        if (!added) break;
-        idx++;
+      /* Selección CURADA por nombre (no random) con match tolerante */
+      var result = findCuratedProducts(brand, FEATURED_PRODUCT_NAMES[brand] || []);
+      if (result.missing.length) {
+        console.warn('[Clousa] Destacados ' + brand + ' no encontrados: ' + result.missing.join(' · '));
+      }
+      var picked = result.found;
+      if (!picked.length) {
+        /* Sin curados encontrados → no mostramos random; ocultamos la sección */
+        var section = grid.closest('.brand-focus');
+        if (section) section.hidden = true;
+        return;
       }
 
       grid.innerHTML = picked.map(cardHtml).join('');
@@ -338,6 +385,138 @@ window.Clousa = window.Clousa || {};
         e.preventDefault();
         filterByBrand(cta.getAttribute('data-brand-cta'));
       });
+    });
+  }
+
+  /* Flechas + dots de las tiras horizontales (data-rail-prev/next y
+     data-rail-dots apuntan al id del rail). Scrollea ~una página visible. */
+  function initRails() {
+    function scrollAmount(rail) {
+      var card = rail.querySelector('.product-card');
+      var step = card ? (card.offsetWidth + 16) : rail.clientWidth * 0.9;
+      return Math.max(step, rail.clientWidth * 0.5);
+    }
+    function pageCount(rail) {
+      return Math.max(1, Math.round(rail.scrollWidth / rail.clientWidth));
+    }
+    function currentPage(rail) {
+      return Math.round(rail.scrollLeft / Math.max(1, rail.clientWidth));
+    }
+    function renderDots(rail) {
+      var dots = document.querySelector('[data-rail-dots="' + rail.id + '"]');
+      if (!dots) return;
+      var pages = pageCount(rail);
+      if (pages <= 1) { dots.innerHTML = ''; return; }
+      var cur = currentPage(rail);
+      var html = '';
+      for (var i = 0; i < pages; i++) {
+        html += '<button type="button" class="brand-focus__dot' + (i === cur ? ' is-active' : '') +
+          '" data-rail-page="' + i + '" aria-label="Página ' + (i + 1) + '"></button>';
+      }
+      dots.innerHTML = html;
+    }
+    function updateArrows(rail) {
+      var prev = document.querySelector('[data-rail-prev="' + rail.id + '"]');
+      var next = document.querySelector('[data-rail-next="' + rail.id + '"]');
+      var maxScroll = rail.scrollWidth - rail.clientWidth - 2;
+      if (prev) prev.disabled = rail.scrollLeft <= 2;
+      if (next) next.disabled = rail.scrollLeft >= maxScroll;
+    }
+    function syncDots(rail) {
+      var dots = document.querySelector('[data-rail-dots="' + rail.id + '"]');
+      if (!dots) return;
+      var cur = currentPage(rail);
+      Array.prototype.forEach.call(dots.children, function (d, i) {
+        d.classList.toggle('is-active', i === cur);
+      });
+    }
+
+    var rails = {};
+    Array.prototype.forEach.call(document.querySelectorAll('[data-rail-prev],[data-rail-next]'), function (btn) {
+      var id = btn.getAttribute('data-rail-prev') || btn.getAttribute('data-rail-next');
+      var rail = document.getElementById(id);
+      if (!rail) return;
+      rails[id] = rail;
+      var dir = btn.hasAttribute('data-rail-next') ? 1 : -1;
+      btn.addEventListener('click', function () {
+        rail.scrollBy({ left: dir * scrollAmount(rail), behavior: 'smooth' });
+      });
+    });
+
+    Object.keys(rails).forEach(function (id) {
+      var rail = rails[id];
+      renderDots(rail);
+      updateArrows(rail);
+      /* Click en un dot → scrollea a esa página */
+      var dots = document.querySelector('[data-rail-dots="' + id + '"]');
+      if (dots) {
+        dots.addEventListener('click', function (e) {
+          var d = e.target.closest('[data-rail-page]');
+          if (!d) return;
+          var page = parseInt(d.getAttribute('data-rail-page'), 10);
+          rail.scrollTo({ left: page * rail.clientWidth, behavior: 'smooth' });
+        });
+      }
+      rail.addEventListener('scroll', function () { updateArrows(rail); syncDots(rail); }, { passive: true });
+      window.addEventListener('resize', function () { renderDots(rail); updateArrows(rail); });
+    });
+  }
+
+  /* Drag horizontal con mouse en las tiras (sin librerías).
+     Solo para mouse — touch/pen y trackpad siguen con scroll nativo.
+     Suprime el click si hubo arrastre (no abre el modal sin querer). */
+  function initRailDrag() {
+    Array.prototype.forEach.call(document.querySelectorAll('.product-rail'), function (rail) {
+      var down = false, moved = false, startX = 0, startLeft = 0;
+
+      rail.addEventListener('pointerdown', function (e) {
+        if (e.pointerType !== 'mouse') return;   /* touch/pen → scroll nativo */
+        down = true; moved = false;
+        startX = e.clientX; startLeft = rail.scrollLeft;
+        rail.classList.add('is-dragging');
+        try { rail.setPointerCapture(e.pointerId); } catch (err) {}
+      });
+      rail.addEventListener('pointermove', function (e) {
+        if (!down) return;
+        var dx = e.clientX - startX;
+        if (Math.abs(dx) > 4) moved = true;
+        rail.scrollLeft = startLeft - dx;
+      });
+      function end(e) {
+        if (!down) return;
+        down = false;
+        rail.classList.remove('is-dragging');
+        try { rail.releasePointerCapture(e.pointerId); } catch (err) {}
+      }
+      rail.addEventListener('pointerup', end);
+      rail.addEventListener('pointercancel', end);
+      /* Si fue drag, cancelar el click siguiente (captura, antes del handler del grid) */
+      rail.addEventListener('click', function (e) {
+        if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; }
+      }, true);
+      /* Evitar el "ghost drag" de las imágenes */
+      rail.addEventListener('dragstart', function (e) { e.preventDefault(); });
+    });
+  }
+
+  /* Rellena las imágenes featured del mega menú con fotos reales de producto
+     (sin placeholders/logos). data-mega-feat = marca, data-mega-feat-cat = categorías. */
+  function populateMegaFeatured() {
+    function pickTop(predicate) {
+      return C.productos
+        .filter(function (p) { return predicate(p) && !p.soldOut && hasRealImage(p); })
+        .sort(function (a, b) { return b.price - a.price; })[0] || null;
+    }
+    function setImg(img, p) {
+      if (p && img) img.src = (p.imagenes && p.imagenes[0]) || p.img;
+    }
+    Array.prototype.forEach.call(document.querySelectorAll('[data-mega-feat]'), function (img) {
+      var brand = img.getAttribute('data-mega-feat');
+      setImg(img, pickTop(function (p) { return p.brand === brand; }));
+    });
+    Array.prototype.forEach.call(document.querySelectorAll('[data-mega-feat-cat]'), function (img) {
+      var cats = img.getAttribute('data-mega-feat-cat').split(',').map(function (s) { return s.trim(); });
+      setImg(img, pickTop(function (p) { return cats.indexOf(p.category) !== -1; }));
     });
   }
 
@@ -490,21 +669,6 @@ window.Clousa = window.Clousa || {};
     dom.price        = document.getElementById('priceFilter');
     dom.sort         = document.getElementById('sortFilter');
     dom.search       = document.getElementById('searchInput');
-    dom.featuredWrap = document.getElementById('featuredWrap');
-
-    function scrollGrid(gridEl, dir) {
-      var card = gridEl.querySelector('.product-card');
-      if (!card) return;
-      gridEl.scrollBy({ left: dir * (card.offsetWidth + 18), behavior: 'smooth' });
-    }
-    function bindNavButtons(prevId, nextId, gridEl) {
-      var p = document.getElementById(prevId);
-      var n = document.getElementById(nextId);
-      if (p) p.addEventListener('click', function () { scrollGrid(gridEl, -1); });
-      if (n) n.addEventListener('click', function () { scrollGrid(gridEl, 1); });
-    }
-    bindNavButtons('featuredPrev', 'featuredNext', dom.grid);
-
     /* Links del nav simplificado y mobile menu — filtrar por categorías */
     var categoryLinks = document.querySelectorAll('[data-categories]:not([data-brand])');
     Array.prototype.forEach.call(categoryLinks, function (link) {
@@ -662,6 +826,15 @@ window.Clousa = window.Clousa || {};
 
     /* Render de los bloques de marca destacados de la home */
     renderBrandBlocks();
+
+    /* Imágenes featured del mega menú (fotos reales de producto) */
+    populateMegaFeatured();
+
+    /* Flechas de las tiras horizontales */
+    initRails();
+
+    /* Drag con mouse en las tiras */
+    initRailDrag();
 
     render();
   }

@@ -197,6 +197,114 @@ window.Clousa = window.Clousa || {};
     }
   }
 
+  /* ---- Mega menú (navegación desktop) ----
+     Abre al hover/click sobre Hombre/Marcas/Categorías. Cierra al salir del
+     nav, click afuera, ESC o al seleccionar un link. Solo desktop (CSS oculta
+     los paneles < 900px; en mobile vive el drawer hamburguesa). */
+  function initMegaMenu() {
+    var nav = document.getElementById('nav');
+    if (!nav) return;
+    var scrim = document.getElementById('megaScrim');
+    var triggers = nav.querySelectorAll('[data-mega]');
+    var panels = {};
+    Array.prototype.forEach.call(nav.querySelectorAll('[data-mega-panel]'), function (p) {
+      panels[p.getAttribute('data-mega-panel')] = p;
+    });
+    var openKey = null, closeTimer = null, hideTimer = null;
+
+    function setScrim(on) {
+      if (!scrim) return;
+      if (on) { scrim.hidden = false; scrim.offsetHeight; scrim.classList.add('is-open'); }
+      else { scrim.classList.remove('is-open'); }
+    }
+    function openPanel(key) {
+      if (openKey === key) return;
+      if (openKey) hardCloseCurrent();
+      var panel = panels[key];
+      if (!panel) return;
+      clearTimeout(hideTimer);
+      panel.hidden = false;
+      panel.offsetHeight; /* reflow para la transición */
+      panel.classList.add('is-open');
+      var trigger = nav.querySelector('[data-mega="' + key + '"]');
+      if (trigger) { trigger.classList.add('is-active'); trigger.setAttribute('aria-expanded', 'true'); }
+      setScrim(true);
+      openKey = key;
+    }
+    function hardCloseCurrent() {
+      if (!openKey) return;
+      var panel = panels[openKey];
+      var trigger = nav.querySelector('[data-mega="' + openKey + '"]');
+      if (panel) {
+        panel.classList.remove('is-open');
+        (function (pnl) {
+          hideTimer = setTimeout(function () {
+            if (!pnl.classList.contains('is-open')) pnl.hidden = true;
+          }, 240);
+        })(panel);
+      }
+      if (trigger) { trigger.classList.remove('is-active'); trigger.setAttribute('aria-expanded', 'false'); }
+      openKey = null;
+    }
+    function closeAll() {
+      hardCloseCurrent();
+      setScrim(false);
+    }
+    function cancelClose() { if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; } }
+    function scheduleClose() { cancelClose(); closeTimer = setTimeout(closeAll, 200); }
+
+    Array.prototype.forEach.call(triggers, function (t) {
+      var key = t.getAttribute('data-mega');
+      t.addEventListener('mouseenter', function () { cancelClose(); openPanel(key); });
+      t.addEventListener('focus', function () { cancelClose(); openPanel(key); });
+      t.addEventListener('click', function (e) {
+        e.preventDefault();
+        if (openKey === key) closeAll(); else { cancelClose(); openPanel(key); }
+      });
+    });
+
+    /* El panel es descendiente de <nav>: hover sobre él NO dispara mouseleave del nav.
+       Cerramos al salir de todo el nav o al volver a entrar cancelamos. */
+    nav.addEventListener('mouseleave', scheduleClose);
+    nav.addEventListener('mouseenter', cancelClose);
+
+    /* Cerrar al hacer click en un link del panel (el link hace su filtrado) */
+    Object.keys(panels).forEach(function (k) {
+      panels[k].addEventListener('click', function (e) {
+        if (e.target.closest('a')) closeAll();
+      });
+    });
+
+    if (scrim) scrim.addEventListener('click', closeAll);
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeAll(); });
+    document.addEventListener('click', function (e) {
+      if (openKey && !e.target.closest('#nav')) closeAll();
+    });
+  }
+
+  /* ---- Newsletter (sin backend — confirmación client-side) ---- */
+  function initNewsletter() {
+    var form = document.getElementById('newsletterForm');
+    if (!form) return;
+    var input = document.getElementById('newsletterEmail');
+    var feedback = document.getElementById('newsletterFeedback');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var val = (input && input.value || '').trim();
+      var ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+      if (!feedback) return;
+      feedback.hidden = false;
+      if (ok) {
+        feedback.textContent = '¡Gracias! Te sumamos a la lista.';
+        feedback.style.color = 'var(--success, #2E7D5A)';
+        form.reset();
+      } else {
+        feedback.textContent = 'Ingresá un email válido.';
+        feedback.style.color = 'var(--sale)';
+      }
+    });
+  }
+
   /* ---- Animaciones GSAP ---- */
   var cardTriggers = [];
 
@@ -238,6 +346,8 @@ window.Clousa = window.Clousa || {};
   /* ---- Init ---- */
   document.addEventListener('DOMContentLoaded', function () {
     initNav();
+    initMegaMenu();
+    initNewsletter();
     C.cart.init();
     C.modal.init();
     initGsap();
