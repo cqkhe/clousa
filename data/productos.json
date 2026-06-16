@@ -2,8 +2,8 @@
   "metadata": {
     "proveedor": "Mistral B2B",
     "coleccion": "Invierno 2026",
-    "fecha_actualizacion": "2026-06-15T14:55:07.824Z",
-    "total_productos": 143,
+    "fecha_actualizacion": "2026-06-16T13:23:52.234Z",
+    "total_productos": 142,
     "total_categorias": 18
   },
   "categorias": [
@@ -547,15 +547,6 @@
       "categoria": "PANTALONES",
       "precio_venta": 95760,
       "imagen": "https://mistralb2b.com.ar/images/productos/55040M/55040M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "99007M",
-      "nombre": "M. E.TOILETTE COOLWATER X100ML MASCULINO",
-      "marca": "Mistral",
-      "categoria": "PERFUMERIA",
-      "precio_venta": 36000,
-      "imagen": "https://mistralb2b.com.ar/images/productos/99007M/99007M-001.png",
       "agotado": false
     },
     {
