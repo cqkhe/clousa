@@ -467,30 +467,35 @@ window.Clousa = window.Clousa || {};
      Suprime el click si hubo arrastre (no abre el modal sin querer). */
   function initRailDrag() {
     Array.prototype.forEach.call(document.querySelectorAll('.product-rail'), function (rail) {
-      var down = false, moved = false, startX = 0, startLeft = 0;
+      var down = false, moved = false, captured = false, startX = 0, startLeft = 0, pid = null;
 
       rail.addEventListener('pointerdown', function (e) {
         if (e.pointerType !== 'mouse') return;   /* touch/pen → scroll nativo */
-        down = true; moved = false;
-        startX = e.clientX; startLeft = rail.scrollLeft;
-        rail.classList.add('is-dragging');
-        try { rail.setPointerCapture(e.pointerId); } catch (err) {}
+        down = true; moved = false; captured = false;
+        startX = e.clientX; startLeft = rail.scrollLeft; pid = e.pointerId;
+        /* OJO: no capturamos el puntero acá — si lo hiciéramos, un click limpio
+           se dispararía sobre el rail y NO sobre el link del tile (no navegaría).
+           Capturamos recién cuando el movimiento confirma que es un drag. */
       });
       rail.addEventListener('pointermove', function (e) {
         if (!down) return;
         var dx = e.clientX - startX;
-        if (Math.abs(dx) > 4) moved = true;
-        rail.scrollLeft = startLeft - dx;
+        if (!moved && Math.abs(dx) > 4) {
+          moved = true;
+          rail.classList.add('is-dragging');
+          try { rail.setPointerCapture(pid); captured = true; } catch (err) {}
+        }
+        if (moved) rail.scrollLeft = startLeft - dx;
       });
-      function end(e) {
+      function end() {
         if (!down) return;
         down = false;
         rail.classList.remove('is-dragging');
-        try { rail.releasePointerCapture(e.pointerId); } catch (err) {}
+        if (captured) { try { rail.releasePointerCapture(pid); } catch (err) {} captured = false; }
       }
       rail.addEventListener('pointerup', end);
       rail.addEventListener('pointercancel', end);
-      /* Si fue drag, cancelar el click siguiente (captura, antes del handler del grid) */
+      /* Si fue drag, cancelar el click siguiente (captura, antes del handler del link) */
       rail.addEventListener('click', function (e) {
         if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; }
       }, true);
@@ -819,7 +824,18 @@ window.Clousa = window.Clousa || {};
 
     /* Event delegation para checkboxes del sidebar (renderizados dinámicamente) */
     var sidebar = document.getElementById('filtersSidebar');
-    if (sidebar) sidebar.addEventListener('change', handleFacetChange);
+    if (sidebar) {
+      sidebar.addEventListener('change', handleFacetChange);
+      /* Acordeón: click en el título del grupo → expandir/colapsar */
+      sidebar.addEventListener('click', function (e) {
+        var title = e.target.closest('.filter-group__title');
+        if (!title) return;
+        var group = title.closest('.filter-group');
+        if (!group) return;
+        var open = group.classList.toggle('is-open');
+        title.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+    }
 
     /* Inicializar facets (cuenta inicial sobre todo el catálogo) */
     renderFiltersSidebar();

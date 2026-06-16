@@ -9,9 +9,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/base.css?v=20260615c">
-<link rel="stylesheet" href="css/layout.css?v=20260615c">
-<link rel="stylesheet" href="css/components.css?v=20260615c">
+<link rel="stylesheet" href="css/base.css?v=20260616c">
+<link rel="stylesheet" href="css/layout.css?v=20260616c">
+<link rel="stylesheet" href="css/components.css?v=20260616c">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 </head>
@@ -305,28 +305,38 @@
   </div>
 </section>
 
-<!-- ════════ COMPRAR POR CATEGORÍA (tiles editoriales) ════════ -->
+<!-- ════════ COMPRAR POR CATEGORÍA (carrusel editorial) ════════ -->
 <section class="cat-tiles featured-only" aria-label="Comprar por categoría">
-  <div class="section-head">
-    <span class="section-head__eyebrow">Categorías</span>
-    <h2 class="section-head__title">Comprar por categoría</h2>
+  <div class="cat-tiles__head">
+    <div class="cat-tiles__intro">
+      <span class="section-head__eyebrow">Categorías</span>
+      <h2 class="cat-tiles__title">Comprar por categoría</h2>
+    </div>
+    <div class="row-head__arrows">
+      <button type="button" class="row-arrow" data-rail-prev="catRail" aria-label="Anterior">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+      </button>
+      <button type="button" class="row-arrow" data-rail-next="catRail" aria-label="Siguiente">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+      </button>
+    </div>
   </div>
-  <div class="cat-tiles__grid">
-    <a class="category-card" href="#" data-categories="CAMPERAS FRISADAS,CAMPERAS RUSTICAS,CAMPERAS POLAR,JACKETS" data-label="Outerwear" data-rep-cat="JACKETS">
-      <div class="category-card__media"><img alt="Outerwear" loading="lazy"></div>
-      <span class="category-card__title">Outerwear</span>
+  <div class="cat-rail product-rail" id="catRail">
+    <a class="cat-tile" href="#" data-categories="CAMPERAS FRISADAS,CAMPERAS RUSTICAS,CAMPERAS POLAR,JACKETS" data-label="Outerwear">
+      <div class="cat-tile__media"><img src="assets/cat-outerwear.jpg?v=20260615g" alt="Outerwear" loading="lazy"></div>
+      <span class="cat-tile__label">Outerwear <span aria-hidden="true">→</span></span>
     </a>
-    <a class="category-card" href="#" data-categories="SWEATERS,BUZOS FRISADOS,BUZOS RUSTICOS,BUZOS POLAR,CANGUROS FRISADOS,CANGUROS RUSTICOS,CAMISAS ML,REMERAS ML,REMERAS MC,POLOS MC" data-label="Tops" data-rep-cat="SWEATERS">
-      <div class="category-card__media"><img alt="Tops" loading="lazy"></div>
-      <span class="category-card__title">Tops</span>
+    <a class="cat-tile" href="#" data-categories="SWEATERS,BUZOS FRISADOS,BUZOS RUSTICOS,BUZOS POLAR,CANGUROS FRISADOS,CANGUROS RUSTICOS" data-label="Buzos & Sweaters">
+      <div class="cat-tile__media"><img src="assets/cat-tops.jpg?v=20260615g" alt="Buzos & Sweaters" loading="lazy"></div>
+      <span class="cat-tile__label">Buzos &amp; Sweaters <span aria-hidden="true">→</span></span>
     </a>
-    <a class="category-card" href="#" data-categories="PANTALONES,PANTALONES CORDEROY,JEANS,JOGGINGS FRISADOS,JOGGINGS RUSTICOS" data-label="Pantalones" data-rep-cat="PANTALONES">
-      <div class="category-card__media"><img alt="Pantalones" loading="lazy"></div>
-      <span class="category-card__title">Pantalones</span>
+    <a class="cat-tile" href="#" data-categories="PANTALONES,PANTALONES CORDEROY,JOGGINGS FRISADOS,JOGGINGS RUSTICOS" data-label="Pantalones">
+      <div class="cat-tile__media"><img src="assets/cat-pantalones.jpg?v=20260615g" alt="Pantalones" loading="lazy"></div>
+      <span class="cat-tile__label">Pantalones <span aria-hidden="true">→</span></span>
     </a>
-    <a class="category-card" href="#" data-categories="BUFANDAS,GORROS,GORRAS,CINTURONES,MEDIAS,BILLETERAS,BOLSOS,BOXERS,PERFUMERIA" data-label="Accesorios" data-rep-cat="BILLETERAS">
-      <div class="category-card__media"><img alt="Accesorios" loading="lazy"></div>
-      <span class="category-card__title">Accesorios</span>
+    <a class="cat-tile" href="#" data-categories="BUFANDAS,GORROS,GORRAS,CINTURONES,MEDIAS,BILLETERAS,BOLSOS,BOXERS,PERFUMERIA" data-label="Accesorios">
+      <div class="cat-tile__media"><img src="assets/cat-accesorios.jpg?v=20260615g" alt="Accesorios" loading="lazy"></div>
+      <span class="cat-tile__label">Accesorios <span aria-hidden="true">→</span></span>
     </a>
   </div>
 </section>
@@ -353,7 +363,7 @@
   </div>
   <div class="brand-focus__body">
     <a href="#" class="brand-focus__editorial" data-brand-cta="Mistral" aria-label="Ver colección Mistral">
-      <img src="assets/brand-mistral.jpg?v=20260615b" alt="Mistral — colección" loading="lazy">
+      <img src="assets/brand-mistral.jpg?v=20260615e" alt="Mistral — colección" loading="lazy">
       <span class="brand-focus__cta">Ver colección <span aria-hidden="true">→</span></span>
     </a>
     <div class="brand-focus__products">
@@ -373,7 +383,16 @@
       <span id="collectionBreadcrumb" class="breadcrumb__current">Colección</span>
     </nav>
 
-    <h1 class="collection-header__title" id="collectionTitle">COLECCIÓN HOMBRE</h1>
+    <!-- Banner editorial full-width con tarjeta de título sobre la imagen (estilo END) -->
+    <div class="coll-banner">
+      <img class="coll-banner__img" src="assets/campaign-wide.jpg" alt="Colección Hombre" loading="lazy">
+      <div class="coll-banner__card">
+        <p class="coll-banner__eyebrow">Invierno 2026</p>
+        <h1 class="coll-banner__title" id="collectionTitle">COLECCIÓN HOMBRE</h1>
+        <p class="coll-banner__text">Mistral &amp; Brooksfield. Tapados, jackets y prendas de temporada seleccionadas.</p>
+        <a href="#catalogo" class="coll-banner__link" data-scroll-grid>Ver todos los productos <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
 
     <div class="collection-header__bar">
       <p class="collection-header__count" id="collectionCount">0 productos</p>
@@ -405,26 +424,41 @@
       <button type="button" class="filters-sidebar__close" id="filtersCloseBtn" aria-label="Cerrar filtros">✕</button>
     </div>
 
-    <!-- Los grupos los renderiza JS (renderFiltersSidebar) -->
-    <div class="filter-group" data-facet="availability">
-      <h3 class="filter-group__title">Disponibilidad</h3>
-      <ul class="filter-group__list" id="facetAvailability"></ul>
-    </div>
-    <div class="filter-group" data-facet="brand">
-      <h3 class="filter-group__title">Marca</h3>
+    <!-- Grupos en acordeón (colapsables). El JS llena los <ul> por id. -->
+    <div class="filter-group is-open" data-facet="brand">
+      <button type="button" class="filter-group__title" aria-expanded="true">
+        Marca
+        <svg class="filter-group__chevron" viewBox="0 0 12 8" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5"/></svg>
+      </button>
       <ul class="filter-group__list" id="facetBrand"></ul>
     </div>
     <div class="filter-group" data-facet="category">
-      <h3 class="filter-group__title">Categoría</h3>
+      <button type="button" class="filter-group__title" aria-expanded="false">
+        Categoría
+        <svg class="filter-group__chevron" viewBox="0 0 12 8" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5"/></svg>
+      </button>
       <ul class="filter-group__list" id="facetCategory"></ul>
     </div>
     <div class="filter-group" data-facet="size">
-      <h3 class="filter-group__title">Talle</h3>
+      <button type="button" class="filter-group__title" aria-expanded="false">
+        Talle
+        <svg class="filter-group__chevron" viewBox="0 0 12 8" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5"/></svg>
+      </button>
       <ul class="filter-group__list" id="facetSize"></ul>
     </div>
     <div class="filter-group" data-facet="price">
-      <h3 class="filter-group__title">Precio</h3>
+      <button type="button" class="filter-group__title" aria-expanded="false">
+        Precio
+        <svg class="filter-group__chevron" viewBox="0 0 12 8" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5"/></svg>
+      </button>
       <ul class="filter-group__list" id="facetPrice"></ul>
+    </div>
+    <div class="filter-group" data-facet="availability">
+      <button type="button" class="filter-group__title" aria-expanded="false">
+        Disponibilidad
+        <svg class="filter-group__chevron" viewBox="0 0 12 8" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5"/></svg>
+      </button>
+      <ul class="filter-group__list" id="facetAvailability"></ul>
     </div>
     <button type="button" class="filters-sidebar__clear" id="filtersClearBtn">Limpiar filtros</button>
   </aside>
@@ -607,10 +641,10 @@
   </div>
 </div>
 
-<script src="js/data.js?v=20260615b"></script>
-<script src="js/cart.js?v=20260615b"></script>
-<script src="js/modal.js?v=20260615b"></script>
-<script src="js/catalog.js?v=20260615b"></script>
-<script src="js/main.js?v=20260615b"></script>
+<script src="js/data.js?v=20260616c"></script>
+<script src="js/cart.js?v=20260616c"></script>
+<script src="js/modal.js?v=20260616c"></script>
+<script src="js/catalog.js?v=20260616c"></script>
+<script src="js/main.js?v=20260616c"></script>
 </body>
 </html>

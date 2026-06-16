@@ -225,8 +225,10 @@
   object-fit: cover;
   object-position: center;
   transition: opacity 0.5s var(--ease), transform 0.7s var(--ease);
-  will-change: opacity, transform;
+  /* sin will-change permanente: forzaba una capa GPU que rasterizaba la
+     imagen sin snap al grid de píxeles → se veía blanda. Solo en hover. */
 }
+.product-card:hover .product-card__img { will-change: opacity, transform; }
 .product-card__img--primary { opacity: 1; }
 .product-card__img--hover { opacity: 0; }
 .product-card:hover .product-card__img--primary { opacity: 0; }
@@ -238,6 +240,18 @@
   opacity: 1;
 }
 .product-card__img.img-error { object-fit: contain; padding: 24%; opacity: 0.4; }
+
+/* Grid de colección: producto COMPLETO sobre blanco (packshot tipo END),
+   sin recortar. Brooksfield queda limpio; Mistral muestra su gris horneado. */
+.catalog-grid .product-card__media {
+  aspect-ratio: 3 / 4;
+  background: #FFFFFF;
+}
+.catalog-grid .product-card__img {
+  object-fit: contain;
+  object-position: center;
+  padding: 8px;
+}
 
 /* Quick view label (no es botón funcional — abre el modal por el click del card).
    Estilo sobrio: scrim blanco + texto ink + borde fino superior. */
@@ -1151,22 +1165,37 @@ body.mode-collection .collection-layout { display: grid; }
    ═════════════════════════════════════════════════════════════════════ */
 
 .filter-group {
-  margin-bottom: var(--s-5);
-  padding-bottom: var(--s-5);
   border-bottom: 1px solid var(--c-line);
 }
-.filter-group:last-of-type {
-  border-bottom: none;
-  padding-bottom: var(--s-4);
-}
+.filter-group:first-of-type { border-top: 1px solid var(--c-line); }
+/* Título = botón de acordeón (label + chevron), full-width */
 .filter-group__title {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+  padding: var(--s-4) 0;
+  margin: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
   font-size: 12px;
   font-weight: 600;
   letter-spacing: var(--tr-eyebrow);
   text-transform: uppercase;
   color: var(--c-ink);
-  margin: 0 0 var(--s-3);
 }
+.filter-group__chevron {
+  width: 11px; height: 7px;
+  flex-shrink: 0;
+  color: var(--c-ink-3);
+  transition: transform var(--duration-fast) var(--ease);
+}
+.filter-group.is-open .filter-group__chevron { transform: rotate(180deg); }
+/* Colapsado: lista oculta. Abierto: visible con un poco de aire abajo. */
+.filter-group:not(.is-open) .filter-group__list { display: none; }
+.filter-group.is-open .filter-group__list { padding-bottom: var(--s-4); }
 .filter-group__list {
   list-style: none;
   padding: 0;
