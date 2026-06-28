@@ -2,9 +2,9 @@
   "metadata": {
     "proveedor": "Mistral B2B",
     "coleccion": "Invierno 2026",
-    "fecha_actualizacion": "2026-06-27T10:53:14.104Z",
-    "total_productos": 138,
-    "total_categorias": 18
+    "fecha_actualizacion": "2026-06-28T11:00:10.377Z",
+    "total_productos": 144,
+    "total_categorias": 19
   },
   "categorias": [
     "BUZOS FRISADOS",
@@ -21,6 +21,7 @@
     "JEANS",
     "JOGGINGS FRISADOS",
     "PANTALONES",
+    "PERFUMERIA",
     "POLOS MC",
     "REMERAS MC",
     "REMERAS ML",
@@ -565,6 +566,60 @@
       "categoria": "PANTALONES",
       "precio_venta": 95760,
       "imagen": "https://mistralb2b.com.ar/images/productos/55040M/55040M-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "99008M",
+      "nombre": "M. E.TOILETTE URBAN X100ML MASCULINO",
+      "marca": "Mistral",
+      "categoria": "PERFUMERIA",
+      "precio_venta": 36000,
+      "imagen": "https://mistralb2b.com.ar/images/productos/99008M/99008M-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "99009M",
+      "nombre": "M. E. PARFUM ONLY BLACK X100ML MASCULINO",
+      "marca": "Mistral",
+      "categoria": "PERFUMERIA",
+      "precio_venta": 43200,
+      "imagen": "https://mistralb2b.com.ar/images/productos/99009M/99009M-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "99021M",
+      "nombre": "M. E.TOILETTE NAUTIQUE X100ML MASCULINO",
+      "marca": "Mistral",
+      "categoria": "PERFUMERIA",
+      "precio_venta": 38400,
+      "imagen": "https://mistralb2b.com.ar/images/productos/99021M/99021M-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "99022M",
+      "nombre": "M. PERFUMINA NAUTIQUE X 500ML MASCULINO",
+      "marca": "Mistral",
+      "categoria": "PERFUMERIA",
+      "precio_venta": 28800,
+      "imagen": "https://mistralb2b.com.ar/images/productos/99022M/99022M-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "99034M",
+      "nombre": "EAU PARFUM LE VENT FRANCE 100ML MASCULINO",
+      "marca": "Mistral",
+      "categoria": "PERFUMERIA",
+      "precio_venta": 44400,
+      "imagen": "https://mistralb2b.com.ar/images/productos/sin_image.png",
+      "agotado": false
+    },
+    {
+      "codigo": "99037M",
+      "nombre": "PARFUM VENT DE FRANCE X100ML TES MASCULINO",
+      "marca": "Mistral",
+      "categoria": "PERFUMERIA",
+      "precio_venta": 33600,
+      "imagen": "https://mistralb2b.com.ar/images/productos/sin_image.png",
       "agotado": false
     },
     {
