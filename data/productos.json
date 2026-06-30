@@ -2,9 +2,9 @@
   "metadata": {
     "proveedor": "Mistral B2B",
     "coleccion": "Invierno 2026",
-    "fecha_actualizacion": "2026-06-29T12:56:58.305Z",
-    "total_productos": 144,
-    "total_categorias": 19
+    "fecha_actualizacion": "2026-06-30T11:40:14.448Z",
+    "total_productos": 141,
+    "total_categorias": 18
   },
   "categorias": [
     "BUZOS FRISADOS",
@@ -12,7 +12,6 @@
     "BUZOS RUSTICOS",
     "CAMISAS ML",
     "CAMPERAS POLAR",
-    "CANGUROS FRISADOS",
     "CANGUROS RUSTICOS",
     "CINTURONES",
     "GORRAS",
@@ -98,24 +97,6 @@
       "categoria": "CAMPERAS POLAR",
       "precio_venta": 50400,
       "imagen": "https://mistralb2b.com.ar/images/productos/sin_image.png",
-      "agotado": false
-    },
-    {
-      "codigo": "83052M2",
-      "nombre": "CANGURO BEN PRINT # 2 FRISA MASCULINO",
-      "marca": "Mistral",
-      "categoria": "CANGUROS FRISADOS",
-      "precio_venta": 94800,
-      "imagen": "https://mistralb2b.com.ar/images/productos/83052M2/83052M2-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "83052M4",
-      "nombre": "CANGURO BEN PRINT # 4 FRISA MASCULINO",
-      "marca": "Mistral",
-      "categoria": "CANGUROS FRISADOS",
-      "precio_venta": 94800,
-      "imagen": "https://mistralb2b.com.ar/images/productos/83052M4/83052M4-001.png",
       "agotado": false
     },
     {
@@ -566,15 +547,6 @@
       "categoria": "PANTALONES",
       "precio_venta": 95760,
       "imagen": "https://mistralb2b.com.ar/images/productos/55040M/55040M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "99008M",
-      "nombre": "M. E.TOILETTE URBAN X100ML MASCULINO",
-      "marca": "Mistral",
-      "categoria": "PERFUMERIA",
-      "precio_venta": 36000,
-      "imagen": "https://mistralb2b.com.ar/images/productos/99008M/99008M-001.png",
       "agotado": false
     },
     {
