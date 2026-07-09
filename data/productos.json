@@ -2,28 +2,24 @@
   "metadata": {
     "proveedor": "Mistral B2B",
     "coleccion": "Invierno 2026",
-    "fecha_actualizacion": "2026-07-08T10:55:55.167Z",
-    "total_productos": 168,
-    "total_categorias": 21
+    "fecha_actualizacion": "2026-07-09T11:44:49.861Z",
+    "total_productos": 68,
+    "total_categorias": 17
   },
   "categorias": [
     "BUZOS FRISADOS",
     "BUZOS POLAR",
     "BUZOS RUSTICOS",
-    "CAMISAS ML",
     "CAMPERAS FRISADAS",
     "CAMPERAS POLAR",
     "CANGUROS FRISADOS",
     "CANGUROS RUSTICOS",
     "CHALECOS",
     "CINTURONES",
-    "GORRAS",
     "GORROS",
     "JACKETS",
     "JEANS",
     "JOGGINGS FRISADOS",
-    "PANTALONES",
-    "PERFUMERIA",
     "POLOS MC",
     "REMERAS MC",
     "REMERAS ML",
@@ -100,51 +96,6 @@
       "categoria": "BUZOS RUSTICOS",
       "precio_venta": 84000,
       "imagen": "https://mistralb2b.com.ar/images/productos/80059M/80059M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "86057M",
-      "nombre": "BUZO WARD R RUS MASCULINO",
-      "marca": "Mistral",
-      "categoria": "BUZOS RUSTICOS",
-      "precio_venta": 65880,
-      "imagen": "https://mistralb2b.com.ar/images/productos/86057M/86057M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "35072M",
-      "nombre": "CAMISA NEW JUSTINE SLIM FIT ML MASCULINO",
-      "marca": "Mistral",
-      "categoria": "CAMISAS ML",
-      "precio_venta": 98400,
-      "imagen": "https://mistralb2b.com.ar/images/productos/35072M/35072M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "35082M",
-      "nombre": "Camisa JUSTINE REGULAR ML MASCULINO",
-      "marca": "Mistral",
-      "categoria": "CAMISAS ML",
-      "precio_venta": 98400,
-      "imagen": "https://mistralb2b.com.ar/images/productos/35082M/35082M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "35083M",
-      "nombre": "CAMISA TOA OXFORD ML MASCULINO",
-      "marca": "Mistral",
-      "categoria": "CAMISAS ML",
-      "precio_venta": 95760,
-      "imagen": "https://mistralb2b.com.ar/images/productos/35083M/35083M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "35084M",
-      "nombre": "CAMISA TOA OXFORD STRIPES ML MASCULINO",
-      "marca": "Mistral",
-      "categoria": "CAMISAS ML",
-      "precio_venta": 95760,
-      "imagen": "https://mistralb2b.com.ar/images/productos/35084M/35084M-001.png",
       "agotado": false
     },
     {
@@ -256,33 +207,6 @@
       "agotado": false
     },
     {
-      "codigo": "90043M",
-      "nombre": "CAP CREEK MASCULINO",
-      "marca": "Mistral",
-      "categoria": "GORRAS",
-      "precio_venta": 36000,
-      "imagen": "https://mistralb2b.com.ar/images/productos/90043M/90043M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "90041M",
-      "nombre": "CAP RYAN MASCULINO",
-      "marca": "Mistral",
-      "categoria": "GORRAS",
-      "precio_venta": 33360,
-      "imagen": "https://mistralb2b.com.ar/images/productos/90041M/90041M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "90042M",
-      "nombre": "CAP DEAN MASCULINO",
-      "marca": "Mistral",
-      "categoria": "GORRAS",
-      "precio_venta": 34080,
-      "imagen": "https://mistralb2b.com.ar/images/productos/90042M/90042M-001.png",
-      "agotado": false
-    },
-    {
       "codigo": "90044M",
       "nombre": "HAT MIKE MASCULINO",
       "marca": "Mistral",
@@ -310,15 +234,6 @@
       "agotado": false
     },
     {
-      "codigo": "70087M",
-      "nombre": "JACKET ASPEN MASCULINO",
-      "marca": "Mistral",
-      "categoria": "JACKETS",
-      "precio_venta": 141221,
-      "imagen": "https://mistralb2b.com.ar/images/productos/70087M/70087M-001.png",
-      "agotado": false
-    },
-    {
       "codigo": "70094M",
       "nombre": "JACKET EDWARD MASCULINO",
       "marca": "Mistral",
@@ -343,69 +258,6 @@
       "categoria": "JACKETS",
       "precio_venta": 144000,
       "imagen": "https://mistralb2b.com.ar/images/productos/70096M/70096M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "70097M",
-      "nombre": "JACKET BRUCE MASCULINO",
-      "marca": "Mistral",
-      "categoria": "JACKETS",
-      "precio_venta": 206160,
-      "imagen": "https://mistralb2b.com.ar/images/productos/70097M/70097M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "70099M",
-      "nombre": "JACKET TIM MASCULINO",
-      "marca": "Mistral",
-      "categoria": "JACKETS",
-      "precio_venta": 141120,
-      "imagen": "https://mistralb2b.com.ar/images/productos/70099M/70099M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "70100M",
-      "nombre": "JACKET BENNETT MASCULINO",
-      "marca": "Mistral",
-      "categoria": "JACKETS",
-      "precio_venta": 154224,
-      "imagen": "https://mistralb2b.com.ar/images/productos/70100M/70100M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "70101M",
-      "nombre": "JACKET WYATT MASCULINO",
-      "marca": "Mistral",
-      "categoria": "JACKETS",
-      "precio_venta": 154224,
-      "imagen": "https://mistralb2b.com.ar/images/productos/70101M/70101M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "70103M",
-      "nombre": "JACKET CHARLIE MASCULINO",
-      "marca": "Mistral",
-      "categoria": "JACKETS",
-      "precio_venta": 171360,
-      "imagen": "https://mistralb2b.com.ar/images/productos/70103M/70103M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "70104M",
-      "nombre": "JACKET FREDDIE MASCULINO",
-      "marca": "Mistral",
-      "categoria": "JACKETS",
-      "precio_venta": 171360,
-      "imagen": "https://mistralb2b.com.ar/images/productos/70104M/70104M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "70105M",
-      "nombre": "JACKET LOGAN MASCULINO",
-      "marca": "Mistral",
-      "categoria": "JACKETS",
-      "precio_venta": 176400,
-      "imagen": "https://mistralb2b.com.ar/images/productos/70105M/70105M-001.png",
       "agotado": false
     },
     {
@@ -481,132 +333,6 @@
       "agotado": false
     },
     {
-      "codigo": "50160M",
-      "nombre": "JEAN CARPINTERO BLUE MASCULINO",
-      "marca": "Mistral",
-      "categoria": "JEANS",
-      "precio_venta": 110400,
-      "imagen": "https://mistralb2b.com.ar/images/productos/50160M/50160M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "50162M",
-      "nombre": "JEAN CARGO BLUE MASCULINO",
-      "marca": "Mistral",
-      "categoria": "JEANS",
-      "precio_venta": 110400,
-      "imagen": "https://mistralb2b.com.ar/images/productos/50162M/50162M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "50166M",
-      "nombre": "JEAN CARGO BLUE PREMIUM MASCULINO",
-      "marca": "Mistral",
-      "categoria": "JEANS",
-      "precio_venta": 110400,
-      "imagen": "https://mistralb2b.com.ar/images/productos/50166M/50166M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "50167M",
-      "nombre": "JEAN CARGO LIGHT BLUE PREMIUM MASCULINO",
-      "marca": "Mistral",
-      "categoria": "JEANS",
-      "precio_venta": 110400,
-      "imagen": "https://mistralb2b.com.ar/images/productos/50167M/50167M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "50168M",
-      "nombre": "JEAN CARPENTER BLUE PREMIUM MASCULINO",
-      "marca": "Mistral",
-      "categoria": "JEANS",
-      "precio_venta": 110400,
-      "imagen": "https://mistralb2b.com.ar/images/productos/50168M/50168M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "50169M",
-      "nombre": "JEAN CARPENTER L. BLUE PREMIUM MASCULINO",
-      "marca": "Mistral",
-      "categoria": "JEANS",
-      "precio_venta": 110400,
-      "imagen": "https://mistralb2b.com.ar/images/productos/50169M/50169M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "50170M",
-      "nombre": "JEAN CARPEN PATCH BLUE PREMIUM MASCULINO",
-      "marca": "Mistral",
-      "categoria": "JEANS",
-      "precio_venta": 110400,
-      "imagen": "https://mistralb2b.com.ar/images/productos/50170M/50170M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "50171M",
-      "nombre": "JEAN CARPEN PATCH L. BLUE PREM MASCULINO",
-      "marca": "Mistral",
-      "categoria": "JEANS",
-      "precio_venta": 110400,
-      "imagen": "https://mistralb2b.com.ar/images/productos/50171M/50171M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "50187M",
-      "nombre": "JEAN CONFORT XTRASLIM MID BLUE MASCULINO",
-      "marca": "Mistral",
-      "categoria": "JEANS",
-      "precio_venta": 105600,
-      "imagen": "https://mistralb2b.com.ar/images/productos/50187M/50187M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "50188M",
-      "nombre": "JEAN CONFORT XTRASLIM DARK BLUE MASCULINO",
-      "marca": "Mistral",
-      "categoria": "JEANS",
-      "precio_venta": 105600,
-      "imagen": "https://mistralb2b.com.ar/images/productos/50188M/50188M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "50189M",
-      "nombre": "JEAN MAN CONFORT XTRASLIM GREY MASCULINO",
-      "marca": "Mistral",
-      "categoria": "JEANS",
-      "precio_venta": 105600,
-      "imagen": "https://mistralb2b.com.ar/images/productos/50189M/50189M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "50190M",
-      "nombre": "JEAN MAN CONFORT XTRASLIM BLACK MASCULINO",
-      "marca": "Mistral",
-      "categoria": "JEANS",
-      "precio_venta": 105600,
-      "imagen": "https://mistralb2b.com.ar/images/productos/50190M/50190M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "50191M",
-      "nombre": "JEAN MAN CONFORT SLIM MID BLUE MASCULINO",
-      "marca": "Mistral",
-      "categoria": "JEANS",
-      "precio_venta": 105600,
-      "imagen": "https://mistralb2b.com.ar/images/productos/50191M/50191M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "50192M",
-      "nombre": "JEAN MAN CONFORT SLIM DARK BLUE MASCULINO",
-      "marca": "Mistral",
-      "categoria": "JEANS",
-      "precio_venta": 105600,
-      "imagen": "https://mistralb2b.com.ar/images/productos/50192M/50192M-001.png",
-      "agotado": false
-    },
-    {
       "codigo": "50193M",
       "nombre": "JEAN MAN CONFORT SLIM GREY MASCULINO",
       "marca": "Mistral",
@@ -625,48 +351,12 @@
       "agotado": false
     },
     {
-      "codigo": "50195M",
-      "nombre": "JEAN MAN REGULAR MID BLUE MASCULINO",
-      "marca": "Mistral",
-      "categoria": "JEANS",
-      "precio_venta": 105600,
-      "imagen": "https://mistralb2b.com.ar/images/productos/50195M/50195M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "50196M",
-      "nombre": "JEAN MAN REGULAR DARK BLUE MASCULINO",
-      "marca": "Mistral",
-      "categoria": "JEANS",
-      "precio_venta": 105600,
-      "imagen": "https://mistralb2b.com.ar/images/productos/50196M/50196M-001.png",
-      "agotado": false
-    },
-    {
       "codigo": "50197M",
       "nombre": "JEAN MAN REGULAR BLACK MASCULINO",
       "marca": "Mistral",
       "categoria": "JEANS",
       "precio_venta": 105600,
       "imagen": "https://mistralb2b.com.ar/images/productos/50197M/50197M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "50198M",
-      "nombre": "JEAN MAN BAGGY MID BLUE MASCULINO",
-      "marca": "Mistral",
-      "categoria": "JEANS",
-      "precio_venta": 105600,
-      "imagen": "https://mistralb2b.com.ar/images/productos/50198M/50198M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "50199M",
-      "nombre": "JEAN MAN BAGGY DARK BLUE MASCULINO",
-      "marca": "Mistral",
-      "categoria": "JEANS",
-      "precio_venta": 105600,
-      "imagen": "https://mistralb2b.com.ar/images/productos/50199M/50199M-001.png",
       "agotado": false
     },
     {
@@ -688,141 +378,6 @@
       "agotado": false
     },
     {
-      "codigo": "55035M",
-      "nombre": "PANTALON CHINO NEW CASWELL MASCULINO",
-      "marca": "Mistral",
-      "categoria": "PANTALONES",
-      "precio_venta": 106800,
-      "imagen": "https://mistralb2b.com.ar/images/productos/55035M/55035M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "55038M",
-      "nombre": "PANTALON CARGO BASIC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "PANTALONES",
-      "precio_venta": 84000,
-      "imagen": "https://mistralb2b.com.ar/images/productos/55038M/55038M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "55039M",
-      "nombre": "PANTALON CHINO BASIC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "PANTALONES",
-      "precio_venta": 98160,
-      "imagen": "https://mistralb2b.com.ar/images/productos/55039M/55039M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "55040M",
-      "nombre": "PANTALON CARGO STEVE MASCULINO",
-      "marca": "Mistral",
-      "categoria": "PANTALONES",
-      "precio_venta": 95760,
-      "imagen": "https://mistralb2b.com.ar/images/productos/55040M/55040M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "99009M",
-      "nombre": "M. E. PARFUM ONLY BLACK X100ML MASCULINO",
-      "marca": "Mistral",
-      "categoria": "PERFUMERIA",
-      "precio_venta": 43200,
-      "imagen": "https://mistralb2b.com.ar/images/productos/99009M/99009M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "99021M",
-      "nombre": "M. E.TOILETTE NAUTIQUE X100ML MASCULINO",
-      "marca": "Mistral",
-      "categoria": "PERFUMERIA",
-      "precio_venta": 38400,
-      "imagen": "https://mistralb2b.com.ar/images/productos/99021M/99021M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "99022M",
-      "nombre": "M. PERFUMINA NAUTIQUE X 500ML MASCULINO",
-      "marca": "Mistral",
-      "categoria": "PERFUMERIA",
-      "precio_venta": 28800,
-      "imagen": "https://mistralb2b.com.ar/images/productos/99022M/99022M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "99034M",
-      "nombre": "EAU PARFUM LE VENT FRANCE 100ML MASCULINO",
-      "marca": "Mistral",
-      "categoria": "PERFUMERIA",
-      "precio_venta": 44400,
-      "imagen": "https://mistralb2b.com.ar/images/productos/sin_image.png",
-      "agotado": false
-    },
-    {
-      "codigo": "99037M",
-      "nombre": "PARFUM VENT DE FRANCE X100ML TES MASCULINO",
-      "marca": "Mistral",
-      "categoria": "PERFUMERIA",
-      "precio_venta": 33600,
-      "imagen": "https://mistralb2b.com.ar/images/productos/sin_image.png",
-      "agotado": false
-    },
-    {
-      "codigo": "20072M",
-      "nombre": "POLO NEW BASIC PIQUE MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "POLOS MC",
-      "precio_venta": 41280,
-      "imagen": "https://mistralb2b.com.ar/images/productos/20072M/20072M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "20077M",
-      "nombre": "POLO BASIC CONTRAST MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "POLOS MC",
-      "precio_venta": 36480,
-      "imagen": "https://mistralb2b.com.ar/images/productos/20077M/20077M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "20078M",
-      "nombre": "POLO STRIPES MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "POLOS MC",
-      "precio_venta": 57360,
-      "imagen": "https://mistralb2b.com.ar/images/productos/20078M/20078M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "20083M",
-      "nombre": "POLO JERSEY LIAM MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "POLOS MC",
-      "precio_venta": 41280,
-      "imagen": "https://mistralb2b.com.ar/images/productos/20083M/20083M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "20086M",
-      "nombre": "POLO PIQUE DUTTON MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "POLOS MC",
-      "precio_venta": 41280,
-      "imagen": "https://mistralb2b.com.ar/images/productos/20086M/20086M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "20088M",
-      "nombre": "POLO PIQUE AUSTIN MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "POLOS MC",
-      "precio_venta": 41280,
-      "imagen": "https://mistralb2b.com.ar/images/productos/20088M/20088M-001.png",
-      "agotado": false
-    },
-    {
       "codigo": "20084M",
       "nombre": "POLO JERSEY HARLAN MC MASCULINO",
       "marca": "Mistral",
@@ -838,24 +393,6 @@
       "categoria": "POLOS MC",
       "precio_venta": 43200,
       "imagen": "https://mistralb2b.com.ar/images/productos/20085M/20085M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "10145M",
-      "nombre": "REMERA LOGO EMBOSSED OVERSIZE MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "REMERAS MC",
-      "precio_venta": 40800,
-      "imagen": "https://mistralb2b.com.ar/images/productos/10145M/10145M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "10146M",
-      "nombre": "REMERA MAUI MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "REMERAS MC",
-      "precio_venta": 40800,
-      "imagen": "https://mistralb2b.com.ar/images/productos/10146M/10146M-001.png",
       "agotado": false
     },
     {
@@ -895,87 +432,6 @@
       "agotado": false
     },
     {
-      "codigo": "10182M",
-      "nombre": "REMERA MINI LOGO MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "REMERAS MC",
-      "precio_venta": 30960,
-      "imagen": "https://mistralb2b.com.ar/images/productos/10182M/10182M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "10193M",
-      "nombre": "REMERA STRIPES MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "REMERAS MC",
-      "precio_venta": 50880,
-      "imagen": "https://mistralb2b.com.ar/images/productos/10193M/10193M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "10194M",
-      "nombre": "REMERA DYED #1 MASCULINO",
-      "marca": "Mistral",
-      "categoria": "REMERAS MC",
-      "precio_venta": 43656,
-      "imagen": "https://mistralb2b.com.ar/images/productos/10194M/10194M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "10196M",
-      "nombre": "REMERA OVERSIZE LOGO 3D MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "REMERAS MC",
-      "precio_venta": 40800,
-      "imagen": "https://mistralb2b.com.ar/images/productos/10196M/10196M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "10197M",
-      "nombre": "REMERA OVERSIZE LOGO MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "REMERAS MC",
-      "precio_venta": 40800,
-      "imagen": "https://mistralb2b.com.ar/images/productos/10197M/10197M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "10198M",
-      "nombre": "REMERA OVERSIZE MINI LOGO MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "REMERAS MC",
-      "precio_venta": 40800,
-      "imagen": "https://mistralb2b.com.ar/images/productos/10198M/10198M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "10199M",
-      "nombre": "REMERA DYED LOGO MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "REMERAS MC",
-      "precio_venta": 42720,
-      "imagen": "https://mistralb2b.com.ar/images/productos/10199M/10199M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "10201M",
-      "nombre": "REMERA DYED #2 MASCULINO",
-      "marca": "Mistral",
-      "categoria": "REMERAS MC",
-      "precio_venta": 43656,
-      "imagen": "https://mistralb2b.com.ar/images/productos/10201M/10201M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "10202M",
-      "nombre": "REMERA PRINT POCKET MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "REMERAS MC",
-      "precio_venta": 40800,
-      "imagen": "https://mistralb2b.com.ar/images/productos/10202M/10202M-001.png",
-      "agotado": false
-    },
-    {
       "codigo": "10203M10",
       "nombre": "REMERA MALIBU #10 MC MASCULINO",
       "marca": "Mistral",
@@ -1003,15 +459,6 @@
       "agotado": false
     },
     {
-      "codigo": "10203M17",
-      "nombre": "REMERA MALIBU #17 MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "REMERAS MC",
-      "precio_venta": 32400,
-      "imagen": "https://mistralb2b.com.ar/images/productos/sin_image.png",
-      "agotado": false
-    },
-    {
       "codigo": "10203M18",
       "nombre": "REMERA MALIBU #18 MC MASCULINO",
       "marca": "Mistral",
@@ -1021,39 +468,12 @@
       "agotado": false
     },
     {
-      "codigo": "10203M21",
-      "nombre": "REMERA MALIBU #21 MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "REMERAS MC",
-      "precio_venta": 32400,
-      "imagen": "https://mistralb2b.com.ar/images/productos/10203M21/10203M21-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "10203M23",
-      "nombre": "REMERA MALIBU #23 MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "REMERAS MC",
-      "precio_venta": 32400,
-      "imagen": "https://mistralb2b.com.ar/images/productos/10203M23/10203M23-001.png",
-      "agotado": false
-    },
-    {
       "codigo": "10203M24",
       "nombre": "REMERA MALIBU #24 MC MASCULINO",
       "marca": "Mistral",
       "categoria": "REMERAS MC",
       "precio_venta": 32400,
       "imagen": "https://mistralb2b.com.ar/images/productos/10203M24/10203M24-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "10203M25",
-      "nombre": "REMERA MALIBU #25 MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "REMERAS MC",
-      "precio_venta": 32400,
-      "imagen": "https://mistralb2b.com.ar/images/productos/10203M25/10203M25-001.png",
       "agotado": false
     },
     {
@@ -1072,24 +492,6 @@
       "categoria": "REMERAS MC",
       "precio_venta": 32400,
       "imagen": "https://mistralb2b.com.ar/images/productos/10203M7/10203M7-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "10203M8",
-      "nombre": "REMERA MALIBU #8 MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "REMERAS MC",
-      "precio_venta": 32400,
-      "imagen": "https://mistralb2b.com.ar/images/productos/10203M8/10203M8-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "10207M",
-      "nombre": "REMERA OVERSIZE BOXY BORDADA MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "REMERAS MC",
-      "precio_venta": 32400,
-      "imagen": "https://mistralb2b.com.ar/images/productos/10207M/10207M-001.png",
       "agotado": false
     },
     {
@@ -1120,15 +522,6 @@
       "agotado": false
     },
     {
-      "codigo": "10209M4",
-      "nombre": "REMERA BOXY EST #4 MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "REMERAS MC",
-      "precio_venta": 32400,
-      "imagen": "https://mistralb2b.com.ar/images/productos/10209M4/10209M4-001.png",
-      "agotado": false
-    },
-    {
       "codigo": "10209M5",
       "nombre": "REMERA BOXY EST #5 MC MASCULINO",
       "marca": "Mistral",
@@ -1147,255 +540,12 @@
       "agotado": false
     },
     {
-      "codigo": "10212M",
-      "nombre": "REMERA MAUI MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "REMERAS MC",
-      "precio_venta": 40800,
-      "imagen": "https://mistralb2b.com.ar/images/productos/10212M/10212M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "10213M",
-      "nombre": "REMERA PACK BASIC MC X 2 MASCULINO",
-      "marca": "Mistral",
-      "categoria": "REMERAS MC",
-      "precio_venta": 57600,
-      "imagen": "https://mistralb2b.com.ar/images/productos/10213M/10213M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "10214M",
-      "nombre": "REMERA LOGO PRINT MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "REMERAS MC",
-      "precio_venta": 32400,
-      "imagen": "https://mistralb2b.com.ar/images/productos/10214M/10214M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "10217M",
-      "nombre": "REMERA GOFRADA MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "REMERAS MC",
-      "precio_venta": 32400,
-      "imagen": "https://mistralb2b.com.ar/images/productos/10217M/10217M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "10218M",
-      "nombre": "REMERA MINI LOGO LIGHT MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "REMERAS MC",
-      "precio_venta": 30960,
-      "imagen": "https://mistralb2b.com.ar/images/productos/10218M/10218M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "10219M",
-      "nombre": "REMERA BIG LOGO LIGHT MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "REMERAS MC",
-      "precio_venta": 30960,
-      "imagen": "https://mistralb2b.com.ar/images/productos/10219M/10219M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "10220M",
-      "nombre": "REMERA LOGO MISTRAL MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "REMERAS MC",
-      "precio_venta": 30960,
-      "imagen": "https://mistralb2b.com.ar/images/productos/10220M/10220M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "10222M",
-      "nombre": "REMERA BIG LOGO PRINT MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "REMERAS MC",
-      "precio_venta": 32400,
-      "imagen": "https://mistralb2b.com.ar/images/productos/10222M/10222M-001.png",
-      "agotado": false
-    },
-    {
       "codigo": "10223M",
       "nombre": "REMERA  LOGO PRINT MC MASCULINO",
       "marca": "Mistral",
       "categoria": "REMERAS MC",
       "precio_venta": 32400,
       "imagen": "https://mistralb2b.com.ar/images/productos/10223M/10223M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "10205M1",
-      "nombre": "REMERA PRINT # 1 MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "REMERAS MC",
-      "precio_venta": 32400,
-      "imagen": "https://mistralb2b.com.ar/images/productos/10205M1/10205M1-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "10205M10",
-      "nombre": "REMERA PRINT # 10 MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "REMERAS MC",
-      "precio_venta": 32400,
-      "imagen": "https://mistralb2b.com.ar/images/productos/10205M10/10205M10-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "10205M11",
-      "nombre": "REMERA PRINT # 11 MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "REMERAS MC",
-      "precio_venta": 32400,
-      "imagen": "https://mistralb2b.com.ar/images/productos/10205M11/10205M11-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "10205M12",
-      "nombre": "REMERA PRINT # 12 MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "REMERAS MC",
-      "precio_venta": 32400,
-      "imagen": "https://mistralb2b.com.ar/images/productos/10205M12/10205M12-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "10205M13",
-      "nombre": "REMERA PRINT # 13 MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "REMERAS MC",
-      "precio_venta": 32400,
-      "imagen": "https://mistralb2b.com.ar/images/productos/10205M13/10205M13-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "10205M14",
-      "nombre": "REMERA PRINT # 14 MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "REMERAS MC",
-      "precio_venta": 32400,
-      "imagen": "https://mistralb2b.com.ar/images/productos/10205M14/10205M14-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "10205M15",
-      "nombre": "REMERA PRINT # 15 MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "REMERAS MC",
-      "precio_venta": 32400,
-      "imagen": "https://mistralb2b.com.ar/images/productos/10205M15/10205M15-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "10205M16",
-      "nombre": "REMERA PRINT # 16 MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "REMERAS MC",
-      "precio_venta": 32400,
-      "imagen": "https://mistralb2b.com.ar/images/productos/10205M16/10205M16-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "10205M17",
-      "nombre": "REMERA PRINT# 17 MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "REMERAS MC",
-      "precio_venta": 32400,
-      "imagen": "https://mistralb2b.com.ar/images/productos/10205M17/10205M17-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "10205M18",
-      "nombre": "REMERA PRINT # 18 MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "REMERAS MC",
-      "precio_venta": 32400,
-      "imagen": "https://mistralb2b.com.ar/images/productos/10205M18/10205M18-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "10205M19",
-      "nombre": "REMERA PRINT # 19 MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "REMERAS MC",
-      "precio_venta": 32400,
-      "imagen": "https://mistralb2b.com.ar/images/productos/10205M19/10205M19-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "10205M2",
-      "nombre": "REMERA PRINT # 2 MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "REMERAS MC",
-      "precio_venta": 32400,
-      "imagen": "https://mistralb2b.com.ar/images/productos/10205M2/10205M2-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "10205M3",
-      "nombre": "REMERA PRINT # 3 MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "REMERAS MC",
-      "precio_venta": 32400,
-      "imagen": "https://mistralb2b.com.ar/images/productos/10205M3/10205M3-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "10205M4",
-      "nombre": "REMERA PRINT # 4 MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "REMERAS MC",
-      "precio_venta": 32400,
-      "imagen": "https://mistralb2b.com.ar/images/productos/10205M4/10205M4-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "10205M5",
-      "nombre": "REMERA PRINT # 5 MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "REMERAS MC",
-      "precio_venta": 32400,
-      "imagen": "https://mistralb2b.com.ar/images/productos/10205M5/10205M5-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "10205M6",
-      "nombre": "REMERA PRINT # 6 MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "REMERAS MC",
-      "precio_venta": 32400,
-      "imagen": "https://mistralb2b.com.ar/images/productos/10205M6/10205M6-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "10205M7",
-      "nombre": "REMERA PRINT # 7 MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "REMERAS MC",
-      "precio_venta": 32400,
-      "imagen": "https://mistralb2b.com.ar/images/productos/10205M7/10205M7-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "10205M8",
-      "nombre": "REMERA PRINT # 8 MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "REMERAS MC",
-      "precio_venta": 32400,
-      "imagen": "https://mistralb2b.com.ar/images/productos/10205M8/10205M8-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "10205M9",
-      "nombre": "REMERA PRINT # 9 MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "REMERAS MC",
-      "precio_venta": 32400,
-      "imagen": "https://mistralb2b.com.ar/images/productos/10205M9/10205M9-001.png",
       "agotado": false
     },
     {
@@ -1426,42 +576,6 @@
       "agotado": false
     },
     {
-      "codigo": "40052M",
-      "nombre": "SWEATER NEW FUNNY R MASCULINO",
-      "marca": "Mistral",
-      "categoria": "SWEATERS",
-      "precio_venta": 68160,
-      "imagen": "https://mistralb2b.com.ar/images/productos/40052M/40052M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "40053M",
-      "nombre": "SWEATER NEW FUNNY V MASCULINO",
-      "marca": "Mistral",
-      "categoria": "SWEATERS",
-      "precio_venta": 68160,
-      "imagen": "https://mistralb2b.com.ar/images/productos/40053M/40053M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "40054M",
-      "nombre": "HALF ZIPPER FUNNY MASCULINO",
-      "marca": "Mistral",
-      "categoria": "SWEATERS",
-      "precio_venta": 81600,
-      "imagen": "https://mistralb2b.com.ar/images/productos/40054M/40054M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "40055M",
-      "nombre": "FULL ZIPPER FUNNY MASCULINO",
-      "marca": "Mistral",
-      "categoria": "SWEATERS",
-      "precio_venta": 96480,
-      "imagen": "https://mistralb2b.com.ar/images/productos/40055M/40055M-001.png",
-      "agotado": false
-    },
-    {
       "codigo": "40056M",
       "nombre": "SWEATER TRIANGLE STRIPES R MASCULINO",
       "marca": "Mistral",
@@ -1471,30 +585,12 @@
       "agotado": false
     },
     {
-      "codigo": "40059M",
-      "nombre": "SWEATER WAFFLE R MASCULINO",
-      "marca": "Mistral",
-      "categoria": "SWEATERS",
-      "precio_venta": 118800,
-      "imagen": "https://mistralb2b.com.ar/images/productos/40059M/40059M-001.png",
-      "agotado": false
-    },
-    {
       "codigo": "40060M",
       "nombre": "HALF ZIPPER WAFFLE MASCULINO",
       "marca": "Mistral",
       "categoria": "SWEATERS",
       "precio_venta": 135600,
       "imagen": "https://mistralb2b.com.ar/images/productos/40060M/40060M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "40074M",
-      "nombre": "HOODIE FUNNY MASCULINO",
-      "marca": "Mistral",
-      "categoria": "SWEATERS",
-      "precio_venta": 86400,
-      "imagen": "https://mistralb2b.com.ar/images/productos/40074M/40074M-001.png",
       "agotado": false
     },
     {
