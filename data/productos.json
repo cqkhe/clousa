@@ -2,8 +2,8 @@
   "metadata": {
     "proveedor": "Mistral B2B",
     "coleccion": "Invierno 2026",
-    "fecha_actualizacion": "2026-07-10T11:41:48.877Z",
-    "total_productos": 68,
+    "fecha_actualizacion": "2026-07-11T10:10:44.001Z",
+    "total_productos": 69,
     "total_categorias": 17
   },
   "categorias": [
@@ -132,6 +132,15 @@
       "categoria": "CANGUROS FRISADOS",
       "precio_venta": 94800,
       "imagen": "https://mistralb2b.com.ar/images/productos/83052M2/83052M2-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "83052M3",
+      "nombre": "CANGURO BEN PRINT # 3 FRISA MASCULINO",
+      "marca": "Mistral",
+      "categoria": "CANGUROS FRISADOS",
+      "precio_venta": 94800,
+      "imagen": "https://mistralb2b.com.ar/images/productos/83052M3/83052M3-001.png",
       "agotado": false
     },
     {
