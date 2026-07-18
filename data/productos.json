@@ -2,8 +2,8 @@
   "metadata": {
     "proveedor": "Mistral B2B",
     "coleccion": "Invierno 2026",
-    "fecha_actualizacion": "2026-07-17T10:30:35.269Z",
-    "total_productos": 68,
+    "fecha_actualizacion": "2026-07-18T10:08:34.065Z",
+    "total_productos": 69,
     "total_categorias": 17
   },
   "categorias": [
@@ -96,6 +96,15 @@
       "categoria": "BUZOS RUSTICOS",
       "precio_venta": 84000,
       "imagen": "https://mistralb2b.com.ar/images/productos/80059M/80059M-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "86058M",
+      "nombre": "CAMPERA MATT FRISA MASCULINO",
+      "marca": "Mistral",
+      "categoria": "CAMPERAS FRISADAS",
+      "precio_venta": 103200,
+      "imagen": "https://mistralb2b.com.ar/images/productos/86058M/86058M-001.png",
       "agotado": false
     },
     {
@@ -541,7 +550,7 @@
     },
     {
       "codigo": "10223M",
-      "nombre": "REMERA  LOGO PRINT MC MASCULINO",
+      "nombre": "REMERA LOGO PRINT MC MASCULINO",
       "marca": "Mistral",
       "categoria": "REMERAS MC",
       "precio_venta": 32400,
