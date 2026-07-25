@@ -2,11 +2,12 @@
   "metadata": {
     "proveedor": "Mistral B2B",
     "coleccion": "Invierno 2026",
-    "fecha_actualizacion": "2026-07-24T10:55:04.049Z",
-    "total_productos": 69,
+    "fecha_actualizacion": "2026-07-25T10:21:11.402Z",
+    "total_productos": 71,
     "total_categorias": 17
   },
   "categorias": [
+    "BOXERS",
     "BUZOS FRISADOS",
     "BUZOS POLAR",
     "BUZOS RUSTICOS",
@@ -16,7 +17,6 @@
     "CANGUROS RUSTICOS",
     "CHALECOS",
     "CINTURONES",
-    "GORROS",
     "JACKETS",
     "JEANS",
     "JOGGINGS FRISADOS",
@@ -26,6 +26,33 @@
     "SWEATERS"
   ],
   "productos": [
+    {
+      "codigo": "96093M",
+      "nombre": "PACK X 2 BOXER PREMIUM LYCRA MASCULINO",
+      "marca": "Mistral",
+      "categoria": "BOXERS",
+      "precio_venta": 45600,
+      "imagen": "https://mistralb2b.com.ar/images/productos/sin_image.png",
+      "agotado": false
+    },
+    {
+      "codigo": "96094M",
+      "nombre": "PACK X 2 BOXER BAMBOO MASCULINO",
+      "marca": "Mistral",
+      "categoria": "BOXERS",
+      "precio_venta": 45600,
+      "imagen": "https://mistralb2b.com.ar/images/productos/sin_image.png",
+      "agotado": false
+    },
+    {
+      "codigo": "96095M",
+      "nombre": "PACK X 3 BOXER ALG/LYCRA IMPORT MASCULINO",
+      "marca": "Mistral",
+      "categoria": "BOXERS",
+      "precio_venta": 57600,
+      "imagen": "https://mistralb2b.com.ar/images/productos/sin_image.png",
+      "agotado": false
+    },
     {
       "codigo": "80061M1",
       "nombre": "BUZO JOHN\nPRINT FRISA # 1 MASCULINO",
@@ -213,15 +240,6 @@
       "categoria": "CINTURONES",
       "precio_venta": 22800,
       "imagen": "https://mistralb2b.com.ar/images/productos/sin_image.png",
-      "agotado": false
-    },
-    {
-      "codigo": "90044M",
-      "nombre": "HAT MIKE MASCULINO",
-      "marca": "Mistral",
-      "categoria": "GORROS",
-      "precio_venta": 25200,
-      "imagen": "https://mistralb2b.com.ar/images/productos/90044M/90044M-001.png",
       "agotado": false
     },
     {
