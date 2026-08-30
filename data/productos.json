@@ -2,9 +2,9 @@
   "metadata": {
     "proveedor": "Mistral B2B",
     "coleccion": "Invierno 2026",
-    "fecha_actualizacion": "2026-08-29T14:05:34.349Z",
-    "total_productos": 69,
-    "total_categorias": 16
+    "fecha_actualizacion": "2026-08-30T14:04:39.748Z",
+    "total_productos": 71,
+    "total_categorias": 17
   },
   "categorias": [
     "BOXERS",
@@ -16,6 +16,7 @@
     "CANGUROS FRISADOS",
     "CANGUROS RUSTICOS",
     "CHALECOS",
+    "CINTURONES",
     "JACKETS",
     "JEANS",
     "JOGGINGS FRISADOS",
@@ -221,6 +222,24 @@
       "categoria": "CHALECOS",
       "precio_venta": 124560,
       "imagen": "https://mistralb2b.com.ar/images/productos/70113M/70113M-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "90054M",
+      "nombre": "CINTO PERRRY MASCULINO",
+      "marca": "Mistral",
+      "categoria": "CINTURONES",
+      "precio_venta": 16560,
+      "imagen": "https://mistralb2b.com.ar/images/productos/sin_image.png",
+      "agotado": false
+    },
+    {
+      "codigo": "90055m",
+      "nombre": "cinto maxwell MASCULINO",
+      "marca": "Mistral",
+      "categoria": "CINTURONES",
+      "precio_venta": 22800,
+      "imagen": "https://mistralb2b.com.ar/images/productos/sin_image.png",
       "agotado": false
     },
     {
