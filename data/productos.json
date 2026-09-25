@@ -2,13 +2,12 @@
   "metadata": {
     "proveedor": "Mistral B2B",
     "coleccion": "Invierno 2026",
-    "fecha_actualizacion": "2026-09-24T13:53:49.422Z",
-    "total_productos": 71,
-    "total_categorias": 17
+    "fecha_actualizacion": "2026-09-25T14:17:20.248Z",
+    "total_productos": 65,
+    "total_categorias": 16
   },
   "categorias": [
     "BOXERS",
-    "BUZOS FRISADOS",
     "BUZOS POLAR",
     "BUZOS RUSTICOS",
     "CAMPERAS FRISADAS",
@@ -51,60 +50,6 @@
       "categoria": "BOXERS",
       "precio_venta": 57600,
       "imagen": "https://mistralb2b.com.ar/images/productos/96095M/96095M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "80061M1",
-      "nombre": "BUZO JOHN\nPRINT FRISA # 1 MASCULINO",
-      "marca": "Mistral",
-      "categoria": "BUZOS FRISADOS",
-      "precio_venta": 64800,
-      "imagen": "https://mistralb2b.com.ar/images/productos/80061M1/80061M1-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "80061M2",
-      "nombre": "BUZO JOHN\nPRINT FRISA # 2 MASCULINO",
-      "marca": "Mistral",
-      "categoria": "BUZOS FRISADOS",
-      "precio_venta": 64800,
-      "imagen": "https://mistralb2b.com.ar/images/productos/80061M2/80061M2-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "80061M3",
-      "nombre": "BUZO JOHN\nPRINT FRISA # 3 MASCULINO",
-      "marca": "Mistral",
-      "categoria": "BUZOS FRISADOS",
-      "precio_venta": 64800,
-      "imagen": "https://mistralb2b.com.ar/images/productos/80061M3/80061M3-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "80062M",
-      "nombre": "BUZO MATT PRINT FRISA MASCULINO",
-      "marca": "Mistral",
-      "categoria": "BUZOS FRISADOS",
-      "precio_venta": 64800,
-      "imagen": "https://mistralb2b.com.ar/images/productos/80062M/80062M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "80063M",
-      "nombre": "BUZO JOHN OVERSIZED FRISA MASCULINO",
-      "marca": "Mistral",
-      "categoria": "BUZOS FRISADOS",
-      "precio_venta": 64800,
-      "imagen": "https://mistralb2b.com.ar/images/productos/80063M/80063M-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "80064M",
-      "nombre": "BUZO MEDIO CIERRE JOHN FRISA MASCULINO",
-      "marca": "Mistral",
-      "categoria": "BUZOS FRISADOS",
-      "precio_venta": 64800,
-      "imagen": "https://mistralb2b.com.ar/images/productos/80064M/80064M-001.png",
       "agotado": false
     },
     {
