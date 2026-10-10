@@ -2,8 +2,8 @@
   "metadata": {
     "proveedor": "Mistral B2B",
     "coleccion": "Invierno 2026",
-    "fecha_actualizacion": "2026-10-09T15:39:52.614Z",
-    "total_productos": 70,
+    "fecha_actualizacion": "2026-10-10T14:53:52.314Z",
+    "total_productos": 69,
     "total_categorias": 17
   },
   "categorias": [
@@ -492,15 +492,6 @@
       "categoria": "REMERAS MC",
       "precio_venta": 23760,
       "imagen": "https://mistralb2b.com.ar/images/productos/10203M18/10203M18-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "10203M24",
-      "nombre": "REMERA MALIBU #24 MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "REMERAS MC",
-      "precio_venta": 23760,
-      "imagen": "https://mistralb2b.com.ar/images/productos/10203M24/10203M24-001.png",
       "agotado": false
     },
     {
