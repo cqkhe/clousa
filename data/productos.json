@@ -2,8 +2,8 @@
   "metadata": {
     "proveedor": "Mistral B2B",
     "coleccion": "Invierno 2026",
-    "fecha_actualizacion": "2026-10-14T14:08:35.177Z",
-    "total_productos": 69,
+    "fecha_actualizacion": "2026-10-15T13:47:17.867Z",
+    "total_productos": 67,
     "total_categorias": 17
   },
   "categorias": [
@@ -441,15 +441,6 @@
       "agotado": false
     },
     {
-      "codigo": "10178M26",
-      "nombre": "REMERA MALIBU #26 MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "REMERAS MC",
-      "precio_venta": 32400,
-      "imagen": "https://mistralb2b.com.ar/images/productos/10178M26/10178M26-001.png",
-      "agotado": false
-    },
-    {
       "codigo": "10179M",
       "nombre": "REMERA CALIFORNIA MC MASCULINO",
       "marca": "Mistral",
@@ -465,15 +456,6 @@
       "categoria": "REMERAS MC",
       "precio_venta": 23760,
       "imagen": "https://mistralb2b.com.ar/images/productos/10203M10/10203M10-001.png",
-      "agotado": false
-    },
-    {
-      "codigo": "10203M12",
-      "nombre": "REMERA MALIBU #12 MC MASCULINO",
-      "marca": "Mistral",
-      "categoria": "REMERAS MC",
-      "precio_venta": 23760,
-      "imagen": "https://mistralb2b.com.ar/images/productos/10203M12/10203M12-001.png",
       "agotado": false
     },
     {
