@@ -2,8 +2,8 @@
   "metadata": {
     "proveedor": "Mistral B2B",
     "coleccion": "Invierno 2026",
-    "fecha_actualizacion": "2026-10-27T15:00:49.370Z",
-    "total_productos": 53,
+    "fecha_actualizacion": "2026-10-28T15:34:59.356Z",
+    "total_productos": 56,
     "total_categorias": 17
   },
   "categorias": [
@@ -90,6 +90,15 @@
       "agotado": false
     },
     {
+      "codigo": "80063M",
+      "nombre": "BUZO JOHN OVERSIZED FRISA MASCULINO",
+      "marca": "Mistral",
+      "categoria": "BUZOS FRISADOS",
+      "precio_venta": 64800,
+      "imagen": "https://mistralb2b.com.ar/images/productos/80063M/80063M-001.png",
+      "agotado": false
+    },
+    {
       "codigo": "80064M",
       "nombre": "BUZO MEDIO CIERRE JOHN FRISA MASCULINO",
       "marca": "Mistral",
@@ -126,6 +135,15 @@
       "agotado": false
     },
     {
+      "codigo": "86059M",
+      "nombre": "CAMPERA LIAM FRISA MASCULINO",
+      "marca": "Mistral",
+      "categoria": "CAMPERAS FRISADAS",
+      "precio_venta": 81600,
+      "imagen": "https://mistralb2b.com.ar/images/productos/86059M/86059M-001.png",
+      "agotado": false
+    },
+    {
       "codigo": "86060M",
       "nombre": "CAMPERA MATT RANGLAN FRISA MASCULINO",
       "marca": "Mistral",
@@ -150,6 +168,15 @@
       "categoria": "CANGUROS FRISADOS",
       "precio_venta": 74400,
       "imagen": "https://mistralb2b.com.ar/images/productos/83052M1/83052M1-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "83052M2",
+      "nombre": "CANGURO BEN PRINT # 2 FRISA MASCULINO",
+      "marca": "Mistral",
+      "categoria": "CANGUROS FRISADOS",
+      "precio_venta": 74400,
+      "imagen": "https://mistralb2b.com.ar/images/productos/83052M2/83052M2-001.png",
       "agotado": false
     },
     {
