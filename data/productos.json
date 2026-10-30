@@ -2,8 +2,8 @@
   "metadata": {
     "proveedor": "Mistral B2B",
     "coleccion": "Invierno 2026",
-    "fecha_actualizacion": "2026-10-29T15:43:07.639Z",
-    "total_productos": 56,
+    "fecha_actualizacion": "2026-10-30T15:26:18.423Z",
+    "total_productos": 57,
     "total_categorias": 17
   },
   "categorias": [
@@ -195,6 +195,15 @@
       "categoria": "CANGUROS FRISADOS",
       "precio_venta": 74400,
       "imagen": "https://mistralb2b.com.ar/images/productos/83052M4/83052M4-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "83053M",
+      "nombre": "CANGURO STEVE PRINT FRISA MASCULINO",
+      "marca": "Mistral",
+      "categoria": "CANGUROS FRISADOS",
+      "precio_venta": 74400,
+      "imagen": "https://mistralb2b.com.ar/images/productos/83053M/83053M-001.png",
       "agotado": false
     },
     {
