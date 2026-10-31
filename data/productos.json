@@ -2,8 +2,8 @@
   "metadata": {
     "proveedor": "Mistral B2B",
     "coleccion": "Invierno 2026",
-    "fecha_actualizacion": "2026-10-30T15:26:18.423Z",
-    "total_productos": 57,
+    "fecha_actualizacion": "2026-10-31T14:54:59.337Z",
+    "total_productos": 58,
     "total_categorias": 17
   },
   "categorias": [
@@ -456,6 +456,15 @@
       "categoria": "REMERAS MC",
       "precio_venta": 23760,
       "imagen": "https://mistralb2b.com.ar/images/productos/10209M6/10209M6-001.png",
+      "agotado": false
+    },
+    {
+      "codigo": "10224m",
+      "nombre": "CAMISETA  ARGENTINA 2026 MASCULINO",
+      "marca": "Mistral",
+      "categoria": "REMERAS MC",
+      "precio_venta": 23760,
+      "imagen": "https://mistralb2b.com.ar/images/productos/10224m/10224M-001.png",
       "agotado": false
     },
     {
